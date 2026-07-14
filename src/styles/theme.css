@@ -1,0 +1,24 @@
+:root {
+  /* Candidato foco */
+  --cor-foco-federal: #0f6e56;
+  --cor-foco-estadual: #5dcaa5;
+
+  /* Concorrentes (cinza degradê) */
+  --cor-concorrente-1: #73726c;
+  --cor-concorrente-2: #b4b2a9;
+  --cor-concorrente-3: #d3d1c7;
+
+  /* Indeciso / branco-nulo */
+  --cor-indeciso: #d3d1c7;
+  --cor-branco-nulo: #e1e0d9;
+
+  /* Neutros de interface */
+  --cor-fundo: #f5f4f0;
+  --cor-superficie: #ffffff;
+  --cor-borda: #d3d1c7;
+  --cor-texto: #2b2a27;
+  --cor-texto-suave: #6b6a64;
+
+  --raio-borda-sm: 8px;
+  --raio-borda-lg: 12px;
+}
