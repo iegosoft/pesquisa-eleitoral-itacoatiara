@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BarraTopo from '../../components/BarraTopo.jsx';
 import SeletorBairro from './SeletorBairro.jsx';
 import SeletorQuantidade from './SeletorQuantidade.jsx';
 import CartaoMorador from './CartaoMorador.jsx';
-import { bairrosMock } from './dadosMock.js';
+import { useAuth } from '../../contexts/useAuth.js';
+import { observarBairros } from '../../services/bairros.js';
+import { observarCandidatosPorCargo } from '../../services/candidatos.js';
+import { salvarResidencia } from '../../services/residencias.js';
 import styles from './PaginaColeta.module.css';
 
 function criarMoradorVazio() {
@@ -23,9 +26,24 @@ function estadoInicial() {
 }
 
 function PaginaColeta() {
+  const { usuarioAuth } = useAuth();
   const [dados, setDados] = useState(estadoInicial);
   const [salvando, setSalvando] = useState(false);
   const [salvo, setSalvo] = useState(false);
+  const [bairros, setBairros] = useState([]);
+  const [candidatosFederal, setCandidatosFederal] = useState([]);
+  const [candidatosEstadual, setCandidatosEstadual] = useState([]);
+
+  useEffect(() => {
+    const cancelarBairros = observarBairros(setBairros);
+    const cancelarFederal = observarCandidatosPorCargo('federal', setCandidatosFederal);
+    const cancelarEstadual = observarCandidatosPorCargo('estadual', setCandidatosEstadual);
+    return () => {
+      cancelarBairros();
+      cancelarFederal();
+      cancelarEstadual();
+    };
+  }, []);
 
   const todosOsMoradoresCompletos = dados.moradores.every(moradorCompleto);
   const podeAdicionarMorador = dados.quantidadeMoradores != null && todosOsMoradoresCompletos;
@@ -47,15 +65,25 @@ function PaginaColeta() {
 
   function salvarCasa() {
     setSalvando(true);
-    // TODO(etapa 4): trocar pela gravação real via services/residencias.js
+
+    // O Firestore grava no cache local na hora e sincroniza sozinho quando
+    // a internet voltar, então não esperamos a confirmação do servidor pra
+    // liberar o pesquisador pra próxima casa.
+    salvarResidencia({
+      bairro: dados.bairro,
+      pesquisadorId: usuarioAuth.uid,
+      qtdMoradores: dados.quantidadeMoradores,
+      entrevistados: dados.moradores,
+    }).catch((erro) => {
+      console.error('Falha ao salvar residência:', erro);
+    });
+
+    setSalvando(false);
+    setSalvo(true);
     setTimeout(() => {
-      setSalvando(false);
-      setSalvo(true);
-      setTimeout(() => {
-        setSalvo(false);
-        setDados(estadoInicial());
-      }, 1200);
-    }, 600);
+      setSalvo(false);
+      setDados(estadoInicial());
+    }, 1200);
   }
 
   return (
@@ -68,7 +96,7 @@ function PaginaColeta() {
           <div className={styles.campo}>
             <span className={styles.rotulo}>Bairro</span>
             <SeletorBairro
-              bairros={bairrosMock}
+              bairros={bairros}
               valor={dados.bairro}
               aoSelecionar={(bairro) => setDados((atual) => ({ ...atual, bairro }))}
             />
@@ -92,6 +120,8 @@ function PaginaColeta() {
                 key={indice}
                 numero={indice + 1}
                 morador={morador}
+                candidatosFederal={candidatosFederal}
+                candidatosEstadual={candidatosEstadual}
                 aoAtualizar={(campo, valor) => atualizarMorador(indice, campo, valor)}
               />
             ))}
