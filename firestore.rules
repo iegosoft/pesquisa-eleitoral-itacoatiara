@@ -1,0 +1,32 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return autenticado()
+        ? get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function ehAdmin() {
+      return role() == 'admin';
+    }
+
+    match /usuarios/{uid} {
+      allow read: if autenticado() && (request.auth.uid == uid || ehAdmin());
+      allow write: if ehAdmin();
+    }
+
+    // As demais coleções (candidatos, residencias e a subcoleção
+    // entrevistados) recebem suas regras na etapa 4, junto da camada de
+    // serviços correspondente. Até lá ficam bloqueadas por padrão.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
