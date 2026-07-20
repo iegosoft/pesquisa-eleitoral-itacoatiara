@@ -1,0 +1,33 @@
+.pagina {
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.pagina h1 {
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+
+.abas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.aba {
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.abaAtiva {
+  color: var(--cor-selecao);
+  border-bottom-color: var(--cor-selecao);
+  font-weight: 600;
+}
