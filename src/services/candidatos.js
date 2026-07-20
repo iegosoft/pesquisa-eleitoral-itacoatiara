@@ -38,6 +38,11 @@ function observarCandidatosPorCargo(cargo, callback) {
   });
 }
 
+async function buscarCandidatos() {
+  const snapshot = await getDocs(colecaoCandidatos);
+  return snapshot.docs.map(paraCandidato);
+}
+
 // Só pode existir um candidato foco por cargo (é ele que fica destacado nos
 // gráficos do painel). Ao marcar um novo, desmarca automaticamente o
 // anterior do mesmo cargo.
@@ -85,4 +90,10 @@ async function atualizarCandidato(id, { nome, partido, cargo, fotoUrl, isFoco })
   }
 }
 
-export { observarCandidatos, observarCandidatosPorCargo, criarCandidato, atualizarCandidato };
+export {
+  observarCandidatos,
+  observarCandidatosPorCargo,
+  buscarCandidatos,
+  criarCandidato,
+  atualizarCandidato,
+};

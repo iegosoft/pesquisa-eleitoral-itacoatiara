@@ -44,7 +44,9 @@ service cloud.firestore {
         return autenticado() && resource.data.pesquisador_id == request.auth.uid;
       }
 
-      allow create: if ehPesquisador() && request.resource.data.pesquisador_id == request.auth.uid;
+      // Admin também cria residências direto (inserção em lote via CSV de
+      // dados coletados em papel), além do próprio pesquisador em campo.
+      allow create: if ehAdmin() || (ehPesquisador() && request.resource.data.pesquisador_id == request.auth.uid);
       allow read, update: if ehAdmin() || ehDonoDaResidencia();
       allow delete: if ehAdmin();
 
@@ -54,7 +56,7 @@ service cloud.firestore {
             == request.auth.uid;
         }
 
-        allow create: if ehPesquisador() && residenciaEhDoPesquisador();
+        allow create: if ehAdmin() || (ehPesquisador() && residenciaEhDoPesquisador());
         allow read, update: if ehAdmin() || (autenticado() && residenciaEhDoPesquisador());
         allow delete: if ehAdmin();
       }

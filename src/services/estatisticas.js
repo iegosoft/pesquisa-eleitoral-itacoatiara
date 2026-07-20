@@ -1,4 +1,4 @@
-import { collection, collectionGroup, onSnapshot } from 'firebase/firestore';
+import { collection, collectionGroup, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from './firebase';
 
 function paraResidencia(documentoSnapshot) {
@@ -36,4 +36,19 @@ function observarTodosEntrevistados(callback) {
   });
 }
 
-export { observarResidencias, observarTodosEntrevistados };
+async function buscarResidencias() {
+  const snapshot = await getDocs(collection(db, 'residencias'));
+  return snapshot.docs.map(paraResidencia);
+}
+
+async function buscarTodosEntrevistados() {
+  const snapshot = await getDocs(collectionGroup(db, 'entrevistados'));
+  return snapshot.docs.map(paraEntrevistado);
+}
+
+export {
+  observarResidencias,
+  observarTodosEntrevistados,
+  buscarResidencias,
+  buscarTodosEntrevistados,
+};

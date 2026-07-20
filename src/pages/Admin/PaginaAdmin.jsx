@@ -2,11 +2,13 @@ import { useState } from 'react';
 import BarraTopo from '../../components/BarraTopo.jsx';
 import PainelCandidatos from './PainelCandidatos.jsx';
 import PainelDashboard from './Dashboard/PainelDashboard.jsx';
+import PainelDados from './Dados/PainelDados.jsx';
 import styles from './PaginaAdmin.module.css';
 
 const ABAS = [
   { valor: 'dashboard', rotulo: 'Dashboard' },
   { valor: 'candidatos', rotulo: 'Candidatos' },
+  { valor: 'dados', rotulo: 'Dados' },
 ];
 
 function PaginaAdmin() {
@@ -33,6 +35,7 @@ function PaginaAdmin() {
 
         {abaAtiva === 'dashboard' && <PainelDashboard />}
         {abaAtiva === 'candidatos' && <PainelCandidatos />}
+        {abaAtiva === 'dados' && <PainelDados />}
       </main>
     </>
   );
