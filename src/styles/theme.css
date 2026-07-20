@@ -19,6 +19,10 @@
   --cor-texto: #2b2a27;
   --cor-texto-suave: #6b6a64;
 
+  /* Seleção/ação da interface — nunca usada pra representar candidato ou dado nos gráficos */
+  --cor-selecao: #2563eb;
+  --cor-selecao-fundo-suave: #eaf1fd;
+
   --raio-borda-sm: 8px;
   --raio-borda-lg: 12px;
 }

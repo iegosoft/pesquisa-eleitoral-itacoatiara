@@ -1,0 +1,22 @@
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 10px 16px;
+  border: 2px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-superficie);
+  font-size: 14px;
+  color: var(--cor-texto);
+  cursor: pointer;
+}
+
+.pill.selecionada {
+  border-color: var(--cor-selecao);
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-selecao);
+  font-weight: 600;
+}
