@@ -1,0 +1,82 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda-lg);
+  padding: 20px;
+  max-width: 360px;
+}
+
+.formulario h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.previa {
+  display: flex;
+  justify-content: center;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.campo input[type='text'],
+.campo input[type='url'] {
+  padding: 10px 12px;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-borda-sm);
+  font-size: 16px;
+  color: var(--cor-texto);
+}
+
+.campoCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+
+.erro {
+  color: #b3261e;
+  font-size: 14px;
+  margin: 0;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+}
+
+.botaoPrimario,
+.botaoSecundario {
+  padding: 10px 16px;
+  border-radius: var(--raio-borda-sm);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.botaoPrimario {
+  border: none;
+  background: var(--cor-selecao);
+  color: #fff;
+  flex: 1;
+}
+
+.botaoPrimario:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.botaoSecundario {
+  border: 2px solid var(--cor-borda);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+}

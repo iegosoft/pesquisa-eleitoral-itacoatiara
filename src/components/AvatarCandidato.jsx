@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styles from './AvatarCandidato.module.css';
 
 function iniciais(nome) {
@@ -8,14 +9,27 @@ function iniciais(nome) {
 }
 
 function AvatarCandidato({ candidato }) {
+  const [falhouAoCarregar, setFalhouAoCarregar] = useState(false);
+
+  useEffect(() => {
+    setFalhouAoCarregar(false);
+  }, [candidato.fotoUrl]);
+
   const corFundo = candidato.isFoco
     ? candidato.cargo === 'estadual'
       ? 'var(--cor-foco-estadual)'
       : 'var(--cor-foco-federal)'
     : 'var(--cor-concorrente-1)';
 
-  if (candidato.fotoUrl) {
-    return <img className={styles.avatar} src={candidato.fotoUrl} alt={candidato.nome} />;
+  if (candidato.fotoUrl && !falhouAoCarregar) {
+    return (
+      <img
+        className={styles.avatar}
+        src={candidato.fotoUrl}
+        alt={candidato.nome}
+        onError={() => setFalhouAoCarregar(true)}
+      />
+    );
   }
 
   return (
