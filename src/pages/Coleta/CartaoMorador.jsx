@@ -1,6 +1,5 @@
 import SeletorPills from '../../components/SeletorPills.jsx';
 import GradeCandidatos from './GradeCandidatos.jsx';
-import { candidatosEstadualMock, candidatosFederalMock } from './dadosMock.js';
 import styles from './CartaoMorador.module.css';
 
 const OPCOES_SEXO = [
@@ -16,7 +15,7 @@ const OPCOES_FAIXA_IDADE = [
   { valor: '60+', rotulo: '60+' },
 ];
 
-function CartaoMorador({ numero, morador, aoAtualizar }) {
+function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual, aoAtualizar }) {
   return (
     <section className={styles.cartao}>
       <h2>Morador {numero}</h2>
@@ -42,7 +41,7 @@ function CartaoMorador({ numero, morador, aoAtualizar }) {
       <div className={styles.campo}>
         <span className={styles.rotulo}>Voto para deputado federal</span>
         <GradeCandidatos
-          candidatos={candidatosFederalMock}
+          candidatos={candidatosFederal}
           valorSelecionado={morador.votoFederal}
           aoSelecionar={(valor) => aoAtualizar('votoFederal', valor)}
         />
@@ -51,7 +50,7 @@ function CartaoMorador({ numero, morador, aoAtualizar }) {
       <div className={styles.campo}>
         <span className={styles.rotulo}>Voto para deputado estadual</span>
         <GradeCandidatos
-          candidatos={candidatosEstadualMock}
+          candidatos={candidatosEstadual}
           valorSelecionado={morador.votoEstadual}
           aoSelecionar={(valor) => aoAtualizar('votoEstadual', valor)}
         />
