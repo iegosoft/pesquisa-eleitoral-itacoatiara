@@ -1,9 +1,14 @@
+import BarraTopo from '../../components/BarraTopo.jsx';
+
 function PaginaColeta() {
   return (
-    <main>
-      <h1>Coleta</h1>
-      <p>Formulário de coleta em campo — em construção.</p>
-    </main>
+    <>
+      <BarraTopo />
+      <main>
+        <h1>Coleta</h1>
+        <p>Formulário de coleta em campo — em construção.</p>
+      </main>
+    </>
   );
 }
 
