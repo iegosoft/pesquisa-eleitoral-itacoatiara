@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import BarraTopo from '../../components/BarraTopo.jsx';
 import PainelCandidatos from './PainelCandidatos.jsx';
+import PainelDashboard from './Dashboard/PainelDashboard.jsx';
 import styles from './PaginaAdmin.module.css';
 
 const ABAS = [
-  { valor: 'candidatos', rotulo: 'Candidatos' },
   { valor: 'dashboard', rotulo: 'Dashboard' },
+  { valor: 'candidatos', rotulo: 'Candidatos' },
 ];
 
 function PaginaAdmin() {
-  const [abaAtiva, setAbaAtiva] = useState('candidatos');
+  const [abaAtiva, setAbaAtiva] = useState('dashboard');
 
   return (
     <>
@@ -30,8 +31,8 @@ function PaginaAdmin() {
           ))}
         </nav>
 
+        {abaAtiva === 'dashboard' && <PainelDashboard />}
         {abaAtiva === 'candidatos' && <PainelCandidatos />}
-        {abaAtiva === 'dashboard' && <p>Dashboard — em construção.</p>}
       </main>
     </>
   );
