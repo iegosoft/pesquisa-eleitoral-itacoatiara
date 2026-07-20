@@ -1,0 +1,49 @@
+.cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda-lg);
+  padding: 16px;
+}
+
+.cartao h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+.vazio {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+  margin: 0;
+}
+
+.tabelaWrapper {
+  overflow-x: auto;
+}
+
+.tabela {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.tabela th,
+.tabela td {
+  padding: 8px 10px;
+  text-align: center;
+  border: 1px solid var(--cor-borda);
+  white-space: nowrap;
+}
+
+.tabela thead th {
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  background: var(--cor-fundo);
+}
+
+.tabela tbody th {
+  text-align: left;
+  color: var(--cor-texto);
+  font-weight: 600;
+  background: var(--cor-fundo);
+}
