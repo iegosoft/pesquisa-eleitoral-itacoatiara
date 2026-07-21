@@ -1,10 +1,8 @@
 .formulario {
+  composes: cartao from '../../styles/md3.module.css';
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
   padding: 20px;
   max-width: 360px;
 }
@@ -12,6 +10,7 @@
 .formulario h2 {
   margin: 0;
   font-size: 16px;
+  font-weight: 500;
 }
 
 .previa {
@@ -27,13 +26,8 @@
   color: var(--cor-texto-suave);
 }
 
-.campo input[type='text'],
-.campo input[type='url'] {
-  padding: 10px 12px;
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-borda-sm);
-  font-size: 16px;
-  color: var(--cor-texto);
+.campoTexto {
+  composes: campoTexto from '../../styles/md3.module.css';
 }
 
 .campoCheckbox {
@@ -45,7 +39,7 @@
 }
 
 .erro {
-  color: #b3261e;
+  color: var(--cor-erro);
   font-size: 14px;
   margin: 0;
 }
@@ -55,28 +49,11 @@
   gap: 10px;
 }
 
-.botaoPrimario,
-.botaoSecundario {
-  padding: 10px 16px;
-  border-radius: var(--raio-borda-sm);
-  font-size: 15px;
-  cursor: pointer;
-}
-
 .botaoPrimario {
-  border: none;
-  background: var(--cor-selecao);
-  color: #fff;
+  composes: botaoPreenchido from '../../styles/md3.module.css';
   flex: 1;
 }
 
-.botaoPrimario:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
 .botaoSecundario {
-  border: 2px solid var(--cor-borda);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
+  composes: botaoContornado from '../../styles/md3.module.css';
 }

@@ -6,11 +6,9 @@
 }
 
 .cartaoPrincipal {
+  composes: cartao from '../../styles/md3.module.css';
   width: 100%;
   max-width: 420px;
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -20,6 +18,7 @@
 .cartaoPrincipal h1 {
   margin: 0;
   font-size: 20px;
+  font-weight: 500;
 }
 
 .campo {
@@ -30,7 +29,7 @@
 
 .rotulo {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--cor-texto);
 }
 
@@ -42,30 +41,16 @@
   border-top: 1px solid var(--cor-borda);
 }
 
-.botaoPrimario,
-.botaoSecundario {
-  padding: 14px;
-  border-radius: var(--raio-borda-sm);
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .botaoPrimario {
-  border: none;
-  background: var(--cor-selecao);
-  color: #fff;
+  composes: botaoPreenchido from '../../styles/md3.module.css';
+  height: 52px;
+  font-size: 16px;
 }
 
 .botaoSecundario {
-  border: 2px solid var(--cor-borda);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
-}
-
-.botaoPrimario:disabled,
-.botaoSecundario:disabled {
-  opacity: 0.5;
-  cursor: default;
+  composes: botaoContornado from '../../styles/md3.module.css';
+  height: 52px;
+  font-size: 16px;
 }
 
 .confirmacao {
@@ -77,10 +62,10 @@
 .avisoFalha {
   padding: 10px 12px;
   margin: 0 0 4px;
-  background: #fdf1f0;
-  border: 1px solid #f3c9c5;
-  border-radius: var(--raio-borda-sm);
-  color: #b3261e;
+  background: var(--cor-erro-fundo-suave);
+  border: 1px solid var(--cor-erro-borda);
+  border-radius: var(--raio-borda-lg);
+  color: var(--cor-erro);
   font-size: 13px;
   font-weight: 600;
 }

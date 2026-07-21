@@ -3,15 +3,19 @@
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+  padding: calc(12px + env(safe-area-inset-top)) 20px 12px;
+  background: var(--cor-superficie);
   border-bottom: 1px solid var(--cor-borda);
 }
 
-.barra button {
-  padding: 6px 12px;
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-sm);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
-  cursor: pointer;
+.nome {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.botaoSair {
+  composes: botaoContornado from '../styles/md3.module.css';
+  height: 36px;
+  padding: 0 18px;
+  font-size: 13px;
 }

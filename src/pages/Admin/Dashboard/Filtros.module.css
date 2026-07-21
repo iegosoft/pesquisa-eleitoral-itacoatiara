@@ -1,11 +1,9 @@
 .filtros {
+  composes: cartao from '../../../styles/md3.module.css';
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  padding: 16px;
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
+  padding: 16px 18px;
   margin-bottom: 20px;
 }
 
@@ -17,11 +15,9 @@
   color: var(--cor-texto-suave);
 }
 
-.campo select,
-.campo input {
-  padding: 8px 10px;
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-sm);
+.campoTexto {
+  composes: campoTexto from '../../../styles/md3.module.css';
+  height: 40px;
   font-size: 14px;
-  color: var(--cor-texto);
+  padding: 0 10px;
 }

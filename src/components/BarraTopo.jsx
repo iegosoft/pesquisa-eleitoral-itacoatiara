@@ -7,8 +7,8 @@ function BarraTopo() {
 
   return (
     <header className={styles.barra}>
-      {nome && <span>{nome}</span>}
-      <button type="button" onClick={sair}>
+      {nome && <span className={styles.nome}>{nome}</span>}
+      <button type="button" className={styles.botaoSair} onClick={sair}>
         Sair
       </button>
     </header>
