@@ -18,6 +18,9 @@ dev-dist
 .env.local
 .env.*.local
 
+# Cache local do Firebase CLI
+.firebase
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

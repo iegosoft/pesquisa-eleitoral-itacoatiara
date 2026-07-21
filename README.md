@@ -50,6 +50,22 @@ src/
    npm run build
    ```
 
+## Deploy (Firebase Hosting)
+
+1. Instale o Firebase CLI, se ainda não tiver: `npm install -g firebase-tools`.
+2. Faça login: `firebase login` (abre o navegador pra autenticar com a conta Google do projeto).
+3. Gere a build de produção: `npm run build` (cria a pasta `dist/`).
+4. Publique:
+   - Só o site: `firebase deploy --only hosting`
+   - Site + regras do Firestore: `firebase deploy --only hosting,firestore:rules`
+5. O terminal mostra a URL pública (algo como `https://pesquisa-eleitoral-itacoatiara.web.app`). É esse link que se compartilha com a equipe — em `/coleta` pros pesquisadores, `/admin` pra administração.
+
+O arquivo `firebase.json` já está configurado (pasta `dist` como público, redirecionamento de todas as rotas pro `index.html`, sem cache no service worker e no manifest pra garantir que atualizações cheguem nos aparelhos dos pesquisadores).
+
+## Instalação como app (PWA)
+
+Ao abrir `/coleta` num celular pela primeira vez, aparece um banner orientando a instalar o app na tela inicial (instalação direta no Android/Chrome, instrução manual no iOS/Safari, já que o iOS não oferece instalação automática). Depois de instalado, o ícone abre em tela cheia, sem barra de endereço. Não há publicação em loja de aplicativos — a distribuição é só o link.
+
 ## Fluxo de trabalho (Git Flow)
 
 - `main`: código estável em produção.
