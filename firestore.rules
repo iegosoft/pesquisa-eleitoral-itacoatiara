@@ -56,7 +56,13 @@ service cloud.firestore {
             == request.auth.uid;
         }
 
-        allow create: if ehAdmin() || (ehPesquisador() && residenciaEhDoPesquisador());
+        // A criação não usa residenciaEhDoPesquisador(): residência e
+        // entrevistados são gravados no mesmo lote atômico, e o get() aqui
+        // não enxerga a residência sendo criada nesse mesmo lote (o
+        // Firestore avalia regras contra o estado já confirmado no banco,
+        // não contra outras escritas pendentes do mesmo lote). Exigir a
+        // checagem aqui faz o lote inteiro ser recusado.
+        allow create: if ehAdmin() || ehPesquisador();
         allow read, update: if ehAdmin() || (autenticado() && residenciaEhDoPesquisador());
         allow delete: if ehAdmin();
       }

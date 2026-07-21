@@ -31,6 +31,7 @@ function PaginaColeta() {
   const [dados, setDados] = useState(estadoInicial);
   const [salvando, setSalvando] = useState(false);
   const [salvo, setSalvo] = useState(false);
+  const [casasComFalha, setCasasComFalha] = useState(0);
   const [bairros, setBairros] = useState([]);
   const [candidatosFederal, setCandidatosFederal] = useState([]);
   const [candidatosEstadual, setCandidatosEstadual] = useState([]);
@@ -77,6 +78,7 @@ function PaginaColeta() {
       entrevistados: dados.moradores,
     }).catch((erro) => {
       console.error('Falha ao salvar residência:', erro);
+      setCasasComFalha((atual) => atual + 1);
     });
 
     setSalvando(false);
@@ -93,6 +95,14 @@ function PaginaColeta() {
       <main className={styles.pagina}>
         <div className={styles.cartaoPrincipal}>
           <BannerInstalacao />
+
+          {casasComFalha > 0 && (
+            <p className={styles.avisoFalha}>
+              {casasComFalha === 1
+                ? '1 casa não conseguiu salvar. Avise o administrador.'
+                : `${casasComFalha} casas não conseguiram salvar. Avise o administrador.`}
+            </p>
+          )}
 
           <h1>Nova casa</h1>
 

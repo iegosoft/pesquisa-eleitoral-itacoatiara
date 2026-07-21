@@ -73,3 +73,14 @@
   color: var(--cor-foco-federal);
   font-weight: 600;
 }
+
+.avisoFalha {
+  padding: 10px 12px;
+  margin: 0 0 4px;
+  background: #fdf1f0;
+  border: 1px solid #f3c9c5;
+  border-radius: var(--raio-borda-sm);
+  color: #b3261e;
+  font-size: 13px;
+  font-weight: 600;
+}
