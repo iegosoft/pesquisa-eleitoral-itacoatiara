@@ -1,13 +1,12 @@
 .cartao {
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
-  padding: 16px;
+  composes: cartao from '../../../styles/md3.module.css';
+  padding: 18px;
 }
 
 .cartao h3 {
   margin: 0 0 12px;
   font-size: 15px;
+  font-weight: 500;
   color: var(--cor-texto);
 }
 

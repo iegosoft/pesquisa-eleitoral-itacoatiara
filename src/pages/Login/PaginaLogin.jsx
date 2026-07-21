@@ -43,6 +43,7 @@ function PaginaLogin() {
           E-mail
           <input
             type="email"
+            className={styles.campoTexto}
             value={email}
             onChange={(evento) => setEmail(evento.target.value)}
             required
@@ -53,6 +54,7 @@ function PaginaLogin() {
           Senha
           <input
             type="password"
+            className={styles.campoTexto}
             value={senha}
             onChange={(evento) => setSenha(evento.target.value)}
             required
@@ -60,7 +62,7 @@ function PaginaLogin() {
           />
         </label>
         {erro && <p className={styles.erro}>{erro}</p>}
-        <button type="submit" disabled={enviando}>
+        <button type="submit" className={styles.botaoEntrar} disabled={enviando}>
           {enviando ? 'Entrando...' : 'Entrar'}
         </button>
       </form>

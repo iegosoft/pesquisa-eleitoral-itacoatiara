@@ -11,7 +11,7 @@ body {
 }
 
 body {
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--fonte-base);
   color: var(--cor-texto);
   background: var(--cor-fundo);
 }
@@ -20,6 +20,13 @@ body {
   min-height: 100svh;
 }
 
-button {
+button,
+input,
+select {
   font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cor-selecao);
+  outline-offset: 2px;
 }

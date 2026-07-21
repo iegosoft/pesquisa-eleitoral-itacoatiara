@@ -1,12 +1,11 @@
 .banner {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 12px 14px;
+  gap: 10px;
+  padding: 14px 16px;
   margin-bottom: 16px;
   background: var(--cor-selecao-fundo-suave);
-  border: 1px solid var(--cor-selecao);
-  border-radius: var(--raio-borda-sm);
+  border-radius: var(--raio-borda-lg);
   font-size: 13px;
   color: var(--cor-texto);
 }
@@ -14,25 +13,17 @@
 .acoes {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .botaoPrimario {
-  padding: 8px 14px;
-  border: none;
-  border-radius: var(--raio-borda-sm);
-  background: var(--cor-selecao);
-  color: #fff;
+  composes: botaoPreenchido from '../styles/md3.module.css';
+  height: 36px;
+  padding: 0 18px;
   font-size: 13px;
-  cursor: pointer;
 }
 
 .botaoTexto {
-  padding: 8px 4px;
-  border: none;
-  background: none;
-  color: var(--cor-texto-suave);
+  composes: botaoTexto from '../styles/md3.module.css';
   font-size: 13px;
-  cursor: pointer;
-  text-decoration: underline;
 }

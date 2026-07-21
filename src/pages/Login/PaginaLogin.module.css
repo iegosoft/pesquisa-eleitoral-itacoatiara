@@ -7,50 +7,43 @@
 }
 
 .cartao {
+  composes: cartao from '../../styles/md3.module.css';
   width: 100%;
-  max-width: 360px;
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
-  padding: 24px;
+  max-width: 380px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+}
+
+.cartao h1 {
+  font-family: var(--fonte-base);
+  font-weight: 500;
+  margin: 0;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 14px;
+  gap: 6px;
+  font-size: 13px;
   color: var(--cor-texto-suave);
 }
 
-.campo input {
-  padding: 10px 12px;
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-sm);
-  font-size: 16px;
-  color: var(--cor-texto);
+.campoTexto {
+  composes: campoTexto from '../../styles/md3.module.css';
 }
 
 .erro {
-  color: #b3261e;
+  color: var(--cor-erro);
   font-size: 14px;
   margin: 0;
 }
 
-.cartao button {
-  padding: 12px;
-  border: none;
-  border-radius: var(--raio-borda-sm);
-  background: var(--cor-foco-federal);
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.cartao button:disabled {
-  opacity: 0.6;
-  cursor: default;
+.botaoEntrar {
+  composes: botaoPreenchido from '../../styles/md3.module.css';
+  width: 100%;
+  height: 48px;
+  font-size: 15px;
+  margin-top: 4px;
 }

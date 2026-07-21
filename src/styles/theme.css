@@ -12,17 +12,41 @@
   --cor-indeciso: #d3d1c7;
   --cor-branco-nulo: #e1e0d9;
 
-  /* Neutros de interface */
+  /* Superfícies tonais (estilo Material 3): fundo, cartão e campo recuado
+     são três tons neutros levemente distintos, nunca branco puro nem
+     gradiente — a distinção vem do tom, não de sombra decorativa. */
   --cor-fundo: #f5f4f0;
-  --cor-superficie: #ffffff;
+  --cor-superficie: #fcfbf8;
+  --cor-superficie-baixa: #edf0ea;
   --cor-borda: #d3d1c7;
   --cor-texto: #2b2a27;
   --cor-texto-suave: #6b6a64;
 
-  /* Seleção/ação da interface — nunca usada pra representar candidato ou dado nos gráficos */
+  /* Seleção/ação da interface — nunca usada pra representar candidato ou
+     dado nos gráficos, pra não confundir "isto está selecionado" com
+     "este é o candidato foco". */
   --cor-selecao: #2563eb;
+  --cor-selecao-hover: #1d4fc4;
   --cor-selecao-fundo-suave: #eaf1fd;
 
+  --cor-erro: #b3261e;
+  --cor-erro-fundo-suave: #fdf1f0;
+  --cor-erro-borda: #f3c9c5;
+
+  /* Raios: pílula pra todo botão/chip, cartões com cantos generosos,
+     campo de texto preenchido (estilo Material 3) com só o topo
+     arredondado. */
   --raio-borda-sm: 8px;
   --raio-borda-lg: 12px;
+  --raio-cartao: 20px;
+  --raio-pilula: 999px;
+  --raio-campo: 12px;
+
+  /* Elevação suave (só em hover/interação, nunca decorativa em repouso) */
+  --sombra-repouso: none;
+  --sombra-elevada: 0 1px 2px rgba(43, 42, 39, 0.08), 0 1px 3px rgba(43, 42, 39, 0.1);
+
+  --easing-md3: cubic-bezier(0.2, 0, 0, 1);
+  --fonte-base:
+    'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
