@@ -1,0 +1,65 @@
+.painel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.listas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.grupo h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--cor-texto-suave);
+}
+
+.vazio {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda-sm);
+  background: var(--cor-superficie);
+  cursor: pointer;
+  text-align: left;
+}
+
+.infoCandidato {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.nome {
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.partido {
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.badgeFoco {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--cor-foco-federal);
+  padding: 4px 10px;
+  border-radius: 999px;
+}

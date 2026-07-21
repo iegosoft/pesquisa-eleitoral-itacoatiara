@@ -1,0 +1,69 @@
+.cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda-lg);
+  padding: 16px;
+}
+
+.cartao h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--cor-texto);
+}
+
+.legendaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendaCor {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.cabecalhoComAcoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cabecalhoComAcoes h3 {
+  margin: 0;
+}
+
+.seletorPeriodo {
+  display: flex;
+  gap: 6px;
+}
+
+.botaoPeriodo {
+  padding: 6px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-superficie);
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+}
+
+.botaoPeriodoAtivo {
+  border-color: var(--cor-selecao);
+  color: var(--cor-selecao);
+  font-weight: 600;
+  background: var(--cor-selecao-fundo-suave);
+}

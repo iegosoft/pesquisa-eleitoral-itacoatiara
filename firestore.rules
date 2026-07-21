@@ -1,0 +1,69 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return autenticado()
+        ? get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function ehAdmin() {
+      return role() == 'admin';
+    }
+
+    function ehPesquisador() {
+      return role() == 'pesquisador';
+    }
+
+    match /usuarios/{uid} {
+      allow read: if autenticado() && (request.auth.uid == uid || ehAdmin());
+      allow write: if ehAdmin();
+    }
+
+    match /candidatos/{candidatoId} {
+      allow read: if autenticado();
+      allow write: if ehAdmin();
+    }
+
+    // Configurações administráveis só pelo admin, mas visíveis pros dois
+    // papéis (ex.: configuracoes/bairros, com a lista fixa de bairros que
+    // o pesquisador usa no formulário de coleta).
+    match /configuracoes/{documentoId} {
+      allow read: if autenticado();
+      allow write: if ehAdmin();
+    }
+
+    match /residencias/{residenciaId} {
+      function ehDonoDaResidencia() {
+        return autenticado() && resource.data.pesquisador_id == request.auth.uid;
+      }
+
+      // Admin também cria residências direto (inserção em lote via CSV de
+      // dados coletados em papel), além do próprio pesquisador em campo.
+      allow create: if ehAdmin() || (ehPesquisador() && request.resource.data.pesquisador_id == request.auth.uid);
+      allow read, update: if ehAdmin() || ehDonoDaResidencia();
+      allow delete: if ehAdmin();
+
+      match /entrevistados/{entrevistadoId} {
+        function residenciaEhDoPesquisador() {
+          return get(/databases/$(database)/documents/residencias/$(residenciaId)).data.pesquisador_id
+            == request.auth.uid;
+        }
+
+        allow create: if ehAdmin() || (ehPesquisador() && residenciaEhDoPesquisador());
+        allow read, update: if ehAdmin() || (autenticado() && residenciaEhDoPesquisador());
+        allow delete: if ehAdmin();
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
