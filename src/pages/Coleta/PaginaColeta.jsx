@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BarraTopo from '../../components/BarraTopo.jsx';
+import BannerInstalacao from '../../components/BannerInstalacao.jsx';
 import SeletorBairro from './SeletorBairro.jsx';
 import SeletorQuantidade from './SeletorQuantidade.jsx';
 import CartaoMorador from './CartaoMorador.jsx';
@@ -91,6 +92,8 @@ function PaginaColeta() {
       <BarraTopo />
       <main className={styles.pagina}>
         <div className={styles.cartaoPrincipal}>
+          <BannerInstalacao />
+
           <h1>Nova casa</h1>
 
           <div className={styles.campo}>
