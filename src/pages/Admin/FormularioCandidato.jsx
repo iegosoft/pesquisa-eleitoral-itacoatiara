@@ -70,6 +70,7 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
         Nome
         <input
           type="text"
+          className={styles.campoTexto}
           value={form.nome}
           onChange={(evento) => atualizarCampo('nome', evento.target.value)}
           required
@@ -80,6 +81,7 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
         Partido
         <input
           type="text"
+          className={styles.campoTexto}
           value={form.partido}
           onChange={(evento) => atualizarCampo('partido', evento.target.value)}
           required
@@ -99,6 +101,7 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
         URL da foto (opcional — link de uma imagem já hospedada)
         <input
           type="url"
+          className={styles.campoTexto}
           placeholder="https://..."
           value={form.fotoUrl}
           onChange={(evento) => atualizarCampo('fotoUrl', evento.target.value)}

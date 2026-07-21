@@ -11,7 +11,11 @@ function Filtros({ filtros, aoAlterar, bairrosDisponiveis }) {
     <div className={styles.filtros}>
       <label className={styles.campo}>
         Bairro
-        <select value={filtros.bairro} onChange={(evento) => atualizar('bairro', evento.target.value)}>
+        <select
+          className={styles.campoTexto}
+          value={filtros.bairro}
+          onChange={(evento) => atualizar('bairro', evento.target.value)}
+        >
           <option value="todos">Todos</option>
           {bairrosDisponiveis.map((bairro) => (
             <option key={bairro} value={bairro}>
@@ -23,7 +27,11 @@ function Filtros({ filtros, aoAlterar, bairrosDisponiveis }) {
 
       <label className={styles.campo}>
         Sexo
-        <select value={filtros.sexo} onChange={(evento) => atualizar('sexo', evento.target.value)}>
+        <select
+          className={styles.campoTexto}
+          value={filtros.sexo}
+          onChange={(evento) => atualizar('sexo', evento.target.value)}
+        >
           <option value="todos">Todos</option>
           <option value="feminino">Feminino</option>
           <option value="masculino">Masculino</option>
@@ -32,7 +40,11 @@ function Filtros({ filtros, aoAlterar, bairrosDisponiveis }) {
 
       <label className={styles.campo}>
         Faixa etária
-        <select value={filtros.faixaIdade} onChange={(evento) => atualizar('faixaIdade', evento.target.value)}>
+        <select
+          className={styles.campoTexto}
+          value={filtros.faixaIdade}
+          onChange={(evento) => atualizar('faixaIdade', evento.target.value)}
+        >
           <option value="todas">Todas</option>
           {OPCOES_FAIXA_IDADE.map((faixa) => (
             <option key={faixa} value={faixa}>
@@ -46,6 +58,7 @@ function Filtros({ filtros, aoAlterar, bairrosDisponiveis }) {
         De
         <input
           type="date"
+          className={styles.campoTexto}
           value={filtros.dataInicio}
           onChange={(evento) => atualizar('dataInicio', evento.target.value)}
         />
@@ -55,6 +68,7 @@ function Filtros({ filtros, aoAlterar, bairrosDisponiveis }) {
         Até
         <input
           type="date"
+          className={styles.campoTexto}
           value={filtros.dataFim}
           onChange={(evento) => atualizar('dataFim', evento.target.value)}
         />

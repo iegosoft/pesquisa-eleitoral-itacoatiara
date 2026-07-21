@@ -1,0 +1,105 @@
+/* Peças visuais reutilizáveis no estilo Material 3: botões em pílula com
+   camada de estado (opacidade/tom no hover, leve encolhimento no toque),
+   cartão de superfície tonal e campo de texto "preenchido". Outros
+   arquivos .module.css usam `composes: x from './md3.module.css'`. */
+
+.botaoBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--raio-pilula);
+  font-family: var(--fonte-base);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 200ms var(--easing-md3),
+    border-color 200ms var(--easing-md3),
+    color 200ms var(--easing-md3),
+    box-shadow 200ms var(--easing-md3),
+    transform 100ms var(--easing-md3);
+}
+
+.botaoBase:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.botaoBase:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.botaoPreenchido {
+  composes: botaoBase;
+  border: none;
+  background: var(--cor-selecao);
+  color: #fff;
+}
+
+.botaoPreenchido:hover:not(:disabled) {
+  background: var(--cor-selecao-hover);
+  box-shadow: var(--sombra-elevada);
+}
+
+.botaoContornado {
+  composes: botaoBase;
+  border: 1.5px solid var(--cor-borda);
+  background: transparent;
+  color: var(--cor-texto);
+}
+
+.botaoContornado:hover:not(:disabled) {
+  border-color: var(--cor-selecao);
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-selecao);
+}
+
+.botaoTexto {
+  composes: botaoBase;
+  height: auto;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-suave);
+}
+
+.botaoTexto:hover:not(:disabled) {
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-selecao);
+}
+
+.cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-cartao);
+}
+
+.campoTexto {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: none;
+  border-bottom: 2px solid var(--cor-borda);
+  border-radius: var(--raio-campo) var(--raio-campo) 0 0;
+  background: var(--cor-superficie-baixa);
+  font-family: var(--fonte-base);
+  font-size: 16px;
+  color: var(--cor-texto);
+  transition:
+    border-color 200ms var(--easing-md3),
+    background-color 200ms var(--easing-md3);
+}
+
+.campoTexto:focus {
+  outline: none;
+  border-bottom-color: var(--cor-selecao);
+}
+
+.campoTexto:disabled {
+  opacity: 0.6;
+}

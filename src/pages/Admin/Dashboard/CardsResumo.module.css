@@ -6,13 +6,11 @@
 }
 
 .card {
+  composes: cartao from '../../../styles/md3.module.css';
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 16px;
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-lg);
+  padding: 16px 18px;
 }
 
 .rotulo {

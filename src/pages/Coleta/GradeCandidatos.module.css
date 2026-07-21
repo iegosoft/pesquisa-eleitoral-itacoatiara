@@ -10,13 +10,22 @@
   align-items: center;
   gap: 6px;
   padding: 12px 8px;
-  border: 2px solid var(--cor-borda);
+  border: 1.5px solid var(--cor-borda);
   border-radius: var(--raio-borda-lg);
   background: var(--cor-superficie);
+  font-family: var(--fonte-base);
   font-size: 13px;
   color: var(--cor-texto);
   text-align: center;
   cursor: pointer;
+  transition:
+    background-color 200ms var(--easing-md3),
+    border-color 200ms var(--easing-md3),
+    transform 100ms var(--easing-md3);
+}
+
+.opcao:active {
+  transform: scale(0.97);
 }
 
 .opcao.selecionada {

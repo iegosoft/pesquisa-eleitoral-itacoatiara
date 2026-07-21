@@ -1,8 +1,16 @@
 .campoOutro {
   width: 90px;
-  padding: 10px 12px;
-  border: 2px solid var(--cor-selecao);
-  border-radius: var(--raio-borda-sm);
+  height: 44px;
+  padding: 0 12px;
+  border: none;
+  border-bottom: 2px solid var(--cor-selecao);
+  border-radius: var(--raio-campo) var(--raio-campo) 0 0;
+  background: var(--cor-superficie-baixa);
+  font-family: var(--fonte-base);
   font-size: 16px;
   color: var(--cor-texto);
+}
+
+.campoOutro:focus {
+  outline: none;
 }

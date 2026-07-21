@@ -30,13 +30,22 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px 14px;
   margin-bottom: 8px;
   border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-borda-sm);
+  border-radius: var(--raio-borda-lg);
   background: var(--cor-superficie);
+  font-family: var(--fonte-base);
   cursor: pointer;
   text-align: left;
+  transition:
+    background-color 200ms var(--easing-md3),
+    border-color 200ms var(--easing-md3);
+}
+
+.item:hover {
+  background: var(--cor-selecao-fundo-suave);
+  border-color: var(--cor-selecao);
 }
 
 .infoCandidato {
