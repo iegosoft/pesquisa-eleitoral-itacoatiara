@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../../components/SeletorPills.module.css';
+import styles from '../SeletorPills.module.css';
 import proprio from './SeletorQuantidade.module.css';
 
 const OPCOES_RAPIDAS = [1, 2, 3, 4];

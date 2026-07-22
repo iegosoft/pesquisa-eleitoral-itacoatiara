@@ -1,4 +1,4 @@
-import { parseDataBr } from './utilCsv.js';
+import { parseDataBr } from './utilData.js';
 import { idDoVoto } from './resolverVoto.js';
 
 const FAIXAS_VALIDAS = ['16-24', '25-34', '35-44', '45-59', '60+'];
