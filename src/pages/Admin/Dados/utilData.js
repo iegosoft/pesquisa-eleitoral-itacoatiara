@@ -1,15 +1,3 @@
-function baixarArquivoCsv(nomeArquivo, conteudoCsv) {
-  const blob = new Blob([`﻿${conteudoCsv}`], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = nomeArquivo;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
-
 function formatarDataBr(data) {
   if (!data) return '';
   return data.toLocaleDateString('pt-BR');
@@ -26,4 +14,4 @@ function parseDataBr(texto) {
   return valida ? data : null;
 }
 
-export { baixarArquivoCsv, formatarDataBr, parseDataBr };
+export { formatarDataBr, parseDataBr };

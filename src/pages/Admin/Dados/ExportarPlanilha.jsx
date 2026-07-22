@@ -1,13 +1,26 @@
 import { useState } from 'react';
-import Papa from 'papaparse';
 import { buscarResidencias, buscarTodosEntrevistados } from '../../../services/estatisticas.js';
 import { buscarCandidatos } from '../../../services/candidatos.js';
 import { listarPesquisadores } from '../../../services/usuarios.js';
 import { nomeDoVoto } from './resolverVoto.js';
-import { baixarArquivoCsv, formatarDataBr } from './utilCsv.js';
+import { formatarDataBr } from './utilData.js';
+import { baixarWorkbook, estilizarPlanilha, COR_CABECALHO_EXPORTACAO } from './utilPlanilha.js';
 import styles from './PainelDados.module.css';
 
-async function montarLinhasCsv() {
+const COLUNAS = [
+  { header: 'Bairro', key: 'bairro', width: 18 },
+  { header: 'Data da coleta', key: 'data_coleta', width: 14 },
+  { header: 'Pesquisador', key: 'pesquisador', width: 22 },
+  { header: 'Moradores na casa', key: 'qtd_moradores', width: 16 },
+  { header: 'Sexo', key: 'sexo', width: 12 },
+  { header: 'Faixa etária', key: 'faixa_idade', width: 12 },
+  { header: 'Voto federal', key: 'voto_federal', width: 20 },
+  { header: 'Voto estadual', key: 'voto_estadual', width: 20 },
+  { header: 'ID da casa', key: 'residencia_id', width: 22 },
+  { header: 'ID do morador', key: 'entrevistado_id', width: 22 },
+];
+
+async function montarLinhas() {
   const [residencias, entrevistados, candidatos, pesquisadores] = await Promise.all([
     buscarResidencias(),
     buscarTodosEntrevistados(),
@@ -35,7 +48,20 @@ async function montarLinhasCsv() {
   });
 }
 
-function ExportarCsv() {
+async function gerarEBaixarPlanilha() {
+  const [{ default: ExcelJS }, linhas] = await Promise.all([import('exceljs'), montarLinhas()]);
+
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Dados brutos');
+  worksheet.columns = COLUNAS;
+  worksheet.addRows(linhas);
+  estilizarPlanilha(worksheet, { corCabecalho: COR_CABECALHO_EXPORTACAO, ultimaColuna: 'J' });
+
+  const dataDeHoje = new Date().toISOString().slice(0, 10);
+  await baixarWorkbook(workbook, `pesquisa-eleitoral-itacoatiara-${dataDeHoje}.xlsx`);
+}
+
+function ExportarPlanilha() {
   const [exportando, setExportando] = useState(false);
   const [erro, setErro] = useState('');
 
@@ -43,10 +69,7 @@ function ExportarCsv() {
     setErro('');
     setExportando(true);
     try {
-      const linhas = await montarLinhasCsv();
-      const csv = Papa.unparse(linhas);
-      const dataDeHoje = new Date().toISOString().slice(0, 10);
-      baixarArquivoCsv(`pesquisa-eleitoral-itacoatiara-${dataDeHoje}.csv`, csv);
+      await gerarEBaixarPlanilha();
     } catch {
       setErro('Não foi possível gerar o arquivo. Tente novamente.');
     } finally {
@@ -58,15 +81,15 @@ function ExportarCsv() {
     <div className={styles.cartao}>
       <h3>Exportar dados</h3>
       <p className={styles.descricao}>
-        Baixa um CSV com todos os dados brutos coletados até agora: uma linha por morador entrevistado, com
-        bairro, data, pesquisador e as respostas.
+        Baixa uma planilha Excel com todos os dados brutos coletados até agora: uma linha por morador
+        entrevistado, com bairro, data, pesquisador e as respostas.
       </p>
       <button type="button" className={styles.botaoPrimario} onClick={aoClicar} disabled={exportando}>
-        {exportando ? 'Gerando arquivo...' : 'Exportar CSV'}
+        {exportando ? 'Gerando planilha...' : 'Exportar planilha'}
       </button>
       {erro && <p className={styles.erro}>{erro}</p>}
     </div>
   );
 }
 
-export default ExportarCsv;
+export default ExportarPlanilha;

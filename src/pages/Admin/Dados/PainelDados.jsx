@@ -1,12 +1,14 @@
-import ExportarCsv from './ExportarCsv.jsx';
-import ImportarCsv from './ImportarCsv.jsx';
+import ExportarPlanilha from './ExportarPlanilha.jsx';
+import ImportarPlanilha from './ImportarPlanilha.jsx';
+import CadastroManual from './CadastroManual.jsx';
 import styles from './PainelDados.module.css';
 
 function PainelDados() {
   return (
     <div className={styles.painel}>
-      <ExportarCsv />
-      <ImportarCsv />
+      <ExportarPlanilha />
+      <ImportarPlanilha />
+      <CadastroManual />
     </div>
   );
 }
