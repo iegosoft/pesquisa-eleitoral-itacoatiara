@@ -51,21 +51,32 @@ service cloud.firestore {
       allow delete: if ehAdmin();
 
       match /entrevistados/{entrevistadoId} {
-        function residenciaEhDoPesquisador() {
-          return get(/databases/$(database)/documents/residencias/$(residenciaId)).data.pesquisador_id
-            == request.auth.uid;
-        }
-
-        // A criação não usa residenciaEhDoPesquisador(): residência e
-        // entrevistados são gravados no mesmo lote atômico, e o get() aqui
-        // não enxerga a residência sendo criada nesse mesmo lote (o
+        // A criação não checa se a residência é do pesquisador: residência e
+        // entrevistados são gravados no mesmo lote atômico, e um get() aqui
+        // não enxergaria a residência sendo criada nesse mesmo lote (o
         // Firestore avalia regras contra o estado já confirmado no banco,
-        // não contra outras escritas pendentes do mesmo lote). Exigir a
-        // checagem aqui faz o lote inteiro ser recusado.
+        // não contra outras escritas pendentes do mesmo lote). Exigir essa
+        // checagem faria o lote inteiro ser recusado.
         allow create: if ehAdmin() || ehPesquisador();
-        allow read, update: if ehAdmin() || (autenticado() && residenciaEhDoPesquisador());
+
+        // Leitura e edição só pelo admin: nenhuma tela do pesquisador lê
+        // entrevistados hoje (só cria), e um get() com o residenciaId do
+        // caminho aqui quebra consultas collectionGroup (usadas pelo
+        // dashboard e pela exportação de CSV) mesmo pro admin.
+        allow read, update: if ehAdmin();
         allow delete: if ehAdmin();
       }
+    }
+
+    // Regra à parte pra consultas collectionGroup em "entrevistados" (usadas
+    // pelo dashboard e pela exportação de CSV, que buscam moradores de TODAS
+    // as residências de uma vez). O Firestore só reconhece regra de leitura
+    // pra esse tipo de consulta quando ela é declarada com o curinga
+    // recursivo no topo — a regra aninhada dentro de /residencias funciona
+    // pra criar/ler um entrevistado específico, mas não é suficiente pra
+    // esse tipo de busca ampla.
+    match /{caminho=**}/entrevistados/{entrevistadoId} {
+      allow read: if ehAdmin();
     }
 
     match /{document=**} {
