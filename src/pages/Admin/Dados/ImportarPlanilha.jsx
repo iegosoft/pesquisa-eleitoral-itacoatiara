@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Papa from 'papaparse';
 import { buscarCandidatos } from '../../../services/candidatos.js';
 import { listarPesquisadores } from '../../../services/usuarios.js';
 import { salvarResidencia } from '../../../services/residencias.js';
 import { validarLinhas } from './validarImportacao.js';
-import { baixarModeloCsv } from './modeloCsv.js';
+import { baixarModeloXlsx } from './modeloXlsx.js';
+import { lerArquivoImportacao } from './lerArquivoImportacao.js';
 import styles from './PainelDados.module.css';
 
-function ImportarCsv() {
+function ImportarPlanilha() {
   const [status, setStatus] = useState('ocioso');
   const [erros, setErros] = useState([]);
   const [casas, setCasas] = useState([]);
@@ -19,30 +19,24 @@ function ImportarCsv() {
     setMensagemErro('');
     setResultado(null);
     try {
-      const [candidatos, pesquisadores] = await Promise.all([buscarCandidatos(), listarPesquisadores()]);
+      const [linhas, candidatos, pesquisadores] = await Promise.all([
+        lerArquivoImportacao(arquivo),
+        buscarCandidatos(),
+        listarPesquisadores(),
+      ]);
       const candidatosFederal = candidatos.filter((c) => c.cargo === 'federal');
       const candidatosEstadual = candidatos.filter((c) => c.cargo === 'estadual');
 
-      Papa.parse(arquivo, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (resultadoParse) => {
-          const { erros: errosValidacao, casas: casasValidadas } = validarLinhas(resultadoParse.data, {
-            candidatosFederal,
-            candidatosEstadual,
-            pesquisadores,
-          });
-          setErros(errosValidacao);
-          setCasas(casasValidadas);
-          setStatus(errosValidacao.length > 0 ? 'com-erros' : 'pronto');
-        },
-        error: () => {
-          setMensagemErro('Não foi possível ler o arquivo. Confira se é um CSV válido.');
-          setStatus('ocioso');
-        },
+      const { erros: errosValidacao, casas: casasValidadas } = validarLinhas(linhas, {
+        candidatosFederal,
+        candidatosEstadual,
+        pesquisadores,
       });
+      setErros(errosValidacao);
+      setCasas(casasValidadas);
+      setStatus(errosValidacao.length > 0 ? 'com-erros' : 'pronto');
     } catch {
-      setMensagemErro('Não foi possível carregar candidatos e pesquisadores pra validar o arquivo.');
+      setMensagemErro('Não foi possível ler o arquivo. Confira se é um .csv ou .xlsx válido.');
       setStatus('ocioso');
     }
   }
@@ -84,15 +78,15 @@ function ImportarCsv() {
       </p>
 
       <div className={styles.acoes}>
-        <button type="button" className={styles.botaoSecundario} onClick={baixarModeloCsv}>
-          Baixar modelo CSV
+        <button type="button" className={styles.botaoSecundario} onClick={baixarModeloXlsx}>
+          Baixar modelo
         </button>
 
         <label className={styles.botaoArquivo}>
-          {status === 'validando' ? 'Lendo arquivo...' : 'Escolher arquivo CSV'}
+          {status === 'validando' ? 'Lendo arquivo...' : 'Escolher arquivo'}
           <input
             type="file"
-            accept=".csv"
+            accept=".csv,.xlsx,.xls"
             onChange={aoSelecionarArquivo}
             disabled={status === 'validando' || status === 'importando'}
           />
@@ -145,4 +139,4 @@ function ImportarCsv() {
   );
 }
 
-export default ImportarCsv;
+export default ImportarPlanilha;

@@ -1,4 +1,4 @@
-import SeletorPills from '../../components/SeletorPills.jsx';
+import SeletorPills from '../SeletorPills.jsx';
 import GradeCandidatos from './GradeCandidatos.jsx';
 import styles from './CartaoMorador.module.css';
 

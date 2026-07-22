@@ -1,4 +1,4 @@
-import AvatarCandidato from '../../components/AvatarCandidato.jsx';
+import AvatarCandidato from '../AvatarCandidato.jsx';
 import styles from './GradeCandidatos.module.css';
 
 function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {

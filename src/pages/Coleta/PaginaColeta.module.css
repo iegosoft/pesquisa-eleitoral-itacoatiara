@@ -21,44 +21,6 @@
   font-weight: 500;
 }
 
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.rotulo {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--cor-texto);
-}
-
-.acoes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--cor-borda);
-}
-
-.botaoPrimario {
-  composes: botaoPreenchido from '../../styles/md3.module.css';
-  height: 52px;
-  font-size: 16px;
-}
-
-.botaoSecundario {
-  composes: botaoContornado from '../../styles/md3.module.css';
-  height: 52px;
-  font-size: 16px;
-}
-
-.confirmacao {
-  text-align: center;
-  color: var(--cor-foco-federal);
-  font-weight: 600;
-}
-
 .avisoFalha {
   padding: 10px 12px;
   margin: 0 0 4px;
