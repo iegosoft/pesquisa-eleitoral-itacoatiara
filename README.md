@@ -62,6 +62,15 @@ src/
 
 O arquivo `firebase.json` já está configurado (pasta `dist` como público, redirecionamento de todas as rotas pro `index.html`, sem cache no service worker e no manifest pra garantir que atualizações cheguem nos aparelhos dos pesquisadores).
 
+## Deploy (Vercel)
+
+Alternativa de hospedagem usada por enquanto. O backend continua sendo o Firebase (Firestore e Auth acessados direto do client), então a Vercel serve só o build estático.
+
+1. Importe o repositório em [vercel.com](https://vercel.com) (framework detectado automaticamente como Vite).
+2. Cadastre as variáveis de ambiente do projeto (Settings → Environment Variables), com os mesmos nomes do `.env.example`: `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`.
+3. O arquivo `vercel.json` já está configurado (redirecionamento de todas as rotas pro `index.html`, sem cache no service worker e no manifest — mesmo motivo do `firebase.json`).
+4. Depois do primeiro deploy, adicione o domínio gerado pela Vercel (ex.: `seu-projeto.vercel.app`, ou o domínio customizado) em **Firebase Console → Authentication → Settings → Authorized domains** — sem isso o login falha com erro de domínio não autorizado.
+
 ## Instalação como app (PWA)
 
 Ao abrir `/coleta` num celular pela primeira vez, aparece um banner orientando a instalar o app na tela inicial (instalação direta no Android/Chrome, instrução manual no iOS/Safari, já que o iOS não oferece instalação automática). Depois de instalado, o ícone abre em tela cheia, sem barra de endereço. Não há publicação em loja de aplicativos — a distribuição é só o link.
