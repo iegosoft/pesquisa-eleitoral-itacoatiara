@@ -1,5 +1,6 @@
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { corFoco } from './coresGraficos.js';
+import { estiloTooltip } from './estiloGraficos.js';
 import styles from './Graficos.module.css';
 
 const PERIODOS = [7, 14, 30];
@@ -29,10 +30,14 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo }) {
 
       <ResponsiveContainer width="100%" height={280}>
         <AreaChart data={dados} margin={{ left: 8, right: 8 }}>
-          <CartesianGrid vertical={false} stroke="var(--cor-borda)" />
-          <XAxis dataKey="data" tick={{ fontSize: 12 }} />
-          <YAxis tickFormatter={(v) => `${v}%`} domain={[0, 100]} tick={{ fontSize: 12 }} />
-          <Tooltip formatter={(valor) => formatarPercentual(valor)} />
+          <CartesianGrid vertical={false} stroke="var(--cor-grafico-grid)" />
+          <XAxis dataKey="data" tick={{ fontSize: 13, fill: 'var(--cor-texto-suave)' }} />
+          <YAxis
+            tickFormatter={(v) => `${v}%`}
+            domain={[0, 100]}
+            tick={{ fontSize: 13, fill: 'var(--cor-texto-suave)' }}
+          />
+          <Tooltip formatter={(valor) => formatarPercentual(valor)} {...estiloTooltip} />
           <Legend
             formatter={(value) => (value === 'percentualFederal' ? 'Federal' : 'Estadual')}
             wrapperStyle={{ fontSize: 13 }}
@@ -43,8 +48,9 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo }) {
             stroke={corFoco('federal')}
             fill={corFoco('federal')}
             fillOpacity={0.15}
-            strokeWidth={2}
-            dot={{ r: 3 }}
+            strokeWidth={3}
+            dot={{ r: 5, strokeWidth: 0 }}
+            activeDot={{ r: 7 }}
           />
           <Area
             type="monotone"
@@ -52,8 +58,9 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo }) {
             stroke={corFoco('estadual')}
             fill={corFoco('estadual')}
             fillOpacity={0.15}
-            strokeWidth={2}
-            dot={{ r: 3 }}
+            strokeWidth={3}
+            dot={{ r: 5, strokeWidth: 0 }}
+            activeDot={{ r: 7 }}
           />
         </AreaChart>
       </ResponsiveContainer>

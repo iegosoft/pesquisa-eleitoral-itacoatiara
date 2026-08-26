@@ -5,8 +5,8 @@
 
 .cartao h3 {
   margin: 0 0 12px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--cor-texto);
 }
 
@@ -16,33 +16,54 @@
   margin: 0;
 }
 
-.tabelaWrapper {
-  overflow-x: auto;
-}
-
-.tabela {
-  border-collapse: collapse;
-  width: 100%;
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 14px;
   font-size: 13px;
-}
-
-.tabela th,
-.tabela td {
-  padding: 8px 10px;
-  text-align: center;
-  border: 1px solid var(--cor-borda);
-  white-space: nowrap;
-}
-
-.tabela thead th {
   color: var(--cor-texto-suave);
-  font-weight: 600;
-  background: var(--cor-fundo);
 }
 
-.tabela tbody th {
-  text-align: left;
-  color: var(--cor-texto);
+.legendaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendaCor {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--raio-borda-lg);
+  color: #fff;
+}
+
+.blocoBairro {
+  font-size: 12px;
   font-weight: 600;
-  background: var(--cor-fundo);
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blocoPercentual {
+  font-family: var(--fonte-destaque);
+  font-size: 20px;
+  font-weight: 800;
 }

@@ -83,6 +83,7 @@ function PainelDashboard() {
       <div className={styles.grade}>
         <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} cargo="federal" />
         <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} cargo="estadual" />
+        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
       </div>
 
       <div className={styles.secao}>
@@ -90,12 +91,8 @@ function PainelDashboard() {
       </div>
 
       <div className={styles.grade}>
-        <MapaCalor titulo="Mapa de calor — Federal" dados={mapaFederal} cargo="federal" />
-        <MapaCalor titulo="Mapa de calor — Estadual" dados={mapaEstadual} cargo="estadual" />
-      </div>
-
-      <div className={styles.secao}>
-        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
+        <MapaCalor titulo="Status do foco por bairro — Federal" dados={mapaFederal} />
+        <MapaCalor titulo="Status do foco por bairro — Estadual" dados={mapaEstadual} />
       </div>
     </div>
   );

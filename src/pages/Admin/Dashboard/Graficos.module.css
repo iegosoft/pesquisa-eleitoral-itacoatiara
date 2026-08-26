@@ -5,31 +5,9 @@
 
 .cartao h3 {
   margin: 0 0 12px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--cor-texto);
-}
-
-.legenda {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  color: var(--cor-texto);
-}
-
-.legendaItem {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.legendaCor {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  flex-shrink: 0;
 }
 
 .cabecalhoComAcoes {

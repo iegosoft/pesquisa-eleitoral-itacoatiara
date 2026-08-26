@@ -16,8 +16,8 @@ export default defineConfig({
         start_url: '/coleta',
         scope: '/',
         display: 'standalone',
-        background_color: '#f5f4f0',
-        theme_color: '#0f6e56',
+        background_color: '#f8fafc',
+        theme_color: '#2563eb',
         icons: [
           {
             src: 'icons/icon-192.png',

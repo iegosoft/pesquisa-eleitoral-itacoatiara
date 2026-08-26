@@ -1,25 +1,67 @@
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
   margin-bottom: 24px;
 }
 
 .card {
   composes: cartao from '../../../styles/md3.module.css';
   display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--raio-borda-lg);
+  flex-shrink: 0;
+}
+
+.icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.iconeAzul {
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-selecao);
+}
+
+.iconePetroleo {
+  background: var(--cor-secundaria-fundo-suave);
+  color: var(--cor-secundaria);
+}
+
+.iconeCinza {
+  background: var(--cor-superficie-baixa);
+  color: var(--cor-texto-suave);
+}
+
+.textos {
+  display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px 18px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .rotulo {
   font-size: 13px;
   color: var(--cor-texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .valor {
-  font-size: 26px;
-  font-weight: 700;
+  font-family: var(--fonte-destaque);
+  font-size: 24px;
+  font-weight: 800;
   color: var(--cor-texto);
+  white-space: nowrap;
 }
