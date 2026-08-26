@@ -13,13 +13,13 @@ function formatarPercentual(valor) {
 // não depende de medir a largura do texto pra não sobrepor o nome.
 function RotuloCandidato({ x, y, payload, itensPorRotulo, cargo }) {
   const item = itensPorRotulo.get(payload.value);
-  const cor = item ? corItemIntencaoVoto(item, item.indiceRanking, cargo) : 'var(--cor-texto-suave)';
+  const cor = item ? corItemIntencaoVoto(item, cargo) : 'var(--cor-texto-suave)';
 
   return (
     <g>
       {item?.isFoco && (
         <g transform={`translate(${x - 40}, ${y - 21})`}>
-          <rect width={40} height={15} rx={7.5} fill="var(--cor-destaque)" />
+          <rect width={40} height={15} rx={7.5} fill="var(--cor-texto)" />
           <text x={20} y={11} textAnchor="middle" fontSize={9} fontWeight={700} fill="#fff">
             FOCO
           </text>
@@ -32,8 +32,6 @@ function RotuloCandidato({ x, y, payload, itensPorRotulo, cargo }) {
   );
 }
 
-// itens já vem com indiceRanking calculado em PainelDashboard (comIndiceDeRanking),
-// pra usar a mesma cor por candidato aqui e no mapa de bairros.
 function GraficoIntencaoVoto({ titulo, itens, cargo }) {
   const itensPorRotulo = new Map(itens.map((item) => [item.rotulo, item]));
 
@@ -43,7 +41,12 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
 
       <ResponsiveContainer width="100%" height={Math.max(itens.length * 44, 140)}>
         <BarChart data={itens} layout="vertical" margin={{ top: 10, left: 8, right: 24 }}>
-          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 13 }} />
+          <XAxis
+            type="number"
+            domain={[0, 100]}
+            tickFormatter={(v) => `${v}%`}
+            tick={{ fontSize: 13, fill: 'var(--cor-texto-suave)' }}
+          />
           <YAxis
             type="category"
             dataKey="rotulo"
@@ -57,9 +60,9 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
             {itens.map((item) => (
               <Cell
                 key={item.chave}
-                fill={corItemIntencaoVoto(item, item.indiceRanking, cargo)}
-                stroke={item.isFoco ? 'var(--cor-destaque)' : 'none'}
-                strokeWidth={item.isFoco ? 3 : 0}
+                fill={corItemIntencaoVoto(item, cargo)}
+                stroke={item.isFoco ? 'var(--cor-texto)' : 'none'}
+                strokeWidth={item.isFoco ? 2 : 0}
               />
             ))}
             <LabelList

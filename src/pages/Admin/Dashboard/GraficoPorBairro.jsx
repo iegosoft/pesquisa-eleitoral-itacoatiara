@@ -14,9 +14,19 @@ function GraficoPorBairro({ dados }) {
 
       <ResponsiveContainer width="100%" height={320}>
         <BarChart data={dados} margin={{ left: 8, right: 8, bottom: 40 }}>
-          <CartesianGrid vertical={false} stroke="var(--cor-borda)" />
-          <XAxis dataKey="bairro" angle={-30} textAnchor="end" interval={0} tick={{ fontSize: 13 }} />
-          <YAxis tickFormatter={(v) => `${v}%`} domain={[0, 100]} tick={{ fontSize: 13 }} />
+          <CartesianGrid vertical={false} stroke="var(--cor-grafico-grid)" />
+          <XAxis
+            dataKey="bairro"
+            angle={-30}
+            textAnchor="end"
+            interval={0}
+            tick={{ fontSize: 13, fill: 'var(--cor-texto-suave)' }}
+          />
+          <YAxis
+            tickFormatter={(v) => `${v}%`}
+            domain={[0, 100]}
+            tick={{ fontSize: 13, fill: 'var(--cor-texto-suave)' }}
+          />
           <Tooltip formatter={(valor) => formatarPercentual(valor)} {...estiloTooltip} />
           <Legend
             formatter={(value) => (value === 'percentualFederal' ? 'Federal' : 'Estadual')}

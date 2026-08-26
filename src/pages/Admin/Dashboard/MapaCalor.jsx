@@ -1,25 +1,31 @@
-import { corPorRanking, COR_SEM_DADOS } from './coresGraficos.js';
+import { corStatusMapa, statusFocoPorBairro } from './coresGraficos.js';
 import styles from './MapaCalor.module.css';
 
-// Pra cada bairro, acha o candidato com maior percentual entre as linhas
-// já calculadas em calcularMapaCalor (mesmo dado, só reorganizado: em vez
-// de candidato -> bairros, vira bairro -> quem lidera ali).
-function calcularLiderancaPorBairro({ bairros, linhas }) {
+const LEGENDA = [
+  { status: 'lidera', rotulo: 'Lidera' },
+  { status: 'empate', rotulo: 'Empate' },
+  { status: 'perde', rotulo: 'Perde' },
+  { status: 'sem_dados', rotulo: 'Sem dados' },
+];
+
+// Por bairro, compara o percentual do candidato foco com o maior percentual
+// entre todos os candidatos daquele cargo ali — não é "quem lidera o
+// bairro" (identidade), é "como o nosso candidato está indo" (status).
+function calcularStatusPorBairro({ bairros, linhas }) {
+  const linhaFoco = linhas.find(({ candidato }) => candidato.isFoco);
+  if (!linhaFoco) return null;
+
   return bairros.map((bairro) => {
-    let liderCandidatoId = null;
-    let maiorPercentual = 0;
-    linhas.forEach(({ candidato, valoresPorBairro }) => {
-      const valor = valoresPorBairro.find((item) => item.bairro === bairro)?.percentual ?? 0;
-      if (valor > maiorPercentual) {
-        maiorPercentual = valor;
-        liderCandidatoId = candidato.id;
-      }
-    });
-    return { bairro, liderCandidatoId, percentual: maiorPercentual };
+    const percentualFoco = linhaFoco.valoresPorBairro.find((item) => item.bairro === bairro)?.percentual ?? 0;
+    const maiorPercentual = Math.max(
+      0,
+      ...linhas.map((linha) => linha.valoresPorBairro.find((item) => item.bairro === bairro)?.percentual ?? 0),
+    );
+    return { bairro, percentualFoco, status: statusFocoPorBairro(percentualFoco, maiorPercentual) };
   });
 }
 
-function MapaCalor({ titulo, dados, itensRanking, cargo }) {
+function MapaCalor({ titulo, dados }) {
   if (dados.bairros.length === 0 || dados.linhas.length === 0) {
     return (
       <div className={styles.cartao}>
@@ -29,38 +35,39 @@ function MapaCalor({ titulo, dados, itensRanking, cargo }) {
     );
   }
 
-  const candidatosPorId = new Map(itensRanking.filter((item) => item.tipo === 'candidato').map((item) => [item.chave, item]));
-  const lideranca = calcularLiderancaPorBairro(dados);
+  const status = calcularStatusPorBairro(dados);
+
+  if (!status) {
+    return (
+      <div className={styles.cartao}>
+        <h3>{titulo}</h3>
+        <p className={styles.vazio}>Nenhum candidato marcado como foco pra esse cargo ainda.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.cartao}>
       <h3>{titulo}</h3>
-      <div className={styles.grade}>
-        {lideranca.map(({ bairro, liderCandidatoId, percentual }) => {
-          const lider = liderCandidatoId ? candidatosPorId.get(liderCandidatoId) : null;
-          const cor = lider ? corPorRanking(lider.indiceRanking, cargo) : COR_SEM_DADOS;
 
-          return (
-            <div
-              key={bairro}
-              className={`${styles.bloco} ${lider ? '' : styles.blocoVazio}`}
-              style={lider ? { background: cor } : undefined}
-            >
-              <span className={styles.blocoBairro}>{bairro}</span>
-              {lider ? (
-                <>
-                  <span className={styles.blocoLider}>
-                    {lider.isFoco && '★ '}
-                    {lider.rotulo}
-                  </span>
-                  <span className={styles.blocoPercentual}>{percentual.toFixed(0)}%</span>
-                </>
-              ) : (
-                <span className={styles.blocoLider}>Sem dados</span>
-              )}
-            </div>
-          );
-        })}
+      <div className={styles.legenda}>
+        {LEGENDA.map((item) => (
+          <span key={item.status} className={styles.legendaItem}>
+            <span className={styles.legendaCor} style={{ background: corStatusMapa(item.status) }} />
+            {item.rotulo}
+          </span>
+        ))}
+      </div>
+
+      <div className={styles.grade}>
+        {status.map(({ bairro, percentualFoco, status: statusBairro }) => (
+          <div key={bairro} className={styles.bloco} style={{ background: corStatusMapa(statusBairro) }}>
+            <span className={styles.blocoBairro}>{bairro}</span>
+            <span className={styles.blocoPercentual}>
+              {statusBairro === 'sem_dados' ? '—' : `${percentualFoco.toFixed(0)}%`}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

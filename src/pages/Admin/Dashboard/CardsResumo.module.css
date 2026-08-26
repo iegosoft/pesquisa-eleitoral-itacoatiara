@@ -33,19 +33,14 @@
   color: var(--cor-selecao);
 }
 
-.iconeVerde {
-  background: var(--cor-sucesso-fundo-suave);
-  color: var(--cor-sucesso);
+.iconePetroleo {
+  background: var(--cor-secundaria-fundo-suave);
+  color: var(--cor-secundaria);
 }
 
-.iconeVioleta {
-  background: var(--cor-violeta-fundo-suave);
-  color: var(--cor-violeta);
-}
-
-.iconeLaranja {
-  background: var(--cor-destaque-fundo-suave);
-  color: var(--cor-destaque);
+.iconeCinza {
+  background: var(--cor-superficie-baixa);
+  color: var(--cor-texto-suave);
 }
 
 .textos {

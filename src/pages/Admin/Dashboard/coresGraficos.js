@@ -1,52 +1,55 @@
-// Cor por posição no ranking, dentro do matiz da própria eleição (azul pro
-// federal, roxo pro estadual — igual ao mockup de referência): o 1º lugar
-// leva o tom mais forte, os seguintes vão clareando. A cor aqui é ordinal
-// (indica posição, não identidade fixa do candidato) — 4 degraus, validados
-// como rampa ordinal (luminosidade monótona, degraus visíveis, ponta clara
-// ainda legível sobre o fundo branco — skill de dataviz, --ordinal). Além
-// da 4ª posição, repete o tom mais claro.
-const RAMPA_FEDERAL = ['#1e3a8a', '#2563eb', '#3b82f6', '#60a5fa'];
-const RAMPA_ESTADUAL = ['#4c1d95', '#7c3aed', '#8b5cf6', '#a78bfa'];
+// Paleta fixa de identidade eleitoral: federal é sempre azul, estadual é
+// sempre roxo — em qualquer gráfico, sem variar por ranking ou resultado.
+// Indeciso e branco/nulo são neutros, fora da paleta de candidato.
+const COR_FEDERAL = '#2563eb';
+const COR_ESTADUAL = '#7c3aed';
+const COR_INDECISO = '#94a3b8';
+const COR_BRANCO_NULO = '#cbd5e1';
 
-const COR_INDECISO = '#d3d1c7';
-const COR_BRANCO_NULO = '#e1e0d9';
-const COR_SEM_DADOS = '#f1f5f9';
-const COR_FOCO_FEDERAL = '#0f6e56';
-const COR_FOCO_ESTADUAL = '#5dcaa5';
+// Status do candidato foco por bairro (não é identidade, é resultado
+// relativo aos concorrentes ali).
+const COR_MAPA_LIDERA = '#15803d';
+const COR_MAPA_EMPATE = '#f59e0b';
+const COR_MAPA_PERDE = '#dc2626';
+const COR_MAPA_SEM_DADOS = '#cbd5e1';
 
 function corFoco(cargo) {
-  return cargo === 'estadual' ? COR_FOCO_ESTADUAL : COR_FOCO_FEDERAL;
+  return cargo === 'estadual' ? COR_ESTADUAL : COR_FEDERAL;
 }
 
-function corPorRanking(indiceEntreCandidatos, cargo) {
-  const rampa = cargo === 'estadual' ? RAMPA_ESTADUAL : RAMPA_FEDERAL;
-  return rampa[Math.min(indiceEntreCandidatos, rampa.length - 1)];
-}
-
-function corItemIntencaoVoto(item, indiceEntreCandidatos, cargo) {
+function corItemIntencaoVoto(item, cargo) {
   if (item.tipo === 'indeciso') return COR_INDECISO;
   if (item.tipo === 'branco_nulo') return COR_BRANCO_NULO;
-  return corPorRanking(indiceEntreCandidatos, cargo);
+  return corFoco(cargo);
 }
 
-// Marca cada candidato com a posição dele no ranking (ignora indeciso e
-// branco/nulo) — usado tanto pro gráfico de ranking quanto pro mapa de
-// bairros, pra garantir que o mesmo candidato sempre apareça com a mesma
-// cor nos dois lugares.
-function comIndiceDeRanking(itens) {
-  let indice = -1;
-  return itens.map((item) => {
-    if (item.tipo === 'candidato') indice += 1;
-    return { ...item, indiceRanking: indice };
-  });
+// Diferença (em pontos percentuais) até o líder pra ainda contar como
+// "empate" no mapa por bairro. Sem essa margem, qualquer diferença mínima
+// apareceria como "perde", o que exageraria o resultado num universo
+// pequeno de entrevistados por bairro.
+const MARGEM_EMPATE_MAPA = 5;
+
+// Classifica o candidato foco em cada bairro: lidera, empata (dentro da
+// margem) ou perde, comparando com o maior percentual entre os candidatos
+// daquele bairro. "Sem dados" quando ninguém tem voto registrado ali.
+function statusFocoPorBairro(percentualFoco, maiorPercentual) {
+  if (maiorPercentual <= 0) return 'sem_dados';
+  if (percentualFoco >= maiorPercentual) return 'lidera';
+  if (maiorPercentual - percentualFoco <= MARGEM_EMPATE_MAPA) return 'empate';
+  return 'perde';
 }
 
-export {
-  corFoco,
-  corPorRanking,
-  corItemIntencaoVoto,
-  comIndiceDeRanking,
-  COR_INDECISO,
-  COR_BRANCO_NULO,
-  COR_SEM_DADOS,
-};
+function corStatusMapa(status) {
+  switch (status) {
+    case 'lidera':
+      return COR_MAPA_LIDERA;
+    case 'empate':
+      return COR_MAPA_EMPATE;
+    case 'perde':
+      return COR_MAPA_PERDE;
+    default:
+      return COR_MAPA_SEM_DADOS;
+  }
+}
+
+export { corFoco, corItemIntencaoVoto, statusFocoPorBairro, corStatusMapa, COR_INDECISO, COR_BRANCO_NULO };
