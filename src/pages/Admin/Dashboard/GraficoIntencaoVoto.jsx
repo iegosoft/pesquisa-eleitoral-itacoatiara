@@ -17,17 +17,27 @@ function comIndiceDeRanking(itens) {
 }
 
 // Rótulo do eixo colorido igual à cor da própria barra — dispensa uma
-// legenda separada, já que a cor e o nome do candidato aparecem juntos na
-// mesma linha.
+// legenda separada. O candidato foco ganha um selo "FOCO" empilhado acima
+// do nome (não só uma estrela), ambos alinhados pela borda direita — assim
+// não depende de medir a largura do texto pra não sobrepor o nome.
 function RotuloCandidato({ x, y, payload, itensPorRotulo, cargo }) {
   const item = itensPorRotulo.get(payload.value);
   const cor = item ? corItemIntencaoVoto(item, item.indiceRanking, cargo) : 'var(--cor-texto-suave)';
 
   return (
-    <text x={x} y={y} dy={4} textAnchor="end" fontSize={13} fontWeight={item?.isFoco ? 700 : 500} fill={cor}>
-      {item?.isFoco ? '★ ' : ''}
-      {payload.value}
-    </text>
+    <g>
+      {item?.isFoco && (
+        <g transform={`translate(${x - 40}, ${y - 21})`}>
+          <rect width={40} height={15} rx={7.5} fill="var(--cor-destaque)" />
+          <text x={20} y={11} textAnchor="middle" fontSize={9} fontWeight={700} fill="#fff">
+            FOCO
+          </text>
+        </g>
+      )}
+      <text x={x} y={y} dy={4} textAnchor="end" fontSize={14} fontWeight={item?.isFoco ? 700 : 500} fill={cor}>
+        {payload.value}
+      </text>
+    </g>
   );
 }
 
@@ -40,8 +50,8 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
       <h3>{titulo}</h3>
 
       <ResponsiveContainer width="100%" height={Math.max(itensComIndice.length * 44, 140)}>
-        <BarChart data={itensComIndice} layout="vertical" margin={{ left: 8, right: 24 }}>
-          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 12 }} />
+        <BarChart data={itensComIndice} layout="vertical" margin={{ top: 10, left: 8, right: 24 }}>
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 13 }} />
           <YAxis
             type="category"
             dataKey="rotulo"
@@ -51,20 +61,20 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
             tick={<RotuloCandidato itensPorRotulo={itensPorRotulo} cargo={cargo} />}
           />
           <Tooltip formatter={(valor) => formatarPercentual(valor)} />
-          <Bar dataKey="percentual" radius={[0, 6, 6, 0]} barSize={26}>
+          <Bar dataKey="percentual" radius={[0, 6, 6, 0]} barSize={28}>
             {itensComIndice.map((item) => (
               <Cell
                 key={item.chave}
                 fill={corItemIntencaoVoto(item, item.indiceRanking, cargo)}
-                stroke={item.isFoco ? 'var(--cor-texto)' : 'none'}
-                strokeWidth={item.isFoco ? 2 : 0}
+                stroke={item.isFoco ? 'var(--cor-destaque)' : 'none'}
+                strokeWidth={item.isFoco ? 3 : 0}
               />
             ))}
             <LabelList
               dataKey="percentual"
               position="right"
               formatter={formatarPercentual}
-              style={{ fontSize: 13, fontWeight: 700 }}
+              style={{ fontSize: 14, fontWeight: 700 }}
             />
           </Bar>
         </BarChart>

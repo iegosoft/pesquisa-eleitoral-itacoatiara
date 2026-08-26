@@ -14,13 +14,13 @@
 }
 
 .rotulo {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--cor-texto-suave);
 }
 
 .valor {
   font-family: var(--fonte-destaque);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
   background: var(--gradiente-marca);
   background-clip: text;
