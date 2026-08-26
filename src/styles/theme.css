@@ -12,15 +12,22 @@
   --cor-indeciso: #d3d1c7;
   --cor-branco-nulo: #e1e0d9;
 
-  /* Superfícies tonais (estilo Material 3): fundo, cartão e campo recuado
-     são três tons neutros levemente distintos, nunca branco puro nem
-     gradiente — a distinção vem do tom, não de sombra decorativa. */
-  --cor-fundo: #f5f4f0;
-  --cor-superficie: #fcfbf8;
-  --cor-superficie-baixa: #edf0ea;
-  --cor-borda: #d3d1c7;
-  --cor-texto: #2b2a27;
-  --cor-texto-suave: #6b6a64;
+  /* Paleta neutra estilo plataforma SaaS (slate + branco) — fundo levemente
+     acinzentado, cartão branco puro, borda discreta. Escolhida pra dar a
+     mesma leitura visual de dashboards como Vercel/Stripe/Linear. */
+  --cor-fundo: #f8fafc;
+  --cor-superficie: #ffffff;
+  --cor-superficie-baixa: #f1f5f9;
+  --cor-borda: #e2e8f0;
+  --cor-texto: #0f172a;
+  --cor-texto-suave: #64748b;
+
+  /* Sidebar: única superfície escura do app, fixa (não é dark mode — o
+     resto da interface continua claro). */
+  --cor-sidebar: #0f172a;
+  --cor-sidebar-texto: #cbd5e1;
+  --cor-sidebar-texto-ativo: #ffffff;
+  --cor-sidebar-hover: rgba(255, 255, 255, 0.06);
 
   /* Seleção/ação da interface — nunca usada pra representar candidato ou
      dado nos gráficos, pra não confundir "isto está selecionado" com
@@ -52,7 +59,7 @@
      arredondado. */
   --raio-borda-sm: 8px;
   --raio-borda-lg: 12px;
-  --raio-cartao: 20px;
+  --raio-cartao: 16px;
   --raio-pilula: 999px;
   --raio-campo: 12px;
 

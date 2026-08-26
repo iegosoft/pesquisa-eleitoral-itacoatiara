@@ -1,49 +1,15 @@
-.pagina {
-  padding: 24px 20px 40px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.pagina h1 {
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 0 16px;
-}
-
-.abas {
+.shell {
   display: flex;
-  gap: 4px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--cor-borda);
+  min-height: 100svh;
 }
 
-.aba {
-  padding: 12px 20px;
-  border: none;
-  background: none;
-  font-family: var(--fonte-base);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--cor-texto-suave);
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  border-radius: var(--raio-borda-sm) var(--raio-borda-sm) 0 0;
-  transition:
-    color 200ms var(--easing-md3),
-    background-color 200ms var(--easing-md3),
-    border-color 200ms var(--easing-md3);
+.areaConteudo {
+  flex: 1;
+  min-width: 0;
 }
 
-.aba:hover {
-  background: var(--cor-selecao-fundo-suave);
-  color: var(--cor-selecao);
-}
-
-.abaAtiva,
-.abaAtiva:hover {
-  color: var(--cor-texto);
-  font-weight: 700;
-  border-bottom: 3px solid transparent;
-  border-image: var(--gradiente-marca) 1;
-  background: none;
+.conteudo {
+  padding: 20px 28px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
