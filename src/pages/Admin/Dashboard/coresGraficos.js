@@ -1,22 +1,12 @@
-// Paleta categórica de identidade — mesma lógica usada por institutos de
-// pesquisa (Datafolha, Ipec etc.): cada candidato tem sua própria cor fixa,
-// nunca reaproveitada pra indicar quem está na frente; indeciso e
-// branco/nulo ficam neutros, fora da paleta de candidato. Oito matizes,
-// ordem fixa, validados contra daltonismo (ΔE ≥ 8 adjacente, piso de visão
-// normal ≥ 15 — ver skill de dataviz, references/palette.md). Três tons
-// (aqua, amarelo, magenta) ficam abaixo de 3:1 de contraste sobre o fundo
-// claro do app — por isso o gráfico nunca depende só da cor: rótulo direto
-// do percentual em cada barra + legenda com texto sempre presentes.
-const PALETA_CANDIDATOS = [
-  '#2a78d6', // azul
-  '#eb6834', // laranja
-  '#1baf7a', // aqua
-  '#eda100', // amarelo
-  '#e87ba4', // magenta
-  '#008300', // verde
-  '#4a3aa7', // violeta
-  '#e34948', // vermelho
-];
+// Cor por posição no ranking, dentro do matiz da própria eleição (azul pro
+// federal, roxo pro estadual — igual ao mockup de referência): o 1º lugar
+// leva o tom mais forte, os seguintes vão clareando. A cor aqui é ordinal
+// (indica posição, não identidade fixa do candidato) — 4 degraus, validados
+// como rampa ordinal (luminosidade monótona, degraus visíveis, ponta clara
+// ainda legível sobre o fundo branco — skill de dataviz, --ordinal). Além
+// da 4ª posição, repete o tom mais claro.
+const RAMPA_FEDERAL = ['#1e3a8a', '#2563eb', '#3b82f6', '#60a5fa'];
+const RAMPA_ESTADUAL = ['#4c1d95', '#7c3aed', '#8b5cf6', '#a78bfa'];
 
 const COR_INDECISO = '#d3d1c7';
 const COR_BRANCO_NULO = '#e1e0d9';
@@ -32,18 +22,15 @@ function corFoco(cargo) {
   return cargo === 'estadual' ? COR_FOCO_ESTADUAL : COR_FOCO_FEDERAL;
 }
 
-// Hash estável do id do candidato pro índice da paleta: a cor de um
-// candidato não muda conforme o resultado da votação nem a ordem da lista,
-// só depende da identidade dele.
-function corCandidato(id) {
-  const soma = [...id].reduce((total, caractere) => total + caractere.charCodeAt(0), 0);
-  return PALETA_CANDIDATOS[soma % PALETA_CANDIDATOS.length];
+function corPorRanking(indiceEntreCandidatos, cargo) {
+  const rampa = cargo === 'estadual' ? RAMPA_ESTADUAL : RAMPA_FEDERAL;
+  return rampa[Math.min(indiceEntreCandidatos, rampa.length - 1)];
 }
 
-function corItemIntencaoVoto(item) {
+function corItemIntencaoVoto(item, indiceEntreCandidatos, cargo) {
   if (item.tipo === 'indeciso') return COR_INDECISO;
   if (item.tipo === 'branco_nulo') return COR_BRANCO_NULO;
-  return corCandidato(item.chave);
+  return corPorRanking(indiceEntreCandidatos, cargo);
 }
 
 function hexParaRgba(hex, alpha) {
@@ -63,4 +50,4 @@ function corMapaCalor(percentual, isFoco, cargo) {
   return hexParaRgba(corBase, alpha);
 }
 
-export { corFoco, corCandidato, corItemIntencaoVoto, corMapaCalor, COR_INDECISO, COR_BRANCO_NULO };
+export { corFoco, corItemIntencaoVoto, corMapaCalor, COR_INDECISO, COR_BRANCO_NULO };
