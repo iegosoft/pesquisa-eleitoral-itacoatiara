@@ -5,6 +5,10 @@ const COR_FEDERAL = '#2563eb';
 const COR_ESTADUAL = '#7c3aed';
 const COR_INDECISO = '#94a3b8';
 const COR_BRANCO_NULO = '#cbd5e1';
+// Candidato sem nenhum voto ainda: cor apagada em vez da cor cheia da
+// eleição, senão uma lista com muitos candidatos zerados vira poluição
+// visual (nome forte sem barra nenhuma pra justificar o destaque).
+const COR_SEM_VOTOS = '#cbd5e1';
 
 // Status do candidato foco por bairro (não é identidade, é resultado
 // relativo aos concorrentes ali).
@@ -20,6 +24,7 @@ function corFoco(cargo) {
 function corItemIntencaoVoto(item, cargo) {
   if (item.tipo === 'indeciso') return COR_INDECISO;
   if (item.tipo === 'branco_nulo') return COR_BRANCO_NULO;
+  if (item.percentual <= 0) return COR_SEM_VOTOS;
   return corFoco(cargo);
 }
 
