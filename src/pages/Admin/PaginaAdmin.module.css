@@ -6,7 +6,7 @@
 
 .pagina h1 {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0 0 16px;
 }
 
@@ -41,7 +41,9 @@
 
 .abaAtiva,
 .abaAtiva:hover {
-  color: var(--cor-selecao);
-  border-bottom-color: var(--cor-selecao);
+  color: var(--cor-texto);
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+  border-image: var(--gradiente-marca) 1;
   background: none;
 }

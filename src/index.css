@@ -16,6 +16,12 @@ body {
   background: var(--cor-fundo);
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-destaque);
+}
+
 #root {
   min-height: 100svh;
 }
