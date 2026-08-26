@@ -33,6 +33,20 @@
   --cor-erro-fundo-suave: #fdf1f0;
   --cor-erro-borda: #f3c9c5;
 
+  /* Acento quente, só pra pequenos realces de interface (badge, destaque
+     visual) — nunca usado em gráfico ou pra representar candidato/voto,
+     mesma regra que já vale pra --cor-selecao. */
+  --cor-destaque: #f2a516;
+  --cor-destaque-fundo-suave: #fdf1dd;
+
+  /* Gradiente de marca: combina o teal do foco federal com o azul de
+     seleção, os dois tons já usados no resto da paleta — dá identidade
+     visual sem inventar cor nova nem conflitar com o significado que
+     --cor-foco-federal e --cor-selecao já carregam nos dados/gráficos.
+     Só pra elementos de interface (barra superior, fundo de destaque),
+     nunca em gráfico ou avatar de candidato. */
+  --gradiente-marca: linear-gradient(135deg, #0f6e56 0%, #2563eb 100%);
+
   /* Raios: pílula pra todo botão/chip, cartões com cantos generosos,
      campo de texto preenchido (estilo Material 3) com só o topo
      arredondado. */
@@ -42,11 +56,14 @@
   --raio-pilula: 999px;
   --raio-campo: 12px;
 
-  /* Elevação suave (só em hover/interação, nunca decorativa em repouso) */
-  --sombra-repouso: none;
-  --sombra-elevada: 0 1px 2px rgba(43, 42, 39, 0.08), 0 1px 3px rgba(43, 42, 39, 0.1);
+  /* Elevação suave: um resíduo leve em repouso pra dar profundidade aos
+     cartões, um pouco mais forte em hover/interação. */
+  --sombra-repouso: 0 1px 2px rgba(43, 42, 39, 0.04), 0 4px 14px rgba(43, 42, 39, 0.06);
+  --sombra-elevada: 0 1px 2px rgba(43, 42, 39, 0.08), 0 4px 16px rgba(43, 42, 39, 0.12);
 
   --easing-md3: cubic-bezier(0.2, 0, 0, 1);
   --fonte-base:
     'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-destaque:
+    'Manrope', var(--fonte-base);
 }

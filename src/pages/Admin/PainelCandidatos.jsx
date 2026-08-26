@@ -21,7 +21,17 @@ function ListaCandidatos({ titulo, candidatos, aoEditar }) {
             <span className={styles.nome}>{candidato.nome}</span>
             <span className={styles.partido}>{candidato.partido}</span>
           </span>
-          {candidato.isFoco && <span className={styles.badgeFoco}>Foco</span>}
+          {candidato.isFoco && (
+            <span
+              className={styles.badgeFoco}
+              style={{
+                background:
+                  candidato.cargo === 'estadual' ? 'var(--cor-foco-estadual)' : 'var(--cor-foco-federal)',
+              }}
+            >
+              Foco
+            </span>
+          )}
         </button>
       ))}
     </div>

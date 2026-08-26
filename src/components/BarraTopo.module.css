@@ -4,13 +4,14 @@
   justify-content: flex-end;
   gap: 12px;
   padding: calc(12px + env(safe-area-inset-top)) 20px 12px;
-  background: var(--cor-superficie);
-  border-bottom: 1px solid var(--cor-borda);
+  background: var(--gradiente-marca);
+  box-shadow: var(--sombra-elevada);
 }
 
 .nome {
   font-size: 14px;
-  color: var(--cor-texto-suave);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .botaoSair {
@@ -18,4 +19,12 @@
   height: 36px;
   padding: 0 18px;
   font-size: 13px;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.botaoSair:hover:not(:disabled) {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }

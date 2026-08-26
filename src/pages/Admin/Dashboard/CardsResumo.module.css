@@ -19,7 +19,11 @@
 }
 
 .valor {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--cor-texto);
+  font-family: var(--fonte-destaque);
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--gradiente-marca);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
+  background: var(--gradiente-marca);
 }
 
 .cartao {
@@ -14,11 +15,11 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+  box-shadow: var(--sombra-elevada);
 }
 
 .cartao h1 {
-  font-family: var(--fonte-base);
-  font-weight: 500;
+  font-weight: 800;
   margin: 0;
 }
 
