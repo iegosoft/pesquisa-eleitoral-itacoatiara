@@ -1,19 +1,10 @@
 import { Bar, BarChart, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { corItemIntencaoVoto } from './coresGraficos.js';
+import { estiloTooltip } from './estiloGraficos.js';
 import styles from './Graficos.module.css';
 
 function formatarPercentual(valor) {
   return `${valor.toFixed(1)}%`;
-}
-
-// Posição do item entre os candidatos (ignora indeciso/branco-nulo), pra
-// escolher o degrau de cor certo dentro do matiz da eleição.
-function comIndiceDeRanking(itens) {
-  let indice = -1;
-  return itens.map((item) => {
-    if (item.tipo === 'candidato') indice += 1;
-    return { ...item, indiceRanking: indice };
-  });
 }
 
 // Rótulo do eixo colorido igual à cor da própria barra — dispensa uma
@@ -41,16 +32,17 @@ function RotuloCandidato({ x, y, payload, itensPorRotulo, cargo }) {
   );
 }
 
+// itens já vem com indiceRanking calculado em PainelDashboard (comIndiceDeRanking),
+// pra usar a mesma cor por candidato aqui e no mapa de bairros.
 function GraficoIntencaoVoto({ titulo, itens, cargo }) {
-  const itensComIndice = comIndiceDeRanking(itens);
-  const itensPorRotulo = new Map(itensComIndice.map((item) => [item.rotulo, item]));
+  const itensPorRotulo = new Map(itens.map((item) => [item.rotulo, item]));
 
   return (
     <div className={styles.cartao}>
       <h3>{titulo}</h3>
 
-      <ResponsiveContainer width="100%" height={Math.max(itensComIndice.length * 44, 140)}>
-        <BarChart data={itensComIndice} layout="vertical" margin={{ top: 10, left: 8, right: 24 }}>
+      <ResponsiveContainer width="100%" height={Math.max(itens.length * 44, 140)}>
+        <BarChart data={itens} layout="vertical" margin={{ top: 10, left: 8, right: 24 }}>
           <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 13 }} />
           <YAxis
             type="category"
@@ -60,9 +52,9 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
             axisLine={false}
             tick={<RotuloCandidato itensPorRotulo={itensPorRotulo} cargo={cargo} />}
           />
-          <Tooltip formatter={(valor) => formatarPercentual(valor)} />
+          <Tooltip formatter={(valor) => formatarPercentual(valor)} {...estiloTooltip} />
           <Bar dataKey="percentual" radius={[0, 6, 6, 0]} barSize={28}>
-            {itensComIndice.map((item) => (
+            {itens.map((item) => (
               <Cell
                 key={item.chave}
                 fill={corItemIntencaoVoto(item, item.indiceRanking, cargo)}
