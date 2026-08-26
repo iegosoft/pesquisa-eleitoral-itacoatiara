@@ -25,6 +25,10 @@
   gap: 6px;
 }
 
+.legendaItemFoco {
+  font-weight: 700;
+}
+
 .legendaCor {
   width: 10px;
   height: 10px;

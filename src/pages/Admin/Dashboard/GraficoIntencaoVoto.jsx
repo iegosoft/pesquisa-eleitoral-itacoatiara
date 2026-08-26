@@ -6,18 +6,19 @@ function formatarPercentual(valor) {
   return `${valor.toFixed(1)}%`;
 }
 
-function GraficoIntencaoVoto({ titulo, itens, cargo }) {
+function GraficoIntencaoVoto({ titulo, itens }) {
   return (
     <div className={styles.cartao}>
       <h3>{titulo}</h3>
 
       <div className={styles.legenda}>
         {itens.map((item) => (
-          <span key={item.chave} className={styles.legendaItem}>
-            <span
-              className={styles.legendaCor}
-              style={{ background: corItemIntencaoVoto(item, cargo) }}
-            />
+          <span
+            key={item.chave}
+            className={`${styles.legendaItem} ${item.isFoco ? styles.legendaItemFoco : ''}`}
+          >
+            <span className={styles.legendaCor} style={{ background: corItemIntencaoVoto(item) }} />
+            {item.isFoco && '★ '}
             {item.rotulo} {formatarPercentual(item.percentual)}
           </span>
         ))}
@@ -30,7 +31,12 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
           <Tooltip formatter={(valor) => formatarPercentual(valor)} />
           <Bar dataKey="percentual" radius={[0, 4, 4, 0]} barSize={22}>
             {itens.map((item) => (
-              <Cell key={item.chave} fill={corItemIntencaoVoto(item, cargo)} />
+              <Cell
+                key={item.chave}
+                fill={corItemIntencaoVoto(item)}
+                stroke={item.isFoco ? 'var(--cor-texto)' : 'none'}
+                strokeWidth={item.isFoco ? 2 : 0}
+              />
             ))}
             <LabelList dataKey="percentual" position="right" formatter={formatarPercentual} style={{ fontSize: 12 }} />
           </Bar>

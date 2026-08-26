@@ -41,9 +41,7 @@ function calcularResumo(respostas) {
 }
 
 // Retorna um item por candidato do cargo, mais Indeciso e Branco/Nulo, com o
-// percentual sobre o total de respostas filtradas. "indiceConcorrente" é a
-// posição estável do candidato (não-foco) na lista, usada só pra escolher o
-// tom de cinza — não muda conforme o resultado da votação.
+// percentual sobre o total de respostas filtradas.
 function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   const total = respostas.length;
   const contagem = {};
@@ -52,19 +50,13 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
     contagem[chave] = (contagem[chave] ?? 0) + 1;
   });
 
-  let indiceConcorrente = 0;
-  const itensCandidatos = candidatosCargo.map((candidato) => {
-    const item = {
-      chave: candidato.id,
-      rotulo: candidato.nome,
-      isFoco: candidato.isFoco,
-      tipo: 'candidato',
-      indiceConcorrente: candidato.isFoco ? null : indiceConcorrente,
-      percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
-    };
-    if (!candidato.isFoco) indiceConcorrente += 1;
-    return item;
-  });
+  const itensCandidatos = candidatosCargo.map((candidato) => ({
+    chave: candidato.id,
+    rotulo: candidato.nome,
+    isFoco: candidato.isFoco,
+    tipo: 'candidato',
+    percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
+  }));
 
   const itensExtras = [
     {
