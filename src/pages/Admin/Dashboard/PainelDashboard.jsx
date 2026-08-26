@@ -81,8 +81,8 @@ function PainelDashboard() {
       <CardsResumo resumo={resumo} />
 
       <div className={styles.grade}>
-        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} cargo="federal" />
-        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} cargo="estadual" />
+        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} />
+        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} />
       </div>
 
       <div className={styles.secao}>
