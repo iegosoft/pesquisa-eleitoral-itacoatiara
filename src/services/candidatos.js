@@ -1,8 +1,11 @@
 import {
   addDoc,
   collection,
+  collectionGroup,
+  deleteDoc,
   doc,
   getDocs,
+  limit,
   onSnapshot,
   query,
   updateDoc,
@@ -10,6 +13,8 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import { db } from './firebase';
+
+class CandidatoComVotosError extends Error {}
 
 const colecaoCandidatos = collection(db, 'candidatos');
 
@@ -90,10 +95,34 @@ async function atualizarCandidato(id, { nome, partido, cargo, fotoUrl, isFoco })
   }
 }
 
+// voto_federal/voto_estadual, em entrevistados, gravam o id do candidato
+// direto (dashboard e exportação resolvem o nome por esse id). Excluir um
+// candidato que já tem voto deixaria esses registros órfãos: o percentual
+// no dashboard passa a não somar 100% e a exportação mostra a célula de
+// voto em branco, sem nenhum aviso. Por isso a exclusão só é permitida pra
+// candidato sem nenhum voto registrado.
+async function candidatoTemVotos(id) {
+  const colecaoEntrevistados = collectionGroup(db, 'entrevistados');
+  const [porFederal, porEstadual] = await Promise.all([
+    getDocs(query(colecaoEntrevistados, where('voto_federal', '==', id), limit(1))),
+    getDocs(query(colecaoEntrevistados, where('voto_estadual', '==', id), limit(1))),
+  ]);
+  return !porFederal.empty || !porEstadual.empty;
+}
+
+async function excluirCandidato(id) {
+  if (await candidatoTemVotos(id)) {
+    throw new CandidatoComVotosError();
+  }
+  await deleteDoc(doc(db, 'candidatos', id));
+}
+
 export {
   observarCandidatos,
   observarCandidatosPorCargo,
   buscarCandidatos,
   criarCandidato,
   atualizarCandidato,
+  excluirCandidato,
+  CandidatoComVotosError,
 };

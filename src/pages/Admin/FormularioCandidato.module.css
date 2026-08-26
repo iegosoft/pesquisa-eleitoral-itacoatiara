@@ -57,3 +57,44 @@
 .botaoSecundario {
   composes: botaoContornado from '../../styles/md3.module.css';
 }
+
+.botaoPerigo {
+  composes: botaoContornado from '../../styles/md3.module.css';
+  border-color: var(--cor-erro-borda);
+  color: var(--cor-erro);
+}
+
+.botaoPerigo:hover:not(:disabled) {
+  border-color: var(--cor-erro);
+  background: var(--cor-erro-fundo-suave);
+  color: var(--cor-erro);
+}
+
+.botaoPerigoPreenchido {
+  composes: botaoBase from '../../styles/md3.module.css';
+  flex: 1;
+  border: none;
+  background: var(--cor-erro);
+  color: #fff;
+}
+
+.botaoPerigoPreenchido:hover:not(:disabled) {
+  box-shadow: var(--sombra-elevada);
+  opacity: 0.9;
+}
+
+.blocoConfirmacaoExclusao {
+  background: var(--cor-erro-fundo-suave);
+  border: 1px solid var(--cor-erro-borda);
+  border-radius: var(--raio-borda-lg);
+  padding: 14px 16px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blocoConfirmacaoExclusao p {
+  margin: 0;
+  color: var(--cor-texto);
+}
