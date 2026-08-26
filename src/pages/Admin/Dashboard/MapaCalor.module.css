@@ -16,9 +16,31 @@
   margin: 0;
 }
 
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.legendaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendaCor {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
 .grade {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 10px;
 }
 
@@ -31,23 +53,10 @@
   color: #fff;
 }
 
-.blocoVazio {
-  background: var(--cor-superficie-baixa);
-  color: var(--cor-texto-suave);
-}
-
 .blocoBairro {
   font-size: 12px;
   font-weight: 600;
-  opacity: 0.85;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.blocoLider {
-  font-size: 13px;
-  font-weight: 700;
+  opacity: 0.9;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

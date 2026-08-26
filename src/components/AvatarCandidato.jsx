@@ -15,11 +15,9 @@ function AvatarCandidato({ candidato }) {
     setFalhouAoCarregar(false);
   }, [candidato.fotoUrl]);
 
-  const corFundo = candidato.isFoco
-    ? candidato.cargo === 'estadual'
-      ? 'var(--cor-foco-estadual)'
-      : 'var(--cor-foco-federal)'
-    : 'var(--cor-concorrente-1)';
+  // Cor pela eleição (federal/estadual), igual em todo o sistema — não
+  // varia por foco/concorrente, isso é sinalizado à parte (selo "Foco").
+  const corFundo = candidato.cargo === 'estadual' ? 'var(--cor-foco-estadual)' : 'var(--cor-foco-federal)';
 
   if (candidato.fotoUrl && !falhouAoCarregar) {
     return (

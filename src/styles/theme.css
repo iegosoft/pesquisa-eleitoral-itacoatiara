@@ -1,79 +1,105 @@
 :root {
-  /* Candidato foco */
-  --cor-foco-federal: #0f6e56;
-  --cor-foco-estadual: #5dcaa5;
+  /* ===== Identidade de eleição — as duas únicas cores de candidato no
+     sistema. Nunca variam por ranking/posição/resultado: federal é sempre
+     azul, estadual é sempre roxo, em toda visualização (gráfico, avatar,
+     badge, mapa). ===== */
+  --cor-foco-federal: #2563eb;
+  --cor-foco-estadual: #7c3aed;
 
-  /* Concorrentes (cinza degradê) */
-  --cor-concorrente-1: #73726c;
-  --cor-concorrente-2: #b4b2a9;
-  --cor-concorrente-3: #d3d1c7;
+  --cor-indeciso: #94a3b8;
+  --cor-branco-nulo: #cbd5e1;
 
-  /* Indeciso / branco-nulo */
-  --cor-indeciso: #d3d1c7;
-  --cor-branco-nulo: #e1e0d9;
-
-  /* Paleta neutra estilo plataforma SaaS (slate + branco) — fundo levemente
-     acinzentado, cartão branco puro, borda discreta. Escolhida pra dar a
-     mesma leitura visual de dashboards como Vercel/Stripe/Linear. */
+  /* ===== Superfícies e neutros (paleta slate, estilo plataforma SaaS) ===== */
   --cor-fundo: #f8fafc;
   --cor-superficie: #ffffff;
   --cor-superficie-baixa: #f1f5f9;
   --cor-borda: #e2e8f0;
   --cor-texto: #0f172a;
   --cor-texto-suave: #64748b;
+  --cor-texto-desabilitado: #94a3b8;
+  --cor-placeholder: #cbd5e1;
 
-  /* Sidebar: única superfície escura do app, fixa (não é dark mode — o
-     resto da interface continua claro). */
+  /* ===== Sidebar: única superfície escura do app, fixa (não é dark mode —
+     o resto da interface continua claro). ===== */
   --cor-sidebar: #0f172a;
-  --cor-sidebar-texto: #cbd5e1;
-  --cor-sidebar-texto-ativo: #ffffff;
-  --cor-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --cor-sidebar-hover: #172554;
+  --cor-sidebar-texto: #ffffff;
+  --cor-sidebar-icone: #cbd5e1;
 
-  /* Seleção/ação da interface — nunca usada pra representar candidato ou
-     dado nos gráficos, pra não confundir "isto está selecionado" com
-     "este é o candidato foco". */
+  /* ===== Azul institucional — cor predominante do sistema (seleção, ação
+     primária, item ativo). ===== */
   --cor-selecao: #2563eb;
-  --cor-selecao-hover: #1d4fc4;
-  --cor-selecao-fundo-suave: #eaf1fd;
+  --cor-selecao-hover: #1d4ed8;
+  --cor-selecao-pressed: #1e40af;
+  --cor-selecao-fundo-suave: #dbeafe;
 
-  --cor-erro: #b3261e;
-  --cor-erro-fundo-suave: #fdf1f0;
-  --cor-erro-borda: #f3c9c5;
+  /* ===== Verde petróleo — cor secundária: cobertura, indicadores
+     analíticos, elementos secundários. Nunca compete com o azul. ===== */
+  --cor-secundaria: #0f766e;
+  --cor-secundaria-fundo-suave: #ccfbf1;
 
-  /* Acento quente, só pra pequenos realces de interface (badge, destaque
-     visual) — nunca usado em gráfico ou pra representar candidato/voto,
-     mesma regra que já vale pra --cor-selecao. */
-  --cor-destaque: #f2a516;
-  --cor-destaque-fundo-suave: #fdf1dd;
-
-  /* Acentos adicionais de interface (ícones de KPI, badges) — mesma regra
-     de nunca representar candidato/voto/dado de gráfico. */
-  --cor-sucesso: #16a34a;
-  --cor-sucesso-fundo-suave: #dcfce7;
+  /* ===== Roxo — só pra diferenciação de série (ex.: deputado estadual),
+     nunca como cor principal da interface. ===== */
   --cor-violeta: #7c3aed;
   --cor-violeta-fundo-suave: #ede9fe;
 
-  /* Gradiente de marca: combina o teal do foco federal com o azul de
-     seleção, os dois tons já usados no resto da paleta — dá identidade
-     visual sem inventar cor nova nem conflitar com o significado que
-     --cor-foco-federal e --cor-selecao já carregam nos dados/gráficos.
-     Só pra elementos de interface (barra superior, fundo de destaque),
-     nunca em gráfico ou avatar de candidato. */
-  --gradiente-marca: linear-gradient(135deg, #0f6e56 0%, #2563eb 100%);
+  /* ===== Verde — só feedback positivo (crescimento, sucesso, badge
+     positivo). Nunca cor dominante. ===== */
+  --cor-sucesso: #16a34a;
+  --cor-sucesso-fundo-suave: #dcfce7;
+  --cor-sucesso-texto: #166534;
 
-  /* Raios: pílula pra todo botão/chip, cartões com cantos generosos,
-     campo de texto preenchido (estilo Material 3) com só o topo
-     arredondado. */
+  /* ===== Laranja — só atenção (margem de erro, avisos, alertas leves). ===== */
+  --cor-destaque: #ea580c;
+  --cor-destaque-fundo-suave: #fef3c7;
+  --cor-destaque-texto: #92400e;
+
+  /* ===== Vermelho — só erro (queda, problema, alerta crítico). ===== */
+  --cor-erro: #dc2626;
+  --cor-erro-fundo-suave: #fee2e2;
+  --cor-erro-borda: #fecaca;
+  --cor-erro-texto: #991b1b;
+
+  /* ===== Badge de informação ===== */
+  --cor-info-fundo-suave: #dbeafe;
+  --cor-info-texto: #1d4ed8;
+
+  /* ===== Mapa: status do candidato foco em relação aos concorrentes, por
+     bairro — não é identidade de candidato, é resultado (lidera/empata/
+     perde). ===== */
+  --cor-mapa-lidera: #15803d;
+  --cor-mapa-empate: #f59e0b;
+  --cor-mapa-perde: #dc2626;
+  --cor-mapa-sem-dados: #cbd5e1;
+
+  /* ===== Heatmap: escala de intensidade (não é identidade, é magnitude —
+     reservada pra tabelas de desempenho por segmento). ===== */
+  --cor-heat-sem-dados: #e5e7eb;
+  --cor-heat-muito-baixo: #fecaca;
+  --cor-heat-baixo: #fdba74;
+  --cor-heat-medio: #fde68a;
+  --cor-heat-bom: #86efac;
+  --cor-heat-excelente: #15803d;
+
+  /* ===== Gráficos: grid e linha de referência ===== */
+  --cor-grafico-grid: #e5e7eb;
+  --cor-grafico-linha-media: #64748b;
+
+  /* Gradiente de marca: as duas cores de identidade do sistema (federal +
+     estadual), só pra elementos de interface (sidebar, hero de login) —
+     nunca em gráfico ou avatar de candidato. */
+  --gradiente-marca: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+
+  /* Raios: pílula pra todo botão/chip, cartões com cantos generosos. */
   --raio-borda-sm: 8px;
   --raio-borda-lg: 12px;
   --raio-cartao: 16px;
   --raio-pilula: 999px;
   --raio-campo: 12px;
 
-  /* Elevação suave: um resíduo leve em repouso pra dar profundidade aos
-     cartões, um pouco mais forte em hover/interação. */
-  --sombra-repouso: 0 1px 2px rgba(43, 42, 39, 0.04), 0 4px 14px rgba(43, 42, 39, 0.06);
-  --sombra-elevada: 0 1px 2px rgba(43, 42, 39, 0.08), 0 4px 16px rgba(43, 42, 39, 0.12);
+  /* Sombras leves — só duas, nada pesado. */
+  --sombra-repouso: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --sombra-elevada: 0 8px 24px rgba(15, 23, 42, 0.04);
 
   --easing-md3: cubic-bezier(0.2, 0, 0, 1);
   --fonte-base:

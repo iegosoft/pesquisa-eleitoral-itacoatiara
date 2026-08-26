@@ -41,19 +41,19 @@ function CardsResumo({ resumo }) {
       rotulo: 'Casas visitadas',
       valor: resumo.casasVisitadas.toLocaleString('pt-BR'),
       icone: 'casa',
-      cor: 'Verde',
+      cor: 'Petroleo',
     },
     {
       rotulo: 'Bairros cobertos',
       valor: resumo.bairrosCobertos.toLocaleString('pt-BR'),
       icone: 'mapa',
-      cor: 'Violeta',
+      cor: 'Petroleo',
     },
     {
       rotulo: 'Última coleta',
       valor: resumo.ultimaColeta,
       icone: 'calendario',
-      cor: 'Laranja',
+      cor: 'Cinza',
     },
   ];
 
