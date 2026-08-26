@@ -21,8 +21,8 @@ function GraficoPorBairro({ dados }) {
             formatter={(value) => (value === 'percentualFederal' ? 'Federal' : 'Estadual')}
             wrapperStyle={{ fontSize: 13 }}
           />
-          <Bar dataKey="percentualFederal" fill={corFoco('federal')} radius={[4, 4, 0, 0]} barSize={16} />
-          <Bar dataKey="percentualEstadual" fill={corFoco('estadual')} radius={[4, 4, 0, 0]} barSize={16} />
+          <Bar dataKey="percentualFederal" fill={corFoco('federal')} radius={[6, 6, 0, 0]} barSize={20} />
+          <Bar dataKey="percentualEstadual" fill={corFoco('estadual')} radius={[6, 6, 0, 0]} barSize={20} />
         </BarChart>
       </ResponsiveContainer>
     </div>

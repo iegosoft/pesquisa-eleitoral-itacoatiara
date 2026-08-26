@@ -43,8 +43,9 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo }) {
             stroke={corFoco('federal')}
             fill={corFoco('federal')}
             fillOpacity={0.15}
-            strokeWidth={2}
-            dot={{ r: 3 }}
+            strokeWidth={3}
+            dot={{ r: 5, strokeWidth: 0 }}
+            activeDot={{ r: 7 }}
           />
           <Area
             type="monotone"
@@ -52,8 +53,9 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo }) {
             stroke={corFoco('estadual')}
             fill={corFoco('estadual')}
             fillOpacity={0.15}
-            strokeWidth={2}
-            dot={{ r: 3 }}
+            strokeWidth={3}
+            dot={{ r: 5, strokeWidth: 0 }}
+            activeDot={{ r: 7 }}
           />
         </AreaChart>
       </ResponsiveContainer>
