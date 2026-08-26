@@ -40,7 +40,7 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
       <h3>{titulo}</h3>
 
       <ResponsiveContainer width="100%" height={Math.max(itens.length * 44, 140)}>
-        <BarChart data={itens} layout="vertical" margin={{ top: 10, left: 8, right: 24 }}>
+        <BarChart data={itens} layout="vertical" margin={{ top: 10, left: 8, right: 48 }}>
           <XAxis
             type="number"
             domain={[0, 100]}
@@ -58,12 +58,7 @@ function GraficoIntencaoVoto({ titulo, itens, cargo }) {
           <Tooltip formatter={(valor) => formatarPercentual(valor)} {...estiloTooltip} />
           <Bar dataKey="percentual" radius={[0, 6, 6, 0]} barSize={28}>
             {itens.map((item) => (
-              <Cell
-                key={item.chave}
-                fill={corItemIntencaoVoto(item, cargo)}
-                stroke={item.isFoco ? 'var(--cor-texto)' : 'none'}
-                strokeWidth={item.isFoco ? 2 : 0}
-              />
+              <Cell key={item.chave} fill={corItemIntencaoVoto(item, cargo)} />
             ))}
             <LabelList
               dataKey="percentual"
