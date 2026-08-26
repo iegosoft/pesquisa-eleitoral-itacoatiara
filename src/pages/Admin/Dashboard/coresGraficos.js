@@ -10,13 +10,9 @@ const RAMPA_ESTADUAL = ['#4c1d95', '#7c3aed', '#8b5cf6', '#a78bfa'];
 
 const COR_INDECISO = '#d3d1c7';
 const COR_BRANCO_NULO = '#e1e0d9';
+const COR_SEM_DADOS = '#f1f5f9';
 const COR_FOCO_FEDERAL = '#0f6e56';
 const COR_FOCO_ESTADUAL = '#5dcaa5';
-// Base do mapa de calor pra linha de candidato não-foco: aqui a cor
-// carrega intensidade (percentual, via opacidade), não identidade — quem é
-// quem já está no rótulo da linha —, por isso fica neutra, fora da
-// paleta categórica de candidato.
-const COR_NEUTRA_MAPA_CALOR = '#73726c';
 
 function corFoco(cargo) {
   return cargo === 'estadual' ? COR_FOCO_ESTADUAL : COR_FOCO_FEDERAL;
@@ -33,21 +29,24 @@ function corItemIntencaoVoto(item, indiceEntreCandidatos, cargo) {
   return corPorRanking(indiceEntreCandidatos, cargo);
 }
 
-function hexParaRgba(hex, alpha) {
-  const valor = hex.replace('#', '');
-  const r = parseInt(valor.slice(0, 2), 16);
-  const g = parseInt(valor.slice(2, 4), 16);
-  const b = parseInt(valor.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+// Marca cada candidato com a posição dele no ranking (ignora indeciso e
+// branco/nulo) — usado tanto pro gráfico de ranking quanto pro mapa de
+// bairros, pra garantir que o mesmo candidato sempre apareça com a mesma
+// cor nos dois lugares.
+function comIndiceDeRanking(itens) {
+  let indice = -1;
+  return itens.map((item) => {
+    if (item.tipo === 'candidato') indice += 1;
+    return { ...item, indiceRanking: indice };
+  });
 }
 
-// Intensidade proporcional ao percentual: base verde pro candidato foco,
-// cinza pros demais, com um piso de opacidade pra célula nunca sumir.
-function corMapaCalor(percentual, isFoco, cargo) {
-  const corBase = isFoco ? corFoco(cargo) : COR_NEUTRA_MAPA_CALOR;
-  if (percentual <= 0) return 'transparent';
-  const alpha = 0.12 + (Math.min(percentual, 100) / 100) * 0.78;
-  return hexParaRgba(corBase, alpha);
-}
-
-export { corFoco, corItemIntencaoVoto, corMapaCalor, COR_INDECISO, COR_BRANCO_NULO };
+export {
+  corFoco,
+  corPorRanking,
+  corItemIntencaoVoto,
+  comIndiceDeRanking,
+  COR_INDECISO,
+  COR_BRANCO_NULO,
+  COR_SEM_DADOS,
+};

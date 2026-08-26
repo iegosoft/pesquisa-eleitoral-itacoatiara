@@ -1,29 +1,72 @@
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
   margin-bottom: 24px;
 }
 
 .card {
   composes: cartao from '../../../styles/md3.module.css';
   display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--raio-borda-lg);
+  flex-shrink: 0;
+}
+
+.icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.iconeAzul {
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-selecao);
+}
+
+.iconeVerde {
+  background: var(--cor-sucesso-fundo-suave);
+  color: var(--cor-sucesso);
+}
+
+.iconeVioleta {
+  background: var(--cor-violeta-fundo-suave);
+  color: var(--cor-violeta);
+}
+
+.iconeLaranja {
+  background: var(--cor-destaque-fundo-suave);
+  color: var(--cor-destaque);
+}
+
+.textos {
+  display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px 18px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .rotulo {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--cor-texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .valor {
   font-family: var(--fonte-destaque);
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 800;
-  background: var(--gradiente-marca);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--cor-texto);
+  white-space: nowrap;
 }

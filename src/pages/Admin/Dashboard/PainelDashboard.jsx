@@ -8,6 +8,7 @@ import {
   calcularPorBairro,
   calcularResumo,
 } from './agregacoes.js';
+import { comIndiceDeRanking } from './coresGraficos.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
 import GraficoIntencaoVoto from './GraficoIntencaoVoto.jsx';
@@ -57,6 +58,10 @@ function PainelDashboard() {
     () => calcularIntencaoVoto(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
     [respostasFiltradas, candidatosEstadual],
   );
+  // Índice de ranking calculado uma vez aqui, pra usar exatamente a mesma
+  // cor por candidato no gráfico de intenção de voto e no mapa por bairro.
+  const itensFederalComIndice = useMemo(() => comIndiceDeRanking(itensFederal), [itensFederal]);
+  const itensEstadualComIndice = useMemo(() => comIndiceDeRanking(itensEstadual), [itensEstadual]);
   const dadosPorBairro = useMemo(
     () => calcularPorBairro(respostasFiltradas, focoFederal, focoEstadual),
     [respostasFiltradas, focoFederal, focoEstadual],
@@ -81,8 +86,9 @@ function PainelDashboard() {
       <CardsResumo resumo={resumo} />
 
       <div className={styles.grade}>
-        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} cargo="federal" />
-        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} cargo="estadual" />
+        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederalComIndice} cargo="federal" />
+        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadualComIndice} cargo="estadual" />
+        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
       </div>
 
       <div className={styles.secao}>
@@ -90,12 +96,18 @@ function PainelDashboard() {
       </div>
 
       <div className={styles.grade}>
-        <MapaCalor titulo="Mapa de calor — Federal" dados={mapaFederal} cargo="federal" />
-        <MapaCalor titulo="Mapa de calor — Estadual" dados={mapaEstadual} cargo="estadual" />
-      </div>
-
-      <div className={styles.secao}>
-        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
+        <MapaCalor
+          titulo="Liderança por bairro — Federal"
+          dados={mapaFederal}
+          itensRanking={itensFederalComIndice}
+          cargo="federal"
+        />
+        <MapaCalor
+          titulo="Liderança por bairro — Estadual"
+          dados={mapaEstadual}
+          itensRanking={itensEstadualComIndice}
+          cargo="estadual"
+        />
       </div>
     </div>
   );

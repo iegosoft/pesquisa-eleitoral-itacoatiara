@@ -46,6 +46,13 @@
   --cor-destaque: #f2a516;
   --cor-destaque-fundo-suave: #fdf1dd;
 
+  /* Acentos adicionais de interface (ícones de KPI, badges) — mesma regra
+     de nunca representar candidato/voto/dado de gráfico. */
+  --cor-sucesso: #16a34a;
+  --cor-sucesso-fundo-suave: #dcfce7;
+  --cor-violeta: #7c3aed;
+  --cor-violeta-fundo-suave: #ede9fe;
+
   /* Gradiente de marca: combina o teal do foco federal com o azul de
      seleção, os dois tons já usados no resto da paleta — dá identidade
      visual sem inventar cor nova nem conflitar com o significado que
