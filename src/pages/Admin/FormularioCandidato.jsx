@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import AvatarCandidato from '../../components/AvatarCandidato.jsx';
 import SeletorPills from '../../components/SeletorPills.jsx';
-import { criarCandidato, atualizarCandidato } from '../../services/candidatos.js';
+import {
+  criarCandidato,
+  atualizarCandidato,
+  excluirCandidato,
+  CandidatoComVotosError,
+} from '../../services/candidatos.js';
 import styles from './FormularioCandidato.module.css';
 
 const OPCOES_CARGO = [
@@ -26,10 +31,14 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
   const [form, setForm] = useState(() => estadoInicial(candidatoEmEdicao));
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState('');
+  const [confirmandoExclusao, setConfirmandoExclusao] = useState(false);
+  const [excluindo, setExcluindo] = useState(false);
 
   useEffect(() => {
     setForm(estadoInicial(candidatoEmEdicao));
     setErro('');
+    setConfirmandoExclusao(false);
+    setExcluindo(false);
   }, [candidatoEmEdicao]);
 
   const podeSalvar = form.nome.trim() && form.partido.trim() && form.cargo;
@@ -53,6 +62,23 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
       setErro('Não foi possível salvar o candidato. Tente novamente.');
     } finally {
       setSalvando(false);
+    }
+  }
+
+  async function aoExcluir() {
+    setErro('');
+    setExcluindo(true);
+    try {
+      await excluirCandidato(candidatoEmEdicao.id);
+      aoConcluir();
+    } catch (excecao) {
+      setErro(
+        excecao instanceof CandidatoComVotosError
+          ? 'Não é possível excluir: este candidato já tem voto registrado. Excluir quebraria os relatórios existentes.'
+          : 'Não foi possível excluir o candidato. Tente novamente.'
+      );
+      setConfirmandoExclusao(false);
+      setExcluindo(false);
     }
   }
 
@@ -129,6 +155,40 @@ function FormularioCandidato({ candidatoEmEdicao, aoConcluir, aoCancelar }) {
           {salvando ? 'Salvando...' : candidatoEmEdicao ? 'Salvar alterações' : 'Cadastrar candidato'}
         </button>
       </div>
+
+      {candidatoEmEdicao && !confirmandoExclusao && (
+        <button
+          type="button"
+          className={styles.botaoPerigo}
+          onClick={() => setConfirmandoExclusao(true)}
+        >
+          Excluir candidato
+        </button>
+      )}
+
+      {confirmandoExclusao && (
+        <div className={styles.blocoConfirmacaoExclusao}>
+          <p>Excluir {candidatoEmEdicao.nome}? Essa ação não pode ser desfeita.</p>
+          <div className={styles.acoes}>
+            <button
+              type="button"
+              className={styles.botaoSecundario}
+              onClick={() => setConfirmandoExclusao(false)}
+              disabled={excluindo}
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              className={styles.botaoPerigoPreenchido}
+              onClick={aoExcluir}
+              disabled={excluindo}
+            >
+              {excluindo ? 'Excluindo...' : 'Confirmar exclusão'}
+            </button>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
