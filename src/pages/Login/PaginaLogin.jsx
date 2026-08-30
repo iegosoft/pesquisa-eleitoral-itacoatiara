@@ -18,9 +18,16 @@ function PaginaLogin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!carregando && usuarioAuth && role) {
+    if (carregando || !usuarioAuth) return;
+    if (role) {
       navigate(CAMINHO_POR_ROLE[role] ?? '/login', { replace: true });
+      return;
     }
+    // Autenticado no Firebase Auth mas sem papel cadastrado em usuarios/{uid}
+    // (ou documento sem o campo role): sem isso, o usuario ficava preso no
+    // botao "Entrando..." pra sempre, sem nenhuma mensagem de erro.
+    setErro('Sua conta não tem um perfil cadastrado. Contate o administrador.');
+    setEnviando(false);
   }, [carregando, usuarioAuth, role, navigate]);
 
   async function aoEnviar(evento) {
