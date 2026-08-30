@@ -4,17 +4,24 @@ Ferramentas de apoio usadas: **Dependabot** (obrigatório, ativado em Settings �
 security and analysis) e `npm audit` (usado localmente pra antecipar o que o Dependabot ia acusar,
 antes mesmo dele terminar de escanear o repositório).
 
-## Bug 1 — Filtro de data do Dashboard não filtra nada
+## Bug 1 — Nome de candidato longo corta o texto e o selo FOCO no gráfico do Dashboard
 
-- **Tipo:** Lógico
-- **Local:** `src/pages/Admin/Dashboard/agregacoes.js`, função `aplicarFiltros` (linhas 6-7)
-- **Descrição:** os campos "De" e "Até" do dashboard (`<input type="date">`) produzem uma string no
-  formato `AAAA-MM-DD`, mas `aplicarFiltros` compara essa string diretamente com
-  `resposta.dataColeta`, que é um objeto `Date`. Em JavaScript, `Date < string` converte a string com
-  `ToNumber`, que retorna `NaN` para esse formato — a comparação nunca é verdadeira. Resultado: o
-  filtro de intervalo de datas nunca exclui nenhum registro, mas a interface não avisa nada, dando a
-  falsa impressão de que funcionou. Viola o requisito RF22 (`docs/requisitos.md`).
-- **Como encontramos:** revisão manual de código.
+- **Tipo:** Lógico (defeito visual)
+- **Local:** `src/pages/Admin/Dashboard/GraficoIntencaoVoto.jsx`, componente `RotuloCandidato`
+- **Descrição:** o rótulo do candidato no gráfico de ranking usa `textAnchor="end"` ancorado num `x`
+  fixo, sem nenhum limite de largura, truncamento ou `text-overflow`. Para nomes longos, o texto cresce
+  livremente para a esquerda e ultrapassa a área visível do SVG, sendo cortado — e o selo "FOCO"
+  (posicionado relativo ao mesmo `x`) é cortado junto. Confirmado com print real (Puppeteer/Chrome
+  headless), não é suposição — ver evidência anexada na issue.
+- **Como encontramos:** revisão manual de código + verificação visual com um harness isolado do
+  componente (renderizado de verdade num navegador headless).
+
+> **Nota de retrabalho:** a primeira versão desta entrada apontava um bug diferente (comparação de
+> data no filtro do Dashboard). Ao reler o código que *chama* `aplicarFiltros`
+> (`PainelDashboard.jsx`), vimos que a conversão de string pra `Date` já acontece antes da chamada —
+> ou seja, aquele filtro funciona corretamente na aplicação real. A issue correspondente foi fechada
+> como *invalid* no GitHub (com o registro do erro) e substituída por este bug, que foi verificado
+> visualmente antes de virar issue.
 
 ## Bug 2 — Login trava indefinidamente sem erro se o usuário não tem perfil no Firestore
 
