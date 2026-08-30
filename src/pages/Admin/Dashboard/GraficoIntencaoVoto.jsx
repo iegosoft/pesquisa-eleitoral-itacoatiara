@@ -1,6 +1,7 @@
 import { Bar, BarChart, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { corItemIntencaoVoto } from './coresGraficos.js';
 import { estiloTooltip } from './estiloGraficos.js';
+import { truncarRotulo } from './truncarRotulo.js';
 import styles from './Graficos.module.css';
 
 function formatarPercentual(valor) {
@@ -26,7 +27,8 @@ function RotuloCandidato({ x, y, payload, itensPorRotulo, cargo }) {
         </g>
       )}
       <text x={x} y={y} dy={4} textAnchor="end" fontSize={14} fontWeight={item?.isFoco ? 700 : 500} fill={cor}>
-        {payload.value}
+        {truncarRotulo(payload.value)}
+        <title>{payload.value}</title>
       </text>
     </g>
   );
