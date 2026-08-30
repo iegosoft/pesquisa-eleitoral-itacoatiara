@@ -19,32 +19,7 @@ Firebase (Firestore como banco de dados, com persistência offline habilitada, e
 login e papéis). As regras de quem pode ler/escrever cada coleção ficam em `firestore.rules`, avaliadas
 pelo próprio Firestore a cada operação.
 
-```mermaid
-flowchart LR
-    subgraph Dispositivos
-        PESQ["Pesquisador (celular, em campo)"]
-        ADM["Administrador (desktop)"]
-    end
-
-    subgraph APP["App React + Vite (PWA)"]
-        UI_COLETA["/coleta"]
-        UI_ADMIN["/admin"]
-    end
-
-    subgraph FIREBASE["Firebase"]
-        AUTH["Firebase Auth"]
-        STORE["Cloud Firestore"]
-        CACHE[("Cache local offline-first")]
-    end
-
-    PESQ --> UI_COLETA
-    ADM --> UI_ADMIN
-    UI_COLETA -- login --> AUTH
-    UI_ADMIN -- login --> AUTH
-    UI_COLETA -- grava --> CACHE
-    CACHE -- sincroniza --> STORE
-    UI_ADMIN -- le/escreve em tempo real --> STORE
-```
+![Diagrama de implantação e arquitetura do sistema](diagramas/diagrama-implantacao-arquitetura.png)
 
 Modelo de dados: coleções `usuarios`, `candidatos`, `residencias` (com subcoleção `entrevistados`) e
 `configuracoes/bairros`. Detalhes completos em `docs/descricao-sistema.md` e `docs/requisitos.md`.

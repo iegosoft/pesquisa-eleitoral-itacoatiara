@@ -1,26 +1,14 @@
 # Guia do Usuário — Pesquisa Eleitoral Itacoatiara
 
-> **Sobre as imagens deste guia:** não foi possível gerar capturas de tela reais do sistema em execução neste momento. Em vez disso, cada tela abaixo é representada por um **esquema estrutural fiel** — um diagrama que mostra exatamente as regiões e componentes reais daquela tela (mesma disposição, mesmos rótulos, mesma hierarquia), só que sem cor/imagem de verdade. Se screenshots reais forem enviados depois, eles substituem os esquemas correspondentes.
+> **Sobre as imagens deste guia:** as capturas de tela abaixo são do sistema real em execução.
 
 ## 1. Acesso ao sistema
 
 O sistema é acessado por um único link (não há loja de aplicativos). Ao abrir a URL, você cai na tela de **login**.
 
-```mermaid
-graph TD
-    subgraph TELA["Tela de Login"]
-        direction TB
-        FUNDO["Fundo com gradiente de marca\n(azul → roxo)"]
-        CARTAO["Cartão central branco"]
-        TITULO["'Entrar'"]
-        CAMPO_EMAIL["Campo: E-mail"]
-        CAMPO_SENHA["Campo: Senha"]
-        ERRO["Mensagem de erro\n(só aparece se falhar)"]
-        BOTAO["Botão 'Entrar'"]
+![Tela de login (desktop)](imagens/login_dashboard.png.png)
 
-        CARTAO --> TITULO --> CAMPO_EMAIL --> CAMPO_SENHA --> ERRO --> BOTAO
-    end
-```
+![Tela de login (celular)](imagens/login-pesquisador.jpeg)
 
 Depois de autenticado, o sistema identifica automaticamente seu papel e te leva direto para a tela certa:
 
@@ -35,32 +23,11 @@ Não existe uma tela onde os dois papéis se veem — cada um só acessa a sua p
 
 ### 2.1 Visão geral da tela
 
-```mermaid
-graph TD
-    subgraph TELA["Tela de Coleta (/coleta)"]
-        direction TB
-        BARRA["Barra superior: nome do usuário + botão Sair"]
-        BANNER["Banner 'Instalar app' (some após instalado)"]
-        AVISO["Aviso de casas que falharam ao sincronizar\n(só aparece se houver falha)"]
-        TITULO["'Nova casa'"]
-        FORM["Formulário de coleta"]
-
-        BARRA --> BANNER --> AVISO --> TITULO --> FORM
-    end
-```
+![Tela de coleta — topo do formulário](imagens/coleta.jpeg)
 
 ### 2.2 Passo a passo — registrar uma casa
 
-```mermaid
-flowchart TD
-    A["1. Escolher o bairro\n(lista pré-cadastrada)"] --> B["2. Informar quantas pessoas\nmoram na casa"]
-    B --> C["3. Para cada morador:\nsexo, faixa etária,\nvoto federal, voto estadual"]
-    C --> D{"Tem mais um\nmorador?"}
-    D -- "Sim" --> E["Adicionar próximo morador"]
-    E --> C
-    D -- "Não, terminei" --> F["Salvar casa"]
-    F --> G["Confirmação 'Casa salva!'\nformulário limpa pra próxima casa"]
-```
+![Tela de coleta — voto do morador e botão Salvar casa](imagens/coleta2.jpeg)
 
 **Pontos importantes:**
 
@@ -82,46 +49,13 @@ Depois de instalado, o ícone abre o app em tela cheia, sem barra de endereço d
 
 ## 3. Guia do Administrador
 
-O painel administrativo tem uma **sidebar** fixa à esquerda com três seções, e um **cabeçalho** no topo com o título da seção atual e a identidade de quem está logado.
-
-```mermaid
-graph LR
-    subgraph SHELL["Estrutura do painel administrativo"]
-        direction LR
-        subgraph SIDEBAR["Sidebar (fundo escuro)"]
-            direction TB
-            LOGO["Logo + nome do sistema"]
-            NAV1["Dashboard"]
-            NAV2["Candidatos"]
-            NAV3["Dados"]
-            SAIR["Sair"]
-            LOGO --> NAV1 --> NAV2 --> NAV3
-            NAV3 -.-> SAIR
-        end
-        subgraph CONTEUDO["Área de conteúdo"]
-            direction TB
-            CABECALHO["Cabeçalho: breadcrumb, título,\nsubtítulo, avatar do usuário"]
-            SECAO["Conteúdo da seção ativa"]
-            CABECALHO --> SECAO
-        end
-    end
-```
+O painel administrativo tem uma **sidebar** fixa à esquerda com três seções, e um **cabeçalho** no topo com o título da seção atual e a identidade de quem está logado (visível no screenshot da seção 3.1, abaixo).
 
 ### 3.1 Seção Dashboard
 
-```mermaid
-graph TD
-    subgraph DASH["Dashboard"]
-        direction TB
-        FILTROS["Filtros: bairro, sexo, faixa etária, data"]
-        KPIS["KPIs: Entrevistados | Casas visitadas |\nBairros cobertos | Última coleta"]
-        LINHA1["Ranking Federal | Ranking Estadual | Evolução do foco"]
-        LINHA2["Intenção do foco por bairro"]
-        LINHA3["Status do foco por bairro — Federal | Estadual"]
+![Dashboard — filtros, KPIs, ranking e evolução do foco](imagens/dashboard.png.png)
 
-        FILTROS --> KPIS --> LINHA1 --> LINHA2 --> LINHA3
-    end
-```
+![Dashboard — intenção e status do foco por bairro](imagens/dashboard2.png.png)
 
 - Cada **ranking** mostra os candidatos daquele cargo ordenados por percentual, com o candidato foco marcado por um selo "FOCO".
 - **Evolução** tem seletor de período (7, 14 ou 30 dias).
@@ -130,19 +64,7 @@ graph TD
 
 ### 3.2 Seção Candidatos
 
-```mermaid
-graph TD
-    subgraph CAND["Candidatos"]
-        direction LR
-        subgraph LISTAS["Listas"]
-            direction TB
-            FED["Deputado Federal\n(lista de candidatos)"]
-            EST["Deputado Estadual\n(lista de candidatos)"]
-        end
-        FORM["Formulário: nome, partido,\ncargo, foto, marcar como foco,\nsalvar / excluir"]
-    end
-    LISTAS -- "clicar num candidato\npra editar" --> FORM
-```
+![Seção Candidatos — listas por cargo e formulário de cadastro](imagens/candidatos.png)
 
 **Passo a passo — cadastrar um candidato:**
 1. Preencher nome, partido e cargo (federal ou estadual) no formulário à direita.
@@ -157,15 +79,7 @@ graph TD
 
 ### 3.3 Seção Dados
 
-```mermaid
-graph TD
-    subgraph DADOS["Dados"]
-        direction TB
-        EXPORT["Exportar dados\n(gera planilha Excel com todos\nos dados brutos coletados)"]
-        IMPORT["Importar em lote\n(planilha/CSV → valida linha a linha\n→ confirma → grava)"]
-        MANUAL["Cadastro manual de uma casa\n(mesmo formulário da coleta,\nusado pelo admin)"]
-    end
-```
+![Seção Dados — exportar, importar em lote e cadastro manual](imagens/dados.png)
 
 - **Exportar**: um clique gera e baixa a planilha, com cabeçalho colorido e uma aba de instruções.
 - **Importar**: primeiro baixa o modelo de planilha, preenche offline (útil pra digitar dados coletados em papel), depois envia o arquivo — o sistema mostra erro linha a linha antes de permitir confirmar a importação.

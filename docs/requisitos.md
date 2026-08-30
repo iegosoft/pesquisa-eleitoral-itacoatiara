@@ -95,81 +95,11 @@
 
 ## 5. Casos de uso
 
-```mermaid
-flowchart LR
-    Pesquisador((Pesquisador))
-    Admin((Administrador))
+![Diagrama de casos de uso](diagramas/diagrama-casos-de-uso.png)
 
-    UC1(["Fazer login"])
-    UC2(["Registrar casa e moradores"])
-    UC3(["Instalar app (PWA)"])
+## 6. Modelo de dados (diagrama de classes)
 
-    UC4(["Gerenciar candidatos\n(criar/editar/excluir)"])
-    UC5(["Consultar dashboard\nanalítico"])
-    UC6(["Filtrar dados do dashboard"])
-    UC7(["Exportar dados em Excel"])
-    UC8(["Importar dados em lote"])
-    UC9(["Cadastrar casa manualmente"])
+O Firestore é um banco orientado a documentos, sem entidade-relacionamento nativo — o diagrama
+abaixo usa notação de classes para representar as mesmas coleções, campos e relações lógicas.
 
-    Pesquisador --> UC1
-    Pesquisador --> UC2
-    Pesquisador --> UC3
-
-    Admin --> UC1
-    Admin --> UC4
-    Admin --> UC5
-    Admin --> UC6
-    Admin --> UC7
-    Admin --> UC8
-    Admin --> UC9
-
-    UC9 -. "reaproveita o mesmo\nformulário de" .-> UC2
-    UC5 -. "depende de dados\nregistrados em" .-> UC2
-    UC4 -. "bloqueada se já\nusada em" .-> UC2
-```
-
-## 6. Modelo de dados (diagrama entidade-relacionamento)
-
-```mermaid
-erDiagram
-    USUARIO ||--o{ RESIDENCIA : "registra"
-    RESIDENCIA ||--|{ ENTREVISTADO : "contém"
-    CANDIDATO ||--o{ ENTREVISTADO : "recebe voto de (opcional)"
-    CONFIGURACAO_BAIRROS ||--o{ RESIDENCIA : "restringe bairro de"
-
-    USUARIO {
-        string uid PK
-        string nome
-        string role
-    }
-
-    CANDIDATO {
-        string id PK
-        string nome
-        string partido
-        string cargo
-        string fotoUrl
-        boolean isFoco
-    }
-
-    RESIDENCIA {
-        string id PK
-        string bairro FK
-        string pesquisadorId FK
-        number qtdMoradores
-        timestamp dataColeta
-    }
-
-    ENTREVISTADO {
-        string id PK
-        string residenciaId FK
-        string sexo
-        string faixaIdade
-        string votoFederal FK
-        string votoEstadual FK
-    }
-
-    CONFIGURACAO_BAIRROS {
-        string documentoId PK
-        string_array lista
-    }
+![Diagrama de classes do modelo de domínio](diagramas/diagrama-classes-pesquisa-eleitoral.png)

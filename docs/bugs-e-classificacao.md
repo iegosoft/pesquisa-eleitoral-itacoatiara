@@ -6,6 +6,8 @@ antes mesmo dele terminar de escanear o repositório).
 
 ## Bug 1 — Nome de candidato longo corta o texto e o selo FOCO no gráfico do Dashboard
 
+**Issue:** [#4](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/4)
+
 - **Tipo:** Lógico (defeito visual)
 - **Local:** `src/pages/Admin/Dashboard/GraficoIntencaoVoto.jsx`, componente `RotuloCandidato`
 - **Descrição:** o rótulo do candidato no gráfico de ranking usa `textAnchor="end"` ancorado num `x`
@@ -19,11 +21,15 @@ antes mesmo dele terminar de escanear o repositório).
 > **Nota de retrabalho:** a primeira versão desta entrada apontava um bug diferente (comparação de
 > data no filtro do Dashboard). Ao reler o código que *chama* `aplicarFiltros`
 > (`PainelDashboard.jsx`), vimos que a conversão de string pra `Date` já acontece antes da chamada —
-> ou seja, aquele filtro funciona corretamente na aplicação real. A issue correspondente foi fechada
-> como *invalid* no GitHub (com o registro do erro) e substituída por este bug, que foi verificado
-> visualmente antes de virar issue.
+> ou seja, aquele filtro funciona corretamente na aplicação real. Isso foi registrado na
+> [issue #1](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/1), fechada como
+> *invalid* no GitHub, e substituído por este bug (Bug 1 deste documento), que foi verificado
+> visualmente antes de virar a issue #4 — **os números não coincidem porque a #1 já existia e não foi
+> reaproveitada**, a #4 é uma issue nova.
 
 ## Bug 2 — Login trava indefinidamente sem erro se o usuário não tem perfil no Firestore
+
+**Issue:** [#2](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/2)
 
 - **Tipo:** Lógico / Runtime
 - **Local:** `src/pages/Login/PaginaLogin.jsx` (linhas 20-24 e 26-36)
@@ -37,6 +43,8 @@ antes mesmo dele terminar de escanear o repositório).
 
 ## Bug 3 — Dependência vulnerável: `uuid` (via `exceljs`)
 
+**Issue:** [#3](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/3)
+
 - **Tipo:** Dependência vulnerável
 - **Local:** `package.json` — dependência direta `exceljs@4.4.0`, que traz `uuid@8.3.2` como
   dependência transitiva.
@@ -48,7 +56,7 @@ antes mesmo dele terminar de escanear o repositório).
   `uuid@^8.3.0` — não existe uma atualização direta do `exceljs` que resolva isso; a correção precisa
   forçar a versão do `uuid` via `overrides` no `package.json`.
 - **Alerta gerado pela ferramenta:** [alerta nº 1 no Dependabot](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/security/dependabot/1)
-  (print anexado na issue correspondente, antes e depois da correção).
+  (print anexado na [issue #3](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/3), antes e depois da correção).
 - **Falso positivo?** Não — a versão instalada (`uuid@8.3.2`) está dentro da faixa vulnerável
   (`< 11.1.1`) confirmada tanto pelo Dependabot quanto pelo `npm audit`, e o código do projeto usa o
   `exceljs` ativamente nas telas de exportação/importação de planilha (RF23/RF24), então a dependência

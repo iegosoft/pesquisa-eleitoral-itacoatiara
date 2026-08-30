@@ -21,42 +21,7 @@ Um usuário só enxerga a rota do seu próprio papel — tentar acessar a rota d
 
 O sistema é uma aplicação **client-side** (React) que fala diretamente com o **Firebase** — não existe um servidor de aplicação intermediário. A regra de negócio de quem pode ler/escrever o quê fica inteiramente nas **regras de segurança do Firestore**, não em uma API própria.
 
-```mermaid
-flowchart LR
-    subgraph Dispositivos
-        PESQ["Pesquisador\n(celular, em campo)"]
-        ADM["Administrador\n(desktop)"]
-    end
-
-    subgraph APP["App React + Vite (PWA)"]
-        UI_COLETA["/coleta"]
-        UI_ADMIN["/admin"]
-    end
-
-    subgraph FIREBASE["Firebase"]
-        AUTH["Firebase Auth\n(login + papel do usuário)"]
-        STORE["Cloud Firestore\n(banco de dados)"]
-        CACHE[("Cache local\noffline-first")]
-    end
-
-    HOST["Hospedagem estática\n(Vercel / Firebase Hosting)"]
-
-    PESQ -- "abre o app" --> HOST
-    ADM -- "abre o app" --> HOST
-    HOST -- "serve os arquivos" --> APP
-
-    UI_COLETA -- "login" --> AUTH
-    UI_ADMIN -- "login" --> AUTH
-    AUTH -- "confirma papel (custom claim/doc)" --> UI_COLETA
-    AUTH -- "confirma papel" --> UI_ADMIN
-
-    UI_COLETA -- "grava residência + entrevistados" --> CACHE
-    CACHE -- "sincroniza quando\nhá internet" --> STORE
-    UI_ADMIN -- "lê candidatos, residências,\nentrevistados (tempo real)" --> STORE
-    UI_ADMIN -- "cadastra/edita/exclui candidato" --> STORE
-
-    STORE -. "regras de acesso\npor papel" .-> AUTH
-```
+![Diagrama de implantação e arquitetura do sistema](diagramas/diagrama-implantacao-arquitetura.png)
 
 **Pontos-chave da arquitetura:**
 
@@ -69,48 +34,7 @@ flowchart LR
 
 O sistema não usa um banco relacional nem classes de domínio em orientação a objetos — os dados vivem como documentos no Firestore. Ainda assim, cada "coleção" tem um formato fixo e bem definido, que é o equivalente funcional de uma classe: os campos abaixo refletem exatamente a estrutura gravada e lida pelo código (camada `src/services/`).
 
-```mermaid
-classDiagram
-    class Usuario {
-        +String uid
-        +String nome
-        +String role
-    }
-
-    class Candidato {
-        +String id
-        +String nome
-        +String partido
-        +String cargo
-        +String fotoUrl
-        +Boolean isFoco
-    }
-
-    class Residencia {
-        +String id
-        +String bairro
-        +String pesquisadorId
-        +Number qtdMoradores
-        +Timestamp dataColeta
-    }
-
-    class Entrevistado {
-        +String id
-        +String sexo
-        +String faixaIdade
-        +String votoFederal
-        +String votoEstadual
-    }
-
-    class ConfiguracaoBairros {
-        +String[] lista
-    }
-
-    Usuario "1" --> "0..*" Residencia : registra (pesquisadorId)
-    Residencia "1" *-- "1..*" Entrevistado : contém
-    Candidato "1" <.. "0..*" Entrevistado : votoFederal / votoEstadual referencia o id
-    ConfiguracaoBairros ..> Residencia : valida bairro usado na coleta
-```
+![Diagrama de classes do modelo de domínio](diagramas/diagrama-classes-pesquisa-eleitoral.png)
 
 **Notas sobre o modelo:**
 
@@ -128,6 +52,8 @@ classDiagram
 - Aviso na tela se alguma casa falhar ao sincronizar de verdade (não apenas ficar pendente por falta de sinal).
 - Banner de instalação do PWA na primeira visita.
 
+![Diagrama de sequência — coleta offline-first](diagramas/diagrama-sequencia-coleta-offline.png)
+
 ### Dashboard (perfil Admin)
 - **KPIs**: entrevistados, casas visitadas, bairros cobertos, última coleta.
 - **Ranking de intenção de voto** por eleição (federal/estadual), com destaque visual pro candidato "foco" da campanha.
@@ -140,6 +66,8 @@ classDiagram
 - Cadastro, edição e **exclusão** de candidatos.
 - A exclusão é **bloqueada** se o candidato já tiver algum voto registrado — evita corromper relatórios e exportações históricas.
 - Marcação de candidato "foco" (um por cargo).
+
+![Diagrama de atividades — gestão de candidato](diagramas/diagrama-atividades-gestao-candidato.png)
 
 ### Dados (perfil Admin)
 - Exportação de todos os dados brutos coletados em planilha Excel formatada.
