@@ -1,8 +1,18 @@
 # Bugs e Classificação — Investigação Inicial
 
 Ferramentas de apoio usadas: **Dependabot** (obrigatório, ativado em Settings → Security → Code
-security and analysis) e `npm audit` (usado localmente pra antecipar o que o Dependabot ia acusar,
-antes mesmo dele terminar de escanear o repositório).
+security and analysis), `npm audit` (usado localmente pra antecipar o que o Dependabot ia acusar,
+antes mesmo dele terminar de escanear o repositório) e **oxlint** (análise estática/linter, diferencial
+opcional — o projeto já usa em `npm run lint`). Rodado sobre todo o código-fonte antes da entrega:
+
+```
+$ npx oxlint --format=default .
+Found 0 warnings and 0 errors.
+Finished in 56ms on 57 files with 91 rules using 2 threads.
+```
+
+Nenhum problema adicional encontrado — os 3 bugs abaixo vieram de revisão manual de código e do
+Dependabot, não do linter.
 
 ## Bug 1 — Nome de candidato longo corta o texto e o selo FOCO no gráfico do Dashboard
 

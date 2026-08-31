@@ -14,6 +14,8 @@ analítico, cadastro de candidatos, importação/exportação de dados). Detalhe
 - **Dependabot** (obrigatório) — ativado em Settings → Security → Code security and analysis. Alertou
   a vulnerabilidade do `uuid` que virou o Bug 3.
 - **`npm audit`** — usado localmente para confirmar o alerta do Dependabot antes de virar issue.
+- **oxlint** (análise estática, diferencial opcional) — rodado sobre todo o código-fonte antes da
+  entrega: 0 warnings e 0 errors em 57 arquivos. Detalhe em [`docs/bugs-e-classificacao.md`](bugs-e-classificacao.md).
 
 ## Os 3 bugs
 
