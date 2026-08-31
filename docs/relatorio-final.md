@@ -40,13 +40,23 @@ deles, antes do merge — conforme a regra de "ninguém aprova o próprio PR".
 ## Evidências de validação
 
 - **Issue #2**: vídeo/prints do "antes" (botão travado em "Entrando...", sem erro) anexados como
-  comentário. Teste `PaginaLogin.test.jsx` falha no código original e passa com a correção (verificado
-  localmente antes de abrir o PR).
-- **Issue #4**: print do "antes" (nome e selo FOCO cortados) anexado como comentário. Confirmado
-  visualmente, com harness isolado do componente real, que a correção resolve o corte.
-- **Issue #3**: print do alerta do Dependabot (nº 1) anexado como comentário, antes da correção. Bug
-  sem manifestação visual em tela — evidência complementar é o `npm audit` limpo e o `dependencias.test.js`
-  confirmando que o `uuid` resolvido fica fora da faixa vulnerável.
+  comentário na issue. Print do "depois" (mensagem de erro + botão liberado) anexado como comentário no
+  [PR #5](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/5). Teste `PaginaLogin.test.jsx`
+  falha no código original e passa com a correção (verificado localmente antes de abrir o PR).
+- **Issue #4**: print do "antes" (nome e selo FOCO cortados) anexado como comentário na issue. Print do
+  "depois" (nome truncado, selo FOCO inteiro) anexado como comentário no
+  [PR #6](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/6).
+- **Issue #3**: print do alerta do Dependabot (nº 1) anexado como comentário na issue, antes da
+  correção. Depois do merge na `main`, o próprio Dependabot marcou o alerta como `fixed` — print desse
+  estado também anexado como comentário na issue. Evidência complementar: `npm audit` limpo e
+  `dependencias.test.js` confirmando que o `uuid` resolvido fica fora da faixa vulnerável.
+
+## Integração final
+
+Todos os PRs de correção foram mergeados primeiro na `develop` (fluxo padrão do projeto) e depois
+integrados na `main` via [PR #9](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/9),
+também revisado e aprovado por Choze. As issues #2, #3 e #4 fecharam automaticamente nesse merge (todas
+usavam `fixes #N` nos commits), e o alerta do Dependabot passou a `fixed`.
 
 ## Responsáveis
 
