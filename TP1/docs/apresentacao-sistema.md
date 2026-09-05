@@ -22,7 +22,7 @@ pelo próprio Firestore a cada operação.
 ![Diagrama de implantação e arquitetura do sistema](diagramas/diagrama-implantacao-arquitetura.png)
 
 Modelo de dados: coleções `usuarios`, `candidatos`, `residencias` (com subcoleção `entrevistados`) e
-`configuracoes/bairros`. Detalhes completos em `docs/descricao-sistema.md` e `docs/requisitos.md`.
+`configuracoes/bairros`. Detalhes completos em `TP1/docs/descricao-sistema.md` e `TP1/docs/requisitos.md`.
 
 ## Principais funcionalidades
 

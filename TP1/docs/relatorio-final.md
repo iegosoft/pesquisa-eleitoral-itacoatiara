@@ -7,7 +7,7 @@ voto em pesquisas eleitorais de rua no município de Itacoatiara-AM, cobrindo as
 federal e deputado estadual em paralelo. Tem dois perfis de uso isolados por papel: **Pesquisador**
 (`/coleta`, coleta casa a casa, sem números agregados) e **Administrador** (`/admin`, dashboard
 analítico, cadastro de candidatos, importação/exportação de dados). Detalhes completos em
-[`docs/apresentacao-sistema.md`](apresentacao-sistema.md) e [`docs/descricao-sistema.md`](descricao-sistema.md).
+[`TP1/docs/apresentacao-sistema.md`](apresentacao-sistema.md) e [`TP1/docs/descricao-sistema.md`](descricao-sistema.md).
 
 ## Ferramentas de apoio usadas
 
@@ -15,7 +15,7 @@ analítico, cadastro de candidatos, importação/exportação de dados). Detalhe
   a vulnerabilidade do `uuid` que virou o Bug 3.
 - **`npm audit`** — usado localmente para confirmar o alerta do Dependabot antes de virar issue.
 - **oxlint** (análise estática, diferencial opcional) — rodado sobre todo o código-fonte antes da
-  entrega: 0 warnings e 0 errors em 57 arquivos. Detalhe em [`docs/bugs-e-classificacao.md`](bugs-e-classificacao.md).
+  entrega: 0 warnings e 0 errors em 57 arquivos. Detalhe em [`TP1/docs/bugs-e-classificacao.md`](bugs-e-classificacao.md).
 
 ## Os 3 bugs
 
@@ -26,7 +26,7 @@ analítico, cadastro de candidatos, importação/exportação de dados). Detalhe
 | 3 | Dependência vulnerável: `uuid` (via `exceljs`) — CVE-2026-41907 | Dependência vulnerável | Média | [#3](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/3) | **Dependabot** (alerta nº 1) + `npm audit` |
 
 Classificação e justificativas completas, incluindo os alertas do Dependabot avaliados e descartados
-como não aplicáveis, em [`docs/bugs-e-classificacao.md`](bugs-e-classificacao.md).
+como não aplicáveis, em [`TP1/docs/bugs-e-classificacao.md`](bugs-e-classificacao.md).
 
 ## Correções
 
@@ -64,8 +64,8 @@ usavam `fixes #N` nos commits), e o alerta do Dependabot passou a `fixed`.
 
 | Pessoa | Responsabilidade |
 |---|---|
-| Choze (`joseandrevianajunior`) | `docs/apresentacao-sistema.md`, `.github/ISSUE_TEMPLATE/bug_report.md`, revisor e aprovador dos 4 PRs de correção |
-| Luiz (`ghostsuki`) | `docs/bugs-e-classificacao.md` |
+| Choze (`joseandrevianajunior`) | `TP1/docs/apresentacao-sistema.md`, `.github/ISSUE_TEMPLATE/bug_report.md`, revisor e aprovador dos 4 PRs de correção |
+| Luiz (`ghostsuki`) | `TP1/docs/bugs-e-classificacao.md` |
 | Luan (`luanzito21`) | Ativação do Dependabot, dono da triagem da issue #3 |
 | Karina Lopes (`Karina-lopes`) | Dona da triagem da issue #2 |
 | Iêgo (`iegosoft`) | Coordenação geral, evidências, aplicação das 3 correções (ver nota de retrabalho abaixo), este relatório |
