@@ -64,7 +64,7 @@ mesma sessão).
 | Commits | [`ce8b2bb`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/ce8b2bb) (diagnóstico + evidências antes), [`9a6bf2b`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/9a6bf2b) (implementação), [`1d1f6e7`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/1d1f6e7) (evidências depois) |
 | Pull Request | [#11](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/11) |
 | Vídeo (antes) | [TP2/evidencias/antes/tp2-video1-antes.mp4](../evidencias/antes/tp2-video1-antes.mp4) |
-| Vídeo (depois) | *[a adicionar em TP2/evidencias/depois/]* |
+| Vídeo (depois) | [TP2/evidencias/depois/tp2-video2-depois.mp4](../evidencias/depois/tp2-video2-depois.mp4) |
 | Prints (antes) | `TP2/evidencias/antes/` |
 | Prints (depois) | `TP2/evidencias/depois/` |
 
