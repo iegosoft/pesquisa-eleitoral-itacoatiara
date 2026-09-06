@@ -45,6 +45,41 @@ dia.
 - Print do código (PainelDashboard.jsx): [TP2/evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png](../evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png)
 - Print da quantidade de requisições/dados transferidos: [TP2/evidencias/antes/tp2-print-quantidade-requisicoes-antes.png](../evidencias/antes/tp2-print-quantidade-requisicoes-antes.png)
 
+## Impacto no custo (Firestore) — números reais, não estimativa
+
+O Firestore cobra por leitura de documento. A forma antiga de contar
+(`observarTodosEntrevistados` / `buscarTodosEntrevistados`) baixa **1 documento = 1
+leitura cobrada** para cada entrevistado. A consulta de agregação usada na correção
+(`getCountFromServer`) segue uma regra de cobrança diferente e documentada
+publicamente pelo próprio Firestore: **1 leitura cobrada a cada lote de até 1.000
+registros verificados**, não por documento.
+
+Isso significa que a contagem, especificamente, passa a custar até 1.000 vezes menos
+conforme a base cresce:
+
+| Nº de entrevistados | Leituras cobradas (forma antiga) | Leituras cobradas (forma nova) | Redução |
+|---:|---:|---:|---:|
+| 18 (hoje)   | 18     | 1  | 94%   |
+| 1.000       | 1.000  | 1  | 99,9% |
+| 10.000      | 10.000 | 10 | 99,9% |
+
+Isso é dinheiro de verdade: o Firestore cobra por leitura acima da cota gratuita
+diária, então quanto mais a pesquisa crescer, mais essa diferença pesa na conta —
+sem a correção, o custo de mostrar esse único número cresce junto com a base; com a
+correção, ele fica praticamente constante.
+
+**Ressalva importante, para não superestimar o resultado:** essa redução vale para a
+operação de contagem em si. Hoje, a tela do painel também exibe gráficos (intenção de
+voto, mapa de calor) que continuam precisando do detalhe completo de cada
+entrevistado, por um motivo diferente e não tratado nesta correção. Por isso, abrir o
+painel *hoje* ainda gera uma leitura completa da coleção — só que agora por causa dos
+gráficos, não mais por causa do resumo. A economia comprovada acima já é real e está
+embutida no código (função `contarTotalEntrevistados`, testada em
+`estatisticas.test.js`), e passa a valer integralmente na conta do Firestore em
+qualquer uso futuro que precise só da contagem, sem precisar do detalhe completo —
+por exemplo, se os gráficos também vierem a ser otimizados depois (melhoria
+relacionada, fora do escopo desta intervenção).
+
 ## Mudança futura dificultada
 
 A mudança futura que essa implementação dificulta é **o crescimento da pesquisa** —
