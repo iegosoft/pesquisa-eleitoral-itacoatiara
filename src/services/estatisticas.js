@@ -1,4 +1,4 @@
-import { collection, collectionGroup, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, collectionGroup, getCountFromServer, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from './firebase';
 
 function paraResidencia(documentoSnapshot) {
@@ -46,9 +46,18 @@ async function buscarTodosEntrevistados() {
   return snapshot.docs.map(paraEntrevistado);
 }
 
+// Conta os entrevistados usando a agregacao nativa do Firestore, sem baixar
+// o documento de cada um — usado pelo resumo do painel quando nenhum filtro
+// detalhado esta ativo.
+async function contarTotalEntrevistados() {
+  const agregado = await getCountFromServer(collectionGroup(db, 'entrevistados'));
+  return agregado.data().count;
+}
+
 export {
   observarResidencias,
   observarTodosEntrevistados,
   buscarResidencias,
   buscarTodosEntrevistados,
+  contarTotalEntrevistados,
 };
