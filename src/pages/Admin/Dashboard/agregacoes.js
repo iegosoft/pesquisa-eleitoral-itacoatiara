@@ -40,6 +40,25 @@ function calcularResumo(respostas) {
   };
 }
 
+// Mesmo resultado de calcularResumo, mas sem depender da lista completa de
+// entrevistados: casas/bairros/ultima coleta vem das residencias (ja
+// carregadas para o filtro de bairro) e o total vem de uma contagem agregada.
+// Só é valido quando nenhum filtro detalhado esta ativo — com filtro, o
+// resumo precisa ser recalculado a partir das respostas filtradas.
+function calcularResumoAgregado(residencias, totalEntrevistados) {
+  const casasVisitadas = residencias.length;
+  const bairrosCobertos = new Set(residencias.map((residencia) => residencia.bairro)).size;
+  const datas = residencias.map((residencia) => residencia.dataColeta).filter(Boolean);
+  const ultimaColeta = datas.length ? new Date(Math.max(...datas)) : null;
+
+  return {
+    totalEntrevistados,
+    casasVisitadas,
+    bairrosCobertos,
+    ultimaColeta: formatarUltimaColeta(ultimaColeta),
+  };
+}
+
 // Retorna um item por candidato do cargo, mais Indeciso e Branco/Nulo, com o
 // percentual sobre o total de respostas filtradas.
 function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
@@ -150,6 +169,7 @@ function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
 export {
   aplicarFiltros,
   calcularResumo,
+  calcularResumoAgregado,
   calcularIntencaoVoto,
   calcularPorBairro,
   calcularMapaCalor,

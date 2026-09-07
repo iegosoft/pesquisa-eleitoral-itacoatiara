@@ -7,6 +7,7 @@ import {
   calcularMapaCalor,
   calcularPorBairro,
   calcularResumo,
+  calcularResumoAgregado,
 } from './agregacoes.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
@@ -20,6 +21,16 @@ function filtrosIniciais() {
   return { bairro: 'todos', sexo: 'todos', faixaIdade: 'todas', dataInicio: '', dataFim: '' };
 }
 
+function nenhumFiltroAtivo(filtros) {
+  return (
+    filtros.bairro === 'todos' &&
+    filtros.sexo === 'todos' &&
+    filtros.faixaIdade === 'todas' &&
+    !filtros.dataInicio &&
+    !filtros.dataFim
+  );
+}
+
 function paraFiltrosDeData(filtros, { ignorarData } = {}) {
   const dataInicio = !ignorarData && filtros.dataInicio ? new Date(`${filtros.dataInicio}T00:00:00`) : null;
   const dataFim = !ignorarData && filtros.dataFim ? new Date(`${filtros.dataFim}T23:59:59`) : null;
@@ -27,7 +38,8 @@ function paraFiltrosDeData(filtros, { ignorarData } = {}) {
 }
 
 function PainelDashboard() {
-  const { respostas, candidatos, bairrosDisponiveis } = useDadosPainel();
+  const { respostas, residencias, candidatos, bairrosDisponiveis, totalEntrevistadosAgregado } =
+    useDadosPainel();
   const [filtros, setFiltros] = useState(filtrosIniciais);
   const [periodoEvolucao, setPeriodoEvolucao] = useState(7);
 
@@ -48,7 +60,16 @@ function PainelDashboard() {
     [respostas, filtros],
   );
 
-  const resumo = useMemo(() => calcularResumo(respostasFiltradas), [respostasFiltradas]);
+  // Sem filtro ativo, o resumo não precisa da lista completa de entrevistados:
+  // usa a contagem agregada (1 leitura) e os dados das residências, que já são
+  // buscados para o filtro de bairro. Com filtro ativo, o resumo é recalculado
+  // a partir das respostas filtradas, como antes.
+  const resumo = useMemo(() => {
+    if (nenhumFiltroAtivo(filtros) && totalEntrevistadosAgregado !== null) {
+      return calcularResumoAgregado(residencias, totalEntrevistadosAgregado);
+    }
+    return calcularResumo(respostasFiltradas);
+  }, [filtros, residencias, totalEntrevistadosAgregado, respostasFiltradas]);
   const itensFederal = useMemo(
     () => calcularIntencaoVoto(respostasFiltradas, candidatosFederal, 'votoFederal'),
     [respostasFiltradas, candidatosFederal],
