@@ -40,10 +40,10 @@ cerca de 3,6 KB transferidos — apenas para exibir os três números de resumo.
 de dados cresce proporcionalmente ao histórico acumulado, não ao uso do sistema no
 dia.
 
-- Vídeo (antes): [TP2/evidencias/antes/tp2-video1-antes.mp4](../evidencias/antes/tp2-video1-antes.mp4)
-- Print do código (estatisticas.js): [TP2/evidencias/antes/tp2-print-arquivo-estatisticas-antes.png](../evidencias/antes/tp2-print-arquivo-estatisticas-antes.png)
-- Print do código (PainelDashboard.jsx): [TP2/evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png](../evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png)
-- Print da quantidade de requisições/dados transferidos: [TP2/evidencias/antes/tp2-print-quantidade-requisicoes-antes.png](../evidencias/antes/tp2-print-quantidade-requisicoes-antes.png)
+- Vídeo (antes): [TP2-MANUT-PREVENTIVA/evidencias/antes/tp2-video1-antes.mp4](../evidencias/antes/tp2-video1-antes.mp4)
+- Print do código (estatisticas.js): [TP2-MANUT-PREVENTIVA/evidencias/antes/tp2-print-arquivo-estatisticas-antes.png](../evidencias/antes/tp2-print-arquivo-estatisticas-antes.png)
+- Print do código (PainelDashboard.jsx): [TP2-MANUT-PREVENTIVA/evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png](../evidencias/antes/tp2-print-arquivo-PainelDashboard-antes.png)
+- Print da quantidade de requisições/dados transferidos: [TP2-MANUT-PREVENTIVA/evidencias/antes/tp2-print-quantidade-requisicoes-antes.png](../evidencias/antes/tp2-print-quantidade-requisicoes-antes.png)
 
 ## Impacto no custo (Firestore) — números reais, não estimativa
 

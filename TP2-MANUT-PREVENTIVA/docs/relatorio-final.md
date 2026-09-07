@@ -58,15 +58,15 @@ mesma sessão).
 
 | Etapa | Referência |
 |---|---|
-| Diagnóstico | [TP2/docs/diagnostico-manutencao-preventiva.md](diagnostico-manutencao-preventiva.md) |
+| Diagnóstico | [TP2-MANUT-PREVENTIVA/docs/diagnostico-manutencao-preventiva.md](diagnostico-manutencao-preventiva.md) |
 | Issue | [#10](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/10) |
 | Branch | [`preventiva/contagem-agregada-painel`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/tree/preventiva/contagem-agregada-painel) |
 | Commits | [`ce8b2bb`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/ce8b2bb) (diagnóstico + evidências antes), [`9a6bf2b`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/9a6bf2b) (implementação), [`1d1f6e7`](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/commit/1d1f6e7) (evidências depois) |
 | Pull Request | [#11](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/11) |
-| Vídeo (antes) | [TP2/evidencias/antes/tp2-video1-antes.mp4](../evidencias/antes/tp2-video1-antes.mp4) |
-| Vídeo (depois) | [TP2/evidencias/depois/tp2-video2-depois.mp4](../evidencias/depois/tp2-video2-depois.mp4) |
-| Prints (antes) | `TP2/evidencias/antes/` |
-| Prints (depois) | `TP2/evidencias/depois/` |
+| Vídeo (antes) | [TP2-MANUT-PREVENTIVA/evidencias/antes/tp2-video1-antes.mp4](../evidencias/antes/tp2-video1-antes.mp4) |
+| Vídeo (depois) | [TP2-MANUT-PREVENTIVA/evidencias/depois/tp2-video2-depois.mp4](../evidencias/depois/tp2-video2-depois.mp4) |
+| Prints (antes) | `TP2-MANUT-PREVENTIVA/evidencias/antes/` |
+| Prints (depois) | `TP2-MANUT-PREVENTIVA/evidencias/depois/` |
 
 ## Arquivos alterados
 
@@ -91,7 +91,7 @@ mesma sessão).
 
 O enunciado oficial referencia o caminho `/docs/...` para os documentos desta etapa.
 Por decisão do grupo, e para manter a mesma convenção adotada no TP1, esses documentos
-foram organizados em `TP2/docs/` e as evidências em `TP2/evidencias/`, dentro de uma
+foram organizados em `TP2-MANUT-PREVENTIVA/docs/` e as evidências em `TP2-MANUT-PREVENTIVA/evidencias/`, dentro de uma
 pasta própria para cada Trabalho Prático no repositório. O conteúdo e a rastreabilidade
 exigidos pelo enunciado foram mantidos integralmente; apenas o caminho do diretório
 foi adaptado.
