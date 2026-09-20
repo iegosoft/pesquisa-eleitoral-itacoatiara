@@ -40,4 +40,4 @@ importado do índice `date-fns/locale`) e tokens de formatação em minúsculo
 ## Commits e Pull Request
 
 - Ver `arquivos-alterados/README.md` para a lista de arquivos alterados.
-- PR: a preencher após abertura.
+- Pull Request: [#13](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/13)
