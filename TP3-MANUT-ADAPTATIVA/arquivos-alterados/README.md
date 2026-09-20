@@ -8,7 +8,13 @@ Preenchido progressivamente, conforme cada estratégia é implementada.
 
 ## Estratégia 1 — Mudança de dependência (`date-fns`)
 
-_A preencher durante a execução._
+- `package.json` — adiciona `date-fns` (instalado em v1.30.1, atualizado para v4.4.0).
+- `package-lock.json` — atualizado automaticamente pelo npm.
+- `src/pages/Admin/Dashboard/agregacoes.js` — `formatarUltimaColeta` passa a usar
+  `isToday`/`isYesterday`/`format` do `date-fns` no lugar da comparação manual de
+  datas; import de locale ajustado de `date-fns/locale/pt` (v1) para
+  `{ ptBR } from 'date-fns/locale'` (v4), e tokens de `format` de `DD/MM/YYYY` (v1)
+  para `dd/MM/yyyy` (v4).
 
 ## Estratégia 2 — Mudança de regulamentação
 
