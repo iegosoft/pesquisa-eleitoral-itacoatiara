@@ -45,4 +45,4 @@ CEP válido mas inexistente, e formato inválido (sem sequer chamar a API nesse
 ## Commits e Pull Request
 
 - Ver `arquivos-alterados/README.md` para a lista de arquivos alterados.
-- Pull Request: a preencher após abertura.
+- Pull Request: [#17](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/17)
