@@ -19,6 +19,29 @@
   color: var(--cor-texto);
 }
 
+.linhaCep {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.campoCep {
+  composes: campoTexto from '../../styles/md3.module.css';
+  flex: 1;
+}
+
+.linhaCep .botaoSecundario {
+  height: 48px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.mensagemCep {
+  margin: 0;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
 .consentimento {
   display: flex;
   align-items: flex-start;
