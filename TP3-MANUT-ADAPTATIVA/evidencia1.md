@@ -8,9 +8,9 @@ O sistema usava a versão 1 do `date-fns`, com a sintaxe da época: tokens de fo
 em maiúsculo (`DD/MM/YYYY`) e o locale genérico `pt` (o português do Brasil, `pt-BR`,
 ainda não existia como locale separado nessa versão).
 
-- Vídeo: [`midias/dependencia/antes/tp3-dependencia-antes-video.mp4`](../midias/dependencia/antes/tp3-dependencia-antes-video.mp4)
-- Print do código: [`midias/dependencia/antes/tp3-dependencia-antes-codigo.png`](../midias/dependencia/antes/tp3-dependencia-antes-codigo.png)
-- Print do `package.json`: [`midias/dependencia/antes/tp3-dependencia-antes-versao-instalada.png`](../midias/dependencia/antes/tp3-dependencia-antes-versao-instalada.png)
+- Vídeo: [`evidencias/dependencia/antes/tp3-dependencia-antes-video.mp4`](../evidencias/dependencia/antes/tp3-dependencia-antes-video.mp4)
+- Print do código: [`evidencias/dependencia/antes/tp3-dependencia-antes-codigo.png`](../evidencias/dependencia/antes/tp3-dependencia-antes-codigo.png)
+- Print do `package.json`: [`evidencias/dependencia/antes/tp3-dependencia-antes-versao-instalada.png`](../evidencias/dependencia/antes/tp3-dependencia-antes-versao-instalada.png)
 
 ## O erro de incompatibilidade
 
@@ -25,8 +25,8 @@ RangeError: Use `dd` instead of `DD` (in `DD/MM/YYYY`) for formatting days of th
 Reproduzido tanto na suíte de testes automatizada quanto ao vivo no navegador (painel
 administrativo, cartão "Última coleta").
 
-- Vídeo: [`midias/dependencia/erro/tp3-dependencia-erro-video.mp4`](../midias/dependencia/erro/tp3-dependencia-erro-video.mp4)
-- Print do console: [`midias/dependencia/erro/tp3-dependencia-erro-console.png`](../midias/dependencia/erro/tp3-dependencia-erro-console.png)
+- Vídeo: [`evidencias/dependencia/erro/tp3-dependencia-erro-video.mp4`](../evidencias/dependencia/erro/tp3-dependencia-erro-video.mp4)
+- Print do console: [`evidencias/dependencia/erro/tp3-dependencia-erro-console.png`](../evidencias/dependencia/erro/tp3-dependencia-erro-console.png)
 
 ## Depois (`date-fns` v4.4.0)
 
@@ -34,7 +34,7 @@ Código ajustado para a sintaxe atual: locale `ptBR` (agora específico para o B
 importado do índice `date-fns/locale`) e tokens de formatação em minúsculo
 (`dd/MM/yyyy`).
 
-- Vídeo: [`midias/dependencia/depois/tp3-dependencia-depois-video.mp4`](../midias/dependencia/depois/tp3-dependencia-depois-video.mp4)
+- Vídeo: [`evidencias/dependencia/depois/tp3-dependencia-depois-video.mp4`](../evidencias/dependencia/depois/tp3-dependencia-depois-video.mp4)
 - Suíte completa: 12/12 testes passando após a correção.
 
 ## Commits e Pull Request
