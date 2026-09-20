@@ -9,10 +9,10 @@ Antes: o formulário de coleta salvava a casa sem nenhum registro de consentimen
 do morador. Depois: um campo obrigatório de consentimento, gravado como
 `consentimento: true` no documento da residência.
 
-- Vídeo (antes): [`evidencias/regulamentacao/antes/video1-antes-regulamentacao.mp4`](../evidencias/regulamentacao/antes/video1-antes-regulamentacao.mp4)
-- Vídeo (depois): [`evidencias/regulamentacao/depois/video2-depois-regulamentacao.mp4`](../evidencias/regulamentacao/depois/video2-depois-regulamentacao.mp4)
-- Print do código (antes): [`evidencias/regulamentacao/antes/print-antes-codigo.png`](../evidencias/regulamentacao/antes/print-antes-codigo.png)
-- Prints do código (depois): [`evidencias/regulamentacao/depois/print-codigo-consentimento.png`](../evidencias/regulamentacao/depois/print-codigo-consentimento.png)
+- Vídeo (antes): [`evidencias/regulamentacao/antes/tp3-regulamentacao-antes-video.mp4`](../evidencias/regulamentacao/antes/tp3-regulamentacao-antes-video.mp4)
+- Vídeo (depois): [`evidencias/regulamentacao/depois/tp3-regulamentacao-depois-video.mp4`](../evidencias/regulamentacao/depois/tp3-regulamentacao-depois-video.mp4)
+- Print do código (antes): [`evidencias/regulamentacao/antes/tp3-regulamentacao-antes-codigo.png`](../evidencias/regulamentacao/antes/tp3-regulamentacao-antes-codigo.png)
+- Prints do código (depois): [`evidencias/regulamentacao/depois/tp3-regulamentacao-depois-codigo-consentimento.png`](../evidencias/regulamentacao/depois/tp3-regulamentacao-depois-codigo-consentimento.png)
 
 ## Funcionalidade B — Acessibilidade
 
@@ -21,9 +21,9 @@ real com o campo — confirmado pelo DevTools, sem nome acessível (`Name: ""`).
 Depois: um `<label htmlFor>` ligado corretamente ao `<select>` (e, nos campos de
 seleção por botão como sexo/faixa etária/voto, um `<fieldset>` com `<legend>`).
 
-- Print do DevTools (antes): [`evidencias/regulamentacao/antes/print-antes-devtools.png`](../evidencias/regulamentacao/antes/print-antes-devtools.png)
-- Print do DevTools (depois): [`evidencias/regulamentacao/depois/print-devtools-label.png`](../evidencias/regulamentacao/depois/print-devtools-label.png)
-- Print do código (depois): [`evidencias/regulamentacao/depois/print-codigo-label.png`](../evidencias/regulamentacao/depois/print-codigo-label.png)
+- Print do DevTools (antes): [`evidencias/regulamentacao/antes/tp3-regulamentacao-antes-devtools-span.png`](../evidencias/regulamentacao/antes/tp3-regulamentacao-antes-devtools-span.png)
+- Print do DevTools (depois): [`evidencias/regulamentacao/depois/tp3-regulamentacao-depois-devtools-label.png`](../evidencias/regulamentacao/depois/tp3-regulamentacao-depois-devtools-label.png)
+- Print do código (depois): [`evidencias/regulamentacao/depois/tp3-regulamentacao-depois-codigo-label.png`](../evidencias/regulamentacao/depois/tp3-regulamentacao-depois-codigo-label.png)
 
 Também corrigido (não fazia parte do roteiro de vídeo, comprovado por teste
 automatizado): contraste de texto insuficiente no mapa de calor do painel

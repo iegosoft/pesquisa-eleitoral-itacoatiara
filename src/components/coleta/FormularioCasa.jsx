@@ -2,7 +2,16 @@ import { useState } from 'react';
 import SeletorBairro from './SeletorBairro.jsx';
 import SeletorQuantidade from './SeletorQuantidade.jsx';
 import CartaoMorador from './CartaoMorador.jsx';
+import { buscarEnderecoPorCep } from '../../services/viacep.js';
 import styles from './FormularioCasa.module.css';
+
+function normalizar(texto) {
+  return texto
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .trim();
+}
 
 function criarMoradorVazio() {
   return { sexo: null, faixaIdade: null, votoFederal: null, votoEstadual: null };
@@ -31,6 +40,9 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
   const [salvando, setSalvando] = useState(false);
   const [salvo, setSalvo] = useState(false);
   const [erro, setErro] = useState('');
+  const [cep, setCep] = useState('');
+  const [buscandoCep, setBuscandoCep] = useState(false);
+  const [mensagemCep, setMensagemCep] = useState('');
 
   const todosOsMoradoresCompletos = dados.moradores.every(moradorCompleto);
   const podeAdicionarMorador = dados.quantidadeMoradores != null && todosOsMoradoresCompletos;
@@ -53,6 +65,27 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
     setDados((atual) => ({ ...atual, moradores: [...atual.moradores, criarMoradorVazio()] }));
   }
 
+  async function buscarCep() {
+    setMensagemCep('');
+    setBuscandoCep(true);
+    try {
+      const endereco = await buscarEnderecoPorCep(cep);
+      const bairroEncontrado = bairros.find((b) => normalizar(b) === normalizar(endereco.bairro));
+      if (bairroEncontrado) {
+        setDados((atual) => ({ ...atual, bairro: bairroEncontrado }));
+        setMensagemCep(`Endereço encontrado: ${endereco.logradouro}, ${endereco.bairro}.`);
+      } else {
+        setMensagemCep(
+          `O CEP aponta pro bairro "${endereco.bairro}", que ainda não está na lista. Selecione o bairro manualmente.`,
+        );
+      }
+    } catch (erroCep) {
+      setMensagemCep(erroCep.message);
+    } finally {
+      setBuscandoCep(false);
+    }
+  }
+
   async function salvarCasa() {
     setErro('');
     setSalvando(true);
@@ -72,6 +105,32 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
 
   return (
     <>
+      <div className={styles.campo}>
+        <label className={styles.rotulo} htmlFor="campo-cep">
+          CEP (opcional — preenche o bairro automaticamente)
+        </label>
+        <div className={styles.linhaCep}>
+          <input
+            id="campo-cep"
+            type="text"
+            inputMode="numeric"
+            placeholder="00000-000"
+            className={styles.campoCep}
+            value={cep}
+            onChange={(evento) => setCep(evento.target.value)}
+          />
+          <button
+            type="button"
+            className={styles.botaoSecundario}
+            disabled={buscandoCep || cep.trim() === ''}
+            onClick={buscarCep}
+          >
+            {buscandoCep ? 'Buscando...' : 'Buscar'}
+          </button>
+        </div>
+        {mensagemCep && <p className={styles.mensagemCep}>{mensagemCep}</p>}
+      </div>
+
       <div className={styles.campo}>
         <label className={styles.rotulo} htmlFor="campo-bairro">
           Bairro

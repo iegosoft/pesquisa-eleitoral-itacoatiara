@@ -37,4 +37,10 @@ Preenchido progressivamente, conforme cada estratégia é implementada.
 
 ## Estratégia 3 — Migração/simulação de API externa (ViaCEP)
 
-_A preencher durante a execução._
+- `src/services/viacep.js` (novo) — integração com a API pública do ViaCEP:
+  valida o CEP, busca o endereço, trata os três casos (sucesso, CEP válido mas
+  inexistente, formato inválido).
+- `src/components/coleta/FormularioCasa.jsx` (+ `.module.css`) — novo campo de
+  CEP opcional, com busca e preenchimento automático do bairro quando ele já
+  está cadastrado no sistema.
+- Novo teste: `src/services/viacep.test.js`.
