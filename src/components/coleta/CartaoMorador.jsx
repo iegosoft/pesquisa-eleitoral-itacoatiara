@@ -20,41 +20,41 @@ function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual,
     <section className={styles.cartao}>
       <h2>Morador {numero}</h2>
 
-      <div className={styles.campo}>
-        <span className={styles.rotulo}>Sexo</span>
+      <fieldset className={styles.campoFieldset}>
+        <legend className={styles.rotulo}>Sexo</legend>
         <SeletorPills
           opcoes={OPCOES_SEXO}
           valorSelecionado={morador.sexo}
           aoSelecionar={(valor) => aoAtualizar('sexo', valor)}
         />
-      </div>
+      </fieldset>
 
-      <div className={styles.campo}>
-        <span className={styles.rotulo}>Faixa de idade</span>
+      <fieldset className={styles.campoFieldset}>
+        <legend className={styles.rotulo}>Faixa de idade</legend>
         <SeletorPills
           opcoes={OPCOES_FAIXA_IDADE}
           valorSelecionado={morador.faixaIdade}
           aoSelecionar={(valor) => aoAtualizar('faixaIdade', valor)}
         />
-      </div>
+      </fieldset>
 
-      <div className={styles.campo}>
-        <span className={styles.rotulo}>Voto para deputado federal</span>
+      <fieldset className={styles.campoFieldset}>
+        <legend className={styles.rotulo}>Voto para deputado federal</legend>
         <GradeCandidatos
           candidatos={candidatosFederal}
           valorSelecionado={morador.votoFederal}
           aoSelecionar={(valor) => aoAtualizar('votoFederal', valor)}
         />
-      </div>
+      </fieldset>
 
-      <div className={styles.campo}>
-        <span className={styles.rotulo}>Voto para deputado estadual</span>
+      <fieldset className={styles.campoFieldset}>
+        <legend className={styles.rotulo}>Voto para deputado estadual</legend>
         <GradeCandidatos
           candidatos={candidatosEstadual}
           valorSelecionado={morador.votoEstadual}
           aoSelecionar={(valor) => aoAtualizar('votoEstadual', valor)}
         />
-      </div>
+      </fieldset>
     </section>
   );
 }

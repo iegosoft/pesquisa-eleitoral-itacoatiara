@@ -17,6 +17,7 @@ function estadoInicial() {
     bairro: '',
     quantidadeMoradores: null,
     moradores: [criarMoradorVazio()],
+    consentimento: false,
   };
 }
 
@@ -34,7 +35,10 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
   const todosOsMoradoresCompletos = dados.moradores.every(moradorCompleto);
   const podeAdicionarMorador = dados.quantidadeMoradores != null && todosOsMoradoresCompletos;
   const podeSalvar =
-    Boolean(dados.bairro) && dados.quantidadeMoradores != null && todosOsMoradoresCompletos;
+    Boolean(dados.bairro) &&
+    dados.quantidadeMoradores != null &&
+    todosOsMoradoresCompletos &&
+    dados.consentimento;
 
   function atualizarMorador(indice, campo, valor) {
     setDados((atual) => ({
@@ -69,8 +73,11 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
   return (
     <>
       <div className={styles.campo}>
-        <span className={styles.rotulo}>Bairro</span>
+        <label className={styles.rotulo} htmlFor="campo-bairro">
+          Bairro
+        </label>
         <SeletorBairro
+          id="campo-bairro"
           bairros={bairros}
           valor={dados.bairro}
           aoSelecionar={(bairro) => setDados((atual) => ({ ...atual, bairro }))}
@@ -78,15 +85,15 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
       </div>
 
       {dados.bairro && (
-        <div className={styles.campo}>
-          <span className={styles.rotulo}>Quantas pessoas moram aqui?</span>
+        <fieldset className={styles.campoFieldset}>
+          <legend className={styles.rotulo}>Quantas pessoas moram aqui?</legend>
           <SeletorQuantidade
             valor={dados.quantidadeMoradores}
             aoSelecionar={(quantidadeMoradores) =>
               setDados((atual) => ({ ...atual, quantidadeMoradores }))
             }
           />
-        </div>
+        </fieldset>
       )}
 
       {dados.quantidadeMoradores != null &&
@@ -100,6 +107,23 @@ function FormularioCasa({ bairros, candidatosFederal, candidatosEstadual, aoSalv
             aoAtualizar={(campo, valor) => atualizarMorador(indice, campo, valor)}
           />
         ))}
+
+      {dados.quantidadeMoradores != null && (
+        <div className={styles.consentimento}>
+          <input
+            type="checkbox"
+            id="campo-consentimento"
+            checked={dados.consentimento}
+            onChange={(evento) =>
+              setDados((atual) => ({ ...atual, consentimento: evento.target.checked }))
+            }
+          />
+          <label htmlFor="campo-consentimento">
+            O morador foi informado e consentiu em participar da pesquisa, com os dados
+            usados de forma anônima e apenas para fins estatísticos.
+          </label>
+        </div>
+      )}
 
       {dados.quantidadeMoradores != null && (
         <div className={styles.acoes}>

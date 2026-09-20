@@ -37,6 +37,7 @@ function PaginaColeta() {
       pesquisadorId: usuarioAuth.uid,
       qtdMoradores: dados.quantidadeMoradores,
       entrevistados: dados.moradores,
+      consentimento: dados.consentimento,
     }).catch((erro) => {
       console.error('Falha ao salvar residência:', erro);
       setCasasComFalha((atual) => atual + 1);

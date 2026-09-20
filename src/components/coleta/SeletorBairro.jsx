@@ -1,8 +1,9 @@
 import styles from './SeletorBairro.module.css';
 
-function SeletorBairro({ bairros, valor, aoSelecionar }) {
+function SeletorBairro({ id, bairros, valor, aoSelecionar }) {
   return (
     <select
+      id={id}
       className={styles.select}
       value={valor}
       onChange={(evento) => aoSelecionar(evento.target.value)}

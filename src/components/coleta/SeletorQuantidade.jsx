@@ -47,6 +47,7 @@ function SeletorQuantidade({ valor, aoSelecionar }) {
           min="1"
           inputMode="numeric"
           placeholder="Quantos?"
+          aria-label="Quantidade exata de moradores"
           value={valor ?? ''}
           onChange={aoDigitarOutro}
         />
