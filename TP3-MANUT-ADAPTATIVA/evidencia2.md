@@ -31,6 +31,18 @@ administrativo (branco sobre fundo âmbar/"empate", 2,15:1, e sobre cinza claro/
 "sem dados", 1,48:1 — abaixo do mínimo WCAG AA de 4,5:1). Corrigido usando texto
 escuro nesses dois status.
 
+## Base legal simulada
+
+- **Consentimento**: art. 7º, inciso I, e art. 8º da Lei 13.709/2018 (LGPD) —
+  tratamento de dado pessoal mediante consentimento do titular, que deve ser
+  fornecido de forma livre, informada e inequívoca. É por isso que o texto do
+  checkbox descreve, em linguagem simples, para que o dado será usado
+  ("de forma anônima e apenas para fins estatísticos") antes de ser aceito.
+- **Acessibilidade**: Lei Brasileira de Inclusão (Lei 13.146/2015), art. 63,
+  c/c as diretrizes de acessibilidade web WCAG 2.1 nível AA (contraste mínimo
+  de 4,5:1 e nomes acessíveis para campos de formulário) — usadas aqui como
+  critério técnico objetivo para os dois problemas corrigidos.
+
 ## Testes
 
 - `estatisticas` da suíte completa: 15/15 testes passando, incluindo 2 novos —
