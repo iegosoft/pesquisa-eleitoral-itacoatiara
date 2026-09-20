@@ -9,8 +9,8 @@ O sistema não consumia nenhuma API externa (confirmado por busca no código —
 nenhum uso de `fetch`/`axios`/`XMLHttpRequest` fora do SDK do Firebase). O
 formulário de coleta só tinha o campo "Bairro", selecionado manualmente.
 
-- Vídeo: [`evidencias/api/antes/tp3-api-antes-video.mp4`](../evidencias/api/antes/tp3-api-antes-video.mp4)
-- Print: [`evidencias/api/antes/tp3-api-antes-formulario-sem-cep.png`](../evidencias/api/antes/tp3-api-antes-formulario-sem-cep.png)
+- Vídeo: [`midias/api/antes/tp3-api-antes-video.mp4`](../midias/api/antes/tp3-api-antes-video.mp4)
+- Print: [`midias/api/antes/tp3-api-antes-formulario-sem-cep.png`](../midias/api/antes/tp3-api-antes-formulario-sem-cep.png)
 
 ## Testes no Postman (antes de integrar no sistema)
 
@@ -19,9 +19,9 @@ Testados três cenários reais contra a API pública do ViaCEP
 
 | CEP | Resultado | Evidência |
 |---|---|---|
-| `69100200` | Sucesso — bairro "Centenário" (já cadastrado no sistema) | [`postman/tp3-api-postman-sucesso-centenario.png`](../evidencias/api/postman/tp3-api-postman-sucesso-centenario.png) |
-| `69100863` | Sucesso na API, mas bairro "Vila Lindóia" não está na lista do sistema | [`postman/tp3-api-postman-mismatch-vila-lindoia.png`](../evidencias/api/postman/tp3-api-postman-mismatch-vila-lindoia.png) |
-| `69100000` | CEP bem formatado, mas inexistente (`{"erro": true}`) | [`postman/tp3-api-postman-nao-encontrado.png`](../evidencias/api/postman/tp3-api-postman-nao-encontrado.png) |
+| `69100200` | Sucesso — bairro "Centenário" (já cadastrado no sistema) | [`postman/tp3-api-postman-sucesso-centenario.png`](../midias/api/postman/tp3-api-postman-sucesso-centenario.png) |
+| `69100863` | Sucesso na API, mas bairro "Vila Lindóia" não está na lista do sistema | [`postman/tp3-api-postman-mismatch-vila-lindoia.png`](../midias/api/postman/tp3-api-postman-mismatch-vila-lindoia.png) |
+| `69100000` | CEP bem formatado, mas inexistente (`{"erro": true}`) | [`postman/tp3-api-postman-nao-encontrado.png`](../midias/api/postman/tp3-api-postman-nao-encontrado.png) |
 
 ## Depois
 
@@ -31,10 +31,10 @@ automaticamente — só quando o bairro devolvido já está na lista cadastrada 
 sistema. Caso contrário, avisa o pesquisador e mantém a seleção manual
 disponível, sem nunca preencher errado.
 
-- Vídeo: [`evidencias/api/depois/tp3-api-depois-video.mp4`](../evidencias/api/depois/tp3-api-depois-video.mp4)
-- Print (CEP com bairro reconhecido): [`depois/tp3-api-depois-sistema-sucesso-centenario.png`](../evidencias/api/depois/tp3-api-depois-sistema-sucesso-centenario.png)
-- Print (CEP com bairro fora da lista): [`depois/tp3-api-depois-sistema-mismatch-vila-lindoia.png`](../evidencias/api/depois/tp3-api-depois-sistema-mismatch-vila-lindoia.png)
-- Print (CEP inexistente): [`depois/tp3-api-depois-sistema-nao-encontrado.png`](../evidencias/api/depois/tp3-api-depois-sistema-nao-encontrado.png)
+- Vídeo: [`midias/api/depois/tp3-api-depois-video.mp4`](../midias/api/depois/tp3-api-depois-video.mp4)
+- Print (CEP com bairro reconhecido): [`depois/tp3-api-depois-sistema-sucesso-centenario.png`](../midias/api/depois/tp3-api-depois-sistema-sucesso-centenario.png)
+- Print (CEP com bairro fora da lista): [`depois/tp3-api-depois-sistema-mismatch-vila-lindoia.png`](../midias/api/depois/tp3-api-depois-sistema-mismatch-vila-lindoia.png)
+- Print (CEP inexistente): [`depois/tp3-api-depois-sistema-nao-encontrado.png`](../midias/api/depois/tp3-api-depois-sistema-nao-encontrado.png)
 
 ## Testes
 

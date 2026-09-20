@@ -76,7 +76,7 @@ residências por bairro, e a busca de CEP preenche automaticamente parte desse e
   será ajustado.
 - Testes automatizados cobrindo o comportamento novo, sem quebrar a suíte existente.
 - Pull Request por estratégia, linkando a Issue correspondente, revisado antes do merge.
-- Vídeos e prints de antes/depois versionados em `TP3-MANUT-ADAPTATIVA/evidencias/`.
+- Vídeos e prints de antes/depois versionados em `TP3-MANUT-ADAPTATIVA/midias/`.
 
 ## Visão de longo prazo
 
