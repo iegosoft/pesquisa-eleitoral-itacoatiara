@@ -1,3 +1,6 @@
+import { format, isToday, isYesterday } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
 function aplicarFiltros(respostas, filtros) {
   return respostas.filter((resposta) => {
     if (filtros.bairro !== 'todos' && resposta.bairro !== filtros.bairro) return false;
@@ -11,18 +14,9 @@ function aplicarFiltros(respostas, filtros) {
 
 function formatarUltimaColeta(data) {
   if (!data) return '—';
-
-  const ehMesmoDia = (a, b) =>
-    a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-
-  const hoje = new Date();
-  if (ehMesmoDia(data, hoje)) return 'Hoje';
-
-  const ontem = new Date(hoje);
-  ontem.setDate(hoje.getDate() - 1);
-  if (ehMesmoDia(data, ontem)) return 'Ontem';
-
-  return data.toLocaleDateString('pt-BR');
+  if (isToday(data)) return 'Hoje';
+  if (isYesterday(data)) return 'Ontem';
+  return format(data, 'dd/MM/yyyy', { locale: ptBR });
 }
 
 function calcularResumo(respostas) {
