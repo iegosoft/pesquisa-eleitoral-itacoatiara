@@ -41,4 +41,4 @@ escuro nesses dois status.
 ## Commits e Pull Request
 
 - Ver `arquivos-alterados/README.md` para a lista de arquivos alterados.
-- Pull Request: a preencher após abertura.
+- Pull Request: [#15](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/15)
