@@ -39,6 +39,7 @@ function CadastroManual() {
       pesquisadorId,
       qtdMoradores: dados.quantidadeMoradores,
       entrevistados: dados.moradores,
+      consentimento: dados.consentimento,
       dataColeta: new Date(`${data}T12:00:00`),
     });
   }

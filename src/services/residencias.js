@@ -1,7 +1,7 @@
 import { collection, doc, serverTimestamp, Timestamp, writeBatch } from 'firebase/firestore';
 import { db } from './firebase';
 
-function salvarResidencia({ bairro, pesquisadorId, qtdMoradores, entrevistados, dataColeta }) {
+function salvarResidencia({ bairro, pesquisadorId, qtdMoradores, entrevistados, dataColeta, consentimento }) {
   const lote = writeBatch(db);
   const referenciaResidencia = doc(collection(db, 'residencias'));
 
@@ -9,6 +9,9 @@ function salvarResidencia({ bairro, pesquisadorId, qtdMoradores, entrevistados, 
     bairro,
     pesquisador_id: pesquisadorId,
     qtd_moradores: qtdMoradores,
+    // Registro do consentimento do morador antes da entrevista (LGPD): a
+    // casa só pode ser salva com esse campo marcado como true.
+    consentimento: consentimento === true,
     // A coleta em campo grava com a data/hora de agora; a inserção em lote
     // retroativa (dados de papel) informa a data real da visita.
     data_coleta: dataColeta ? Timestamp.fromDate(dataColeta) : serverTimestamp(),

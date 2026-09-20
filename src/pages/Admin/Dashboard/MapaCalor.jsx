@@ -1,4 +1,4 @@
-import { corStatusMapa, statusFocoPorBairro } from './coresGraficos.js';
+import { corStatusMapa, corTextoMapa, statusFocoPorBairro } from './coresGraficos.js';
 import styles from './MapaCalor.module.css';
 
 const LEGENDA = [
@@ -61,7 +61,11 @@ function MapaCalor({ titulo, dados }) {
 
       <div className={styles.grade}>
         {status.map(({ bairro, percentualFoco, status: statusBairro }) => (
-          <div key={bairro} className={styles.bloco} style={{ background: corStatusMapa(statusBairro) }}>
+          <div
+            key={bairro}
+            className={styles.bloco}
+            style={{ background: corStatusMapa(statusBairro), color: corTextoMapa(statusBairro) }}
+          >
             <span className={styles.blocoBairro}>{bairro}</span>
             <span className={styles.blocoPercentual}>
               {statusBairro === 'sem_dados' ? '—' : `${percentualFoco.toFixed(0)}%`}

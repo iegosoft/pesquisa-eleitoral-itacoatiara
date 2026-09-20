@@ -57,4 +57,22 @@ function corStatusMapa(status) {
   }
 }
 
-export { corFoco, corItemIntencaoVoto, statusFocoPorBairro, corStatusMapa, COR_INDECISO, COR_BRANCO_NULO };
+// Texto branco não tem contraste suficiente (WCAG AA, mínimo 4.5:1) sobre o
+// amarelo de "empate" (2.15:1) nem sobre o cinza de "sem dados" (1.48:1) —
+// medido contra a cor de fundo real de cada status. Nesses dois casos usa
+// texto escuro; nos demais, o fundo já é escuro o bastante pro branco.
+const COR_TEXTO_ESCURO_MAPA = '#0f172a';
+
+function corTextoMapa(status) {
+  return status === 'empate' || status === 'sem_dados' ? COR_TEXTO_ESCURO_MAPA : '#fff';
+}
+
+export {
+  corFoco,
+  corItemIntencaoVoto,
+  statusFocoPorBairro,
+  corStatusMapa,
+  corTextoMapa,
+  COR_INDECISO,
+  COR_BRANCO_NULO,
+};

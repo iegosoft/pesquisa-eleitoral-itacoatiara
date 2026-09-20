@@ -18,8 +18,18 @@
   gap: 8px;
 }
 
+.campoFieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .rotulo {
   font-size: 14px;
   font-weight: 600;
   color: var(--cor-texto);
+  padding: 0;
 }
