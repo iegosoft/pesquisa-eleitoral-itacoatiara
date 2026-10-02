@@ -41,8 +41,29 @@
   grid-template-columns: 52px minmax(96px, 150px) 1fr 76px;
   align-items: center;
   gap: 14px;
-  padding: 10px 0;
+  margin: 0 -10px;
+  padding: 10px;
   border-bottom: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  transition: background-color 180ms var(--easing-md3);
+}
+
+/* Hover discreto: a linha clareia, a barra ganha brilho, a foto cresce um
+   pouco e aparece a quantidade de votos. */
+.item:hover {
+  background: var(--cor-superficie-baixa);
+}
+
+.item:hover .barra {
+  filter: brightness(1.15);
+}
+
+.item:hover .foto {
+  transform: scale(1.05);
+}
+
+.item:hover .votos {
+  opacity: 1;
 }
 
 .item:last-child {
@@ -54,6 +75,7 @@
   height: 52px;
   border-radius: 10px;
   font-size: 16px;
+  transition: transform 180ms var(--easing-md3);
 }
 
 .fotoNeutra {
@@ -123,6 +145,7 @@
   background-image: var(--textura-grao);
   transform-origin: left center;
   animation: crescer 700ms var(--easing-md3) both;
+  transition: filter 180ms var(--easing-md3);
 }
 
 .barra_lidera {
@@ -143,6 +166,20 @@
 
 .barraNeutra {
   background-color: var(--cor-barra-neutra);
+}
+
+.valores {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.votos {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  opacity: 0;
+  transition: opacity 180ms var(--easing-md3);
+  font-variant-numeric: tabular-nums;
 }
 
 .percentual {
@@ -191,5 +228,15 @@
 @media (prefers-reduced-motion: reduce) {
   .barra {
     animation: none;
+  }
+
+  .item,
+  .item .foto,
+  .votos {
+    transition: none;
+  }
+
+  .item:hover .foto {
+    transform: none;
   }
 }

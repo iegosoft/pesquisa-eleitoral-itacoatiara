@@ -59,7 +59,12 @@ function RankingIntencao({ titulo, itens, statusFoco, base }) {
                 style={{ width: `${(item.percentual / maior) * 100}%`, animationDelay: `${indice * 70}ms` }}
               />
             </div>
-            <span className={styles.percentual}>{formatarPercentual(item.percentual)}</span>
+            <span className={styles.valores}>
+              <span className={styles.percentual}>{formatarPercentual(item.percentual)}</span>
+              <span className={styles.votos}>
+                {item.quantidade} {item.quantidade === 1 ? 'voto' : 'votos'}
+              </span>
+            </span>
           </li>
         ))}
       </ol>

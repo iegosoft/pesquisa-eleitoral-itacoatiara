@@ -5,9 +5,9 @@ import PerfilAmostra from './PerfilAmostra.jsx';
 import RankingIntencao from './RankingIntencao.jsx';
 
 const ITENS = [
-  { chave: 'f1', rotulo: 'Sidney Leite', partido: 'PSD', cargo: 'federal', fotoUrl: '', isFoco: true, tipo: 'candidato', percentual: 57.9 },
-  { chave: 'f2', rotulo: 'Josias Melo', partido: 'PT', cargo: 'federal', fotoUrl: '', isFoco: false, tipo: 'candidato', percentual: 26.3 },
-  { chave: 'indeciso', rotulo: 'Indeciso', isFoco: false, tipo: 'indeciso', percentual: 15.8 },
+  { chave: 'f1', rotulo: 'Sidney Leite', partido: 'PSD', cargo: 'federal', fotoUrl: '', isFoco: true, tipo: 'candidato', quantidade: 11, percentual: 57.9 },
+  { chave: 'f2', rotulo: 'Josias Melo', partido: 'PT', cargo: 'federal', fotoUrl: '', isFoco: false, tipo: 'candidato', quantidade: 5, percentual: 26.3 },
+  { chave: 'indeciso', rotulo: 'Indeciso', isFoco: false, tipo: 'indeciso', quantidade: 1, percentual: 15.8 },
 ];
 
 describe('RankingIntencao', () => {
@@ -20,6 +20,8 @@ describe('RankingIntencao', () => {
     expect(within(linhas[0]).getByText('PSD')).toBeInTheDocument();
     expect(within(linhas[0]).getByText('57,9%')).toBeInTheDocument();
     expect(within(linhas[0]).getByText('Foco')).toBeInTheDocument();
+    expect(within(linhas[0]).getByText('11 votos')).toBeInTheDocument();
+    expect(within(linhas[2]).getByText('1 voto')).toBeInTheDocument();
     expect(within(linhas[2]).getByText('Indeciso')).toBeInTheDocument();
     expect(screen.getByText('Base: 19 entrevistados')).toBeInTheDocument();
   });

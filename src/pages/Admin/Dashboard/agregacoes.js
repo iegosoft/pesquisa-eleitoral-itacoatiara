@@ -78,6 +78,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
     cargo: candidato.cargo,
     isFoco: candidato.isFoco,
     tipo: 'candidato',
+    quantidade: contagem[candidato.id] ?? 0,
     percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
   }));
 
@@ -87,6 +88,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
       rotulo: 'Indeciso',
       isFoco: false,
       tipo: 'indeciso',
+      quantidade: contagem.indeciso ?? 0,
       percentual: total ? ((contagem.indeciso ?? 0) / total) * 100 : 0,
     },
     {
@@ -94,6 +96,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
       rotulo: 'Branco/Nulo',
       isFoco: false,
       tipo: 'branco_nulo',
+      quantidade: contagem.branco_nulo ?? 0,
       percentual: total ? ((contagem.branco_nulo ?? 0) / total) * 100 : 0,
     },
   ];
