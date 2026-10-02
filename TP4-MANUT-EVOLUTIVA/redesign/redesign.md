@@ -83,3 +83,29 @@ filtro de data quando o intervalo está invertido.
 
 **Testes:** `src/pages/Admin/Dashboard/Filtros.test.jsx`, com 4 novos testes.
 Suíte completa: 31/31.
+
+## R6 — Encerrar a sessão de conta sem perfil na tela de login
+
+**Problema tratado:** P7 · **Heurísticas:** H3 (controle e liberdade do
+usuário), H9 (ajudar a reconhecer, diagnosticar e corrigir erros) ·
+**Issue:** [#24](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/24)
+
+| | Antes | Depois |
+|---|---|---|
+| Sessão da conta sem perfil | continuava ativa; a cada abertura do app, o mesmo erro voltava sozinho | é encerrada automaticamente (`sair()`) assim que a falta de perfil é detectada |
+| Mensagem | "Sua conta não tem um perfil cadastrado. Contate o administrador." | "Sua conta não tem um perfil cadastrado no sistema. Peça ao administrador para liberar o acesso ou entre com outra conta.", que diz o que fazer em seguida |
+| Evidência | [`antes/tp4-redesign-antes-login-codigo-sem-role.png`](../evidencias/redesign/antes/tp4-redesign-antes-login-codigo-sem-role.png) | [`depois/tp4-redesign-depois-login-codigo-sem-role.png`](../evidencias/redesign/depois/tp4-redesign-depois-login-codigo-sem-role.png), [`depois/tp4-redesign-depois-login-testes.png`](../evidencias/redesign/depois/tp4-redesign-depois-login-testes.png) |
+
+A evidência desta melhoria é o código mais os testes automatizados, porque
+reproduzir na interface exigiria criar uma conta no Firebase Auth sem perfil no
+Firestore só para a demonstração.
+
+**Correção da avaliação:** ao implementar, verificamos que a conta sem perfil
+não ficava presa, como dizia a primeira versão do P7: o formulário continuava
+habilitado e era possível digitar outra conta. A descrição do P7 em
+[`avaliacao-heuristica.md`](avaliacao-heuristica.md) foi ajustada para o problema
+real, a sessão mantida.
+
+**Testes:** `src/pages/Login/PaginaLogin.test.jsx`, com 2 novos testes (a
+sessão é encerrada para a conta sem perfil, e não é encerrada para quem tem
+perfil). Suíte completa: 33/33.
