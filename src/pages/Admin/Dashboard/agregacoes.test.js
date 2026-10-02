@@ -4,6 +4,7 @@ import {
   calcularEvolucao,
   calcularResumo,
   calcularResumoAgregado,
+  calcularResultadoFoco,
 } from './agregacoes.js';
 
 describe('calcularResumoAgregado', () => {
@@ -92,5 +93,36 @@ describe('calcularEvolucao', () => {
     expect(pontos).toHaveLength(7);
     expect(pontos[6]).toMatchObject({ entrevistas: 1, percentualFederal: 100, percentualEstadual: 100 });
     expect(pontos[0]).toMatchObject({ entrevistas: 0, percentualFederal: null, percentualEstadual: null });
+  });
+});
+
+function item(rotulo, percentual, isFoco = false, tipo = 'candidato') {
+  return { chave: rotulo, rotulo, percentual, isFoco, tipo };
+}
+
+describe('calcularResultadoFoco', () => {
+  it('quando o foco lidera, compara com o segundo colocado', () => {
+    const resultado = calcularResultadoFoco([
+      item('Sidney', 57.9, true),
+      item('Josias', 26.3),
+      item('Indeciso', 10, false, 'indeciso'),
+    ]);
+
+    expect(resultado).toMatchObject({ nome: 'Sidney', posicao: 1, totalCandidatos: 2, status: 'lidera', adversario: 'Josias' });
+    expect(resultado.diferenca).toBeCloseTo(31.6);
+  });
+
+  it('quando o foco perde, compara com quem lidera', () => {
+    const resultado = calcularResultadoFoco([item('Ana', 50), item('Bia', 30), item('Foco', 20, true)]);
+
+    expect(resultado).toMatchObject({ posicao: 3, status: 'perde', adversario: 'Ana', diferenca: -30 });
+  });
+
+  it('empate exato na lideranca vira empate, nao lideranca', () => {
+    expect(calcularResultadoFoco([item('Ana', 40), item('Foco', 40, true)]).status).toBe('empate');
+  });
+
+  it('devolve null sem candidato foco', () => {
+    expect(calcularResultadoFoco([item('Ana', 40)])).toBeNull();
   });
 });

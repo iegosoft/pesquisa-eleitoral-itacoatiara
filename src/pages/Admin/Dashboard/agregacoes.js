@@ -1,6 +1,6 @@
 import { format, isToday, isYesterday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { statusFocoPorBairro } from './coresGraficos.js';
+import { statusFoco } from './coresGraficos.js';
 
 function aplicarFiltros(respostas, filtros) {
   return respostas.filter((resposta) => {
@@ -98,6 +98,31 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   return [...itensCandidatos, ...itensExtras].sort((a, b) => b.percentual - a.percentual);
 }
 
+// Resposta direta à pergunta do painel ("como está o nosso candidato?") a
+// partir dos itens de calcularIntencaoVoto: posição entre os candidatos,
+// status e a diferença em pontos para o adversário que importa (o segundo
+// colocado, se o foco lidera; o líder, se não lidera).
+function calcularResultadoFoco(itens) {
+  const candidatos = itens.filter((item) => item.tipo === 'candidato');
+  const foco = candidatos.find((item) => item.isFoco);
+  if (!foco) return null;
+
+  const outros = candidatos.filter((item) => !item.isFoco);
+  const melhorOutro = outros.reduce((melhor, item) => (!melhor || item.percentual > melhor.percentual ? item : melhor), null);
+  const maiorPercentual = Math.max(0, ...candidatos.map((item) => item.percentual));
+  const empatadoNoTopo = Boolean(melhorOutro) && maiorPercentual > 0 && melhorOutro.percentual === foco.percentual;
+
+  return {
+    nome: foco.rotulo,
+    percentual: foco.percentual,
+    posicao: 1 + candidatos.filter((item) => item.percentual > foco.percentual).length,
+    totalCandidatos: candidatos.length,
+    status: empatadoNoTopo ? 'empate' : statusFoco(foco.percentual, maiorPercentual),
+    adversario: melhorOutro?.rotulo ?? null,
+    diferenca: melhorOutro ? foco.percentual - melhorOutro.percentual : null,
+  };
+}
+
 // Abaixo dessa quantidade de entrevistas, o percentual de um bairro oscila
 // demais (1 entrevista vira "100%") e o painel sinaliza "amostra pequena".
 const AMOSTRA_MINIMA_BAIRRO = 5;
@@ -111,7 +136,7 @@ function desempenhoNoCargo(doBairro, candidatosCargo, campoVoto) {
   const percentual = percentualDe(foco.id);
   const maiorPercentual = Math.max(0, ...candidatosCargo.map((candidato) => percentualDe(candidato.id)));
 
-  return { percentual, status: statusFocoPorBairro(percentual, maiorPercentual) };
+  return { percentual, status: statusFoco(percentual, maiorPercentual) };
 }
 
 // Uma linha por bairro, com o número de entrevistas e, para cada cargo, o
@@ -177,6 +202,7 @@ export {
   calcularResumoAgregado,
   calcularIntencaoVoto,
   calcularDesempenhoPorBairro,
+  calcularResultadoFoco,
   AMOSTRA_MINIMA_BAIRRO,
   calcularEvolucao,
 };

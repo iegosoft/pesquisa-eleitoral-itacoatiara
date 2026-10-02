@@ -22,6 +22,10 @@
   animation-delay: 180ms;
 }
 
+.painel > :nth-child(6) {
+  animation-delay: 300ms;
+}
+
 .painel > :nth-child(5) {
   animation-delay: 240ms;
 }

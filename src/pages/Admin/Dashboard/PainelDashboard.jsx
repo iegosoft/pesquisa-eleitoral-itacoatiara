@@ -7,10 +7,12 @@ import {
   calcularIntencaoVoto,
   calcularResumo,
   calcularResumoAgregado,
+  calcularResultadoFoco,
   intervaloDeDatasInvertido,
 } from './agregacoes.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
+import ResultadoFoco from './ResultadoFoco.jsx';
 import GraficoIntencaoVoto from './GraficoIntencaoVoto.jsx';
 import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
@@ -80,6 +82,8 @@ function PainelDashboard() {
     () => calcularIntencaoVoto(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
     [respostasFiltradas, candidatosEstadual],
   );
+  const resultadoFederal = useMemo(() => calcularResultadoFoco(itensFederal), [itensFederal]);
+  const resultadoEstadual = useMemo(() => calcularResultadoFoco(itensEstadual), [itensEstadual]);
   const desempenhoPorBairro = useMemo(
     () => calcularDesempenhoPorBairro(respostasFiltradas, candidatosFederal, candidatosEstadual),
     [respostasFiltradas, candidatosFederal, candidatosEstadual],
@@ -99,7 +103,12 @@ function PainelDashboard() {
         bairrosDisponiveis={bairrosDisponiveis}
       />
 
-      <CardsResumo resumo={resumo} />
+      <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} base={respostasFiltradas.length} />
+
+      <section className={styles.secao} aria-labelledby="secao-coleta">
+        <h2 id="secao-coleta" className={styles.tituloSecao}>Andamento da coleta</h2>
+        <CardsResumo resumo={resumo} />
+      </section>
 
       <section className={styles.secao} aria-labelledby="secao-intencao">
         <h2 id="secao-intencao" className={styles.tituloSecao}>Intenção de voto</h2>

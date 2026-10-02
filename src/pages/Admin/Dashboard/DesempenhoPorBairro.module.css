@@ -25,6 +25,32 @@
   color: var(--cor-texto-suave);
 }
 
+.resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.resumoCargo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resumoRotulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 84px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
 .grade {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -87,9 +113,9 @@
 .avisoAmostra {
   align-self: flex-start;
   padding: 2px 8px;
+  border: 1px dashed var(--cor-texto-suave);
   border-radius: var(--raio-pilula);
-  background: var(--cor-status-empate-fundo);
-  color: var(--cor-status-empate);
+  color: var(--cor-texto-suave);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -151,38 +177,6 @@
 .semFoco {
   font-size: 12px;
   color: var(--cor-texto-suave);
-}
-
-.selo {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-width: 78px;
-  justify-content: center;
-  padding: 3px 9px;
-  border-radius: var(--raio-pilula);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.selo_lidera {
-  background: var(--cor-status-lidera-fundo);
-  color: var(--cor-status-lidera);
-}
-
-.selo_empate {
-  background: var(--cor-status-empate-fundo);
-  color: var(--cor-status-empate);
-}
-
-.selo_perde {
-  background: var(--cor-status-perde-fundo);
-  color: var(--cor-status-perde);
-}
-
-.selo_sem_dados {
-  background: var(--cor-status-sem-dados-fundo);
-  color: var(--cor-status-sem-dados);
 }
 
 @media (prefers-reduced-motion: reduce) {

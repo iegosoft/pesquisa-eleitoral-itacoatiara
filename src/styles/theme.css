@@ -106,7 +106,10 @@
      contraste e separação para daltonismo. */
   --cor-serie-federal: var(--cor-foco-federal);
   --cor-serie-estadual: var(--cor-foco-estadual);
-  --cor-grafico-indeciso: #94a3b8;
+  /* Concorrentes em cinza: só o candidato foco leva a cor da série, para ser
+     achado de imediato. Indeciso e branco/nulo num cinza mais apagado. */
+  --cor-grafico-concorrente: #94a3b8;
+  --cor-grafico-indeciso: #cbd5e1;
   --cor-grafico-branco-nulo: #cbd5e1;
   --cor-grafico-sem-votos: #cbd5e1;
 
@@ -174,8 +177,9 @@
   --cor-foco-estadual: #7e22ce;
   --cor-serie-federal: #0aa2c0;
   --cor-serie-estadual: #a855f7;
-  --cor-grafico-indeciso: #64748b;
-  --cor-grafico-branco-nulo: #475569;
+  --cor-grafico-concorrente: #64748b;
+  --cor-grafico-indeciso: #4b5568;
+  --cor-grafico-branco-nulo: #4b5568;
   --cor-grafico-sem-votos: #334155;
   --cor-grafico-grid: rgba(148, 163, 184, 0.12);
 

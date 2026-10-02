@@ -1,0 +1,37 @@
+.selo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 78px;
+  padding: 3px 9px;
+  border-radius: var(--raio-pilula);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.grande {
+  padding: 5px 12px;
+  font-size: 13px;
+}
+
+.lidera {
+  background: var(--cor-status-lidera-fundo);
+  color: var(--cor-status-lidera);
+}
+
+.empate {
+  background: var(--cor-status-empate-fundo);
+  color: var(--cor-status-empate);
+}
+
+.perde {
+  background: var(--cor-status-perde-fundo);
+  color: var(--cor-status-perde);
+}
+
+.sem_dados {
+  background: var(--cor-status-sem-dados-fundo);
+  color: var(--cor-status-sem-dados);
+}

@@ -1,0 +1,139 @@
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cabecalho h2 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.base {
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* A faixa no topo carrega o status (verde/âmbar/vermelho) para a leitura de
+   relance; o selo ao lado repete o status com ícone e texto. */
+.cartao {
+  composes: cartao from '../../../styles/md3.module.css';
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  padding: 22px 22px 20px;
+}
+
+.cartao::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--cor-faixa-status);
+}
+
+.lidera {
+  --cor-faixa-status: var(--cor-status-lidera);
+}
+
+.empate {
+  --cor-faixa-status: var(--cor-status-empate);
+}
+
+.perde {
+  --cor-faixa-status: var(--cor-status-perde);
+}
+
+.sem_dados {
+  --cor-faixa-status: var(--cor-status-sem-dados);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cargo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.marcador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.marcador_federal {
+  background: var(--cor-serie-federal);
+}
+
+.marcador_estadual {
+  background: var(--cor-serie-estadual);
+}
+
+.linhaNumero {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.percentual {
+  font-family: var(--fonte-destaque);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--gradiente-numero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: var(--brilho-numero, none);
+  font-variant-numeric: tabular-nums;
+}
+
+.nome {
+  font-family: var(--fonte-destaque);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.frase {
+  margin: 0;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+.detalhe {
+  margin: 0;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}

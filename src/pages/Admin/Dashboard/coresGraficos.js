@@ -15,11 +15,15 @@ function corFoco(cargo) {
   return cargo === 'estadual' ? COR_ESTADUAL : COR_FEDERAL;
 }
 
+const COR_CONCORRENTE = 'var(--cor-grafico-concorrente)';
+
+// Só o candidato foco leva a cor da série: a pergunta do painel é "como o
+// nosso candidato está", e o olho precisa achá-lo sem ler os nomes.
 function corItemIntencaoVoto(item, cargo) {
   if (item.tipo === 'indeciso') return COR_INDECISO;
   if (item.tipo === 'branco_nulo') return COR_BRANCO_NULO;
   if (item.percentual <= 0) return COR_SEM_VOTOS;
-  return corFoco(cargo);
+  return item.isFoco ? corFoco(cargo) : COR_CONCORRENTE;
 }
 
 // Diferença (em pontos percentuais) até o líder pra ainda contar como
@@ -28,14 +32,14 @@ function corItemIntencaoVoto(item, cargo) {
 // entrevistados por bairro.
 const MARGEM_EMPATE = 5;
 
-// Classifica o candidato foco em cada bairro: lidera, empata (dentro da
+// Classifica o candidato foco (no total ou num bairro): lidera, empata (dentro da
 // margem) ou perde, comparando com o maior percentual entre os candidatos
-// daquele bairro. "Sem dados" quando ninguém tem voto registrado ali.
-function statusFocoPorBairro(percentualFoco, maiorPercentual) {
+// do mesmo cargo. "Sem dados" quando ninguém tem voto registrado.
+function statusFoco(percentualFoco, maiorPercentual) {
   if (maiorPercentual <= 0) return 'sem_dados';
   if (percentualFoco >= maiorPercentual) return 'lidera';
   if (maiorPercentual - percentualFoco <= MARGEM_EMPATE) return 'empate';
   return 'perde';
 }
 
-export { corFoco, corItemIntencaoVoto, statusFocoPorBairro, MARGEM_EMPATE };
+export { corFoco, corItemIntencaoVoto, statusFoco, MARGEM_EMPATE };
