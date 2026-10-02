@@ -49,8 +49,21 @@ com foto ou iniciais, como na "colinha" de papel do pesquisador.
   pesquisa eleitoral, um percentual sem o tamanho da amostra induz a uma leitura
   errada: um bairro com 1 entrevista aparece com "100%", com o mesmo peso visual
   de um bairro com 50 (`GraficoPorBairro.jsx`, `MapaCalor.jsx:69-72`).
+  Nos prints, Centro, Da Paz, Iracy e Jauary 2 aparecem com "100%" sem nenhuma
+  indicação de quantas entrevistas sustentam esse número
+  ([`dashboard-por-bairro.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-por-bairro.png),
+  [`dashboard-mapas.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-mapas.png)).
 - **P9** — O card "Inserção em lote" (Dados) cita o identificador técnico
   `"casa_id"` no texto de instrução.
+- **P10** — O tooltip do gráfico por bairro mostra os nomes internos dos campos
+  do código ("percentualEstadual : 66.7%", "percentualFederal : 66.7%"), e não
+  "Estadual" / "Federal"
+  ([`dashboard-tooltip.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-tooltip.png)).
+- **P11** — O gráfico "Evolução do candidato foco" desenha uma linha em **0%**
+  nos dias sem nenhuma coleta (`calcularEvolucao` devolve 0 quando o dia não tem
+  entrevista). Nos últimos 7 dias não houve coleta (a última foi em
+  08/09/2026), e o gráfico dá a entender que o candidato caiu para 0% de
+  intenção ([`dashboard-graficos.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-graficos.png)).
 
 ### H3 — Controle e liberdade do usuário
 
@@ -161,6 +174,8 @@ explica o efeito ("destacado nos gráficos").
 | P2 | Morador extra não pode ser removido e não respeita a quantidade | H3, H5 | 3 | R2 |
 | P3 | "Salvar casa" desabilitado sem dizer o que falta | H1, H9 | 3 | R3 |
 | P5 | Percentuais sem base amostral no Dashboard | H2 | 3 | R5 |
+| P11 | Evolução mostra 0% em dias sem coleta | H1, H2 | 3 | R5 |
+| P10 | Tooltip com nomes internos do código | H2 | 2 | R5 |
 | P4 | Intervalo de datas invertido aceito sem aviso | H5, H9 | 2 | R4 |
 | P6 | Dashboard sem hierarquia, com blocos redundantes | H8 | 2 | R5 |
 | P7 | Sessão de conta sem perfil continua ativa, e o erro volta a cada abertura | H3, H9 | 2 | R6 |
@@ -179,8 +194,10 @@ explica o efeito ("destacado nos gráficos").
 - **R5 — Redesign do Dashboard:** reordenar os blocos para contar a história na
   sequência certa (resumo → intenção de voto → território → evolução), unir as
   visualizações redundantes do foco por bairro, mostrar a base de entrevistados
-  junto dos percentuais, explicar o critério do mapa e renovar a identidade
-  visual do painel.
+  junto dos percentuais, explicar o critério do mapa, tirar os nomes internos
+  dos tooltips, não desenhar 0% em dias sem coleta e renovar a identidade
+  visual do painel administrativo (tema escuro em todas as seções do Admin; a
+  coleta continua clara, porque é usada no celular, na rua).
 - **R6 — Encerrar a sessão da conta sem perfil** e orientar a entrar com outra
   conta.
 
