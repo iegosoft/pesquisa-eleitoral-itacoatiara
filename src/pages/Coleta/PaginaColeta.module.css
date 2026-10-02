@@ -1,5 +1,6 @@
 .tela {
   min-height: 100svh;
+  color: var(--cor-texto);
   background: var(--textura-grao), var(--cor-fundo-painel);
   background-attachment: fixed;
 }
@@ -27,14 +28,11 @@
 }
 
 .chapeu {
-  align-self: flex-start;
-  padding: 1px 6px;
-  background: #fde047;
-  color: #17140f;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--cor-texto-suave);
 }
 
 .titulo h1 {
