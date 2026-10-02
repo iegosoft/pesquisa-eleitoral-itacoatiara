@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { sair } from '../services/auth.js';
 import styles from './Sidebar.module.css';
 
@@ -35,7 +36,7 @@ const ITENS = [
   { valor: 'dados', rotulo: 'Dados', icone: 'dados' },
 ];
 
-function Sidebar({ abaAtiva, aoNavegar }) {
+function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
@@ -55,15 +56,14 @@ function Sidebar({ abaAtiva, aoNavegar }) {
 
       <nav className={styles.nav}>
         {ITENS.map((item) => (
-          <button
+          <NavLink
             key={item.valor}
-            type="button"
-            className={`${styles.item} ${abaAtiva === item.valor ? styles.itemAtivo : ''}`}
-            onClick={() => aoNavegar(item.valor)}
+            to={`/admin/${item.valor}`}
+            className={({ isActive }) => `${styles.item} ${isActive ? styles.itemAtivo : ''}`}
           >
             <span className={styles.itemIcone}>{ICONES[item.icone]}</span>
             {item.rotulo}
-          </button>
+          </NavLink>
         ))}
       </nav>
 

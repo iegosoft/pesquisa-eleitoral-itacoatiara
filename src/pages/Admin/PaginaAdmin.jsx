@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar.jsx';
 import Cabecalho from '../../components/Cabecalho.jsx';
 import PainelCandidatos from './PainelCandidatos.jsx';
@@ -25,12 +25,16 @@ const SECOES = {
 };
 
 function PaginaAdmin() {
-  const [secaoAtiva, setSecaoAtiva] = useState('dashboard');
-  const secao = SECOES[secaoAtiva];
+  const { secao: secaoDaUrl } = useParams();
+  const secao = SECOES[secaoDaUrl];
+
+  if (!secao) {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
 
   return (
     <div className={styles.shell}>
-      <Sidebar abaAtiva={secaoAtiva} aoNavegar={setSecaoAtiva} />
+      <Sidebar />
 
       <div className={styles.areaConteudo}>
         <Cabecalho secaoAtual={secao.rotulo} titulo={secao.rotulo} subtitulo={secao.subtitulo} />

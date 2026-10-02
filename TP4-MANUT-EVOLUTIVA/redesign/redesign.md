@@ -1,0 +1,30 @@
+# Redesign — melhorias de interface (antes e depois)
+
+Cada melhoria abaixo corrige um ou mais problemas encontrados na
+[avaliação heurística](avaliacao-heuristica.md) e indica quais heurísticas de
+Nielsen ela atende. As evidências de "antes" foram gravadas no sistema
+publicado (Vercel), e as de "depois" no ambiente local (`npm run dev`) da branch
+de cada melhoria, antes do merge.
+
+## R1 — Rotas reais no painel administrativo
+
+**Problema tratado:** P1 · **Heurísticas:** H1 (visibilidade do status do
+sistema), H3 (controle e liberdade do usuário), H4 (consistência e padrões) ·
+**Issue:** [#18](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/18)
+
+| | Antes | Depois |
+|---|---|---|
+| URL da seção | sempre `/admin` | `/admin/dashboard`, `/admin/candidatos`, `/admin/dados` |
+| Recarregar a página em "Candidatos" | volta para o Dashboard | continua em Candidatos |
+| Botão Voltar do navegador | sai do painel | volta para a seção anterior |
+| Itens da barra lateral | botões (`<button>`) | links reais (`<a>`), com `aria-current="page"` na seção ativa |
+| Evidência | [`antes/tp4-redesign-antes-navegacao-f5.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-navegacao-f5.mp4) | [`depois/tp4-redesign-depois-navegacao-f5.mp4`](../evidencias/redesign/depois/tp4-redesign-depois-navegacao-f5.mp4) |
+
+**O que mudou no código:** a rota `/admin` passou a ser `/admin/:secao?`
+(`src/routes/AppRoutes.jsx`). A seção ativa agora vem da URL, e não mais de um
+`useState` (`src/pages/Admin/PaginaAdmin.jsx`). `/admin` ou uma seção
+inexistente redirecionam para `/admin/dashboard`. Na barra lateral
+(`src/components/Sidebar.jsx`), os itens viraram `NavLink`.
+
+**Testes:** `src/pages/Admin/PaginaAdmin.test.jsx` (3 novos), que cobrem a
+abertura da seção pela URL e os dois redirecionamentos.
