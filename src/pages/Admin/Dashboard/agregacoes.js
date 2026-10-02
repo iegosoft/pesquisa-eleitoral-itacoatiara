@@ -12,6 +12,12 @@ function aplicarFiltros(respostas, filtros) {
   });
 }
 
+// Datas dos filtros vêm do <input type="date"> como "aaaa-mm-dd", então a
+// comparação de texto já respeita a ordem cronológica.
+function intervaloDeDatasInvertido(filtros) {
+  return Boolean(filtros.dataInicio && filtros.dataFim && filtros.dataInicio > filtros.dataFim);
+}
+
 function formatarUltimaColeta(data) {
   if (!data) return '—';
   if (isToday(data)) return 'Hoje';
@@ -162,6 +168,7 @@ function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
 
 export {
   aplicarFiltros,
+  intervaloDeDatasInvertido,
   calcularResumo,
   calcularResumoAgregado,
   calcularIntencaoVoto,

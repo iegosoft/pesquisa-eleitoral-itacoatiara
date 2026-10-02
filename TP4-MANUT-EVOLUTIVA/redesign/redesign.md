@@ -60,3 +60,26 @@ dois componentes.
 **Testes:** `src/components/coleta/FormularioCasa.test.jsx`, com 4 novos testes
 (lista de pendências, limite de moradores, remoção e bloqueio por excesso).
 Suíte completa: 27/27.
+
+## R4 — Validação do intervalo de datas nos filtros do Dashboard
+
+**Problema tratado:** P4 · **Heurísticas:** H5 (prevenção de erros), H9
+(ajudar a reconhecer, diagnosticar e corrigir erros), H3 (controle e liberdade
+do usuário, com o botão "Limpar filtros") ·
+**Issue:** [#22](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/22)
+
+| | Antes | Depois |
+|---|---|---|
+| Escolher datas pelo calendário | aceitava qualquer combinação | o calendário de cada campo bloqueia as datas que inverteriam o intervalo (no print, com "De" = 30/09, o "Até" não deixa escolher dias anteriores) |
+| Intervalo invertido digitado | todos os cards caíam para "0" e "Última coleta" para "—", sem nenhum aviso | mensagem "A data inicial (30/09/2026) é depois da data final (01/09/2026). Corrija o intervalo…", campos com borda vermelha, e o painel continua mostrando os dados (19 entrevistados, 16 casas), ignorando só o filtro de data |
+| Voltar ao estado inicial | trocar cada filtro manualmente | botão **Limpar filtros**, visível quando há algum filtro ativo |
+| Leitor de tela | sem aviso | a mensagem usa `role="alert"`; os campos recebem `aria-invalid` e `aria-describedby` apontando para a mensagem |
+| Evidência | [`antes/tp4-redesign-antes-filtro-data-invertida.png`](../evidencias/redesign/antes/tp4-redesign-antes-filtro-data-invertida.png) | [`depois/tp4-redesign-depois-filtro-data-invertida.png`](../evidencias/redesign/depois/tp4-redesign-depois-filtro-data-invertida.png), [`depois/tp4-redesign-depois-filtro-calendario.png`](../evidencias/redesign/depois/tp4-redesign-depois-filtro-calendario.png) |
+
+**O que mudou no código:** `intervaloDeDatasInvertido` em
+`src/pages/Admin/Dashboard/agregacoes.js`; `Filtros.jsx` (atributos `min`/`max`,
+mensagem de erro e botão "Limpar filtros"); `PainelDashboard.jsx`, que ignora o
+filtro de data quando o intervalo está invertido.
+
+**Testes:** `src/pages/Admin/Dashboard/Filtros.test.jsx`, com 4 novos testes.
+Suíte completa: 31/31.

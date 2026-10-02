@@ -1,10 +1,17 @@
 .filtros {
   composes: cartao from '../../../styles/md3.module.css';
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
   padding: 16px 18px;
   margin-bottom: 20px;
+}
+
+.campos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
 }
 
 .campo {
@@ -20,4 +27,26 @@
   height: 40px;
   font-size: 14px;
   padding: 0 10px;
+}
+
+.campoTexto[aria-invalid='true'] {
+  outline: 2px solid var(--cor-erro);
+  outline-offset: -2px;
+}
+
+.botaoLimpar {
+  composes: botaoContornado from '../../../styles/md3.module.css';
+  height: 40px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.erro {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--raio-borda-sm);
+  border: 1px solid var(--cor-erro-borda);
+  background: var(--cor-erro-fundo-suave);
+  color: var(--cor-erro-texto);
+  font-size: 13.5px;
 }
