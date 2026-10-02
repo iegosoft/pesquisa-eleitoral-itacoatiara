@@ -8,6 +8,7 @@ import {
   calcularPorBairro,
   calcularResumo,
   calcularResumoAgregado,
+  intervaloDeDatasInvertido,
 } from './agregacoes.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
@@ -31,9 +32,12 @@ function nenhumFiltroAtivo(filtros) {
   );
 }
 
+// Com o intervalo invertido, o filtro de data é ignorado (e o Filtros explica
+// o erro) em vez de zerar o painel inteiro.
 function paraFiltrosDeData(filtros, { ignorarData } = {}) {
-  const dataInicio = !ignorarData && filtros.dataInicio ? new Date(`${filtros.dataInicio}T00:00:00`) : null;
-  const dataFim = !ignorarData && filtros.dataFim ? new Date(`${filtros.dataFim}T23:59:59`) : null;
+  const usarData = !ignorarData && !intervaloDeDatasInvertido(filtros);
+  const dataInicio = usarData && filtros.dataInicio ? new Date(`${filtros.dataInicio}T00:00:00`) : null;
+  const dataFim = usarData && filtros.dataFim ? new Date(`${filtros.dataFim}T23:59:59`) : null;
   return { ...filtros, dataInicio, dataFim };
 }
 
@@ -97,7 +101,13 @@ function PainelDashboard() {
 
   return (
     <div className={styles.painel}>
-      <Filtros filtros={filtros} aoAlterar={setFiltros} bairrosDisponiveis={bairrosDisponiveis} />
+      <Filtros
+        filtros={filtros}
+        aoAlterar={setFiltros}
+        aoLimpar={() => setFiltros(filtrosIniciais())}
+        temFiltroAtivo={!nenhumFiltroAtivo(filtros)}
+        bairrosDisponiveis={bairrosDisponiveis}
+      />
 
       <CardsResumo resumo={resumo} />
 
