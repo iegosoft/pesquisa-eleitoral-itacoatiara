@@ -49,7 +49,11 @@ describe('calcularPerfil e PerfilAmostra', () => {
   it('as roscas trazem os valores tambem em texto, na legenda', () => {
     render(<PerfilAmostra perfil={calcularPerfil(respostas)} />);
 
-    expect(screen.getByText('Feminino').closest('li')).toHaveTextContent('75% (3)');
-    expect(screen.getByText('60 anos ou mais').closest('li')).toHaveTextContent('50% (2)');
+    const itensLegenda = screen.getAllByRole('listitem');
+    expect(itensLegenda.find((li) => li.textContent.startsWith('Feminino'))).toHaveTextContent('75% (3)');
+    expect(itensLegenda.find((li) => li.textContent.startsWith('60 anos ou mais'))).toHaveTextContent('50% (2)');
+    const [sexo, idade] = screen.getAllByRole('figure');
+    expect(sexo.querySelector('figcaption')).toHaveTextContent('Sexo Maior grupo: Feminino (75%)');
+    expect(idade.querySelector('figcaption')).toHaveTextContent('Faixa etária Maior grupo: 60 anos ou mais (50%)');
   });
 });

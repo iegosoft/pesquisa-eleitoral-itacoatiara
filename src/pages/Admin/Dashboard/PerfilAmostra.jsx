@@ -18,10 +18,16 @@ function formatarPercentual(valor) {
 function Rosca({ titulo, fatias, total }) {
   let acumulado = 0;
   const comVotos = fatias.filter((fatia) => fatia.quantidade > 0);
+  const maiorGrupo = fatias.reduce((maior, fatia) => (fatia.quantidade > maior.quantidade ? fatia : maior));
 
   return (
     <figure className={styles.rosca}>
-      <figcaption className={styles.titulo}>{titulo}</figcaption>
+      <figcaption className={styles.titulo}>
+        {titulo}
+        <span className={styles.destaque}>
+          Maior grupo: <strong>{maiorGrupo.rotulo}</strong> ({formatarPercentual(maiorGrupo.percentual)})
+        </span>
+      </figcaption>
       <div className={styles.corpo}>
         <div className={styles.grafico}>
           <svg viewBox="0 0 120 120" aria-hidden="true">
