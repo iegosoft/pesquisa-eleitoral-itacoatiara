@@ -106,12 +106,6 @@
      contraste e separação para daltonismo. */
   --cor-serie-federal: var(--cor-foco-federal);
   --cor-serie-estadual: var(--cor-foco-estadual);
-  /* Concorrentes em cinza: só o candidato foco leva a cor da série, para ser
-     achado de imediato. Indeciso e branco/nulo num cinza mais apagado. */
-  --cor-grafico-concorrente: #94a3b8;
-  --cor-grafico-indeciso: #cbd5e1;
-  --cor-grafico-branco-nulo: #cbd5e1;
-  --cor-grafico-sem-votos: #cbd5e1;
 
   /* Texto da cor de seleção sobre a superfície (hover de botão contornado,
      período ativo). */
@@ -134,6 +128,28 @@
   --cor-status-perde-fundo: #fee2e2;
   --cor-status-sem-dados: #475569;
   --cor-status-sem-dados-fundo: #f1f5f9;
+
+  /* Barras do ranking de intenção: o candidato foco leva a cor do próprio
+     resultado (lidera/empata/perde); concorrentes em cinza sólido. */
+  --cor-barra-lidera: #16a34a;
+  --cor-barra-empate: #d97706;
+  --cor-barra-perde: #dc2626;
+  --cor-barra-concorrente: #94a3b8;
+  --cor-barra-neutra: #cbd5e1;
+
+  /* Perfil da amostra: sexo (categórico, validado para daltonismo) e faixa
+     etária (ordenada, então escala de um só tom, do claro ao escuro). */
+  --cor-perfil-feminino: #db2777;
+  --cor-perfil-masculino: #4f6bed;
+  --cor-idade-1: #99f6e4;
+  --cor-idade-2: #2dd4bf;
+  --cor-idade-3: #14b8a6;
+  --cor-idade-4: #0d9488;
+  --cor-idade-5: #115e59;
+
+  /* Grão fino (ruído fractal) usado como textura de papel/filme. */
+  --textura-grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --fonte-manchete: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   --easing-md3: cubic-bezier(0.2, 0, 0, 1);
   --fonte-base:
@@ -177,10 +193,16 @@
   --cor-foco-estadual: #7e22ce;
   --cor-serie-federal: #0aa2c0;
   --cor-serie-estadual: #a855f7;
-  --cor-grafico-concorrente: #64748b;
-  --cor-grafico-indeciso: #4b5568;
-  --cor-grafico-branco-nulo: #4b5568;
-  --cor-grafico-sem-votos: #334155;
+  --cor-barra-lidera: #22c55e;
+  --cor-barra-empate: #f59e0b;
+  --cor-barra-perde: #ef4444;
+  --cor-barra-concorrente: #64748b;
+  --cor-barra-neutra: #4b5568;
+  --cor-idade-1: #ccfbf1;
+  --cor-idade-2: #5eead4;
+  --cor-idade-3: #14b8a6;
+  --cor-idade-4: #0d9488;
+  --cor-idade-5: #0f766e;
   --cor-grafico-grid: rgba(148, 163, 184, 0.12);
 
   --cor-secundaria: #5eead4;

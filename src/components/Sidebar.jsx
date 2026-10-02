@@ -1,5 +1,7 @@
-import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { sair } from '../services/auth.js';
+import { SECOES_DASHBOARD } from '../pages/Admin/Dashboard/secoesDashboard.js';
 import styles from './Sidebar.module.css';
 
 const ICONES = {
@@ -36,7 +38,54 @@ const ITENS = [
   { valor: 'dados', rotulo: 'Dados', icone: 'dados' },
 ];
 
+// Marca o atalho da seção que está na parte de cima da tela enquanto a
+// página rola.
+function useSecaoVisivel() {
+  const [secaoVisivel, setSecaoVisivel] = useState(SECOES_DASHBOARD[0].id);
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return undefined;
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        const visivel = entradas.find((entrada) => entrada.isIntersecting);
+        if (visivel) setSecaoVisivel(visivel.target.id);
+      },
+      { rootMargin: '-15% 0px -70% 0px' },
+    );
+    SECOES_DASHBOARD.forEach(({ id }) => {
+      const elemento = document.getElementById(id);
+      if (elemento) observador.observe(elemento);
+    });
+    return () => observador.disconnect();
+  }, []);
+
+  return secaoVisivel;
+}
+
+function AtalhosDashboard() {
+  const secaoVisivel = useSecaoVisivel();
+
+  return (
+    <ul className={styles.atalhos} aria-label="Seções do Dashboard">
+      {SECOES_DASHBOARD.map(({ id, rotulo }) => (
+        <li key={id}>
+          <a
+            href={`#${id}`}
+            className={`${styles.atalho} ${secaoVisivel === id ? styles.atalhoAtivo : ''}`}
+            aria-current={secaoVisivel === id ? 'location' : undefined}
+          >
+            {rotulo}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function Sidebar() {
+  const { pathname } = useLocation();
+  const noDashboard = pathname === '/admin/dashboard';
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
@@ -54,16 +103,18 @@ function Sidebar() {
         </span>
       </div>
 
-      <nav className={styles.nav}>
+      <nav className={styles.nav} aria-label="Painel administrativo">
         {ITENS.map((item) => (
-          <NavLink
-            key={item.valor}
-            to={`/admin/${item.valor}`}
-            className={({ isActive }) => `${styles.item} ${isActive ? styles.itemAtivo : ''}`}
-          >
-            <span className={styles.itemIcone}>{ICONES[item.icone]}</span>
-            {item.rotulo}
-          </NavLink>
+          <div key={item.valor}>
+            <NavLink
+              to={`/admin/${item.valor}`}
+              className={({ isActive }) => `${styles.item} ${isActive ? styles.itemAtivo : ''}`}
+            >
+              <span className={styles.itemIcone}>{ICONES[item.icone]}</span>
+              {item.rotulo}
+            </NavLink>
+            {item.valor === 'dashboard' && noDashboard && <AtalhosDashboard />}
+          </div>
         ))}
       </nav>
 

@@ -8,7 +8,9 @@ function iniciais(nome) {
   return (primeira + ultima).toUpperCase();
 }
 
-function AvatarCandidato({ candidato }) {
+// `decorativo`: quando o nome já aparece em texto ao lado, a foto não repete
+// o nome para o leitor de tela.
+function AvatarCandidato({ candidato, className = '', decorativo = false }) {
   const [falhouAoCarregar, setFalhouAoCarregar] = useState(false);
 
   useEffect(() => {
@@ -22,16 +24,16 @@ function AvatarCandidato({ candidato }) {
   if (candidato.fotoUrl && !falhouAoCarregar) {
     return (
       <img
-        className={styles.avatar}
+        className={`${styles.avatar} ${className}`}
         src={candidato.fotoUrl}
-        alt={candidato.nome}
+        alt={decorativo ? '' : candidato.nome}
         onError={() => setFalhouAoCarregar(true)}
       />
     );
   }
 
   return (
-    <span className={styles.avatar} style={{ background: corFundo, color: '#fff' }}>
+    <span className={`${styles.avatar} ${className}`} aria-hidden={decorativo || undefined} style={{ background: corFundo, color: '#fff' }}>
       {iniciais(candidato.nome)}
     </span>
   );

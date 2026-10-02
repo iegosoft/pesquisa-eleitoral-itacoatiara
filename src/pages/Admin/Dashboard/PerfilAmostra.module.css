@@ -1,0 +1,137 @@
+.cartao {
+  composes: cartao from './Graficos.module.css';
+  padding: 20px 22px;
+}
+
+.explicacao,
+.vazio {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+.vazio {
+  margin: 0;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.rosca {
+  margin: 0;
+}
+
+.titulo {
+  margin-bottom: 10px;
+  font-family: var(--fonte-manchete);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.corpo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.grafico {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.grafico svg {
+  width: 100%;
+  height: 100%;
+}
+
+.trilho {
+  fill: none;
+  stroke: var(--cor-superficie-baixa);
+  stroke-width: 16;
+}
+
+.fatia {
+  fill: none;
+  stroke-width: 16;
+  animation: aparecer 700ms var(--easing-md3) both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+.centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+}
+
+.centro strong {
+  font-family: var(--fonte-destaque);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.centro span {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+}
+
+.legenda {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.legenda li {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.marcador {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.rotulo {
+  color: var(--cor-texto);
+}
+
+.valor {
+  font-family: var(--fonte-destaque);
+  font-weight: 800;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.quantidade {
+  font-family: var(--fonte-base);
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fatia {
+    animation: none;
+  }
+}

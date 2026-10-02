@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { corItemIntencaoVoto } from './coresGraficos.js';
 import ResultadoFoco from './ResultadoFoco.jsx';
 
 describe('ResultadoFoco', () => {
@@ -18,19 +17,13 @@ describe('ResultadoFoco', () => {
     expect(screen.getByText('Lidera')).toBeInTheDocument();
     expect(screen.getByText('Perde')).toBeInTheDocument();
     expect(screen.getByText('Base: 19 entrevistados')).toBeInTheDocument();
+    expect(screen.getByText('Sidney Leite lidera para deputado federal')).toBeInTheDocument();
+    expect(screen.getByText('Foco Est está em 2º lugar para deputado estadual')).toBeInTheDocument();
   });
 
   it('avisa quando o cargo nao tem candidato foco', () => {
     render(<ResultadoFoco base={0} federal={null} estadual={null} />);
 
     expect(screen.getAllByText('Nenhum candidato foco marcado para este cargo.')).toHaveLength(2);
-  });
-});
-
-describe('corItemIntencaoVoto', () => {
-  it('so o candidato foco leva a cor da serie; concorrentes ficam em cinza', () => {
-    expect(corItemIntencaoVoto({ tipo: 'candidato', isFoco: true, percentual: 50 }, 'federal')).toBe('var(--cor-serie-federal)');
-    expect(corItemIntencaoVoto({ tipo: 'candidato', isFoco: false, percentual: 30 }, 'federal')).toBe('var(--cor-grafico-concorrente)');
-    expect(corItemIntencaoVoto({ tipo: 'indeciso', isFoco: false, percentual: 10 }, 'federal')).toBe('var(--cor-grafico-indeciso)');
   });
 });

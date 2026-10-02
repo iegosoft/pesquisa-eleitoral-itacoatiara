@@ -73,6 +73,9 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   const itensCandidatos = candidatosCargo.map((candidato) => ({
     chave: candidato.id,
     rotulo: candidato.nome,
+    partido: candidato.partido ?? '',
+    fotoUrl: candidato.fotoUrl ?? '',
+    cargo: candidato.cargo,
     isFoco: candidato.isFoco,
     tipo: 'candidato',
     percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
@@ -114,12 +117,45 @@ function calcularResultadoFoco(itens) {
 
   return {
     nome: foco.rotulo,
+    partido: foco.partido,
+    fotoUrl: foco.fotoUrl,
+    cargo: foco.cargo,
     percentual: foco.percentual,
     posicao: 1 + candidatos.filter((item) => item.percentual > foco.percentual).length,
     totalCandidatos: candidatos.length,
     status: empatadoNoTopo ? 'empate' : statusFoco(foco.percentual, maiorPercentual),
     adversario: melhorOutro?.rotulo ?? null,
     diferenca: melhorOutro ? foco.percentual - melhorOutro.percentual : null,
+  };
+}
+
+const OPCOES_SEXO = [
+  { chave: 'feminino', rotulo: 'Feminino' },
+  { chave: 'masculino', rotulo: 'Masculino' },
+];
+const OPCOES_FAIXA_IDADE = [
+  { chave: '16-24', rotulo: '16 a 24 anos' },
+  { chave: '25-34', rotulo: '25 a 34 anos' },
+  { chave: '35-44', rotulo: '35 a 44 anos' },
+  { chave: '45-59', rotulo: '45 a 59 anos' },
+  { chave: '60+', rotulo: '60 anos ou mais' },
+];
+
+function distribuicao(respostas, campo, opcoes) {
+  const total = respostas.length;
+  return opcoes.map(({ chave, rotulo }) => {
+    const quantidade = respostas.filter((resposta) => resposta[campo] === chave).length;
+    return { chave, rotulo, quantidade, percentual: total ? (quantidade / total) * 100 : 0 };
+  });
+}
+
+// Quem foi entrevistado: sem isso não dá para saber se um resultado reflete
+// a cidade ou só um grupo (por exemplo, só homens acima de 60 anos).
+function calcularPerfil(respostas) {
+  return {
+    total: respostas.length,
+    sexo: distribuicao(respostas, 'sexo', OPCOES_SEXO),
+    faixaIdade: distribuicao(respostas, 'faixaIdade', OPCOES_FAIXA_IDADE),
   };
 }
 
@@ -203,6 +239,7 @@ export {
   calcularIntencaoVoto,
   calcularDesempenhoPorBairro,
   calcularResultadoFoco,
+  calcularPerfil,
   AMOSTRA_MINIMA_BAIRRO,
   calcularEvolucao,
 };

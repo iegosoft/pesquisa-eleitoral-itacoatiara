@@ -8,12 +8,14 @@ import {
   calcularResumo,
   calcularResumoAgregado,
   calcularResultadoFoco,
+  calcularPerfil,
   intervaloDeDatasInvertido,
 } from './agregacoes.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
 import ResultadoFoco from './ResultadoFoco.jsx';
-import GraficoIntencaoVoto from './GraficoIntencaoVoto.jsx';
+import RankingIntencao from './RankingIntencao.jsx';
+import PerfilAmostra from './PerfilAmostra.jsx';
 import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
 import styles from './PainelDashboard.module.css';
@@ -88,6 +90,7 @@ function PainelDashboard() {
     () => calcularDesempenhoPorBairro(respostasFiltradas, candidatosFederal, candidatosEstadual),
     [respostasFiltradas, candidatosFederal, candidatosEstadual],
   );
+  const perfil = useMemo(() => calcularPerfil(respostasFiltradas), [respostasFiltradas]);
   const evolucao = useMemo(
     () => calcularEvolucao(respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao),
     [respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao],
@@ -105,36 +108,41 @@ function PainelDashboard() {
 
       <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} base={respostasFiltradas.length} />
 
-      <section className={styles.secao} aria-labelledby="secao-coleta">
-        <h2 id="secao-coleta" className={styles.tituloSecao}>Andamento da coleta</h2>
+      <section id="coleta" className={styles.secao} aria-labelledby="titulo-coleta">
+        <h2 id="titulo-coleta" className={styles.tituloSecao}>Andamento da coleta</h2>
         <CardsResumo resumo={resumo} />
       </section>
 
-      <section className={styles.secao} aria-labelledby="secao-intencao">
-        <h2 id="secao-intencao" className={styles.tituloSecao}>Intenção de voto</h2>
-        <div className={styles.grade}>
-          <GraficoIntencaoVoto
+      <section id="intencao" className={styles.secao} aria-labelledby="titulo-intencao">
+        <h2 id="titulo-intencao" className={styles.tituloSecao}>Intenção de voto</h2>
+        <div className={styles.gradeLarga}>
+          <RankingIntencao
             titulo="Deputado federal"
             itens={itensFederal}
-            cargo="federal"
+            statusFoco={resultadoFederal?.status}
             base={respostasFiltradas.length}
           />
-          <GraficoIntencaoVoto
+          <RankingIntencao
             titulo="Deputado estadual"
             itens={itensEstadual}
-            cargo="estadual"
+            statusFoco={resultadoEstadual?.status}
             base={respostasFiltradas.length}
           />
         </div>
       </section>
 
-      <section className={styles.secao} aria-labelledby="secao-territorio">
-        <h2 id="secao-territorio" className={styles.tituloSecao}>Território</h2>
+      <section id="territorio" className={styles.secao} aria-labelledby="titulo-territorio">
+        <h2 id="titulo-territorio" className={styles.tituloSecao}>Território</h2>
         <DesempenhoPorBairro dados={desempenhoPorBairro} />
       </section>
 
-      <section className={styles.secao} aria-labelledby="secao-tendencia">
-        <h2 id="secao-tendencia" className={styles.tituloSecao}>Tendência</h2>
+      <section id="perfil" className={styles.secao} aria-labelledby="titulo-perfil">
+        <h2 id="titulo-perfil" className={styles.tituloSecao}>Perfil da amostra</h2>
+        <PerfilAmostra perfil={perfil} />
+      </section>
+
+      <section id="tendencia" className={styles.secao} aria-labelledby="titulo-tendencia">
+        <h2 id="titulo-tendencia" className={styles.tituloSecao}>Tendência</h2>
         <GraficoEvolucao
           dados={evolucao}
           periodo={periodoEvolucao}

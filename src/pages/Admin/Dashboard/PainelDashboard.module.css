@@ -67,3 +67,18 @@
     animation: none;
   }
 }
+
+.gradeLarga {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  gap: 20px;
+}
+
+/* Os atalhos da barra lateral levam até cada seção sem esconder o título. */
+.painel > section {
+  scroll-margin-top: 20px;
+}
+
+.painel > :nth-child(7) {
+  animation-delay: 360ms;
+}
