@@ -60,42 +60,44 @@ function DesempenhoPorBairro({ dados }) {
   return (
     <section className={styles.cartao} aria-labelledby="titulo-desempenho-bairro">
       <h3 id="titulo-desempenho-bairro">Desempenho do candidato foco por bairro</h3>
-      <p className={styles.explicacao}>
-        <strong>Lidera</strong>: o foco tem o maior percentual do bairro. <strong>Empate</strong>: está a
-        até {MARGEM_EMPATE} pontos do primeiro. <strong>Perde</strong>: está mais de {MARGEM_EMPATE} pontos
-        atrás. Bairros com menos de {AMOSTRA_MINIMA_BAIRRO} entrevistas têm resultado pouco confiável e
-        aparecem com borda tracejada.
-      </p>
-
-      {dados.length === 0 ? (
-        <p className={styles.vazio}>Sem dados suficientes ainda.</p>
-      ) : (
-        <>
+      <div className={styles.topo}>
+        <p className={styles.explicacao}>
+          <strong>Lidera</strong>: o foco tem o maior percentual do bairro. <strong>Empate</strong>: está a
+          até {MARGEM_EMPATE} pontos do primeiro. <strong>Perde</strong>: está mais de {MARGEM_EMPATE} pontos
+          atrás. Bairros com menos de {AMOSTRA_MINIMA_BAIRRO} entrevistas têm resultado pouco confiável e
+          aparecem com borda tracejada.
+        </p>
+        {dados.length > 0 && (
           <div className={styles.resumo}>
             <ResumoCargo rotulo="Federal" cargo="federal" dados={dados} />
             <ResumoCargo rotulo="Estadual" cargo="estadual" dados={dados} />
           </div>
-          <ul className={styles.grade}>
-            {dados.map((linha) => (
-              <li
-                key={linha.bairro}
-                className={`${styles.bloco} ${linha.amostraPequena ? styles.blocoAmostraPequena : ''}`}
-              >
-                <div className={styles.blocoTopo}>
-                  <span className={styles.bairro}>{linha.bairro}</span>
-                  <span className={styles.entrevistas}>
-                    {linha.entrevistas} {linha.entrevistas === 1 ? 'entrevista' : 'entrevistas'}
-                  </span>
-                </div>
-                {linha.amostraPequena && <span className={styles.avisoAmostra}>Amostra pequena</span>}
-                <dl className={styles.cargos}>
-                  <LinhaCargo rotulo="Federal" cargo="federal" desempenho={linha.federal} />
-                  <LinhaCargo rotulo="Estadual" cargo="estadual" desempenho={linha.estadual} />
-                </dl>
-              </li>
-            ))}
-          </ul>
-        </>
+        )}
+      </div>
+
+      {dados.length === 0 ? (
+        <p className={styles.vazio}>Sem dados suficientes ainda.</p>
+      ) : (
+        <ul className={styles.grade}>
+          {dados.map((linha) => (
+            <li
+              key={linha.bairro}
+              className={`${styles.bloco} ${linha.amostraPequena ? styles.blocoAmostraPequena : ''}`}
+            >
+              <div className={styles.blocoTopo}>
+                <span className={styles.bairro}>{linha.bairro}</span>
+                <span className={styles.entrevistas}>
+                  {linha.entrevistas} {linha.entrevistas === 1 ? 'entrevista' : 'entrevistas'}
+                </span>
+              </div>
+              {linha.amostraPequena && <span className={styles.avisoAmostra}>Amostra pequena</span>}
+              <dl className={styles.cargos}>
+                <LinhaCargo rotulo="Federal" cargo="federal" desempenho={linha.federal} />
+                <LinhaCargo rotulo="Estadual" cargo="estadual" desempenho={linha.estadual} />
+              </dl>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );

@@ -3,17 +3,17 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  min-width: 78px;
-  padding: 3px 9px;
+  min-width: 84px;
+  padding: 4px 10px;
   border-radius: var(--raio-pilula);
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .grande {
   padding: 5px 12px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .lidera {
