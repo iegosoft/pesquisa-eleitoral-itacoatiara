@@ -246,3 +246,25 @@
   background-color: var(--cor-superficie-solida);
   color: var(--cor-texto);
 }
+
+/* ===== Tema "papel" da tela de coleta: mesma identidade do painel (manchete
+   serifada, cores fortes, textura de grão), mas clara, porque a coleta é
+   feita no celular, na rua, sob o sol. Contrastes conferidos (WCAG AA). ===== */
+[data-tema='papel'] {
+  --cor-fundo-painel: linear-gradient(180deg, #f4f0e8 0%, #ebe5d8 100%);
+  --cor-superficie: rgba(251, 249, 244, 0.92);
+  --cor-superficie-baixa: #efe9dd;
+  --cor-superficie-solida: #fbf9f4;
+  --cor-borda: #dcd4c4;
+  --cor-borda-luz: #ffffff;
+  --cor-texto: #17140f;
+  --cor-texto-suave: #5f584b;
+  --cor-selecao: #1d4ed8;
+  --cor-selecao-texto: #1d4ed8;
+  --cor-selecao-fundo-suave: #dbe6fd;
+  --cor-erro: #b91c1c;
+  --cor-sucesso-texto: #166534;
+  --sombra-repouso: 0 1px 2px rgba(23, 20, 15, 0.06), 0 8px 24px rgba(23, 20, 15, 0.06);
+
+  color: var(--cor-texto);
+}

@@ -4,23 +4,58 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: var(--gradiente-marca);
+  background: var(--textura-grao), var(--cor-fundo-painel);
+  background-attachment: fixed;
+  color: var(--cor-texto);
 }
 
 .cartao {
   composes: cartao from '../../styles/md3.module.css';
   width: 100%;
-  max-width: 380px;
-  padding: 28px 24px;
+  max-width: 400px;
+  padding: 30px 28px;
   display: flex;
   flex-direction: column;
   gap: 18px;
   box-shadow: var(--sombra-elevada);
 }
 
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoMarca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--raio-borda-lg);
+  background: var(--gradiente-marca);
+  color: #fff;
+}
+
+.logoMarca svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nomeSistema {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
 .cartao h1 {
-  font-weight: 800;
   margin: 0;
+  font-family: var(--fonte-manchete);
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .campo {
@@ -36,7 +71,7 @@
 }
 
 .erro {
-  color: var(--cor-erro);
+  color: var(--cor-erro-texto);
   font-size: 14px;
   margin: 0;
 }

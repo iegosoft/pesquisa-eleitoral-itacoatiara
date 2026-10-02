@@ -16,7 +16,7 @@ function ListaCandidatos({ titulo, candidatos, aoEditar }) {
           className={styles.item}
           onClick={() => aoEditar(candidato)}
         >
-          <AvatarCandidato candidato={candidato} />
+          <AvatarCandidato candidato={candidato} className={styles.foto} decorativo />
           <span className={styles.infoCandidato}>
             <span className={styles.nome}>{candidato.nome}</span>
             <span className={styles.partido}>{candidato.partido}</span>

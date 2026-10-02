@@ -1,6 +1,5 @@
 .cabecalho {
   padding: 20px 28px 0;
-  background: var(--cor-superficie);
 }
 
 .linhaSuperior {
@@ -72,8 +71,10 @@
 
 .titulos h1 {
   margin: 0 0 4px;
-  font-size: 24px;
-  font-weight: 700;
+  font-family: var(--fonte-manchete);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 .titulos p {

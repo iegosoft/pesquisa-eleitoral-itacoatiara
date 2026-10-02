@@ -11,7 +11,7 @@ function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {
           className={`${styles.opcao} ${valorSelecionado === candidato.id ? styles.selecionada : ''}`}
           onClick={() => aoSelecionar(candidato.id)}
         >
-          <AvatarCandidato candidato={candidato} />
+          <AvatarCandidato candidato={candidato} className={styles.foto} decorativo />
           <span>{candidato.nome}</span>
         </button>
       ))}
@@ -21,7 +21,7 @@ function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {
         className={`${styles.opcao} ${valorSelecionado === 'indeciso' ? styles.selecionada : ''}`}
         onClick={() => aoSelecionar('indeciso')}
       >
-        <span className={styles.avatarNeutro} style={{ background: 'var(--cor-indeciso)' }}>
+        <span className={styles.avatarNeutro} aria-hidden="true" style={{ background: 'var(--cor-superficie-baixa)' }}>
           ?
         </span>
         <span>Indeciso</span>
@@ -32,7 +32,7 @@ function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {
         className={`${styles.opcao} ${valorSelecionado === 'branco_nulo' ? styles.selecionada : ''}`}
         onClick={() => aoSelecionar('branco_nulo')}
       >
-        <span className={styles.avatarNeutro} style={{ background: 'var(--cor-branco-nulo)' }}>
+        <span className={styles.avatarNeutro} aria-hidden="true" style={{ background: 'var(--cor-superficie-baixa)' }}>
           —
         </span>
         <span>Branco/Nulo</span>

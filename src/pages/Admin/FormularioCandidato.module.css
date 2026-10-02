@@ -9,8 +9,9 @@
 
 .formulario h2 {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--fonte-manchete);
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .previa {
