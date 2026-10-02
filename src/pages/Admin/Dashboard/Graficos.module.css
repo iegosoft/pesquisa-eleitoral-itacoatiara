@@ -23,6 +23,11 @@
   margin: 0;
 }
 
+.rotuloPeriodo {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
 .seletorPeriodo {
   display: flex;
   gap: 6px;

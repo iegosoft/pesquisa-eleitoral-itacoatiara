@@ -6,26 +6,35 @@
   padding: 16px 18px;
 }
 
+/* Os campos dividem a largura do cartão inteira. */
+.titulo {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
 .campos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
   gap: 16px;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--cor-texto-suave);
 }
 
 .campoTexto {
   composes: campoTexto from '../../../styles/md3.module.css';
-  height: 40px;
-  font-size: 14px;
-  padding: 0 10px;
+  height: 44px;
+  font-size: 15px;
+  padding: 0 12px;
 }
 
 .campoTexto[aria-invalid='true'] {
@@ -35,7 +44,7 @@
 
 .botaoLimpar {
   composes: botaoContornado from '../../../styles/md3.module.css';
-  height: 40px;
+  height: 44px;
   padding: 0 16px;
   font-size: 13px;
 }

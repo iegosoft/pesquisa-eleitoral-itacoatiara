@@ -18,7 +18,28 @@ import RankingIntencao from './RankingIntencao.jsx';
 import PerfilAmostra from './PerfilAmostra.jsx';
 import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
+import { SECOES_DASHBOARD } from './secoesDashboard.js';
 import styles from './PainelDashboard.module.css';
+
+// Título grande + uma linha dizendo que pergunta a seção responde, para o
+// usuário saber o que está vendo sem precisar ler os gráficos.
+function Secao({ id, complemento, children }) {
+  const { titulo, descricao } = SECOES_DASHBOARD.find((secao) => secao.id === id);
+  return (
+    <section id={id} className={styles.secao} aria-labelledby={`titulo-${id}`}>
+      <header className={styles.cabecalhoSecao}>
+        <div>
+          <h2 id={`titulo-${id}`} className={styles.tituloSecao}>
+            {titulo}
+          </h2>
+          <p className={styles.descricaoSecao}>{descricao}</p>
+        </div>
+        {complemento && <span className={styles.complemento}>{complemento}</span>}
+      </header>
+      {children}
+    </section>
+  );
+}
 
 function filtrosIniciais() {
   return { bairro: 'todos', sexo: 'todos', faixaIdade: 'todas', dataInicio: '', dataFim: '' };
@@ -106,15 +127,20 @@ function PainelDashboard() {
         bairrosDisponiveis={bairrosDisponiveis}
       />
 
-      <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} base={respostasFiltradas.length} />
+      <Secao
+        id="resultado"
+        complemento={`Base: ${respostasFiltradas.length.toLocaleString('pt-BR')} ${
+          respostasFiltradas.length === 1 ? 'entrevistado' : 'entrevistados'
+        }`}
+      >
+        <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} />
+      </Secao>
 
-      <section id="coleta" className={styles.secao} aria-labelledby="titulo-coleta">
-        <h2 id="titulo-coleta" className={styles.tituloSecao}>Andamento da coleta</h2>
+      <Secao id="coleta">
         <CardsResumo resumo={resumo} />
-      </section>
+      </Secao>
 
-      <section id="intencao" className={styles.secao} aria-labelledby="titulo-intencao">
-        <h2 id="titulo-intencao" className={styles.tituloSecao}>Intenção de voto</h2>
+      <Secao id="intencao">
         <div className={styles.gradeLarga}>
           <RankingIntencao
             titulo="Deputado federal"
@@ -129,27 +155,24 @@ function PainelDashboard() {
             base={respostasFiltradas.length}
           />
         </div>
-      </section>
+      </Secao>
 
-      <section id="territorio" className={styles.secao} aria-labelledby="titulo-territorio">
-        <h2 id="titulo-territorio" className={styles.tituloSecao}>Território</h2>
+      <Secao id="territorio">
         <DesempenhoPorBairro dados={desempenhoPorBairro} />
-      </section>
+      </Secao>
 
-      <section id="perfil" className={styles.secao} aria-labelledby="titulo-perfil">
-        <h2 id="titulo-perfil" className={styles.tituloSecao}>Perfil da amostra</h2>
+      <Secao id="perfil">
         <PerfilAmostra perfil={perfil} />
-      </section>
+      </Secao>
 
-      <section id="tendencia" className={styles.secao} aria-labelledby="titulo-tendencia">
-        <h2 id="titulo-tendencia" className={styles.tituloSecao}>Tendência</h2>
+      <Secao id="tendencia">
         <GraficoEvolucao
           dados={evolucao}
           periodo={periodoEvolucao}
           aoAlterarPeriodo={setPeriodoEvolucao}
           ultimaColeta={resumo.ultimaColeta}
         />
-      </section>
+      </Secao>
     </div>
   );
 }

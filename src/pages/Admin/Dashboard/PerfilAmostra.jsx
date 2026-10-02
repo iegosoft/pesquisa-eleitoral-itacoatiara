@@ -86,9 +86,6 @@ function PerfilAmostra({ perfil }) {
 
   return (
     <div className={styles.cartao}>
-      <p className={styles.explicacao}>
-        Quem foi ouvido. Se um grupo estiver sobrando ou faltando, o resultado pode não representar a cidade.
-      </p>
       <div className={styles.grade}>
         <Rosca
           titulo="Sexo"

@@ -16,7 +16,10 @@ function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiv
   }
 
   return (
-    <div className={styles.filtros}>
+    <div className={styles.filtros} role="search" aria-labelledby="titulo-filtros">
+      <h2 id="titulo-filtros" className={styles.titulo}>
+        Filtrar resultados
+      </h2>
       <div className={styles.campos}>
         <label className={styles.campo}>
           Bairro

@@ -25,7 +25,7 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
   return (
     <div className={`${styles.cartao} ${styles.graficoEvolucao}`}>
       <div className={styles.cabecalhoComAcoes}>
-        <h3>Evolução do candidato foco</h3>
+        <span className={styles.rotuloPeriodo}>Período:</span>
         <div className={styles.seletorPeriodo} role="group" aria-label="Período">
           {PERIODOS.map((dias) => (
             <button

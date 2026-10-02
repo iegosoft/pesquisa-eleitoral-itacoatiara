@@ -1,7 +1,7 @@
 .painel {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 44px;
 }
 
 /* Entrada em sequência: cada bloco sobe e aparece um pouco depois do anterior,
@@ -44,16 +44,37 @@
 .secao {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+}
+
+.cabecalhoSecao {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 16px;
 }
 
 .tituloSecao {
   margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--fonte-manchete);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--cor-texto);
+}
+
+.descricaoSecao {
+  margin: 4px 0 0;
+  font-size: 15px;
   color: var(--cor-texto-suave);
+}
+
+.complemento {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
 }
 
 .grade {

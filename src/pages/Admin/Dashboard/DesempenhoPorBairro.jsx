@@ -58,8 +58,7 @@ function LinhaCargo({ rotulo, cargo, desempenho }) {
 
 function DesempenhoPorBairro({ dados }) {
   return (
-    <section className={styles.cartao} aria-labelledby="titulo-desempenho-bairro">
-      <h3 id="titulo-desempenho-bairro">Desempenho do candidato foco por bairro</h3>
+    <div className={styles.cartao}>
       <div className={styles.topo}>
         <p className={styles.explicacao}>
           <strong>Lidera</strong>: o foco tem o maior percentual do bairro. <strong>Empate</strong>: está a
@@ -99,7 +98,7 @@ function DesempenhoPorBairro({ dados }) {
           ))}
         </ul>
       )}
-    </section>
+    </div>
   );
 }
 

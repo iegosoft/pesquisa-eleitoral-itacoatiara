@@ -88,20 +88,12 @@ function CartaoResultado({ rotuloCargo, resultado }) {
   );
 }
 
-function ResultadoFoco({ federal, estadual, base }) {
+function ResultadoFoco({ federal, estadual }) {
   return (
-    <section id="resultado" className={styles.secao} aria-labelledby="titulo-resultado-foco">
-      <div className={styles.cabecalho}>
-        <h2 id="titulo-resultado-foco">Resultado do candidato foco</h2>
-        <span className={styles.base}>
-          Base: {base.toLocaleString('pt-BR')} {base === 1 ? 'entrevistado' : 'entrevistados'}
-        </span>
-      </div>
-      <div className={styles.grade}>
-        <CartaoResultado rotuloCargo="Deputado federal" resultado={federal} />
-        <CartaoResultado rotuloCargo="Deputado estadual" resultado={estadual} />
-      </div>
-    </section>
+    <div className={styles.grade}>
+      <CartaoResultado rotuloCargo="Deputado federal" resultado={federal} />
+      <CartaoResultado rotuloCargo="Deputado estadual" resultado={estadual} />
+    </div>
   );
 }
 
