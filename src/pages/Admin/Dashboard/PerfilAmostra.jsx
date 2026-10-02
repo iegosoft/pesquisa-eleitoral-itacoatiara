@@ -23,7 +23,7 @@ function Rosca({ titulo, fatias, total }) {
   return (
     <figure className={styles.rosca}>
       <figcaption className={styles.titulo}>
-        {titulo}
+        {titulo}{' '}
         <span className={styles.destaque}>
           Maior grupo: <strong>{maiorGrupo.rotulo}</strong> ({formatarPercentual(maiorGrupo.percentual)})
         </span>
