@@ -1,5 +1,6 @@
 import { format, isToday, isYesterday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { statusFocoPorBairro } from './coresGraficos.js';
 
 function aplicarFiltros(respostas, filtros) {
   return respostas.filter((resposta) => {
@@ -97,40 +98,40 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   return [...itensCandidatos, ...itensExtras].sort((a, b) => b.percentual - a.percentual);
 }
 
-function calcularPorBairro(respostas, focoFederal, focoEstadual) {
-  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))].sort();
+// Abaixo dessa quantidade de entrevistas, o percentual de um bairro oscila
+// demais (1 entrevista vira "100%") e o painel sinaliza "amostra pequena".
+const AMOSTRA_MINIMA_BAIRRO = 5;
 
-  return bairros.map((bairro) => {
-    const doBairro = respostas.filter((resposta) => resposta.bairro === bairro);
-    const total = doBairro.length;
-    const percentualFederal =
-      focoFederal && total
-        ? (doBairro.filter((resposta) => resposta.votoFederal === focoFederal.id).length / total) * 100
-        : 0;
-    const percentualEstadual =
-      focoEstadual && total
-        ? (doBairro.filter((resposta) => resposta.votoEstadual === focoEstadual.id).length / total) * 100
-        : 0;
-    return { bairro, percentualFederal, percentualEstadual };
-  });
+function desempenhoNoCargo(doBairro, candidatosCargo, campoVoto) {
+  const foco = candidatosCargo.find((candidato) => candidato.isFoco);
+  if (!foco) return null;
+
+  const total = doBairro.length;
+  const percentualDe = (id) => (doBairro.filter((resposta) => resposta[campoVoto] === id).length / total) * 100;
+  const percentual = percentualDe(foco.id);
+  const maiorPercentual = Math.max(0, ...candidatosCargo.map((candidato) => percentualDe(candidato.id)));
+
+  return { percentual, status: statusFocoPorBairro(percentual, maiorPercentual) };
 }
 
-function calcularMapaCalor(respostas, candidatosCargo, campoVoto) {
-  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))].sort();
+// Uma linha por bairro, com o número de entrevistas e, para cada cargo, o
+// percentual do candidato foco e o status dele (lidera/empate/perde) em
+// relação aos concorrentes. Bairros com mais entrevistas vêm primeiro.
+function calcularDesempenhoPorBairro(respostas, candidatosFederal, candidatosEstadual) {
+  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))];
 
-  const linhas = candidatosCargo.map((candidato) => {
-    const valoresPorBairro = bairros.map((bairro) => {
+  return bairros
+    .map((bairro) => {
       const doBairro = respostas.filter((resposta) => resposta.bairro === bairro);
-      const total = doBairro.length;
-      const percentual = total
-        ? (doBairro.filter((resposta) => resposta[campoVoto] === candidato.id).length / total) * 100
-        : 0;
-      return { bairro, percentual };
-    });
-    return { candidato, valoresPorBairro };
-  });
-
-  return { bairros, linhas };
+      return {
+        bairro,
+        entrevistas: doBairro.length,
+        amostraPequena: doBairro.length < AMOSTRA_MINIMA_BAIRRO,
+        federal: desempenhoNoCargo(doBairro, candidatosFederal, 'votoFederal'),
+        estadual: desempenhoNoCargo(doBairro, candidatosEstadual, 'votoEstadual'),
+      };
+    })
+    .sort((a, b) => b.entrevistas - a.entrevistas || a.bairro.localeCompare(b.bairro, 'pt-BR'));
 }
 
 function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
@@ -149,17 +150,20 @@ function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
       return dataResposta.getTime() === dia.getTime();
     });
 
+    // Dia sem coleta fica sem valor (null), não 0%: senão o gráfico
+    // desenharia uma queda que não aconteceu.
     const total = doDia.length;
     pontos.push({
       data: dia.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
+      entrevistas: total,
       percentualFederal:
         focoFederal && total
           ? (doDia.filter((resposta) => resposta.votoFederal === focoFederal.id).length / total) * 100
-          : 0,
+          : null,
       percentualEstadual:
         focoEstadual && total
           ? (doDia.filter((resposta) => resposta.votoEstadual === focoEstadual.id).length / total) * 100
-          : 0,
+          : null,
     });
   }
 
@@ -172,7 +176,7 @@ export {
   calcularResumo,
   calcularResumoAgregado,
   calcularIntencaoVoto,
-  calcularPorBairro,
-  calcularMapaCalor,
+  calcularDesempenhoPorBairro,
+  AMOSTRA_MINIMA_BAIRRO,
   calcularEvolucao,
 };

@@ -1,4 +1,40 @@
+import { useEffect, useState } from 'react';
 import styles from './CardsResumo.module.css';
+
+const DURACAO_ANIMACAO_MS = 700;
+
+function prefereMenosMovimento() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
+
+// Conta de 0 até o valor na entrada do painel (e ao trocar de filtro), sem
+// animar para quem pediu menos movimento no sistema.
+function useNumeroAnimado(valor) {
+  const [exibido, setExibido] = useState(valor);
+
+  useEffect(() => {
+    if (prefereMenosMovimento()) {
+      setExibido(valor);
+      return undefined;
+    }
+    let quadro;
+    const inicio = performance.now();
+    function passo(agora) {
+      const progresso = Math.min((agora - inicio) / DURACAO_ANIMACAO_MS, 1);
+      const suavizado = 1 - (1 - progresso) ** 3;
+      setExibido(Math.round(valor * suavizado));
+      if (progresso < 1) quadro = requestAnimationFrame(passo);
+    }
+    quadro = requestAnimationFrame(passo);
+    return () => cancelAnimationFrame(quadro);
+  }, [valor]);
+
+  return exibido;
+}
+
+function ValorNumerico({ valor }) {
+  return useNumeroAnimado(valor).toLocaleString('pt-BR');
+}
 
 const ICONES = {
   pessoas: (
@@ -33,19 +69,19 @@ function CardsResumo({ resumo }) {
   const cards = [
     {
       rotulo: 'Entrevistados',
-      valor: resumo.totalEntrevistados.toLocaleString('pt-BR'),
+      valor: <ValorNumerico valor={resumo.totalEntrevistados} />,
       icone: 'pessoas',
       cor: 'Azul',
     },
     {
       rotulo: 'Casas visitadas',
-      valor: resumo.casasVisitadas.toLocaleString('pt-BR'),
+      valor: <ValorNumerico valor={resumo.casasVisitadas} />,
       icone: 'casa',
       cor: 'Petroleo',
     },
     {
       rotulo: 'Bairros cobertos',
-      valor: resumo.bairrosCobertos.toLocaleString('pt-BR'),
+      valor: <ValorNumerico valor={resumo.bairrosCobertos} />,
       icone: 'mapa',
       cor: 'Petroleo',
     },
@@ -54,6 +90,7 @@ function CardsResumo({ resumo }) {
       valor: resumo.ultimaColeta,
       icone: 'calendario',
       cor: 'Cinza',
+      texto: true,
     },
   ];
 
@@ -64,7 +101,7 @@ function CardsResumo({ resumo }) {
           <span className={`${styles.icone} ${styles[`icone${card.cor}`]}`}>{ICONES[card.icone]}</span>
           <span className={styles.textos}>
             <span className={styles.rotulo}>{card.rotulo}</span>
-            <span className={styles.valor}>{card.valor}</span>
+            <span className={card.texto ? styles.valorTexto : styles.valor}>{card.valor}</span>
           </span>
         </div>
       ))}

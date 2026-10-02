@@ -109,7 +109,7 @@
 
 .confirmacao {
   text-align: center;
-  color: var(--cor-foco-federal);
+  color: var(--cor-sucesso-texto);
   font-weight: 600;
 }
 

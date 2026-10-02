@@ -54,9 +54,9 @@
 }
 
 .botaoContornado:hover:not(:disabled) {
-  border-color: var(--cor-selecao);
+  border-color: var(--cor-selecao-texto);
   background: var(--cor-selecao-fundo-suave);
-  color: var(--cor-selecao);
+  color: var(--cor-selecao-texto);
 }
 
 .botaoTexto {
@@ -70,7 +70,7 @@
 
 .botaoTexto:hover:not(:disabled) {
   background: var(--cor-selecao-fundo-suave);
-  color: var(--cor-selecao);
+  color: var(--cor-selecao-texto);
 }
 
 .cartao {
@@ -78,6 +78,13 @@
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-cartao);
   box-shadow: var(--sombra-repouso);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Cartão de vidro: no tema escuro, a borda de cima pega uma luz sutil. */
+:global([data-tema='escuro']) .cartao {
+  border-top-color: var(--cor-borda-luz);
 }
 
 .campoTexto {
@@ -98,7 +105,7 @@
 
 .campoTexto:focus {
   outline: none;
-  border-bottom-color: var(--cor-selecao);
+  border-bottom-color: var(--cor-selecao-texto);
 }
 
 .campoTexto:disabled {

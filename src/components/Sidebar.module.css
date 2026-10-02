@@ -6,6 +6,8 @@
   min-height: 100svh;
   padding: 20px 14px calc(20px + env(safe-area-inset-bottom));
   background: var(--cor-sidebar);
+  border-right: 1px solid var(--cor-borda);
+  backdrop-filter: blur(16px);
 }
 
 .logo {

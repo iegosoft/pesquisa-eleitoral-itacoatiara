@@ -1,9 +1,10 @@
 // Estilo compartilhado do tooltip do Recharts em todos os gráficos do
 // dashboard — sem isso, o tooltip usa o visual padrão da lib (caixa branca
-// crua, borda fina, sem sombra), que destoa do resto do design system.
+// crua, borda fina, sem sombra), que destoa do resto do design system. Usa a
+// superfície opaca: o cartão de vidro deixaria o gráfico aparecer por trás.
 const estiloTooltip = {
   contentStyle: {
-    background: 'var(--cor-superficie)',
+    background: 'var(--cor-superficie-solida)',
     border: '1px solid var(--cor-borda)',
     borderRadius: 'var(--raio-borda-lg)',
     boxShadow: 'var(--sombra-elevada)',

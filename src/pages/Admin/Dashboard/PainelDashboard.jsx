@@ -3,9 +3,8 @@ import { useDadosPainel } from './useDadosPainel.js';
 import {
   aplicarFiltros,
   calcularEvolucao,
+  calcularDesempenhoPorBairro,
   calcularIntencaoVoto,
-  calcularMapaCalor,
-  calcularPorBairro,
   calcularResumo,
   calcularResumoAgregado,
   intervaloDeDatasInvertido,
@@ -13,8 +12,7 @@ import {
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
 import GraficoIntencaoVoto from './GraficoIntencaoVoto.jsx';
-import GraficoPorBairro from './GraficoPorBairro.jsx';
-import MapaCalor from './MapaCalor.jsx';
+import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
 import styles from './PainelDashboard.module.css';
 
@@ -82,17 +80,9 @@ function PainelDashboard() {
     () => calcularIntencaoVoto(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
     [respostasFiltradas, candidatosEstadual],
   );
-  const dadosPorBairro = useMemo(
-    () => calcularPorBairro(respostasFiltradas, focoFederal, focoEstadual),
-    [respostasFiltradas, focoFederal, focoEstadual],
-  );
-  const mapaFederal = useMemo(
-    () => calcularMapaCalor(respostasFiltradas, candidatosFederal, 'votoFederal'),
-    [respostasFiltradas, candidatosFederal],
-  );
-  const mapaEstadual = useMemo(
-    () => calcularMapaCalor(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
-    [respostasFiltradas, candidatosEstadual],
+  const desempenhoPorBairro = useMemo(
+    () => calcularDesempenhoPorBairro(respostasFiltradas, candidatosFederal, candidatosEstadual),
+    [respostasFiltradas, candidatosFederal, candidatosEstadual],
   );
   const evolucao = useMemo(
     () => calcularEvolucao(respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao),
@@ -111,20 +101,38 @@ function PainelDashboard() {
 
       <CardsResumo resumo={resumo} />
 
-      <div className={styles.grade}>
-        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} cargo="federal" />
-        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} cargo="estadual" />
-        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
-      </div>
+      <section className={styles.secao} aria-labelledby="secao-intencao">
+        <h2 id="secao-intencao" className={styles.tituloSecao}>Intenção de voto</h2>
+        <div className={styles.grade}>
+          <GraficoIntencaoVoto
+            titulo="Deputado federal"
+            itens={itensFederal}
+            cargo="federal"
+            base={respostasFiltradas.length}
+          />
+          <GraficoIntencaoVoto
+            titulo="Deputado estadual"
+            itens={itensEstadual}
+            cargo="estadual"
+            base={respostasFiltradas.length}
+          />
+        </div>
+      </section>
 
-      <div className={styles.secao}>
-        <GraficoPorBairro dados={dadosPorBairro} />
-      </div>
+      <section className={styles.secao} aria-labelledby="secao-territorio">
+        <h2 id="secao-territorio" className={styles.tituloSecao}>Território</h2>
+        <DesempenhoPorBairro dados={desempenhoPorBairro} />
+      </section>
 
-      <div className={styles.grade}>
-        <MapaCalor titulo="Status do foco por bairro — Federal" dados={mapaFederal} />
-        <MapaCalor titulo="Status do foco por bairro — Estadual" dados={mapaEstadual} />
-      </div>
+      <section className={styles.secao} aria-labelledby="secao-tendencia">
+        <h2 id="secao-tendencia" className={styles.tituloSecao}>Tendência</h2>
+        <GraficoEvolucao
+          dados={evolucao}
+          periodo={periodoEvolucao}
+          aoAlterarPeriodo={setPeriodoEvolucao}
+          ultimaColeta={resumo.ultimaColeta}
+        />
+      </section>
     </div>
   );
 }

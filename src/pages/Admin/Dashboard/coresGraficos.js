@@ -1,21 +1,15 @@
-// Paleta fixa de identidade eleitoral: federal é sempre azul, estadual é
-// sempre roxo — em qualquer gráfico, sem variar por ranking ou resultado.
-// Indeciso e branco/nulo são neutros, fora da paleta de candidato.
-const COR_FEDERAL = '#2563eb';
-const COR_ESTADUAL = '#7c3aed';
-const COR_INDECISO = '#94a3b8';
-const COR_BRANCO_NULO = '#cbd5e1';
+// Paleta fixa de identidade eleitoral: federal é sempre a série azul/ciano,
+// estadual é sempre a violeta, em qualquer gráfico, sem variar por ranking ou
+// resultado. Os tons vêm do tema (theme.css), que escolhe a versão certa para
+// o fundo claro ou escuro. Indeciso e branco/nulo são neutros.
+const COR_FEDERAL = 'var(--cor-serie-federal)';
+const COR_ESTADUAL = 'var(--cor-serie-estadual)';
+const COR_INDECISO = 'var(--cor-grafico-indeciso)';
+const COR_BRANCO_NULO = 'var(--cor-grafico-branco-nulo)';
 // Candidato sem nenhum voto ainda: cor apagada em vez da cor cheia da
 // eleição, senão uma lista com muitos candidatos zerados vira poluição
 // visual (nome forte sem barra nenhuma pra justificar o destaque).
-const COR_SEM_VOTOS = '#cbd5e1';
-
-// Status do candidato foco por bairro (não é identidade, é resultado
-// relativo aos concorrentes ali).
-const COR_MAPA_LIDERA = '#15803d';
-const COR_MAPA_EMPATE = '#f59e0b';
-const COR_MAPA_PERDE = '#dc2626';
-const COR_MAPA_SEM_DADOS = '#cbd5e1';
+const COR_SEM_VOTOS = 'var(--cor-grafico-sem-votos)';
 
 function corFoco(cargo) {
   return cargo === 'estadual' ? COR_ESTADUAL : COR_FEDERAL;
@@ -29,10 +23,10 @@ function corItemIntencaoVoto(item, cargo) {
 }
 
 // Diferença (em pontos percentuais) até o líder pra ainda contar como
-// "empate" no mapa por bairro. Sem essa margem, qualquer diferença mínima
-// apareceria como "perde", o que exageraria o resultado num universo
-// pequeno de entrevistados por bairro.
-const MARGEM_EMPATE_MAPA = 5;
+// "empate" no bairro. Sem essa margem, qualquer diferença mínima apareceria
+// como "perde", o que exageraria o resultado num universo pequeno de
+// entrevistados por bairro.
+const MARGEM_EMPATE = 5;
 
 // Classifica o candidato foco em cada bairro: lidera, empata (dentro da
 // margem) ou perde, comparando com o maior percentual entre os candidatos
@@ -40,39 +34,8 @@ const MARGEM_EMPATE_MAPA = 5;
 function statusFocoPorBairro(percentualFoco, maiorPercentual) {
   if (maiorPercentual <= 0) return 'sem_dados';
   if (percentualFoco >= maiorPercentual) return 'lidera';
-  if (maiorPercentual - percentualFoco <= MARGEM_EMPATE_MAPA) return 'empate';
+  if (maiorPercentual - percentualFoco <= MARGEM_EMPATE) return 'empate';
   return 'perde';
 }
 
-function corStatusMapa(status) {
-  switch (status) {
-    case 'lidera':
-      return COR_MAPA_LIDERA;
-    case 'empate':
-      return COR_MAPA_EMPATE;
-    case 'perde':
-      return COR_MAPA_PERDE;
-    default:
-      return COR_MAPA_SEM_DADOS;
-  }
-}
-
-// Texto branco não tem contraste suficiente (WCAG AA, mínimo 4.5:1) sobre o
-// amarelo de "empate" (2.15:1) nem sobre o cinza de "sem dados" (1.48:1) —
-// medido contra a cor de fundo real de cada status. Nesses dois casos usa
-// texto escuro; nos demais, o fundo já é escuro o bastante pro branco.
-const COR_TEXTO_ESCURO_MAPA = '#0f172a';
-
-function corTextoMapa(status) {
-  return status === 'empate' || status === 'sem_dados' ? COR_TEXTO_ESCURO_MAPA : '#fff';
-}
-
-export {
-  corFoco,
-  corItemIntencaoVoto,
-  statusFocoPorBairro,
-  corStatusMapa,
-  corTextoMapa,
-  COR_INDECISO,
-  COR_BRANCO_NULO,
-};
+export { corFoco, corItemIntencaoVoto, statusFocoPorBairro, MARGEM_EMPATE };

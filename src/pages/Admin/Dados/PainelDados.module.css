@@ -71,7 +71,7 @@
 }
 
 .sucesso {
-  color: var(--cor-foco-federal);
+  color: var(--cor-sucesso-texto);
   font-weight: 600;
   font-size: 14px;
   margin: 0;

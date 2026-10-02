@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { calcularResumo, calcularResumoAgregado } from './agregacoes.js';
+import {
+  calcularDesempenhoPorBairro,
+  calcularEvolucao,
+  calcularResumo,
+  calcularResumoAgregado,
+} from './agregacoes.js';
 
 describe('calcularResumoAgregado', () => {
   it('deriva casas visitadas e bairros cobertos das residencias, sem depender da lista de entrevistados', () => {
@@ -36,5 +41,56 @@ describe('calcularResumoAgregado', () => {
     const resumoNovo = calcularResumoAgregado(residencias, respostas.length);
 
     expect(resumoNovo).toEqual(resumoAntigo);
+  });
+});
+
+const FOCO_FED = { id: 'f1', isFoco: true };
+const OUTRO_FED = { id: 'f2', isFoco: false };
+const FOCO_EST = { id: 'e1', isFoco: true };
+
+function resposta(bairro, votoFederal, votoEstadual = 'indeciso', dataColeta = null) {
+  return { bairro, votoFederal, votoEstadual, dataColeta };
+}
+
+describe('calcularDesempenhoPorBairro', () => {
+  it('traz o numero de entrevistas, o percentual e o status do foco em cada cargo', () => {
+    const respostas = [
+      ...Array.from({ length: 4 }, () => resposta('Centro', 'f1', 'e1')),
+      resposta('Centro', 'f2', 'e1'),
+      resposta('Iracy', 'f2'),
+    ];
+
+    const [centro, iracy] = calcularDesempenhoPorBairro(respostas, [FOCO_FED, OUTRO_FED], [FOCO_EST]);
+
+    expect(centro).toMatchObject({ bairro: 'Centro', entrevistas: 5, amostraPequena: false });
+    expect(centro.federal).toEqual({ percentual: 80, status: 'lidera' });
+    expect(centro.estadual).toEqual({ percentual: 100, status: 'lidera' });
+    expect(iracy).toMatchObject({ bairro: 'Iracy', entrevistas: 1, amostraPequena: true });
+    expect(iracy.federal).toEqual({ percentual: 0, status: 'perde' });
+    expect(iracy.estadual).toEqual({ percentual: 0, status: 'sem_dados' });
+  });
+
+  it('ordena pelos bairros com mais entrevistas', () => {
+    const respostas = [resposta('Aleixo', 'f1'), resposta('Zona', 'f1'), resposta('Zona', 'f1')];
+
+    expect(calcularDesempenhoPorBairro(respostas, [FOCO_FED], []).map((l) => l.bairro)).toEqual(['Zona', 'Aleixo']);
+  });
+
+  it('devolve null no cargo sem candidato foco', () => {
+    const [linha] = calcularDesempenhoPorBairro([resposta('Centro', 'f2')], [OUTRO_FED], []);
+
+    expect(linha.federal).toBeNull();
+    expect(linha.estadual).toBeNull();
+  });
+});
+
+describe('calcularEvolucao', () => {
+  it('deixa vazio (null) o dia sem coleta, em vez de 0%', () => {
+    const hoje = new Date();
+    const pontos = calcularEvolucao([resposta('Centro', 'f1', 'e1', hoje.getTime())], FOCO_FED, FOCO_EST, 7);
+
+    expect(pontos).toHaveLength(7);
+    expect(pontos[6]).toMatchObject({ entrevistas: 1, percentualFederal: 100, percentualEstadual: 100 });
+    expect(pontos[0]).toMatchObject({ entrevistas: 0, percentualFederal: null, percentualEstadual: null });
   });
 });
