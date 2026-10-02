@@ -59,6 +59,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--cor-sidebar-texto);
+  text-decoration: none;
   cursor: pointer;
   text-align: left;
   transition: background-color 200ms var(--easing-md3);

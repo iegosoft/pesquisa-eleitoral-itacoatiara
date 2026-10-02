@@ -17,7 +17,7 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/admin"
+        path="/admin/:secao?"
         element={
           <RotaProtegida roleExigida="admin">
             <PaginaAdmin />
