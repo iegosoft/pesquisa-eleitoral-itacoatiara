@@ -15,10 +15,22 @@ const OPCOES_FAIXA_IDADE = [
   { valor: '60+', rotulo: '60+' },
 ];
 
-function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual, aoAtualizar }) {
+function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual, aoAtualizar, aoRemover }) {
   return (
     <section className={styles.cartao}>
-      <h2>Morador {numero}</h2>
+      <div className={styles.cabecalho}>
+        <h2>Morador {numero}</h2>
+        {aoRemover && (
+          <button
+            type="button"
+            className={styles.botaoRemover}
+            onClick={aoRemover}
+            aria-label={`Remover morador ${numero}`}
+          >
+            Remover
+          </button>
+        )}
+      </div>
 
       <fieldset className={styles.campoFieldset}>
         <legend className={styles.rotulo}>Sexo</legend>

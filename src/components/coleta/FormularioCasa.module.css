@@ -68,6 +68,33 @@
   border-top: 1px solid var(--cor-borda);
 }
 
+.dica {
+  margin: 0;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+.pendencias {
+  padding: 12px 14px;
+  border-radius: var(--raio-borda-sm);
+  border: 1px solid var(--cor-erro-borda);
+  background: var(--cor-erro-fundo-suave);
+  color: var(--cor-erro-texto);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.pendencias p {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.pendencias ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .botaoPrimario {
   composes: botaoPreenchido from '../../styles/md3.module.css';
   height: 52px;
