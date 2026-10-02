@@ -89,12 +89,8 @@ function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span className={styles.logoMarca}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-            <path d="M5 19V13" />
-            <path d="M12 19V6" />
-            <path d="M19 19V10" />
-          </svg>
+        <span className={styles.logoMarca} aria-hidden="true">
+          <img src="/icons/icon-192.png" alt="" />
         </span>
         <span className={styles.logoTexto}>
           Pesquisa

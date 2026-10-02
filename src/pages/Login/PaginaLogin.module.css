@@ -27,19 +27,21 @@
 }
 
 .logoMarca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: var(--raio-borda-lg);
-  background: var(--gradiente-marca);
-  color: #fff;
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 19%;
 }
 
-.logoMarca svg {
-  width: 18px;
-  height: 18px;
+/* A logo oficial (public/icons) tem uma margem clara em volta do quadrado
+   azul-marinho: a moldura com o mesmo raio recorta essa margem. */
+.logoMarca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.15);
 }
 
 .nomeSistema {

@@ -50,11 +50,7 @@ function PaginaLogin() {
       <form className={styles.cartao} onSubmit={aoEnviar}>
         <div className={styles.marca}>
           <span className={styles.logoMarca} aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-              <path d="M5 19V13" />
-              <path d="M12 19V6" />
-              <path d="M19 19V10" />
-            </svg>
+            <img src="/icons/icon-192.png" alt="" />
           </span>
           <span className={styles.nomeSistema}>Pesquisa Eleitoral · Itacoatiara</span>
         </div>

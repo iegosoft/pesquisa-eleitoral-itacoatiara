@@ -21,26 +21,27 @@
 }
 
 .logoMarca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--raio-borda-lg);
-  background: var(--gradiente-marca);
-  color: #fff;
+  display: block;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 19%;
 }
 
-.logoMarca svg {
-  width: 20px;
-  height: 20px;
+/* A logo oficial (public/icons) tem uma margem clara em volta do quadrado
+   azul-marinho: a moldura com o mesmo raio recorta essa margem. */
+.logoMarca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.15);
 }
 
 .logoTexto {
   font-family: var(--fonte-destaque);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.2;
   color: var(--cor-sidebar-texto);
 }
@@ -61,7 +62,7 @@
   border-radius: var(--raio-borda-lg);
   background: none;
   font-family: var(--fonte-base);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--cor-sidebar-texto);
   text-decoration: none;
@@ -114,9 +115,9 @@
 
 .atalho {
   display: block;
-  padding: 6px 10px;
+  padding: 7px 10px;
   border-radius: var(--raio-borda-sm);
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--cor-sidebar-icone);
   text-decoration: none;
   transition:
