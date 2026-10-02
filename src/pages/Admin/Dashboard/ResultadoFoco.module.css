@@ -125,11 +125,16 @@
   }
 }
 
+/* Tamanho explícito: uma <img> não estica só com `inset`; com largura
+   automática ela aparecia no tamanho original do arquivo. */
 .anel .fotoAnel {
   position: absolute;
-  inset: 18px;
-  width: auto;
-  height: auto;
+  top: 18px;
+  left: 18px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
   font-size: 26px;
 }
 
