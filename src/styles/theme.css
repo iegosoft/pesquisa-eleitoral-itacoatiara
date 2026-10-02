@@ -210,3 +210,17 @@
 
   color: var(--cor-texto);
 }
+
+/* A lista aberta de um <select> é desenhada pelo sistema operacional, que no
+   Windows ignora o fundo do campo: sem isso, as opções saíam com fundo claro
+   e texto claro (herdado do tema), ilegíveis. */
+[data-tema='escuro'] select,
+[data-tema='escuro'] option,
+[data-tema='escuro'] input {
+  color-scheme: dark;
+}
+
+[data-tema='escuro'] option {
+  background-color: var(--cor-superficie-solida);
+  color: var(--cor-texto);
+}
