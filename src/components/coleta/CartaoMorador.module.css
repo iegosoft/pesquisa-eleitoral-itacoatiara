@@ -6,6 +6,22 @@
   border-top: 1px solid var(--cor-borda);
 }
 
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.botaoRemover {
+  composes: botaoContornado from '../../styles/md3.module.css';
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: var(--cor-erro);
+  border-color: var(--cor-erro-borda);
+}
+
 .cartao h2 {
   margin: 0;
   font-size: 16px;
