@@ -65,10 +65,12 @@ com foto ou iniciais, como na "colinha" de papel do pesquisador.
   (`FormularioCasa.jsx:64-66`). A única saída é recarregar a página e perder a
   casa inteira
   ([`coleta-sem-remover.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-sem-remover.mp4)).
-- **P7** — Uma conta autenticada sem perfil cadastrado fica presa na tela de
-  login com a mensagem "Contate o administrador", sem nenhum botão para sair e
-  tentar outra conta (`PaginaLogin.jsx:20-31`,
+- **P7** — Quando uma conta sem perfil cadastrado entra, a tela de login mostra
+  "Contate o administrador", mas a sessão dessa conta continua ativa
+  (`PaginaLogin.jsx:20-31`,
   [`login-codigo-sem-role.png`](../evidencias/redesign/antes/tp4-redesign-antes-login-codigo-sem-role.png)).
+  Toda vez que o app é reaberto, o mesmo erro volta sozinho, e nada indica que
+  é possível entrar com outra conta.
 
 ### H4 — Consistência e padrões
 
@@ -161,7 +163,7 @@ explica o efeito ("destacado nos gráficos").
 | P5 | Percentuais sem base amostral no Dashboard | H2 | 3 | R5 |
 | P4 | Intervalo de datas invertido aceito sem aviso | H5, H9 | 2 | R4 |
 | P6 | Dashboard sem hierarquia, com blocos redundantes | H8 | 2 | R5 |
-| P7 | Conta sem perfil presa na tela de login | H3, H9 | 2 | R6 |
+| P7 | Sessão de conta sem perfil continua ativa, e o erro volta a cada abertura | H3, H9 | 2 | R6 |
 | P8 | Critério do mapa de calor não explicado | H10 | 1 | R5 |
 | P9 | Termo técnico `casa_id` no texto de instrução | H2 | 1 | não tratado |
 
@@ -179,7 +181,8 @@ explica o efeito ("destacado nos gráficos").
   visualizações redundantes do foco por bairro, mostrar a base de entrevistados
   junto dos percentuais, explicar o critério do mapa e renovar a identidade
   visual do painel.
-- **R6 — Botão "Sair" na tela de login** quando a conta não tem perfil.
+- **R6 — Encerrar a sessão da conta sem perfil** e orientar a entrar com outra
+  conta.
 
 O problema P9 (severidade 1, cosmético) foi registrado, mas ficou fora do
 escopo das melhorias.

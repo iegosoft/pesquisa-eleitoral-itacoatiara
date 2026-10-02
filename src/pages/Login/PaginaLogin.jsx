@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { entrar } from '../../services/auth.js';
+import { entrar, sair } from '../../services/auth.js';
 import { useAuth } from '../../contexts/useAuth.js';
 import styles from './PaginaLogin.module.css';
 
@@ -24,10 +24,13 @@ function PaginaLogin() {
       return;
     }
     // Autenticado no Firebase Auth mas sem papel cadastrado em usuarios/{uid}
-    // (ou documento sem o campo role): sem isso, o usuario ficava preso no
-    // botao "Entrando..." pra sempre, sem nenhuma mensagem de erro.
-    setErro('Sua conta não tem um perfil cadastrado. Contate o administrador.');
+    // (ou documento sem o campo role). A sessão é encerrada para não voltar
+    // ao mesmo erro toda vez que o app for reaberto.
+    setErro(
+      'Sua conta não tem um perfil cadastrado no sistema. Peça ao administrador para liberar o acesso ou entre com outra conta.',
+    );
     setEnviando(false);
+    sair();
   }, [carregando, usuarioAuth, role, navigate]);
 
   async function aoEnviar(evento) {
