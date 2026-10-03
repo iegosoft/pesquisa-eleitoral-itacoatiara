@@ -24,7 +24,7 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
 
   return (
     <div className={`${styles.cartao} ${styles.graficoEvolucao}`}>
-      <div className={styles.cabecalhoComAcoes}>
+      <div className={`${styles.cabecalhoComAcoes} ${styles.cabecalhoPeriodo}`}>
         <span className={styles.rotuloPeriodo}>Período:</span>
         <div className={styles.seletorPeriodo} role="group" aria-label="Período">
           {PERIODOS.map((dias) => (
@@ -43,7 +43,10 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
 
       {temColetaNoPeriodo ? (
         <>
-          <p className={styles.subtitulo}>Percentual do foco em cada dia com coleta. Dias sem coleta ficam em branco.</p>
+          <p className={styles.subtitulo}>
+            Cada ponto é um dia com coleta. Dias sem coleta ficam em branco, sem linha ligando, para não
+            sugerir uma tendência que não foi medida.
+          </p>
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={dados} margin={{ left: 8, right: 8, top: 8 }}>
               <defs>
@@ -82,7 +85,7 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
                   type="monotone"
                   dataKey={chave}
                   name={nome}
-                  connectNulls
+                  connectNulls={false}
                   stroke={corFoco(cargo)}
                   fill={`url(#degrade-evolucao-${cargo})`}
                   strokeWidth={2.5}

@@ -23,6 +23,10 @@
   margin: 0;
 }
 
+.cabecalhoPeriodo {
+  justify-content: flex-start;
+}
+
 .rotuloPeriodo {
   font-size: 14px;
   color: var(--cor-texto-suave);
