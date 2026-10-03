@@ -1,5 +1,6 @@
 import { format, isToday, isYesterday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { statusFoco } from './coresGraficos.js';
 
 function aplicarFiltros(respostas, filtros) {
   return respostas.filter((resposta) => {
@@ -72,8 +73,12 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   const itensCandidatos = candidatosCargo.map((candidato) => ({
     chave: candidato.id,
     rotulo: candidato.nome,
+    partido: candidato.partido ?? '',
+    fotoUrl: candidato.fotoUrl ?? '',
+    cargo: candidato.cargo,
     isFoco: candidato.isFoco,
     tipo: 'candidato',
+    quantidade: contagem[candidato.id] ?? 0,
     percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
   }));
 
@@ -83,6 +88,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
       rotulo: 'Indeciso',
       isFoco: false,
       tipo: 'indeciso',
+      quantidade: contagem.indeciso ?? 0,
       percentual: total ? ((contagem.indeciso ?? 0) / total) * 100 : 0,
     },
     {
@@ -90,6 +96,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
       rotulo: 'Branco/Nulo',
       isFoco: false,
       tipo: 'branco_nulo',
+      quantidade: contagem.branco_nulo ?? 0,
       percentual: total ? ((contagem.branco_nulo ?? 0) / total) * 100 : 0,
     },
   ];
@@ -97,40 +104,98 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   return [...itensCandidatos, ...itensExtras].sort((a, b) => b.percentual - a.percentual);
 }
 
-function calcularPorBairro(respostas, focoFederal, focoEstadual) {
-  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))].sort();
+// Resposta direta à pergunta do painel ("como está o nosso candidato?") a
+// partir dos itens de calcularIntencaoVoto: posição entre os candidatos,
+// status e a diferença em pontos para o adversário que importa (o segundo
+// colocado, se o foco lidera; o líder, se não lidera).
+function calcularResultadoFoco(itens) {
+  const candidatos = itens.filter((item) => item.tipo === 'candidato');
+  const foco = candidatos.find((item) => item.isFoco);
+  if (!foco) return null;
 
-  return bairros.map((bairro) => {
-    const doBairro = respostas.filter((resposta) => resposta.bairro === bairro);
-    const total = doBairro.length;
-    const percentualFederal =
-      focoFederal && total
-        ? (doBairro.filter((resposta) => resposta.votoFederal === focoFederal.id).length / total) * 100
-        : 0;
-    const percentualEstadual =
-      focoEstadual && total
-        ? (doBairro.filter((resposta) => resposta.votoEstadual === focoEstadual.id).length / total) * 100
-        : 0;
-    return { bairro, percentualFederal, percentualEstadual };
+  const outros = candidatos.filter((item) => !item.isFoco);
+  const melhorOutro = outros.reduce((melhor, item) => (!melhor || item.percentual > melhor.percentual ? item : melhor), null);
+  const maiorPercentual = Math.max(0, ...candidatos.map((item) => item.percentual));
+  const empatadoNoTopo = Boolean(melhorOutro) && maiorPercentual > 0 && melhorOutro.percentual === foco.percentual;
+
+  return {
+    nome: foco.rotulo,
+    partido: foco.partido,
+    fotoUrl: foco.fotoUrl,
+    cargo: foco.cargo,
+    percentual: foco.percentual,
+    posicao: 1 + candidatos.filter((item) => item.percentual > foco.percentual).length,
+    totalCandidatos: candidatos.length,
+    status: empatadoNoTopo ? 'empate' : statusFoco(foco.percentual, maiorPercentual),
+    adversario: melhorOutro?.rotulo ?? null,
+    diferenca: melhorOutro ? foco.percentual - melhorOutro.percentual : null,
+  };
+}
+
+const OPCOES_SEXO = [
+  { chave: 'feminino', rotulo: 'Feminino' },
+  { chave: 'masculino', rotulo: 'Masculino' },
+];
+const OPCOES_FAIXA_IDADE = [
+  { chave: '16-24', rotulo: '16 a 24 anos' },
+  { chave: '25-34', rotulo: '25 a 34 anos' },
+  { chave: '35-44', rotulo: '35 a 44 anos' },
+  { chave: '45-59', rotulo: '45 a 59 anos' },
+  { chave: '60+', rotulo: '60 anos ou mais' },
+];
+
+function distribuicao(respostas, campo, opcoes) {
+  const total = respostas.length;
+  return opcoes.map(({ chave, rotulo }) => {
+    const quantidade = respostas.filter((resposta) => resposta[campo] === chave).length;
+    return { chave, rotulo, quantidade, percentual: total ? (quantidade / total) * 100 : 0 };
   });
 }
 
-function calcularMapaCalor(respostas, candidatosCargo, campoVoto) {
-  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))].sort();
+// Quem foi entrevistado: sem isso não dá para saber se um resultado reflete
+// a cidade ou só um grupo (por exemplo, só homens acima de 60 anos).
+function calcularPerfil(respostas) {
+  return {
+    total: respostas.length,
+    sexo: distribuicao(respostas, 'sexo', OPCOES_SEXO),
+    faixaIdade: distribuicao(respostas, 'faixaIdade', OPCOES_FAIXA_IDADE),
+  };
+}
 
-  const linhas = candidatosCargo.map((candidato) => {
-    const valoresPorBairro = bairros.map((bairro) => {
+// Abaixo dessa quantidade de entrevistas, o percentual de um bairro oscila
+// demais (1 entrevista vira "100%") e o painel sinaliza "amostra pequena".
+const AMOSTRA_MINIMA_BAIRRO = 5;
+
+function desempenhoNoCargo(doBairro, candidatosCargo, campoVoto) {
+  const foco = candidatosCargo.find((candidato) => candidato.isFoco);
+  if (!foco) return null;
+
+  const total = doBairro.length;
+  const percentualDe = (id) => (doBairro.filter((resposta) => resposta[campoVoto] === id).length / total) * 100;
+  const percentual = percentualDe(foco.id);
+  const maiorPercentual = Math.max(0, ...candidatosCargo.map((candidato) => percentualDe(candidato.id)));
+
+  return { percentual, status: statusFoco(percentual, maiorPercentual) };
+}
+
+// Uma linha por bairro, com o número de entrevistas e, para cada cargo, o
+// percentual do candidato foco e o status dele (lidera/empate/perde) em
+// relação aos concorrentes. Bairros com mais entrevistas vêm primeiro.
+function calcularDesempenhoPorBairro(respostas, candidatosFederal, candidatosEstadual) {
+  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))];
+
+  return bairros
+    .map((bairro) => {
       const doBairro = respostas.filter((resposta) => resposta.bairro === bairro);
-      const total = doBairro.length;
-      const percentual = total
-        ? (doBairro.filter((resposta) => resposta[campoVoto] === candidato.id).length / total) * 100
-        : 0;
-      return { bairro, percentual };
-    });
-    return { candidato, valoresPorBairro };
-  });
-
-  return { bairros, linhas };
+      return {
+        bairro,
+        entrevistas: doBairro.length,
+        amostraPequena: doBairro.length < AMOSTRA_MINIMA_BAIRRO,
+        federal: desempenhoNoCargo(doBairro, candidatosFederal, 'votoFederal'),
+        estadual: desempenhoNoCargo(doBairro, candidatosEstadual, 'votoEstadual'),
+      };
+    })
+    .sort((a, b) => b.entrevistas - a.entrevistas || a.bairro.localeCompare(b.bairro, 'pt-BR'));
 }
 
 function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
@@ -149,17 +214,20 @@ function calcularEvolucao(respostas, focoFederal, focoEstadual, dias) {
       return dataResposta.getTime() === dia.getTime();
     });
 
+    // Dia sem coleta fica sem valor (null), não 0%: senão o gráfico
+    // desenharia uma queda que não aconteceu.
     const total = doDia.length;
     pontos.push({
       data: dia.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
+      entrevistas: total,
       percentualFederal:
         focoFederal && total
           ? (doDia.filter((resposta) => resposta.votoFederal === focoFederal.id).length / total) * 100
-          : 0,
+          : null,
       percentualEstadual:
         focoEstadual && total
           ? (doDia.filter((resposta) => resposta.votoEstadual === focoEstadual.id).length / total) * 100
-          : 0,
+          : null,
     });
   }
 
@@ -172,7 +240,9 @@ export {
   calcularResumo,
   calcularResumoAgregado,
   calcularIntencaoVoto,
-  calcularPorBairro,
-  calcularMapaCalor,
+  calcularDesempenhoPorBairro,
+  calcularResultadoFoco,
+  calcularPerfil,
+  AMOSTRA_MINIMA_BAIRRO,
   calcularEvolucao,
 };

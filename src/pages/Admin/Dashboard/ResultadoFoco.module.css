@@ -1,0 +1,169 @@
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* A faixa no topo e o anel carregam o status (verde/âmbar/vermelho) para a
+   leitura de relance; o selo repete o status com ícone e texto. */
+.cartao {
+  composes: cartao from '../../../styles/md3.module.css';
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 22px 20px;
+}
+
+.cartao::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--cor-faixa-status);
+}
+
+.lidera {
+  --cor-faixa-status: var(--cor-barra-lidera);
+}
+
+.empate {
+  --cor-faixa-status: var(--cor-barra-empate);
+}
+
+.perde {
+  --cor-faixa-status: var(--cor-barra-perde);
+}
+
+.sem_dados {
+  --cor-faixa-status: var(--cor-status-sem-dados);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cargo {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.corpo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.anel {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  flex-shrink: 0;
+}
+
+.anel svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.anelTrilho {
+  fill: none;
+  stroke: var(--cor-superficie-baixa);
+  stroke-width: 9;
+}
+
+.anelValor {
+  fill: none;
+  stroke: var(--cor-faixa-status);
+  stroke-width: 9;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px var(--cor-faixa-status));
+  animation: preencher 900ms var(--easing-md3) both;
+}
+
+@keyframes preencher {
+  from {
+    stroke-dasharray: 0 400;
+  }
+}
+
+/* Tamanho explícito: uma <img> não estica só com `inset`; com largura
+   automática ela aparecia no tamanho original do arquivo. */
+.anel .fotoAnel {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  font-size: 26px;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.manchete {
+  margin: 0;
+  font-family: var(--fonte-base);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--cor-texto);
+  text-wrap: balance;
+}
+
+.linhaNumero {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+}
+
+.percentual {
+  font-family: var(--fonte-base);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--cor-faixa-status);
+  font-variant-numeric: tabular-nums;
+}
+
+.posicao {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.frase {
+  margin: 0;
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+
+@media (max-width: 480px) {
+  .corpo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anelValor {
+    animation: none;
+  }
+}

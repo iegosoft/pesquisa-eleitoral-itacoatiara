@@ -3,9 +3,14 @@
   flex-direction: column;
   width: 248px;
   flex-shrink: 0;
-  min-height: 100svh;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow-y: auto;
   padding: 20px 14px calc(20px + env(safe-area-inset-bottom));
   background: var(--cor-sidebar);
+  border-right: 1px solid var(--cor-borda);
+  backdrop-filter: blur(16px);
 }
 
 .logo {
@@ -16,26 +21,27 @@
 }
 
 .logoMarca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--raio-borda-lg);
-  background: var(--gradiente-marca);
-  color: #fff;
+  display: block;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 19%;
 }
 
-.logoMarca svg {
-  width: 20px;
-  height: 20px;
+/* A logo oficial (public/icons) tem uma margem clara em volta do quadrado
+   azul-marinho: a moldura com o mesmo raio recorta essa margem. */
+.logoMarca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.15);
 }
 
 .logoTexto {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.2;
   color: var(--cor-sidebar-texto);
 }
@@ -56,7 +62,7 @@
   border-radius: var(--raio-borda-lg);
   background: none;
   font-family: var(--fonte-base);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--cor-sidebar-texto);
   text-decoration: none;
@@ -95,4 +101,36 @@
 .botaoSair:hover {
   background: rgba(220, 38, 38, 0.16);
   color: #fca5a5;
+}
+
+.atalhos {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 6px 0 10px 22px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid var(--cor-borda);
+  list-style: none;
+}
+
+.atalho {
+  display: block;
+  padding: 7px 10px;
+  border-radius: var(--raio-borda-sm);
+  font-size: 14.5px;
+  color: var(--cor-sidebar-icone);
+  text-decoration: none;
+  transition:
+    background-color 200ms var(--easing-md3),
+    color 200ms var(--easing-md3);
+}
+
+.atalho:hover {
+  background: var(--cor-sidebar-hover);
+  color: var(--cor-sidebar-texto);
+}
+
+.atalhoAtivo {
+  color: var(--cor-selecao-texto);
+  font-weight: 600;
 }

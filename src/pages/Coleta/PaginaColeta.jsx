@@ -46,7 +46,7 @@ function PaginaColeta() {
   }
 
   return (
-    <>
+    <div className={styles.tela} data-tema="escuro">
       <BarraTopo />
       <main className={styles.pagina}>
         <div className={styles.cartaoPrincipal}>
@@ -60,7 +60,10 @@ function PaginaColeta() {
             </p>
           )}
 
-          <h1>Nova casa</h1>
+          <div className={styles.titulo}>
+            <span className={styles.chapeu}>Coleta em campo</span>
+            <h1>Nova casa</h1>
+          </div>
 
           <FormularioCasa
             bairros={bairros}
@@ -70,7 +73,7 @@ function PaginaColeta() {
           />
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

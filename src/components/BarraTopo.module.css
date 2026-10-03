@@ -1,30 +1,71 @@
+/* Mesma superfície, logo e tipografia da barra lateral do painel, para o
+   pesquisador reconhecer o mesmo sistema. */
 .barra {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 12px;
-  padding: calc(12px + env(safe-area-inset-top)) 20px 12px;
-  background: var(--gradiente-marca);
-  box-shadow: var(--sombra-elevada);
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background: var(--cor-sidebar);
+  border-bottom: 1px solid var(--cor-borda);
+  backdrop-filter: blur(16px);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.logoMarca {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 19%;
+}
+
+/* A logo oficial tem uma margem clara em volta do quadrado azul-marinho: a
+   moldura com o mesmo raio recorta essa margem. */
+.logoMarca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.15);
+}
+
+.logoTexto {
+  font-family: var(--fonte-base);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cor-sidebar-texto);
+  white-space: nowrap;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .nome {
+  overflow: hidden;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--cor-texto-suave);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .botaoSair {
   composes: botaoContornado from '../styles/md3.module.css';
   height: 36px;
-  padding: 0 18px;
+  padding: 0 16px;
   font-size: 13px;
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #fff;
-}
-
-.botaoSair:hover:not(:disabled) {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
 }

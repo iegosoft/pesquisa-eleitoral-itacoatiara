@@ -46,8 +46,14 @@ function PaginaLogin() {
   }
 
   return (
-    <main className={styles.pagina}>
+    <main className={styles.pagina} data-tema="escuro">
       <form className={styles.cartao} onSubmit={aoEnviar}>
+        <div className={styles.marca}>
+          <span className={styles.logoMarca} aria-hidden="true">
+            <img src="/icons/icon-192.png" alt="" />
+          </span>
+          <span className={styles.nomeSistema}>Pesquisa Eleitoral · Itacoatiara</span>
+        </div>
         <h1>Entrar</h1>
         <label className={styles.campo}>
           E-mail

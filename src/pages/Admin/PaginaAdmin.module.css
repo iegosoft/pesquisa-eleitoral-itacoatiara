@@ -1,6 +1,9 @@
 .shell {
   display: flex;
   min-height: 100svh;
+  background: var(--textura-grao), var(--cor-fundo-painel);
+  background-attachment: fixed;
+  color: var(--cor-texto);
 }
 
 .areaConteudo {

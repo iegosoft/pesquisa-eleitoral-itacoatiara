@@ -3,20 +3,43 @@ import { useDadosPainel } from './useDadosPainel.js';
 import {
   aplicarFiltros,
   calcularEvolucao,
+  calcularDesempenhoPorBairro,
   calcularIntencaoVoto,
-  calcularMapaCalor,
-  calcularPorBairro,
   calcularResumo,
   calcularResumoAgregado,
+  calcularResultadoFoco,
+  calcularPerfil,
   intervaloDeDatasInvertido,
 } from './agregacoes.js';
 import Filtros from './Filtros.jsx';
 import CardsResumo from './CardsResumo.jsx';
-import GraficoIntencaoVoto from './GraficoIntencaoVoto.jsx';
-import GraficoPorBairro from './GraficoPorBairro.jsx';
-import MapaCalor from './MapaCalor.jsx';
+import ResultadoFoco from './ResultadoFoco.jsx';
+import RankingIntencao from './RankingIntencao.jsx';
+import PerfilAmostra from './PerfilAmostra.jsx';
+import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
+import { SECOES_DASHBOARD } from './secoesDashboard.js';
 import styles from './PainelDashboard.module.css';
+
+// Título grande + uma linha dizendo que pergunta a seção responde, para o
+// usuário saber o que está vendo sem precisar ler os gráficos.
+function Secao({ id, complemento, children }) {
+  const { titulo, descricao } = SECOES_DASHBOARD.find((secao) => secao.id === id);
+  return (
+    <section id={id} className={styles.secao} aria-labelledby={`titulo-${id}`}>
+      <header className={styles.cabecalhoSecao}>
+        <div>
+          <h2 id={`titulo-${id}`} className={styles.tituloSecao}>
+            {titulo}
+          </h2>
+          <p className={styles.descricaoSecao}>{descricao}</p>
+        </div>
+        {complemento && <span className={styles.complemento}>{complemento}</span>}
+      </header>
+      {children}
+    </section>
+  );
+}
 
 function filtrosIniciais() {
   return { bairro: 'todos', sexo: 'todos', faixaIdade: 'todas', dataInicio: '', dataFim: '' };
@@ -82,18 +105,13 @@ function PainelDashboard() {
     () => calcularIntencaoVoto(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
     [respostasFiltradas, candidatosEstadual],
   );
-  const dadosPorBairro = useMemo(
-    () => calcularPorBairro(respostasFiltradas, focoFederal, focoEstadual),
-    [respostasFiltradas, focoFederal, focoEstadual],
+  const resultadoFederal = useMemo(() => calcularResultadoFoco(itensFederal), [itensFederal]);
+  const resultadoEstadual = useMemo(() => calcularResultadoFoco(itensEstadual), [itensEstadual]);
+  const desempenhoPorBairro = useMemo(
+    () => calcularDesempenhoPorBairro(respostasFiltradas, candidatosFederal, candidatosEstadual),
+    [respostasFiltradas, candidatosFederal, candidatosEstadual],
   );
-  const mapaFederal = useMemo(
-    () => calcularMapaCalor(respostasFiltradas, candidatosFederal, 'votoFederal'),
-    [respostasFiltradas, candidatosFederal],
-  );
-  const mapaEstadual = useMemo(
-    () => calcularMapaCalor(respostasFiltradas, candidatosEstadual, 'votoEstadual'),
-    [respostasFiltradas, candidatosEstadual],
-  );
+  const perfil = useMemo(() => calcularPerfil(respostasFiltradas), [respostasFiltradas]);
   const evolucao = useMemo(
     () => calcularEvolucao(respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao),
     [respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao],
@@ -109,22 +127,52 @@ function PainelDashboard() {
         bairrosDisponiveis={bairrosDisponiveis}
       />
 
-      <CardsResumo resumo={resumo} />
+      <Secao
+        id="resultado"
+        complemento={`Base: ${respostasFiltradas.length.toLocaleString('pt-BR')} ${
+          respostasFiltradas.length === 1 ? 'entrevistado' : 'entrevistados'
+        }`}
+      >
+        <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} />
+      </Secao>
 
-      <div className={styles.grade}>
-        <GraficoIntencaoVoto titulo="Deputado federal" itens={itensFederal} cargo="federal" />
-        <GraficoIntencaoVoto titulo="Deputado estadual" itens={itensEstadual} cargo="estadual" />
-        <GraficoEvolucao dados={evolucao} periodo={periodoEvolucao} aoAlterarPeriodo={setPeriodoEvolucao} />
-      </div>
+      <Secao id="coleta">
+        <CardsResumo resumo={resumo} />
+      </Secao>
 
-      <div className={styles.secao}>
-        <GraficoPorBairro dados={dadosPorBairro} />
-      </div>
+      <Secao id="intencao">
+        <div className={styles.gradeLarga}>
+          <RankingIntencao
+            titulo="Deputado federal"
+            itens={itensFederal}
+            statusFoco={resultadoFederal?.status}
+            base={respostasFiltradas.length}
+          />
+          <RankingIntencao
+            titulo="Deputado estadual"
+            itens={itensEstadual}
+            statusFoco={resultadoEstadual?.status}
+            base={respostasFiltradas.length}
+          />
+        </div>
+      </Secao>
 
-      <div className={styles.grade}>
-        <MapaCalor titulo="Status do foco por bairro — Federal" dados={mapaFederal} />
-        <MapaCalor titulo="Status do foco por bairro — Estadual" dados={mapaEstadual} />
-      </div>
+      <Secao id="territorio">
+        <DesempenhoPorBairro dados={desempenhoPorBairro} />
+      </Secao>
+
+      <Secao id="perfil">
+        <PerfilAmostra perfil={perfil} />
+      </Secao>
+
+      <Secao id="tendencia">
+        <GraficoEvolucao
+          dados={evolucao}
+          periodo={periodoEvolucao}
+          aoAlterarPeriodo={setPeriodoEvolucao}
+          ultimaColeta={resumo.ultimaColeta}
+        />
+      </Secao>
     </div>
   );
 }

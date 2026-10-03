@@ -14,9 +14,11 @@
 }
 
 .grupo h3 {
-  margin: 0 0 8px;
-  font-size: 15px;
-  color: var(--cor-texto-suave);
+  margin: 0 0 10px;
+  font-family: var(--fonte-base);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--cor-texto);
 }
 
 .vazio {
@@ -28,7 +30,7 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
   padding: 10px 14px;
   margin-bottom: 8px;
@@ -55,12 +57,22 @@
 }
 
 .nome {
-  font-weight: 600;
+  font-family: var(--fonte-base);
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
   color: var(--cor-texto);
 }
 
+.item .foto {
+  width: 56px;
+  height: 56px;
+}
+
 .partido {
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--cor-texto-suave);
 }
 

@@ -15,8 +15,9 @@
 
 .cartao h3 {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--fonte-base);
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .descricao {
@@ -71,7 +72,7 @@
 }
 
 .sucesso {
-  color: var(--cor-foco-federal);
+  color: var(--cor-sucesso-texto);
   font-weight: 600;
   font-size: 14px;
   margin: 0;

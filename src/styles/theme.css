@@ -101,9 +101,148 @@
   --sombra-repouso: 0 1px 2px rgba(15, 23, 42, 0.04);
   --sombra-elevada: 0 8px 24px rgba(15, 23, 42, 0.04);
 
+  /* Cores das marcas de gráfico (barra, linha, área). No tema claro são as
+     próprias cores de identidade; no escuro mudam de tom para manter
+     contraste e separação para daltonismo. */
+  --cor-serie-federal: var(--cor-foco-federal);
+  --cor-serie-estadual: var(--cor-foco-estadual);
+
+  /* Texto da cor de seleção sobre a superfície (hover de botão contornado,
+     período ativo). */
+  --cor-selecao-texto: var(--cor-selecao);
+  /* Superfície opaca para o que flutua sobre os gráficos (tooltip). */
+  --cor-superficie-solida: #ffffff;
+  /* Fundo de botão destrutivo, com texto branco. */
+  --cor-perigo-fundo: #dc2626;
+  --cor-fundo-painel: var(--cor-fundo);
+  /* Texto sobre um fundo da cor do texto (selo "FOCO"). */
+  --cor-texto-inverso: #ffffff;
+  --gradiente-numero: linear-gradient(90deg, var(--cor-texto), var(--cor-texto));
+
+  /* Status do candidato foco por bairro (texto e fundo do selo). */
+  --cor-status-lidera: #166534;
+  --cor-status-lidera-fundo: #dcfce7;
+  --cor-status-empate: #92400e;
+  --cor-status-empate-fundo: #fef3c7;
+  --cor-status-perde: #991b1b;
+  --cor-status-perde-fundo: #fee2e2;
+  --cor-status-sem-dados: #475569;
+  --cor-status-sem-dados-fundo: #f1f5f9;
+
+  /* Barras do ranking de intenção: o candidato foco leva a cor do próprio
+     resultado (lidera/empata/perde); concorrentes em cinza sólido. */
+  --cor-barra-lidera: #16a34a;
+  --cor-barra-empate: #d97706;
+  --cor-barra-perde: #dc2626;
+  --cor-barra-concorrente: #94a3b8;
+  --cor-barra-neutra: #cbd5e1;
+
+  /* Perfil da amostra: sexo (categórico, validado para daltonismo) e faixa
+     etária (ordenada, então escala de um só tom, do claro ao escuro). */
+  --cor-perfil-feminino: #db2777;
+  --cor-perfil-masculino: #4f6bed;
+  --cor-idade-1: #99f6e4;
+  --cor-idade-2: #2dd4bf;
+  --cor-idade-3: #14b8a6;
+  --cor-idade-4: #0d9488;
+  --cor-idade-5: #115e59;
+
+  /* Grão fino (ruído fractal) usado como textura de papel/filme. */
+  --textura-grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
   --easing-md3: cubic-bezier(0.2, 0, 0, 1);
+  /* Uma família só no sistema inteiro: a hierarquia vem do tamanho e do
+     peso. A Manrope tem algarismos de largura fixa (tabular-nums), o que
+     alinha colunas de números. */
   --fonte-base:
-    'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --fonte-destaque:
-    'Manrope', var(--fonte-base);
+    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ===== Tema escuro do painel administrativo. Aplicado só dentro do shell do
+   Admin ([data-tema='escuro']); a tela de coleta continua clara, porque é
+   usada no celular, na rua, sob o sol. Cores de texto conferidas para WCAG
+   AA e cores de série para separação em daltonismo. ===== */
+[data-tema='escuro'] {
+  color-scheme: dark;
+
+  --cor-fundo: #070b14;
+  --cor-fundo-painel:
+    radial-gradient(1200px 600px at 85% -10%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(168, 85, 247, 0.07), transparent 60%),
+    linear-gradient(165deg, #0b1326 0%, #060912 70%, #04060c 100%);
+  --cor-superficie: rgba(148, 163, 184, 0.06);
+  --cor-superficie-baixa: rgba(148, 163, 184, 0.1);
+  --cor-superficie-solida: #121b2f;
+  --cor-borda: rgba(148, 163, 184, 0.16);
+  --cor-borda-luz: rgba(186, 230, 253, 0.22);
+  --cor-texto: #e6edf7;
+  --cor-texto-suave: #94a3b8;
+  --cor-texto-desabilitado: #64748b;
+  --cor-placeholder: #64748b;
+  --cor-texto-inverso: #0b1326;
+
+  --cor-sidebar: rgba(4, 7, 14, 0.72);
+  --cor-sidebar-hover: rgba(148, 163, 184, 0.1);
+
+  --cor-selecao-fundo-suave: rgba(34, 211, 238, 0.12);
+  --cor-selecao-texto: #67e8f9;
+
+  /* Avatares e selos com texto branco: tons escuros o bastante para o
+     branco (contraste >= 4.5:1). */
+  --cor-foco-federal: #0e7490;
+  --cor-foco-estadual: #7e22ce;
+  --cor-serie-federal: #0aa2c0;
+  --cor-serie-estadual: #a855f7;
+  --cor-barra-lidera: #22c55e;
+  --cor-barra-empate: #f59e0b;
+  --cor-barra-perde: #ef4444;
+  --cor-barra-concorrente: #64748b;
+  --cor-barra-neutra: #4b5568;
+  --cor-idade-1: #ccfbf1;
+  --cor-idade-2: #5eead4;
+  --cor-idade-3: #14b8a6;
+  --cor-idade-4: #0d9488;
+  --cor-idade-5: #0f766e;
+  --cor-grafico-grid: rgba(148, 163, 184, 0.12);
+
+  --cor-secundaria: #5eead4;
+  --cor-secundaria-fundo-suave: rgba(45, 212, 191, 0.12);
+  --cor-violeta-fundo-suave: rgba(168, 85, 247, 0.14);
+
+  --cor-sucesso-texto: #86efac;
+  --cor-erro: #f87171;
+  --cor-erro-fundo-suave: rgba(248, 113, 113, 0.1);
+  --cor-erro-borda: rgba(248, 113, 113, 0.35);
+  --cor-erro-texto: #fca5a5;
+
+  --cor-status-lidera: #86efac;
+  --cor-status-lidera-fundo: rgba(34, 197, 94, 0.14);
+  --cor-status-empate: #fcd34d;
+  --cor-status-empate-fundo: rgba(245, 158, 11, 0.14);
+  --cor-status-perde: #fca5a5;
+  --cor-status-perde-fundo: rgba(239, 68, 68, 0.14);
+  --cor-status-sem-dados: #94a3b8;
+  --cor-status-sem-dados-fundo: rgba(148, 163, 184, 0.1);
+
+  --gradiente-numero: linear-gradient(95deg, #67e8f9 0%, #c4b5fd 100%);
+  --brilho-numero: drop-shadow(0 0 14px rgba(103, 232, 249, 0.28));
+  --cor-perigo-fundo: #dc2626;
+  --sombra-repouso: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 30px rgba(0, 0, 0, 0.35);
+  --sombra-elevada: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 40px rgba(0, 0, 0, 0.45);
+
+  color: var(--cor-texto);
+}
+
+/* A lista aberta de um <select> é desenhada pelo sistema operacional, que no
+   Windows ignora o fundo do campo: sem isso, as opções saíam com fundo claro
+   e texto claro (herdado do tema), ilegíveis. */
+[data-tema='escuro'] select,
+[data-tema='escuro'] option,
+[data-tema='escuro'] input {
+  color-scheme: dark;
+}
+
+[data-tema='escuro'] option {
+  background-color: var(--cor-superficie-solida);
+  color: var(--cor-texto);
 }

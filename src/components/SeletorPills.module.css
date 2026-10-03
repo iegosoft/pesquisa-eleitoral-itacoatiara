@@ -25,8 +25,8 @@
 }
 
 .pill.selecionada {
-  border-color: var(--cor-selecao);
+  border-color: var(--cor-selecao-texto);
   background: var(--cor-selecao-fundo-suave);
-  color: var(--cor-selecao);
+  color: var(--cor-selecao-texto);
   font-weight: 500;
 }

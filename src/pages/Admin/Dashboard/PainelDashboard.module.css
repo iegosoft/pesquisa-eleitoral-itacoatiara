@@ -1,7 +1,80 @@
 .painel {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 44px;
+}
+
+/* Entrada em sequência: cada bloco sobe e aparece um pouco depois do anterior,
+   na mesma ordem em que a história do painel deve ser lida. */
+.painel > * {
+  animation: entrada 520ms var(--easing-md3) both;
+}
+
+.painel > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.painel > :nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.painel > :nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.painel > :nth-child(6) {
+  animation-delay: 300ms;
+}
+
+.painel > :nth-child(5) {
+  animation-delay: 240ms;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cabecalhoSecao {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.tituloSecao {
+  margin: 0;
+  font-family: var(--fonte-base);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--cor-texto);
+}
+
+.descricaoSecao {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--cor-texto-suave);
+}
+
+.complemento {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
 }
 
 .grade {
@@ -10,6 +83,23 @@
   gap: 20px;
 }
 
-.secao {
+@media (prefers-reduced-motion: reduce) {
+  .painel > * {
+    animation: none;
+  }
+}
+
+.gradeLarga {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  gap: 20px;
+}
+
+/* Os atalhos da barra lateral levam até cada seção sem esconder o título. */
+.painel > section {
+  scroll-margin-top: 20px;
+}
+
+.painel > :nth-child(7) {
+  animation-delay: 360ms;
 }

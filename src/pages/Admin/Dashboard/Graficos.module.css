@@ -23,6 +23,15 @@
   margin: 0;
 }
 
+.cabecalhoPeriodo {
+  justify-content: flex-start;
+}
+
+.rotuloPeriodo {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
 .seletorPeriodo {
   display: flex;
   gap: 6px;
@@ -44,14 +53,57 @@
 }
 
 .botaoPeriodo:hover {
-  border-color: var(--cor-selecao);
-  color: var(--cor-selecao);
+  border-color: var(--cor-selecao-texto);
+  color: var(--cor-selecao-texto);
 }
 
 .botaoPeriodoAtivo,
 .botaoPeriodoAtivo:hover {
-  border-color: var(--cor-selecao);
-  color: var(--cor-selecao);
+  border-color: var(--cor-selecao-texto);
+  color: var(--cor-selecao-texto);
   font-weight: 500;
   background: var(--cor-selecao-fundo-suave);
+}
+
+.cartao {
+  transition:
+    border-color 250ms var(--easing-md3),
+    transform 250ms var(--easing-md3);
+}
+
+.cartao:hover {
+  border-color: var(--cor-borda-luz, var(--cor-borda));
+  transform: translateY(-2px);
+}
+
+.subtitulo {
+  margin: -6px 0 10px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.semDados {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  max-width: 46ch;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+.graficoEvolucao :global(.recharts-area-curve) {
+  filter: url(#brilho-evolucao);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartao,
+  .cartao:hover {
+    transition: none;
+    transform: none;
+  }
 }

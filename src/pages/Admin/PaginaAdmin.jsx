@@ -33,7 +33,7 @@ function PaginaAdmin() {
   }
 
   return (
-    <div className={styles.shell}>
+    <div className={styles.shell} data-tema="escuro">
       <Sidebar />
 
       <div className={styles.areaConteudo}>

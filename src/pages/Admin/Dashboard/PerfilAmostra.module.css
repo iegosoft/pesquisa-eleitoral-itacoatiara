@@ -1,0 +1,167 @@
+.cartao {
+  composes: cartao from './Graficos.module.css';
+  padding: 20px 22px;
+}
+
+.explicacao,
+.vazio {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: var(--cor-texto-suave);
+}
+
+.vazio {
+  margin: 0;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 28px 40px;
+}
+
+.rosca {
+  margin: 0;
+}
+
+.titulo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-family: var(--fonte-base);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.destaque {
+  font-family: var(--fonte-base);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+.destaque strong {
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+
+.corpo {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.grafico {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.grafico svg {
+  width: 100%;
+  height: 100%;
+}
+
+.trilho {
+  fill: none;
+  stroke: var(--cor-superficie-baixa);
+  stroke-width: 16;
+}
+
+.fatia {
+  fill: none;
+  stroke-width: 16;
+  animation: aparecer 700ms var(--easing-md3) both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+.centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+}
+
+.centro strong {
+  font-family: var(--fonte-base);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.centro span {
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.legenda {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+
+.legenda li {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.marcador {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.rotulo {
+  color: var(--cor-texto);
+}
+
+.valor {
+  font-family: var(--fonte-base);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.quantidade {
+  font-family: var(--fonte-base);
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fatia {
+    animation: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .corpo {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .grafico {
+    align-self: center;
+  }
+}

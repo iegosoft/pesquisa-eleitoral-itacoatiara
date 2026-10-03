@@ -1,0 +1,242 @@
+.cartao {
+  composes: cartao from './Graficos.module.css';
+  padding: 20px 22px;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-bottom: 14px;
+}
+
+.cabecalho h3 {
+  margin: 0;
+  font-family: var(--fonte-base);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.base {
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Foto | nome e partido | barra | percentual — como numa arte de pesquisa
+   de jornal. A barra ocupa o espaço que sobrar. */
+.item {
+  display: grid;
+  grid-template-columns: 52px minmax(96px, 150px) 1fr 76px;
+  align-items: center;
+  gap: 14px;
+  margin: 0 -10px;
+  padding: 10px;
+  border-bottom: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  transition: background-color 180ms var(--easing-md3);
+}
+
+/* Hover discreto: a linha clareia, a barra ganha brilho, a foto cresce um
+   pouco e aparece a quantidade de votos. */
+.item:hover {
+  background: var(--cor-superficie-baixa);
+}
+
+.item:hover .barra {
+  filter: brightness(1.15);
+}
+
+.item:hover .foto {
+  transform: scale(1.05);
+}
+
+.item:hover .votos {
+  opacity: 1;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item .foto {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: transform 180ms var(--easing-md3);
+}
+
+.fotoNeutra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-superficie-baixa);
+  color: var(--cor-texto-suave);
+  font-family: var(--fonte-base);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.identificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nome {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: var(--fonte-base);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+}
+
+.itemFoco .nome {
+  font-size: 15px;
+}
+
+.seloFoco {
+  padding: 1px 7px;
+  border-radius: var(--raio-pilula);
+  background: var(--cor-texto);
+  color: var(--cor-texto-inverso);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.partido {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.trilho {
+  height: 30px;
+}
+
+.itemFoco .trilho {
+  height: 38px;
+}
+
+.barra {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 3px;
+  background-image: var(--textura-grao);
+  transform-origin: left center;
+  animation: crescer 700ms var(--easing-md3) both;
+  transition: filter 180ms var(--easing-md3);
+}
+
+.barra_lidera {
+  background-color: var(--cor-barra-lidera);
+}
+
+.barra_empate {
+  background-color: var(--cor-barra-empate);
+}
+
+.barra_perde {
+  background-color: var(--cor-barra-perde);
+}
+
+.barraConcorrente {
+  background-color: var(--cor-barra-concorrente);
+}
+
+.barraNeutra {
+  background-color: var(--cor-barra-neutra);
+}
+
+.valores {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.votos {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  opacity: 0;
+  transition: opacity 180ms var(--easing-md3);
+  font-variant-numeric: tabular-nums;
+}
+
+.percentual {
+  font-family: var(--fonte-base);
+  font-size: 22px;
+  font-weight: 800;
+  text-align: right;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.itemFoco .percentual {
+  font-size: 26px;
+}
+
+@keyframes crescer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .item {
+    grid-template-columns: 44px 1fr 64px;
+  }
+
+  .trilho {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    height: 14px;
+  }
+
+  .itemFoco .trilho {
+    height: 18px;
+  }
+
+  .item .foto {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra {
+    animation: none;
+  }
+
+  .item,
+  .item .foto,
+  .votos {
+    transition: none;
+  }
+
+  .item:hover .foto {
+    transform: none;
+  }
+}
