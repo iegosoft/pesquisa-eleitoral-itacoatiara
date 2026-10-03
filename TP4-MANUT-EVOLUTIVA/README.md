@@ -25,6 +25,16 @@ cada uma com `antes/` e `depois/`:
 Os arquivos de evidência seguem o padrão
 `tp4-redesign-<antes|depois>-<tela-ou-situação>.<png|mp4>`.
 
-## Etapa 2 — Manutenção evolutiva e acessibilidade
+## Etapa 2 — Manutenção evolutiva e acessibilidade ([`etapa2-evolutiva/`](etapa2-evolutiva/))
 
-Em andamento.
+| Documento | Conteúdo |
+|---|---|
+| [`planejamento.md`](etapa2-evolutiva/planejamento.md) | Diagnóstico do que o administrador consegue fazer, as funcionalidades novas (F1–F4) e a melhoria de acessibilidade (A1), cada uma com a justificativa |
+
+| Item | Pasta de evidências | Issue | Pull Request |
+|---|---|---|---|
+| F1 — Alternar tema claro/escuro | [`F1-alternar-tema/`](etapa2-evolutiva/evidencias/F1-alternar-tema/) | — | — |
+| F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
+| F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | — | — |
+| F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | — | — |
+| A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | — | — |
