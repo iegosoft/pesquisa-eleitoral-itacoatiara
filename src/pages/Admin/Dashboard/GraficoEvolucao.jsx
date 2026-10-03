@@ -11,7 +11,7 @@ const SERIES = [
 ];
 
 function formatarPercentual(valor) {
-  return `${valor.toFixed(1)}%`;
+  return `${valor.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
 }
 
 function rotuloDoDia(data, payload) {
