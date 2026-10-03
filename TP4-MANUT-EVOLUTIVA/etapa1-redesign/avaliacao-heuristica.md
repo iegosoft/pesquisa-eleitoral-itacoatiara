@@ -10,11 +10,11 @@ também no código-fonte, para indicar a causa exata.
 
 | Tela | Perfil | Evidência |
 |---|---|---|
-| Login | todos | [`login.png`](../evidencias/redesign/antes/tp4-redesign-antes-login.png) |
-| Dashboard | administrador | [`dashboard-topo.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-topo.png), [`dashboard-completo.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-completo.mp4) |
-| Candidatos | administrador | [`candidatos.png`](../evidencias/redesign/antes/tp4-redesign-antes-candidatos.png) |
-| Dados | administrador | [`dados.png`](../evidencias/redesign/antes/tp4-redesign-antes-dados.png) |
-| Coleta | pesquisador | [`coleta-parte1.png`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-parte1.png), [`coleta-parte2.png`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-parte2.png) |
+| Login | todos | [`login.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-login.png) |
+| Dashboard | administrador | [`dashboard-topo.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-topo.png), [`dashboard-completo.mp4`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-completo.mp4) |
+| Candidatos | administrador | [`candidatos.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-candidatos.png) |
+| Dados | administrador | [`dados.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dados.png) |
+| Coleta | pesquisador | [`coleta-parte1.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-coleta-parte1.png), [`coleta-parte2.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-coleta-parte2.png) |
 
 ## Escala de severidade
 
@@ -33,7 +33,7 @@ confirma o salvamento com "Casa salva!".
 - **P1** — A seção do painel administrativo não aparece na URL, que fica sempre
   em `/admin` (visível na barra de endereço de todos os prints do Admin).
 - **P3** — O botão "Salvar casa" fica desabilitado sem dizer o que falta. No
-  print [`coleta-sem-remover.png`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-sem-remover.png),
+  print [`coleta-sem-remover.png`](evidencias/R2-R3-formulario-coleta/antes/tp4-redesign-antes-coleta-sem-remover.png),
   o consentimento está marcado e o botão continua desabilitado (falta preencher
   o morador 2), mas nada na tela diz isso.
 
@@ -51,19 +51,19 @@ com foto ou iniciais, como na "colinha" de papel do pesquisador.
   de um bairro com 50 (`GraficoPorBairro.jsx`, `MapaCalor.jsx:69-72`).
   Nos prints, Centro, Da Paz, Iracy e Jauary 2 aparecem com "100%" sem nenhuma
   indicação de quantas entrevistas sustentam esse número
-  ([`dashboard-por-bairro.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-por-bairro.png),
-  [`dashboard-mapas.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-mapas.png)).
+  ([`dashboard-por-bairro.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-por-bairro.png),
+  [`dashboard-mapas.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-mapas.png)).
 - **P9** — O card "Inserção em lote" (Dados) cita o identificador técnico
   `"casa_id"` no texto de instrução.
 - **P10** — O tooltip do gráfico por bairro mostra os nomes internos dos campos
   do código ("percentualEstadual : 66.7%", "percentualFederal : 66.7%"), e não
   "Estadual" / "Federal"
-  ([`dashboard-tooltip.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-tooltip.png)).
+  ([`dashboard-tooltip.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-tooltip.png)).
 - **P11** — O gráfico "Evolução do candidato foco" desenha uma linha em **0%**
   nos dias sem nenhuma coleta (`calcularEvolucao` devolve 0 quando o dia não tem
   entrevista). Nos últimos 7 dias não houve coleta (a última foi em
   08/09/2026), e o gráfico dá a entender que o candidato caiu para 0% de
-  intenção ([`dashboard-graficos.png`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-graficos.png)).
+  intenção ([`dashboard-graficos.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-graficos.png)).
 
 ### H3 — Controle e liberdade do usuário
 
@@ -72,16 +72,16 @@ com foto ou iniciais, como na "colinha" de papel do pesquisador.
   (`PaginaAdmin.jsx:28`, `useState`), recarregar a página em "Candidatos" ou
   "Dados" volta para o Dashboard, e o botão Voltar do navegador sai do painel
   em vez de voltar à seção anterior
-  ([`navegacao-f5.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-navegacao-f5.mp4)).
+  ([`navegacao-f5.mp4`](evidencias/R1-rotas-admin/antes/tp4-redesign-antes-navegacao-f5.mp4)).
 - **P2** — Na coleta, um morador adicionado por engano não pode ser removido:
   existe `adicionarMorador()` mas nenhuma ação de remover
   (`FormularioCasa.jsx:64-66`). A única saída é recarregar a página e perder a
   casa inteira
-  ([`coleta-sem-remover.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-sem-remover.mp4)).
+  ([`coleta-sem-remover.mp4`](evidencias/R2-R3-formulario-coleta/antes/tp4-redesign-antes-coleta-sem-remover.mp4)).
 - **P7** — Quando uma conta sem perfil cadastrado entra, a tela de login mostra
   "Contate o administrador", mas a sessão dessa conta continua ativa
   (`PaginaLogin.jsx:20-31`,
-  [`login-codigo-sem-role.png`](../evidencias/redesign/antes/tp4-redesign-antes-login-codigo-sem-role.png)).
+  [`login-codigo-sem-role.png`](evidencias/R6-login-sem-perfil/antes/tp4-redesign-antes-login-codigo-sem-role.png)).
   Toda vez que o app é reaberto, o mesmo erro volta sozinho, e nada indica que
   é possível entrar com outra conta.
 
@@ -105,10 +105,10 @@ digitado e o "Salvar casa" exige o consentimento.
 - **P2** — O seletor "Quantas pessoas moram aqui?" não limita os cartões de
   morador: no vídeo, a casa foi marcada com **1** morador e o sistema deixou
   adicionar o **morador 2**, sem nenhum aviso
-  ([`coleta-parte1.png`](../evidencias/redesign/antes/tp4-redesign-antes-coleta-parte1.png)).
+  ([`coleta-parte1.png`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-coleta-parte1.png)).
 - **P4** — Os filtros de data aceitam um intervalo invertido ("De" 30/09/2026,
   "Até" 01/09/2026) sem nenhum aviso
-  ([`filtro-data-invertida.png`](../evidencias/redesign/antes/tp4-redesign-antes-filtro-data-invertida.png)).
+  ([`filtro-data-invertida.png`](evidencias/R4-filtro-datas/antes/tp4-redesign-antes-filtro-data-invertida.png)).
 
 ### H6 — Reconhecimento em vez de memorização
 
@@ -140,7 +140,7 @@ hierarquia clara e um bloco por tarefa.
   gráfico "Intenção do candidato foco por bairro" e os mapas "Status do foco
   por bairro" mostram o mesmo dado (percentual do foco em cada bairro), em
   duas visualizações diferentes
-  ([`dashboard-completo.mp4`](../evidencias/redesign/antes/tp4-redesign-antes-dashboard-completo.mp4)).
+  ([`dashboard-completo.mp4`](evidencias/R5-dashboard-e-identidade/antes/tp4-redesign-antes-dashboard-completo.mp4)).
 
 ### H9 — Ajudar a reconhecer, diagnosticar e corrigir erros
 
