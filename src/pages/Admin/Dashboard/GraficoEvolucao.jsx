@@ -44,8 +44,8 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
       {temColetaNoPeriodo ? (
         <>
           <p className={styles.subtitulo}>
-            Cada ponto é um dia com coleta. Dias sem coleta ficam em branco, sem linha ligando, para não
-            sugerir uma tendência que não foi medida.
+            Cada ponto é um dia com coleta. Linha contínua liga dias seguidos; a linha tracejada atravessa
+            dias sem coleta, em que não houve medição.
           </p>
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={dados} margin={{ left: 8, right: 8, top: 8 }}>
@@ -79,6 +79,27 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
                 {...estiloTooltip}
               />
               <Legend wrapperStyle={{ fontSize: 13, color: 'var(--cor-texto-suave)' }} />
+              {/* Por baixo: tracejado fraco ligando todos os dias com coleta, para
+                  a tendência aparecer de ponta a ponta. Fica fora da legenda e do
+                  tooltip; o trecho sólido por cima é o que foi medido em dias seguidos. */}
+              {SERIES.map(({ chave, cargo }) => (
+                <Area
+                  key={`${chave}-tracejado`}
+                  type="linear"
+                  dataKey={chave}
+                  connectNulls
+                  stroke={corFoco(cargo)}
+                  strokeOpacity={0.55}
+                  strokeDasharray="6 6"
+                  strokeWidth={2}
+                  fill="none"
+                  dot={false}
+                  activeDot={false}
+                  legendType="none"
+                  tooltipType="none"
+                  isAnimationActive={false}
+                />
+              ))}
               {SERIES.map(({ chave, nome, cargo }) => (
                 <Area
                   key={chave}
