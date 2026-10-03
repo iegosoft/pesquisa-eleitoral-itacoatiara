@@ -58,7 +58,7 @@
 }
 
 .valor {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 24px;
   font-weight: 800;
   color: var(--cor-texto);
@@ -77,7 +77,7 @@
 }
 
 .valorTexto {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 22px;
   font-weight: 800;
   line-height: 1.25;

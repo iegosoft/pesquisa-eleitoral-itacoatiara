@@ -39,7 +39,7 @@
 }
 
 .logoTexto {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-weight: 700;
   font-size: 16px;
   line-height: 1.2;

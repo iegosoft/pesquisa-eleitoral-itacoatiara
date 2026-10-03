@@ -71,7 +71,7 @@
 
 .titulos h1 {
   margin: 0 0 4px;
-  font-family: var(--fonte-manchete);
+  font-family: var(--fonte-base);
   font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.015em;

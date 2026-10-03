@@ -15,7 +15,7 @@
 
 .grupo h3 {
   margin: 0 0 10px;
-  font-family: var(--fonte-manchete);
+  font-family: var(--fonte-base);
   font-size: 22px;
   font-weight: 800;
   color: var(--cor-texto);
@@ -57,7 +57,7 @@
 }
 
 .nome {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 15px;
   font-weight: 800;
   text-transform: uppercase;

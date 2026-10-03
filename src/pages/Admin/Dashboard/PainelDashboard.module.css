@@ -57,7 +57,7 @@
 
 .tituloSecao {
   margin: 0;
-  font-family: var(--fonte-manchete);
+  font-family: var(--fonte-base);
   font-size: 28px;
   font-weight: 800;
   line-height: 1.15;

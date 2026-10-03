@@ -40,7 +40,7 @@
 }
 
 .logoTexto {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 15px;
   font-weight: 700;
   color: var(--cor-sidebar-texto);

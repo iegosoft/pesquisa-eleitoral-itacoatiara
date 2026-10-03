@@ -29,7 +29,7 @@
   flex-direction: column;
   gap: 4px;
   margin-bottom: 16px;
-  font-family: var(--fonte-manchete);
+  font-family: var(--fonte-base);
   font-size: 24px;
   font-weight: 800;
   color: var(--cor-texto);
@@ -94,7 +94,7 @@
 }
 
 .centro strong {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 36px;
   font-weight: 800;
   color: var(--cor-texto);
@@ -136,7 +136,7 @@
 }
 
 .valor {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 17px;
   font-weight: 800;
   color: var(--cor-texto);

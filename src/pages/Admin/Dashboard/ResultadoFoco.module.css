@@ -118,7 +118,7 @@
 
 .manchete {
   margin: 0;
-  font-family: var(--fonte-manchete);
+  font-family: var(--fonte-base);
   font-size: 22px;
   font-weight: 800;
   line-height: 1.15;
@@ -135,7 +135,7 @@
 }
 
 .percentual {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
   font-size: 40px;
   font-weight: 800;
   line-height: 1;

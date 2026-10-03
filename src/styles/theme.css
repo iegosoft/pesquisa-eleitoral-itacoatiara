@@ -149,13 +149,13 @@
 
   /* Grão fino (ruído fractal) usado como textura de papel/filme. */
   --textura-grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  --fonte-manchete: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   --easing-md3: cubic-bezier(0.2, 0, 0, 1);
+  /* Uma família só no sistema inteiro: a hierarquia vem do tamanho e do
+     peso. A Manrope tem algarismos de largura fixa (tabular-nums), o que
+     alinha colunas de números. */
   --fonte-base:
-    'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --fonte-destaque:
-    'Manrope', var(--fonte-base);
+    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 /* ===== Tema escuro do painel administrativo. Aplicado só dentro do shell do

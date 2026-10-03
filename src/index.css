@@ -19,7 +19,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--fonte-destaque);
+  font-family: var(--fonte-base);
 }
 
 #root {
