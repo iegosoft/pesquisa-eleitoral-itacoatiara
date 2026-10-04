@@ -107,3 +107,48 @@
     transform: none;
   }
 }
+
+.tabelaAlternativa {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.tabelaAlternativa summary {
+  width: fit-content;
+  padding: 6px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pilula);
+  color: var(--cor-texto);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabelaAlternativa table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabelaAlternativa caption {
+  margin-bottom: 8px;
+  text-align: left;
+  color: var(--cor-texto-suave);
+}
+
+.tabelaAlternativa th,
+.tabelaAlternativa td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: right;
+  color: var(--cor-texto);
+}
+
+.tabelaAlternativa th:first-child {
+  text-align: left;
+}
+
+.tabelaAlternativa thead th {
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+}

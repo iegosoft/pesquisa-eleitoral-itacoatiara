@@ -58,6 +58,13 @@
   overflow: hidden;
 }
 
+/* O campo de arquivo real fica invisível por cima do botão; sem isto, o foco
+   do teclado chegava nele sem nenhum contorno visível. */
+.botaoArquivo:has(input:focus-visible) {
+  outline: 2px solid var(--cor-selecao-texto);
+  outline-offset: 2px;
+}
+
 .botaoArquivo input {
   position: absolute;
   inset: 0;

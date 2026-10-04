@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
@@ -38,5 +38,25 @@ describe('PaginaAdmin', () => {
     renderNaUrl('/admin/qualquer-coisa');
 
     expect(screen.getByText('conteudo-dashboard')).toBeInTheDocument();
+  });
+
+  it('oferece o link Pular para o conteudo, que leva o foco ao conteudo principal', () => {
+    renderNaUrl('/admin/dashboard');
+
+    const link = screen.getByRole('link', { name: 'Pular para o conteúdo' });
+    expect(link).toHaveAttribute('href', '#conteudo-principal');
+    fireEvent.click(link);
+    expect(document.activeElement).toBe(screen.getByRole('main'));
+  });
+
+  it('ao trocar de secao, leva o foco ao titulo da pagina e atualiza o titulo da aba', () => {
+    renderNaUrl('/admin/dashboard');
+    expect(document.title).toBe('Dashboard · Pesquisa Eleitoral');
+
+    fireEvent.click(screen.getByRole('link', { name: 'Dados' }));
+
+    expect(screen.getByText('conteudo-dados')).toBeInTheDocument();
+    expect(document.activeElement).toBe(screen.getByRole('heading', { level: 1, name: 'Dados' }));
+    expect(document.title).toBe('Dados · Pesquisa Eleitoral');
   });
 });

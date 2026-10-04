@@ -37,7 +37,9 @@ function Cabecalho({ secaoAtual, titulo, subtitulo }) {
       </div>
 
       <div className={styles.titulos}>
-        <h1>{titulo}</h1>
+        <h1 id="titulo-pagina" tabIndex={-1}>
+          {titulo}
+        </h1>
         <p>{subtitulo}</p>
       </div>
     </header>
