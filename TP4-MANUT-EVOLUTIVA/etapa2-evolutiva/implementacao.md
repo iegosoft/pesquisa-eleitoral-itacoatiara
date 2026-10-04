@@ -54,3 +54,64 @@ na tela:
   descrição para o leitor de tela.
 
 Suíte completa: 46/46.
+
+## F1 — Alternar tema claro/escuro
+
+**Issue:** [#30](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/30)
+
+| | Antes | Depois |
+|---|---|---|
+| Escolha de tema | não existia: o sistema era só escuro desde o redesign | botão na barra lateral do painel ("Tema claro" / "Tema escuro"), na barra superior da coleta e no login (ícone de sol/lua, com o nome da ação para o leitor de tela) |
+| Alcance | — | a troca vale para todas as telas, inclusive a barra lateral e a barra superior da coleta |
+| Memória da escolha | — | a escolha fica salva no aparelho; no primeiro acesso, o sistema segue o modo claro/escuro do celular ou do computador |
+| Ao abrir a página | — | um script no `index.html` aplica o tema antes de o app carregar, para não aparecer o tema errado por um instante |
+
+**Por que se justifica:** o pesquisador trabalha na rua, e sob sol forte uma tela
+escura reflete e fica difícil de ler. No redesign, a coleta passou a ser escura
+para manter a consistência do sistema (H4), com a combinação de oferecer o claro
+como escolha. Atende também quem lê melhor em fundo claro e o uso do painel
+projetado. Heurísticas H3 (controle e liberdade) e H7 (flexibilidade e
+eficiência).
+
+### Cores do tema claro (medidas, não estimadas)
+
+- **Achado:** as cores originais de federal e estadual no tema claro (azul
+  `#2563eb` e roxo `#7c3aed`) **reprovaram** no validador de paleta: para quem
+  tem deuteranopia, a diferença entre elas é ΔE 0,4, ou seja, ficam praticamente
+  iguais. Até para visão normal ficam abaixo do mínimo (ΔE 12,4, mínimo 15).
+  Foram trocadas por ciano `#0891b2` e violeta `#9333ea`, que passaram em todas as
+  checagens e combinam com as do tema escuro.
+- Dois tons de texto ficaram abaixo de 4,5:1 e foram escurecidos: o texto
+  secundário sobre os campos (4,34 → 5,37:1) e o texto azul das opções
+  selecionadas (4,24 → 5,49:1).
+- No tema claro, o item ativo da barra lateral (fundo azul) passou a ter texto e
+  ícone brancos (5,17:1); com o texto escuro do tema, ficaria ilegível.
+
+| Exemplos de contraste (tema claro) | Razão |
+|---|---|
+| Texto principal sobre o cartão | 17,85:1 |
+| Texto secundário sobre o cartão / sobre os campos | 5,88 / 5,37:1 |
+| Selos Lidera / Empate / Perde | 6,49 / 6,37 / 6,80:1 |
+| Atalho ativo da barra lateral | 6,70:1 |
+
+### Evidências
+
+| | Antes | Depois |
+|---|---|---|
+| Painel | [`antes/…-tema-painel.png`](evidencias/F1-alternar-tema/antes/tp4-evolutiva-antes-tema-painel.png): sem opção de tema | [`depois/…-tema-painel.mp4`](evidencias/F1-alternar-tema/depois/tp4-evolutiva-depois-tema-painel.mp4) (vídeo alternando os temas), [`depois/…-tema-claro-painel.png`](evidencias/F1-alternar-tema/depois/tp4-evolutiva-depois-tema-claro-painel.png), [`depois/…-tema-escuro-painel.png`](evidencias/F1-alternar-tema/depois/tp4-evolutiva-depois-tema-escuro-painel.png) |
+| Coleta | [`antes/…-tema-coleta.png`](evidencias/F1-alternar-tema/antes/tp4-evolutiva-antes-tema-coleta.png): sem opção de tema | [`depois/…-tema-claro-coleta.png`](evidencias/F1-alternar-tema/depois/tp4-evolutiva-depois-tema-claro-coleta.png), [`depois/…-tema-escuro-coleta.png`](evidencias/F1-alternar-tema/depois/tp4-evolutiva-depois-tema-escuro-coleta.png) |
+
+### O que mudou no código
+
+- `src/contexts/TemaContext.jsx` e `useTema.js`: guardam o tema, aplicam no
+  `<html>` e salvam a escolha.
+- `src/components/BotaoTema.jsx`: o botão, em versão com texto (barra lateral) e
+  só com ícone (coleta e login).
+- `src/styles/theme.css`: valores do tema claro revisados e medidos.
+- `index.html`: aplica o tema antes de o app carregar.
+
+### Testes
+
+4 testes novos em `src/contexts/TemaContext.test.jsx` (tema inicial, troca e
+gravação da escolha, respeito à escolha salva, nome acessível do botão só com
+ícone). Suíte completa: 50/50.

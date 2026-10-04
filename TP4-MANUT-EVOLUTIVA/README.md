@@ -34,7 +34,7 @@ Os arquivos de evidência seguem o padrão
 
 | Item | Pasta de evidências | Issue | Pull Request |
 |---|---|---|---|
-| F1 — Alternar tema claro/escuro | [`F1-alternar-tema/`](etapa2-evolutiva/evidencias/F1-alternar-tema/) | — | — |
+| F1 — Alternar tema claro/escuro | [`F1-alternar-tema/`](etapa2-evolutiva/evidencias/F1-alternar-tema/) | [#30](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/30) | PR_F1 |
 | F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
 | F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | — | — |
 | F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | — | — |
