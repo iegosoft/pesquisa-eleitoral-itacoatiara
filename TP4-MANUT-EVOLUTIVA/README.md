@@ -38,4 +38,4 @@ Os arquivos de evidência seguem o padrão
 | F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
 | F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | — | — |
 | F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | — | — |
-| A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | [#28](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/28) | PR_A1 |
+| A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | [#28](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/28) | [#29](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/29) |
