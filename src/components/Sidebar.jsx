@@ -25,6 +25,12 @@ const ICONES = {
       <path d="M5 12v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6" />
     </svg>
   ),
+  entrevistas: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="4" width="14" height="17" rx="2" />
+      <path d="M9 4.5V3h6v1.5M9 10h6M9 14h6M9 18h3" />
+    </svg>
+  ),
   sair: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2" />
@@ -37,6 +43,7 @@ const ITENS = [
   { valor: 'dashboard', rotulo: 'Dashboard', icone: 'dashboard' },
   { valor: 'candidatos', rotulo: 'Candidatos', icone: 'candidatos' },
   { valor: 'dados', rotulo: 'Dados', icone: 'dados' },
+  { valor: 'entrevistas', rotulo: 'Entrevistas', icone: 'entrevistas' },
 ];
 
 // Marca o atalho da seção que está na parte de cima da tela enquanto a

@@ -5,6 +5,7 @@ import Cabecalho from '../../components/Cabecalho.jsx';
 import PainelCandidatos from './PainelCandidatos.jsx';
 import PainelDashboard from './Dashboard/PainelDashboard.jsx';
 import PainelDados from './Dados/PainelDados.jsx';
+import PainelEntrevistas from './Entrevistas/PainelEntrevistas.jsx';
 import styles from './PaginaAdmin.module.css';
 
 const SECOES = {
@@ -22,6 +23,11 @@ const SECOES = {
     rotulo: 'Dados',
     subtitulo: 'Importação, exportação e cadastro manual de dados coletados',
     Conteudo: PainelDados,
+  },
+  entrevistas: {
+    rotulo: 'Entrevistas',
+    subtitulo: 'Conferência das entrevistas salvas: corrigir respostas e excluir duplicadas',
+    Conteudo: PainelEntrevistas,
   },
 };
 
