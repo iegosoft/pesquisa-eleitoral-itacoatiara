@@ -16,3 +16,27 @@
   max-width: 1400px;
   margin: 0 auto;
 }
+
+/* Primeiro item do Tab: fica fora da tela até receber foco, e então aparece
+   no canto, por cima de tudo. */
+.pularConteudo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: var(--raio-borda-lg);
+  background: var(--cor-selecao);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.pularConteudo:focus {
+  transform: none;
+}
+
+.conteudo:focus {
+  outline: none;
+}

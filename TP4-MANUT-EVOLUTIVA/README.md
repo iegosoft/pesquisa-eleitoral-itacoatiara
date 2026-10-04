@@ -30,6 +30,7 @@ Os arquivos de evidência seguem o padrão
 | Documento | Conteúdo |
 |---|---|
 | [`planejamento.md`](etapa2-evolutiva/planejamento.md) | Diagnóstico do que o administrador consegue fazer, as funcionalidades novas (F1–F4) e a melhoria de acessibilidade (A1), cada uma com a justificativa |
+| [`implementacao.md`](etapa2-evolutiva/implementacao.md) | Resultado de cada item, com a comparação antes/depois, o que mudou no código e os testes |
 
 | Item | Pasta de evidências | Issue | Pull Request |
 |---|---|---|---|
@@ -37,4 +38,4 @@ Os arquivos de evidência seguem o padrão
 | F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
 | F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | — | — |
 | F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | — | — |
-| A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | — | — |
+| A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | [#28](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/28) | [#29](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/29) |

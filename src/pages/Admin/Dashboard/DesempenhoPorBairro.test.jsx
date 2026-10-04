@@ -51,4 +51,23 @@ describe('GraficoEvolucao', () => {
     );
     expect(screen.getByRole('button', { name: '7 dias' })).toHaveAttribute('aria-pressed', 'true');
   });
+
+  it('traz uma tabela com os mesmos numeros do grafico, so dos dias com coleta', () => {
+    const dias = [
+      { data: '08/09', entrevistas: 1, percentualFederal: 100, percentualEstadual: 100 },
+      { data: '09/09', entrevistas: 0, percentualFederal: null, percentualEstadual: null },
+      { data: '02/10', entrevistas: 3, percentualFederal: 0, percentualEstadual: 33.333 },
+    ];
+
+    render(<GraficoEvolucao dados={dias} periodo={30} aoAlterarPeriodo={() => {}} ultimaColeta="Hoje" />);
+
+    const tabela = screen.getByRole('table', { name: /Evolução do candidato foco nos últimos 30 dias/ });
+    const linhas = within(tabela).getAllByRole('row');
+    expect(linhas).toHaveLength(3);
+    expect(linhas[1]).toHaveTextContent('08/09');
+    expect(linhas[1]).toHaveTextContent('100,0%');
+    expect(linhas[2]).toHaveTextContent('02/10');
+    expect(linhas[2]).toHaveTextContent('33,3%');
+    expect(screen.getByRole('img', { name: /Os valores de cada dia estão na tabela/ })).toBeInTheDocument();
+  });
 });
