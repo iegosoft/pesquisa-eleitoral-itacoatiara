@@ -78,6 +78,8 @@
 }
 
 .bloco {
+  position: relative;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -110,14 +112,36 @@
   gap: 8px;
 }
 
+/* O nome do bairro é o botão; o ::after estica o clique para o cartão todo. */
 .bairro {
+  padding: 0;
+  border: none;
+  background: none;
   font-family: var(--fonte-base);
   font-size: 18px;
   font-weight: 800;
+  text-align: left;
   color: var(--cor-texto);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.bairro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--raio-borda-lg);
+}
+
+.bairro:focus-visible {
+  outline: none;
+}
+
+.bairro:focus-visible::after {
+  outline: 2px solid var(--cor-selecao-texto);
+  outline-offset: 2px;
 }
 
 .entrevistas {

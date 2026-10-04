@@ -240,3 +240,135 @@
     transform: none;
   }
 }
+
+/* O nome do candidato é o botão; o ::after estica a área de clique para a
+   linha inteira, sem colocar a tabela dentro de um botão. */
+.item {
+  position: relative;
+}
+
+.botaoNome {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.botaoNome::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+}
+
+.botaoNome:focus-visible {
+  outline: none;
+}
+
+.botaoNome:focus-visible::after {
+  outline: 2px solid var(--cor-selecao-texto);
+  outline-offset: -2px;
+}
+
+.itemAberto,
+.itemAberto:hover {
+  background: var(--cor-selecao-fundo-suave);
+}
+
+.detalhe {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda-lg);
+  background: var(--cor-superficie-baixa);
+}
+
+.detalheCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.detalheCabecalho h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.botaoFechar {
+  composes: botaoContornado from '../../../styles/md3.module.css';
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.detalheLista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detalheLista li {
+  display: grid;
+  grid-template-columns: minmax(110px, 160px) 1fr 64px minmax(120px, auto);
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.detalheBairro {
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.detalheTrilho {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--cor-borda);
+  overflow: hidden;
+}
+
+.detalheBarra {
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background: var(--cor-selecao-texto);
+}
+
+.detalhePercentual {
+  font-weight: 800;
+  text-align: right;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.detalheVotos {
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.detalheAmostraPequena .detalhePercentual {
+  opacity: 0.6;
+}
+
+@media (max-width: 560px) {
+  .detalheLista li {
+    grid-template-columns: 1fr 56px;
+  }
+
+  .detalheTrilho,
+  .detalheVotos {
+    grid-column: 1 / -1;
+  }
+}

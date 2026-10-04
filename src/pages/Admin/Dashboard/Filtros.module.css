@@ -58,3 +58,24 @@
   color: var(--cor-erro-texto);
   font-size: 13.5px;
 }
+
+.aviso {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--raio-borda-sm);
+  background: var(--cor-selecao-fundo-suave);
+  color: var(--cor-texto);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* A região continua na página vazia, para o leitor de tela anunciar quando o
+   aviso aparecer, mas fora do fluxo, sem ocupar espaço. */
+.avisoVazio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

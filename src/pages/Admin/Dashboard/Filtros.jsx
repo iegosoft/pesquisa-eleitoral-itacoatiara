@@ -8,7 +8,7 @@ function formatarDataIso(iso) {
   return `${dia}/${mes}/${ano}`;
 }
 
-function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiveis }) {
+function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiveis, aviso = '' }) {
   const datasInvertidas = intervaloDeDatasInvertido(filtros);
 
   function atualizar(campo, valor) {
@@ -17,9 +17,12 @@ function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiv
 
   return (
     <div className={styles.filtros} role="search" aria-labelledby="titulo-filtros">
-      <h2 id="titulo-filtros" className={styles.titulo}>
+      <h2 id="titulo-filtros" className={styles.titulo} tabIndex={-1}>
         Filtrar resultados
       </h2>
+      <p className={aviso ? styles.aviso : styles.avisoVazio} role="status" aria-live="polite">
+        {aviso}
+      </p>
       <div className={styles.campos}>
         <label className={styles.campo}>
           Bairro

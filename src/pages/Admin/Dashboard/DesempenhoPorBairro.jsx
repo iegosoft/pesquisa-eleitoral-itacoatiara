@@ -56,7 +56,7 @@ function LinhaCargo({ rotulo, cargo, desempenho }) {
   );
 }
 
-function DesempenhoPorBairro({ dados }) {
+function DesempenhoPorBairro({ dados, aoSelecionarBairro }) {
   return (
     <div className={styles.cartao}>
       <div className={styles.topo}>
@@ -64,7 +64,7 @@ function DesempenhoPorBairro({ dados }) {
           <strong>Lidera</strong>: o foco tem o maior percentual do bairro. <strong>Empate</strong>: está a
           até {MARGEM_EMPATE} pontos do primeiro. <strong>Perde</strong>: está mais de {MARGEM_EMPATE} pontos
           atrás. Bairros com menos de {AMOSTRA_MINIMA_BAIRRO} entrevistas têm resultado pouco confiável e
-          aparecem com borda tracejada.
+          aparecem com borda tracejada. Clique num bairro para ver o painel inteiro só dele.
         </p>
         {dados.length > 0 && (
           <div className={styles.resumo}>
@@ -84,7 +84,15 @@ function DesempenhoPorBairro({ dados }) {
               className={`${styles.bloco} ${linha.amostraPequena ? styles.blocoAmostraPequena : ''}`}
             >
               <div className={styles.blocoTopo}>
-                <span className={styles.bairro}>{linha.bairro}</span>
+                <button
+                  type="button"
+                  className={styles.bairro}
+                  title="Filtrar o painel por este bairro"
+                  aria-label={`Filtrar o painel pelo bairro ${linha.bairro}`}
+                  onClick={() => aoSelecionarBairro(linha.bairro)}
+                >
+                  {linha.bairro}
+                </button>
                 <span className={styles.entrevistas}>
                   {linha.entrevistas} {linha.entrevistas === 1 ? 'entrevista' : 'entrevistas'}
                 </span>
