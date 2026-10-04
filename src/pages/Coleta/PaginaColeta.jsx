@@ -46,7 +46,7 @@ function PaginaColeta() {
   }
 
   return (
-    <div className={styles.tela} data-tema="escuro">
+    <div className={styles.tela}>
       <BarraTopo />
       <main className={styles.pagina}>
         <div className={styles.cartaoPrincipal}>

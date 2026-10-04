@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { entrar, sair } from '../../services/auth.js';
 import { useAuth } from '../../contexts/useAuth.js';
+import BotaoTema from '../../components/BotaoTema.jsx';
 import styles from './PaginaLogin.module.css';
 
 const CAMINHO_POR_ROLE = {
@@ -46,7 +47,8 @@ function PaginaLogin() {
   }
 
   return (
-    <main className={styles.pagina} data-tema="escuro">
+    <main className={styles.pagina}>
+      <BotaoTema compacto className={styles.botaoTema} />
       <form className={styles.cartao} onSubmit={aoEnviar}>
         <div className={styles.marca}>
           <span className={styles.logoMarca} aria-hidden="true">

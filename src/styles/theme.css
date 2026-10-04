@@ -1,10 +1,14 @@
+/* Tema claro (padrão) e tema escuro ([data-tema='escuro'], mais abaixo). O
+   tema escolhido vai no <html> e vale para todas as telas. */
 :root {
+  color-scheme: light;
   /* ===== Identidade de eleição — as duas únicas cores de candidato no
      sistema. Nunca variam por ranking/posição/resultado: federal é sempre
-     azul, estadual é sempre roxo, em toda visualização (gráfico, avatar,
-     badge, mapa). ===== */
-  --cor-foco-federal: #2563eb;
-  --cor-foco-estadual: #7c3aed;
+     azul-petróleo, estadual é sempre roxo, em toda visualização. Estes tons
+     são os dos avatares e selos com texto branco; as marcas de gráfico usam
+     --cor-serie-*, validadas para daltonismo. ===== */
+  --cor-foco-federal: #0e7490;
+  --cor-foco-estadual: #7e22ce;
 
   --cor-indeciso: #94a3b8;
   --cor-branco-nulo: #cbd5e1;
@@ -15,16 +19,15 @@
   --cor-superficie-baixa: #f1f5f9;
   --cor-borda: #e2e8f0;
   --cor-texto: #0f172a;
-  --cor-texto-suave: #64748b;
+  --cor-texto-suave: #5b6577;
   --cor-texto-desabilitado: #94a3b8;
   --cor-placeholder: #cbd5e1;
 
-  /* ===== Sidebar: única superfície escura do app, fixa (não é dark mode —
-     o resto da interface continua claro). ===== */
-  --cor-sidebar: #0f172a;
-  --cor-sidebar-hover: #172554;
-  --cor-sidebar-texto: #ffffff;
-  --cor-sidebar-icone: #cbd5e1;
+  /* ===== Barra lateral e barra superior da coleta. ===== */
+  --cor-sidebar: #ffffff;
+  --cor-sidebar-hover: #f1f5f9;
+  --cor-sidebar-texto: #0f172a;
+  --cor-sidebar-icone: #5b6577;
 
   /* ===== Azul institucional — cor predominante do sistema (seleção, ação
      primária, item ativo). ===== */
@@ -104,17 +107,17 @@
   /* Cores das marcas de gráfico (barra, linha, área). No tema claro são as
      próprias cores de identidade; no escuro mudam de tom para manter
      contraste e separação para daltonismo. */
-  --cor-serie-federal: var(--cor-foco-federal);
-  --cor-serie-estadual: var(--cor-foco-estadual);
+  --cor-serie-federal: #0891b2;
+  --cor-serie-estadual: #9333ea;
 
   /* Texto da cor de seleção sobre a superfície (hover de botão contornado,
      período ativo). */
-  --cor-selecao-texto: var(--cor-selecao);
+  --cor-selecao-texto: #1d4ed8;
   /* Superfície opaca para o que flutua sobre os gráficos (tooltip). */
   --cor-superficie-solida: #ffffff;
   /* Fundo de botão destrutivo, com texto branco. */
   --cor-perigo-fundo: #dc2626;
-  --cor-fundo-painel: var(--cor-fundo);
+  --cor-fundo-painel: linear-gradient(165deg, #f8fafc 0%, #eef2f7 100%);
   /* Texto sobre um fundo da cor do texto (selo "FOCO"). */
   --cor-texto-inverso: #ffffff;
   --gradiente-numero: linear-gradient(90deg, var(--cor-texto), var(--cor-texto));
@@ -134,14 +137,14 @@
   --cor-barra-lidera: #16a34a;
   --cor-barra-empate: #d97706;
   --cor-barra-perde: #dc2626;
-  --cor-barra-concorrente: #94a3b8;
-  --cor-barra-neutra: #cbd5e1;
+  --cor-barra-concorrente: #64748b;
+  --cor-barra-neutra: #94a3b8;
 
   /* Perfil da amostra: sexo (categórico, validado para daltonismo) e faixa
      etária (ordenada, então escala de um só tom, do claro ao escuro). */
   --cor-perfil-feminino: #db2777;
   --cor-perfil-masculino: #4f6bed;
-  --cor-idade-1: #99f6e4;
+  --cor-idade-1: #5eead4;
   --cor-idade-2: #2dd4bf;
   --cor-idade-3: #14b8a6;
   --cor-idade-4: #0d9488;
@@ -183,6 +186,8 @@
 
   --cor-sidebar: rgba(4, 7, 14, 0.72);
   --cor-sidebar-hover: rgba(148, 163, 184, 0.1);
+  --cor-sidebar-texto: #ffffff;
+  --cor-sidebar-icone: #cbd5e1;
 
   --cor-selecao-fundo-suave: rgba(34, 211, 238, 0.12);
   --cor-selecao-texto: #67e8f9;

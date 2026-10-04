@@ -53,7 +53,7 @@ function PaginaAdmin() {
   }
 
   return (
-    <div className={styles.shell} data-tema="escuro">
+    <div className={styles.shell}>
       <a href="#conteudo-principal" className={styles.pularConteudo} onClick={pularParaConteudo}>
         Pular para o conteúdo
       </a>

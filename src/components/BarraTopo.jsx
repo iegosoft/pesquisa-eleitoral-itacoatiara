@@ -1,5 +1,6 @@
 import { sair } from '../services/auth.js';
 import { useAuth } from '../contexts/useAuth.js';
+import BotaoTema from './BotaoTema.jsx';
 import styles from './BarraTopo.module.css';
 
 function BarraTopo() {
@@ -15,6 +16,7 @@ function BarraTopo() {
       </div>
       <div className={styles.usuario}>
         {nome && <span className={styles.nome}>{nome}</span>}
+        <BotaoTema compacto />
         <button type="button" className={styles.botaoSair} onClick={sair}>
           Sair
         </button>

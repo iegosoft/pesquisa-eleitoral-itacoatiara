@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
+import { TemaProvider } from '../../contexts/TemaContext.jsx';
 import PaginaAdmin from './PaginaAdmin.jsx';
 
 vi.mock('./Dashboard/PainelDashboard.jsx', () => ({ default: () => <p>conteudo-dashboard</p> }));
@@ -10,13 +11,15 @@ vi.mock('./Dados/PainelDados.jsx', () => ({ default: () => <p>conteudo-dados</p>
 
 function renderNaUrl(url) {
   return render(
-    <MemoryRouter initialEntries={[url]}>
-      <AuthContext.Provider value={{ usuarioAuth: { uid: 'a' }, role: 'admin', nome: 'Admin Teste', carregando: false }}>
-        <Routes>
-          <Route path="/admin/:secao?" element={<PaginaAdmin />} />
-        </Routes>
-      </AuthContext.Provider>
-    </MemoryRouter>,
+    <TemaProvider>
+      <MemoryRouter initialEntries={[url]}>
+        <AuthContext.Provider value={{ usuarioAuth: { uid: 'a' }, role: 'admin', nome: 'Admin Teste', carregando: false }}>
+          <Routes>
+            <Route path="/admin/:secao?" element={<PaginaAdmin />} />
+          </Routes>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    </TemaProvider>,
   );
 }
 

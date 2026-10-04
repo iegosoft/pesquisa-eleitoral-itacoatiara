@@ -10,6 +10,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Pesquisa Eleitoral" />
     <meta name="description" content="Coleta e análise de intenção de voto em pesquisa eleitoral de rua em Itacoatiara-AM." />
+    <script>
+      // Aplica o tema antes de o app abrir, para não piscar o tema errado.
+      (function () {
+        var tema = 'escuro';
+        try {
+          var salvo = localStorage.getItem('pesquisa-eleitoral:tema');
+          if (salvo === 'claro' || salvo === 'escuro') tema = salvo;
+          else if (window.matchMedia('(prefers-color-scheme: light)').matches) tema = 'claro';
+        } catch (e) {}
+        document.documentElement.dataset.tema = tema;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { sair } from '../services/auth.js';
 import { SECOES_DASHBOARD } from '../pages/Admin/Dashboard/secoesDashboard.js';
+import BotaoTema from './BotaoTema.jsx';
 import styles from './Sidebar.module.css';
 
 const ICONES = {
@@ -114,10 +115,13 @@ function Sidebar() {
         ))}
       </nav>
 
-      <button type="button" className={styles.botaoSair} onClick={sair}>
-        <span className={styles.itemIcone}>{ICONES.sair}</span>
-        Sair
-      </button>
+      <div className={styles.rodape}>
+        <BotaoTema />
+        <button type="button" className={styles.botaoSair} onClick={sair}>
+          <span className={styles.itemIcone}>{ICONES.sair}</span>
+          Sair
+        </button>
+      </div>
     </aside>
   );
 }

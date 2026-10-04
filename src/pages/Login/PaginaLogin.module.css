@@ -9,6 +9,12 @@
   color: var(--cor-texto);
 }
 
+.botaoTema {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
 .cartao {
   composes: cartao from '../../styles/md3.module.css';
   width: 100%;
