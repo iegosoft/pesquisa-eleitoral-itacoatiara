@@ -6,6 +6,29 @@ Nielsen ela atende. As evidências de "antes" foram gravadas no sistema
 publicado (Vercel), e as de "depois" no ambiente local (`npm run dev`) da branch
 de cada melhoria, antes do merge.
 
+## Técnicas de UI/UX aplicadas
+
+Resumo das técnicas usadas no redesign e onde cada uma aparece:
+
+| Técnica | Onde foi aplicada |
+|---|---|
+| **Avaliação heurística** (10 heurísticas de Nielsen, com escala de severidade) | Ponto de partida de todas as melhorias: cada mudança responde a um problema P1–P11 |
+| **Hierarquia visual / pirâmide invertida** (o mais importante primeiro) | O Dashboard abre com o "Resultado do candidato foco" e segue do resumo para o detalhe: resultado → coleta → intenção → território → perfil → tendência |
+| **Storytelling com dados** | Cada seção tem um título e uma linha dizendo que pergunta ela responde; frases prontas como "27,3 pontos à frente de Josias Melo." |
+| **Divulgação progressiva** (detalhe só quando pedido) | Desempenho do candidato bairro a bairro ao clicar, "Ver como tabela" na tendência, quantidade de votos ao passar o mouse |
+| **Destaque pré-atentivo** (o olho acha antes de ler) | Só o candidato foco tem cor; os concorrentes ficam em cinza |
+| **Cor semântica com significado único** | Ciano/violeta = cargo; verde/âmbar/vermelho = resultado do foco; cinza = contexto. A cor nunca indica posição no ranking |
+| **Codificação redundante** (não depender só da cor) | Status sempre com cor + ícone + texto (▲ Lidera, = Empate, ▼ Perde); amostra pequena com borda tracejada e selo |
+| **Design system com tokens** (consistência, H4) | Todas as cores, raios e sombras vêm de variáveis de tema; uma única família tipográfica, com hierarquia por tamanho e peso; algarismos de largura fixa para alinhar números |
+| **Acessibilidade medida** | Contraste WCAG AA calculado para cada texto, paletas validadas para daltonismo, nos dois temas; respeito a "reduzir movimento" |
+| **Prevenção e recuperação de erros** | Validação das datas no filtro, limite de moradores, "Para salvar esta casa, falta:", mensagens que dizem como corrigir |
+| **Visibilidade do status do sistema** | URLs por seção, seção atual destacada na barra lateral, base de entrevistados em cada percentual, avisos anunciados ao leitor de tela |
+| **Integridade dos dados na visualização** | Nenhum 0% falso em dias sem coleta (linha tracejada onde não houve medição), base amostral visível, aviso de amostra pequena |
+| **Navegação por âncoras com destaque da seção visível** (*scroll-spy*) | Atalhos de seção na barra lateral, fixa durante a rolagem |
+| **Microinterações sutis** | Hover discreto nas linhas e cartões, barras e anéis que crescem na entrada, números que contam até o valor |
+| **Áreas de clique ampliadas** (Lei de Fitts) | A linha inteira do candidato e o cartão inteiro do bairro são clicáveis |
+| **Personalização** | Tema claro ou escuro, seguindo a preferência do sistema operacional no primeiro acesso |
+
 ## R1 — Rotas reais no painel administrativo
 
 **Problema tratado:** P1 · **Heurísticas:** H1 (visibilidade do status do

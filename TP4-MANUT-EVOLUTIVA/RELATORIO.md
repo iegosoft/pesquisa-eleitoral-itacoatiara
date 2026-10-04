@@ -40,6 +40,26 @@ própria avaliação heurística serviu de critério para revisar decisões
 visuais: a coleta chegou a ter um tema claro próprio, que foi revertido por
 quebrar a consistência com o resto do sistema (H4).
 
+### Técnicas de UI/UX utilizadas
+
+Em síntese (detalhes e onde cada uma aparece em
+[`redesign.md`](etapa1-redesign/redesign.md#técnicas-de-uiux-aplicadas)):
+
+- **Avaliação heurística de Nielsen** como ponto de partida de cada mudança.
+- **Hierarquia visual e storytelling com dados:** a resposta principal primeiro
+  e as seções na ordem da leitura, cada uma dizendo que pergunta responde.
+- **Divulgação progressiva:** detalhes (bairro a bairro, tabela, votos) só
+  quando o usuário pede.
+- **Cor com significado único e destaque pré-atentivo:** só o candidato foco tem
+  cor; status sempre com cor, ícone e texto.
+- **Design system com tokens** e uma única fonte, para consistência.
+- **Acessibilidade medida:** contraste WCAG AA e paletas validadas para
+  daltonismo, nos dois temas.
+- **Prevenção de erros, visibilidade do status e integridade dos dados** (base
+  amostral, sem 0% falso, aviso de amostra pequena).
+- **Microinterações sutis, áreas de clique ampliadas e personalização** (tema
+  claro/escuro).
+
 ## Etapa 2 — Manutenção evolutiva e acessibilidade
 
 Documentos: [`planejamento.md`](etapa2-evolutiva/planejamento.md) (diagnóstico,
