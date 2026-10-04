@@ -37,5 +37,5 @@ Os arquivos de evidência seguem o padrão
 | F1 — Alternar tema claro/escuro | [`F1-alternar-tema/`](etapa2-evolutiva/evidencias/F1-alternar-tema/) | [#30](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/30) | [#31](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/31) |
 | F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
 | F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | — | — |
-| F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | — | — |
+| F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | [#32](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/32) | PR_F4 |
 | A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | [#28](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/28) | [#29](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/29) |

@@ -115,3 +115,61 @@ eficiência).
 4 testes novos em `src/contexts/TemaContext.test.jsx` (tema inicial, troca e
 gravação da escolha, respeito à escolha salva, nome acessível do botão só com
 ícone). Suíte completa: 50/50.
+
+## F4 — Gerenciar entrevistas
+
+**Issue:** [#32](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/32)
+
+| | Antes | Depois |
+|---|---|---|
+| Ver as entrevistas salvas | só baixando a planilha (Dados → Exportar) | seção **Entrevistas** na barra lateral, com cada casa num cartão (bairro, data, pesquisador, quantos foram entrevistados) e a tabela dos moradores, com as respostas por extenso |
+| Encontrar uma entrevista | — | filtros por bairro e por pesquisador, com o total de casas e entrevistados |
+| Corrigir uma resposta errada | impossível pelo sistema | **Corrigir** transforma a linha em campos (sexo, faixa etária, voto federal, voto estadual), com Salvar e Cancelar |
+| Excluir uma entrevista duplicada ou errada | impossível pelo sistema | **Excluir** (um morador) e **Excluir casa** (a casa inteira, para casa salva duas vezes), sempre com confirmação; ao excluir o último morador, o sistema avisa que a casa também será excluída |
+| Retorno da ação | — | mensagem do resultado ("Dados do morador 1 da casa de Centro corrigidos."), anunciada pelo leitor de tela, em vermelho quando dá erro |
+
+**Por que se justifica:** uma resposta registrada errada em campo, ou uma casa
+salva duas vezes, distorcia os percentuais do painel sem que o administrador
+pudesse corrigir. Heurísticas H3 (controle e liberdade do usuário) e H9 (ajudar a
+reconhecer e corrigir erros). A confirmação antes de excluir atende H5
+(prevenção de erros), porque a exclusão não pode ser desfeita.
+
+**Decisões técnicas:**
+
+- As regras de segurança do Firestore já permitiam que só o administrador
+  editasse e excluísse residências e entrevistados; nenhuma regra mudou.
+- O Firestore não apaga as subcoleções junto com o documento pai. Por isso, para
+  excluir uma casa, o sistema apaga cada entrevistado e a residência no mesmo
+  lote (`writeBatch`), tudo ou nada.
+- Ao excluir o último morador, a casa vai junto, para não ficar uma casa vazia
+  contando em "Casas visitadas".
+- A lista e o Dashboard se atualizam sozinhos depois de uma correção ou
+  exclusão, porque os dados chegam em tempo real (`onSnapshot`).
+
+**Cuidado na gravação das evidências:** o ambiente local usa o mesmo banco do
+sistema publicado. Por isso, no vídeo, a correção e a exclusão foram feitas numa
+casa de teste criada só para isso; nos prints de correção e de confirmação, a
+ação foi cancelada.
+
+### Evidências
+
+| | Antes | Depois |
+|---|---|---|
+| Tela Dados / Entrevistas | [`antes/…-dados-sem-lista.png`](evidencias/F4-gerenciar-entrevistas/antes/tp4-evolutiva-antes-dados-sem-lista.png): não havia lista de entrevistas | [`depois/…-entrevistas-lista.png`](evidencias/F4-gerenciar-entrevistas/depois/tp4-evolutiva-depois-entrevistas-lista.png) |
+| Corrigir e excluir | — | [`depois/…-entrevistas.mp4`](evidencias/F4-gerenciar-entrevistas/depois/tp4-evolutiva-depois-entrevistas.mp4) (vídeo), [`depois/…-entrevistas-corrigir.png`](evidencias/F4-gerenciar-entrevistas/depois/tp4-evolutiva-depois-entrevistas-corrigir.png), [`depois/…-entrevistas-confirmar.png`](evidencias/F4-gerenciar-entrevistas/depois/tp4-evolutiva-depois-entrevistas-confirmar.png) |
+
+### O que mudou no código
+
+- `src/services/entrevistas.js`: `atualizarEntrevistado`, `excluirEntrevistado`
+  e `excluirCasa`.
+- `src/pages/Admin/Entrevistas/`: `PainelEntrevistas.jsx` (tela e filtros),
+  `CartaoCasa.jsx` (casa e exclusão da casa), `LinhaMorador.jsx` (correção e
+  exclusão do morador) e `agruparEntrevistas.js` (monta a lista por casa).
+- `PaginaAdmin.jsx` e `Sidebar.jsx`: nova seção **Entrevistas**.
+
+### Testes
+
+7 testes novos em `PainelEntrevistas.test.jsx`: montagem da lista por casa e
+filtros; correção grava os valores certos; exclusão de morador só acontece depois
+da confirmação; aviso quando é o último morador; exclusão da casa inteira com
+todos os moradores. Suíte completa: 57/57.
