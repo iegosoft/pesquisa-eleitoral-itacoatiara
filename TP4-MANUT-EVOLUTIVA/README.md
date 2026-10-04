@@ -4,6 +4,9 @@ Trabalho prático 4 da disciplina Manutenção e Integração de Software (UFAM)
 aplicado ao sistema Pesquisa Eleitoral Itacoatiara. Cada etapa do enunciado tem
 uma pasta própria, com os documentos e as evidências dela.
 
+**Comece pelo [relatório final](RELATORIO.md)**: resumo das duas etapas,
+verificação, desvios em relação ao enunciado e reflexão crítica.
+
 ## Etapa 1 — Redesign ([`etapa1-redesign/`](etapa1-redesign/))
 
 | Documento | Conteúdo |
@@ -29,13 +32,12 @@ Os arquivos de evidência seguem o padrão
 
 | Documento | Conteúdo |
 |---|---|
-| [`planejamento.md`](etapa2-evolutiva/planejamento.md) | Diagnóstico do que o administrador consegue fazer, as funcionalidades novas (F1–F4) e a melhoria de acessibilidade (A1), cada uma com a justificativa |
+| [`planejamento.md`](etapa2-evolutiva/planejamento.md) | Diagnóstico do que o administrador consegue fazer, as funcionalidades novas (F1, F3 e F4; o F2 ficou como trabalho futuro) e a melhoria de acessibilidade (A1), cada uma com a justificativa |
 | [`implementacao.md`](etapa2-evolutiva/implementacao.md) | Resultado de cada item, com a comparação antes/depois, o que mudou no código e os testes |
 
 | Item | Pasta de evidências | Issue | Pull Request |
 |---|---|---|---|
 | F1 — Alternar tema claro/escuro | [`F1-alternar-tema/`](etapa2-evolutiva/evidencias/F1-alternar-tema/) | [#30](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/30) | [#31](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/31) |
-| F2 — Metas e acompanhamento da coleta | [`F2-metas-e-acompanhamento/`](etapa2-evolutiva/evidencias/F2-metas-e-acompanhamento/) | — | — |
 | F3 — Dashboard interativo | [`F3-dashboard-interativo/`](etapa2-evolutiva/evidencias/F3-dashboard-interativo/) | [#34](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/34) | [#35](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/35) |
 | F4 — Gerenciar entrevistas | [`F4-gerenciar-entrevistas/`](etapa2-evolutiva/evidencias/F4-gerenciar-entrevistas/) | [#32](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/32) | [#33](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/33) |
 | A1 — Uso completo por teclado e por leitor de tela | [`A1-teclado-e-leitor-de-tela/`](etapa2-evolutiva/evidencias/A1-teclado-e-leitor-de-tela/) | [#28](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/28) | [#29](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/29) |

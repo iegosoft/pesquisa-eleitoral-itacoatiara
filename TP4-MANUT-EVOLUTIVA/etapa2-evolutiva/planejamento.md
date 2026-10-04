@@ -35,7 +35,12 @@ Levantamento feito no código antes de escolher as funcionalidades:
   concentrou as cores em variáveis), com contraste medido pelo WCAG AA, como foi
   feito no tema escuro.
 
-### F2 — Metas e acompanhamento da coleta
+### F2 — Metas e acompanhamento da coleta (fora do escopo desta entrega)
+
+> **Situação:** planejada, mas não implementada nesta entrega, por decisão do
+> grupo. A etapa já cumpre o mínimo do enunciado com três funcionalidades novas
+> (F1, F3 e F4). O F2 fica registrado aqui como trabalho futuro, com a
+> justificativa e a forma de fazer já levantadas.
 
 - **O que é:** o administrador define uma meta de entrevistas por bairro e passa
   a ver o progresso de cada bairro (por exemplo, 12 de 30) e a produção de cada
@@ -95,5 +100,8 @@ real (lidos pelo leitor de tela); por isso não entram nesta lista.
 
 1. Evidências de **antes** de todos os itens (antes de qualquer código).
 2. Um item por vez, cada um com Issue, branch, testes automatizados, evidências
-   de **depois**, documentação e Pull Request: A1, F1, F4, F3, F2.
+   de **depois**, documentação e Pull Request: A1, F1, F4, F3. O F2 ficou fora
+   do escopo desta entrega (ver acima).
 3. README e CHANGELOG do projeto atualizados no final, como pede o enunciado.
+
+O resultado de cada item está em [`implementacao.md`](implementacao.md).
