@@ -4,6 +4,7 @@ import {
   aplicarFiltros,
   calcularEvolucao,
   calcularDesempenhoPorBairro,
+  calcularCandidatoPorBairro,
   calcularIntencaoVoto,
   calcularResumo,
   calcularResumoAgregado,
@@ -69,6 +70,8 @@ function PainelDashboard() {
     useDadosPainel();
   const [filtros, setFiltros] = useState(filtrosIniciais);
   const [periodoEvolucao, setPeriodoEvolucao] = useState(7);
+  const [candidatosAbertos, setCandidatosAbertos] = useState({ federal: null, estadual: null });
+  const [aviso, setAviso] = useState('');
 
   const candidatosFederal = useMemo(() => candidatos.filter((c) => c.cargo === 'federal'), [candidatos]);
   const candidatosEstadual = useMemo(() => candidatos.filter((c) => c.cargo === 'estadual'), [candidatos]);
@@ -116,15 +119,42 @@ function PainelDashboard() {
     () => calcularEvolucao(respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao),
     [respostasParaEvolucao, focoFederal, focoEstadual, periodoEvolucao],
   );
+  const detalheFederal = useMemo(
+    () => candidatosAbertos.federal && calcularCandidatoPorBairro(respostasFiltradas, candidatosAbertos.federal, 'votoFederal'),
+    [respostasFiltradas, candidatosAbertos.federal],
+  );
+  const detalheEstadual = useMemo(
+    () =>
+      candidatosAbertos.estadual && calcularCandidatoPorBairro(respostasFiltradas, candidatosAbertos.estadual, 'votoEstadual'),
+    [respostasFiltradas, candidatosAbertos.estadual],
+  );
+
+  function alternarCandidato(cargo, id) {
+    setCandidatosAbertos((atual) => ({ ...atual, [cargo]: atual[cargo] === id ? null : id }));
+  }
+
+  // Clique num bairro: filtra o painel inteiro e leva o usuário de volta ao
+  // topo (os filtros), onde o aviso explica o que aconteceu e como desfazer.
+  function filtrarPorBairro(bairro) {
+    setFiltros((atual) => ({ ...atual, bairro }));
+    setAviso(`Painel filtrado pelo bairro ${bairro}. Use "Limpar filtros" para voltar a todos os bairros.`);
+    document.getElementById('titulo-filtros')?.focus();
+  }
+
+  function alterarFiltros(novos) {
+    setFiltros(novos);
+    setAviso('');
+  }
 
   return (
     <div className={styles.painel}>
       <Filtros
         filtros={filtros}
-        aoAlterar={setFiltros}
-        aoLimpar={() => setFiltros(filtrosIniciais())}
+        aoAlterar={alterarFiltros}
+        aoLimpar={() => alterarFiltros(filtrosIniciais())}
         temFiltroAtivo={!nenhumFiltroAtivo(filtros)}
         bairrosDisponiveis={bairrosDisponiveis}
+        aviso={aviso}
       />
 
       <Secao
@@ -144,21 +174,29 @@ function PainelDashboard() {
         <div className={styles.gradeLarga}>
           <RankingIntencao
             titulo="Deputado federal"
+            cargo="federal"
             itens={itensFederal}
             statusFoco={resultadoFederal?.status}
             base={respostasFiltradas.length}
+            candidatoAberto={candidatosAbertos.federal}
+            detalhe={detalheFederal}
+            aoAlternarCandidato={(id) => alternarCandidato('federal', id)}
           />
           <RankingIntencao
             titulo="Deputado estadual"
+            cargo="estadual"
             itens={itensEstadual}
             statusFoco={resultadoEstadual?.status}
             base={respostasFiltradas.length}
+            candidatoAberto={candidatosAbertos.estadual}
+            detalhe={detalheEstadual}
+            aoAlternarCandidato={(id) => alternarCandidato('estadual', id)}
           />
         </div>
       </Secao>
 
       <Secao id="territorio">
-        <DesempenhoPorBairro dados={desempenhoPorBairro} />
+        <DesempenhoPorBairro dados={desempenhoPorBairro} aoSelecionarBairro={filtrarPorBairro} />
       </Secao>
 
       <Secao id="perfil">

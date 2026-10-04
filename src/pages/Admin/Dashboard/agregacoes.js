@@ -132,6 +132,27 @@ function calcularResultadoFoco(itens) {
   };
 }
 
+// Onde um candidato é forte e onde é fraco: para cada bairro, quantos votos
+// ele teve e o percentual sobre as entrevistas do bairro. Do maior para o menor
+// percentual; no empate, o bairro com mais entrevistas primeiro.
+function calcularCandidatoPorBairro(respostas, candidatoId, campoVoto) {
+  const bairros = [...new Set(respostas.map((resposta) => resposta.bairro))];
+
+  return bairros
+    .map((bairro) => {
+      const doBairro = respostas.filter((resposta) => resposta.bairro === bairro);
+      const votos = doBairro.filter((resposta) => resposta[campoVoto] === candidatoId).length;
+      return {
+        bairro,
+        entrevistas: doBairro.length,
+        votos,
+        percentual: (votos / doBairro.length) * 100,
+        amostraPequena: doBairro.length < AMOSTRA_MINIMA_BAIRRO,
+      };
+    })
+    .sort((a, b) => b.percentual - a.percentual || b.entrevistas - a.entrevistas);
+}
+
 const OPCOES_SEXO = [
   { chave: 'feminino', rotulo: 'Feminino' },
   { chave: 'masculino', rotulo: 'Masculino' },
@@ -241,6 +262,7 @@ export {
   calcularResumoAgregado,
   calcularIntencaoVoto,
   calcularDesempenhoPorBairro,
+  calcularCandidatoPorBairro,
   calcularResultadoFoco,
   calcularPerfil,
   AMOSTRA_MINIMA_BAIRRO,
