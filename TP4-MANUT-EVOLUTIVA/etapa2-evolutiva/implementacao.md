@@ -173,3 +173,45 @@ ação foi cancelada.
 filtros; correção grava os valores certos; exclusão de morador só acontece depois
 da confirmação; aviso quando é o último morador; exclusão da casa inteira com
 todos os moradores. Suíte completa: 57/57.
+
+## F3 — Dashboard interativo
+
+**Issue:** [#34](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/issues/34)
+
+| | Antes | Depois |
+|---|---|---|
+| Clicar num bairro (Território) | nada acontecia; para ver um bairro, era preciso subir até o filtro e escolher na lista | o cartão inteiro é clicável: o painel todo passa a mostrar só aquele bairro, a página volta aos filtros e aparece o aviso "Painel filtrado pelo bairro X. Use 'Limpar filtros' para voltar a todos os bairros." |
+| Clicar num candidato (ranking de intenção) | nada acontecia; não havia como saber onde um candidato é forte | a linha inteira é clicável e abre, dentro do cartão, **"Candidato bairro a bairro"**: uma barra por bairro, com o percentual e "X de N entrevistas", do bairro mais forte ao mais fraco; bairros com amostra pequena aparecem apagados |
+| Teclado e leitor de tela | — | tudo funciona com Tab e Enter, com contorno de foco no cartão ou na linha; o botão do candidato informa se o detalhe está aberto (`aria-expanded`); ao abrir o detalhe, o foco vai para o título dele; o aviso do filtro é lido pelo leitor de tela |
+
+**Por que se justifica:** o painel deixa de ser só leitura e passa a responder
+ao que o administrador está olhando, sem ele precisar lembrar onde fica cada
+filtro. Heurísticas H7 (flexibilidade e eficiência: um atalho direto para quem
+explora os dados) e H6 (reconhecimento em vez de memorização). Os elementos
+clicáveis seguem os critérios da A1 (acessíveis por teclado e com foco
+visível).
+
+### Evidências
+
+| | Antes | Depois |
+|---|---|---|
+| Cliques no Dashboard | [`antes/…-dashboard-cliques.mp4`](evidencias/F3-dashboard-interativo/antes/tp4-evolutiva-antes-dashboard-cliques.mp4): os cliques não tinham efeito | [`depois/…-dashboard-cliques.mp4`](evidencias/F3-dashboard-interativo/depois/tp4-evolutiva-depois-dashboard-cliques.mp4) |
+| Candidato bairro a bairro | — | [`depois/…-candidato-bairros.png`](evidencias/F3-dashboard-interativo/depois/tp4-evolutiva-depois-candidato-bairros.png) |
+| Filtro por clique no bairro | — | [`depois/…-filtro-por-clique.png`](evidencias/F3-dashboard-interativo/depois/tp4-evolutiva-depois-filtro-por-clique.png) |
+
+### O que mudou no código
+
+- `agregacoes.js`: `calcularCandidatoPorBairro` (votos e percentual de um
+  candidato em cada bairro).
+- `RankingIntencao.jsx`: o nome do candidato virou botão (com a área de clique
+  estendida à linha) e o detalhe `DetalheCandidato`.
+- `DesempenhoPorBairro.jsx`: o nome do bairro virou botão (com a área de clique
+  estendida ao cartão).
+- `PainelDashboard.jsx` e `Filtros.jsx`: filtro por clique, candidatos abertos e
+  o aviso do filtro.
+
+### Testes
+
+5 testes novos em `DashboardInterativo.test.jsx` (cálculo bairro a bairro,
+abertura do detalhe com foco no título, botão só para candidatos, clique no
+bairro e aviso do filtro). Suíte completa: 62/62.
