@@ -4,8 +4,14 @@ Sistema de coleta e análise de intenção de voto para pesquisa eleitoral de ru
 
 O sistema tem dois perfis de uso completamente separados:
 
-- **Pesquisador** (rota `/coleta`): interface simples para coleta em campo, casa a casa, sem números ou resultados agregados visíveis.
-- **Admin** (rota `/admin`): plataforma de BI eleitoral com sidebar própria, dividida em três seções — **Dashboard** (KPIs, ranking de intenção de voto por eleição, evolução do candidato foco, status do foco por bairro), **Candidatos** (cadastro, edição e exclusão — bloqueada se o candidato já tiver voto registrado, pra não corromper os relatórios) e **Dados** (importação/exportação em Excel, cadastro manual de uma casa).
+- **Pesquisador** (rota `/coleta`): interface simples para coleta em campo, casa a casa, sem números ou resultados agregados visíveis. Mostra o que falta para salvar a casa, permite remover um morador adicionado por engano e exige o consentimento do entrevistado.
+- **Admin** (rotas `/admin/...`): plataforma de BI eleitoral com sidebar própria, dividida em quatro seções, cada uma com endereço próprio:
+  - **Dashboard** (`/admin/dashboard`): resultado do candidato foco em cada cargo, andamento da coleta, ranking de intenção de voto com foto e partido, desempenho do foco por bairro, perfil da amostra e evolução no tempo. É interativo: clicar num bairro filtra o painel inteiro, e clicar num candidato mostra o desempenho dele bairro a bairro.
+  - **Candidatos** (`/admin/candidatos`): cadastro, edição e exclusão (bloqueada se o candidato já tiver voto registrado, pra não corromper os relatórios).
+  - **Dados** (`/admin/dados`): importação/exportação em Excel e cadastro manual de uma casa.
+  - **Entrevistas** (`/admin/entrevistas`): conferência das entrevistas salvas, com correção de respostas e exclusão de entrevistas duplicadas.
+
+O sistema tem tema claro e escuro (a escolha fica salva no aparelho) e foi revisado para uso por teclado e leitor de tela.
 
 ## Stack
 
@@ -13,23 +19,26 @@ O sistema tem dois perfis de uso completamente separados:
 - Back-end Firebase: Firestore como banco de dados e Firebase Auth para login e controle de papéis.
 - Persistência offline do Firestore habilitada, para coleta em áreas com sinal instável.
 - Gráficos do painel admin com Recharts.
-- CSS Modules com um pequeno design system próprio (`src/styles/theme.css`): tokens de cor com papel fixo (azul institucional predominante, verde petróleo secundário, roxo só pra diferenciar a eleição estadual, verde/laranja/vermelho reservados a positivo/atenção/erro), tipografia Roboto + Manrope (Google Fonts), cantos arredondados (16px) e sombras leves — nada de cor decidida por componente, tudo referencia os tokens.
+- CSS Modules com um design system próprio (`src/styles/theme.css`): tokens de cor com papel fixo, em versão clara e escura (ciano e violeta identificam as eleições federal e estadual; verde/âmbar/vermelho só indicam o resultado do candidato foco; cinza é contexto), uma única família tipográfica (Manrope, Google Fonts), cantos arredondados e textura de grão. Nada de cor decidida por componente: tudo referencia os tokens. As cores das séries foram validadas para daltonismo e os textos para contraste WCAG AA.
 
 ## Estrutura de pastas
 
 ```
 src/
   components/    componentes de interface reutilizáveis (Sidebar, Cabecalho,
-                 BarraTopo, AvatarCandidato, SeletorPills, BannerInstalacao)
+                 BarraTopo, BotaoTema, AvatarCandidato, SeletorPills,
+                 BannerInstalacao)
     coleta/      componentes específicos da tela de coleta
-  contexts/      AuthContext/useAuth — sessão e papel do usuário logado
+  contexts/      AuthContext/useAuth — sessão e papel do usuário logado;
+                 TemaContext/useTema — tema claro/escuro
   hooks/         hooks compartilhados (ex.: prompt de instalação do PWA)
   pages/
     Coleta/      tela do perfil pesquisador
     Login/       tela de login
     Admin/       shell do perfil admin (sidebar + cabeçalho + seções)
-      Dashboard/ KPIs, gráficos, agregações e paleta de cores dos gráficos
+      Dashboard/ seções do painel, agregações e cores dos gráficos
       Dados/     importação/exportação de planilha, cadastro manual
+      Entrevistas/ conferência, correção e exclusão de entrevistas
   routes/        definição de rotas da aplicação
   services/      camada isolada de acesso a dados (Firestore/Auth) — nenhum
                  componente acessa o Firebase diretamente
@@ -57,6 +66,20 @@ src/
    ```
    npm run build
    ```
+
+5. Para rodar os testes automatizados (Vitest + Testing Library) e o lint:
+
+   ```
+   npm test
+   npm run lint
+   ```
+
+## Histórico de mudanças
+
+As mudanças de cada entrega estão no [CHANGELOG](CHANGELOG.md). A documentação
+de cada trabalho prático, com evidências de antes e depois, fica nas pastas
+`TP1-MANUT-CORRETIVA/`, `TP2-MANUT-PREVENTIVA/`, `TP3-MANUT-ADAPTATIVA/` e
+`TP4-MANUT-EVOLUTIVA/`.
 
 ## Deploy (Firebase Hosting)
 
