@@ -1,0 +1,213 @@
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.barra {
+  composes: cartao from '../../../styles/md3.module.css';
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 16px 18px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cor-texto-suave);
+}
+
+.campoTexto {
+  composes: campoTexto from '../../../styles/md3.module.css';
+  height: 44px;
+  font-size: 15px;
+}
+
+.resumo {
+  margin: 0 0 0 auto;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.mensagem {
+  margin: 0;
+  min-height: 1.4em;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cor-sucesso-texto);
+}
+
+.mensagemErro {
+  composes: mensagem;
+  color: var(--cor-erro-texto);
+}
+
+.vazio {
+  margin: 0;
+  font-size: 15px;
+  color: var(--cor-texto-suave);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.casa {
+  composes: cartao from '../../../styles/md3.module.css';
+  padding: 18px 20px;
+}
+
+.cabecalhoCasa {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cabecalhoCasa h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+.detalheCasa {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--cor-texto-suave);
+}
+
+.rolagemTabela {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela th,
+.tabela td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
+  color: var(--cor-texto);
+  white-space: nowrap;
+}
+
+.tabela thead th {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.tabela tbody tr:last-child th,
+.tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.linhaEditando {
+  background: var(--cor-selecao-fundo-suave);
+}
+
+.campoTabela {
+  composes: campoTexto from '../../../styles/md3.module.css';
+  height: 38px;
+  min-width: 130px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.acoes {
+  text-align: right;
+}
+
+.acoes > * + * {
+  margin-left: 8px;
+}
+
+.confirmacao {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--cor-erro-borda);
+  border-radius: var(--raio-borda-lg);
+  background: var(--cor-erro-fundo-suave);
+  color: var(--cor-erro-texto);
+  font-size: 14px;
+}
+
+.confirmacao p {
+  margin: 0 0 10px;
+}
+
+.acoesConfirmacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.confirmacaoLinha {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cor-erro-texto);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.botaoPrimario {
+  composes: botaoPreenchido from '../../../styles/md3.module.css';
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.botaoSecundario {
+  composes: botaoContornado from '../../../styles/md3.module.css';
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.botaoPerigo {
+  composes: botaoContornado from '../../../styles/md3.module.css';
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+  border-color: var(--cor-erro-borda);
+  color: var(--cor-erro-texto);
+}
+
+.botaoPerigoPreenchido {
+  composes: botaoBase from '../../../styles/md3.module.css';
+  height: 36px;
+  padding: 0 16px;
+  border: none;
+  background: var(--cor-perigo-fundo);
+  color: #fff;
+  font-size: 13px;
+}
+
+.somenteLeitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
