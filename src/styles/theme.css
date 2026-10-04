@@ -1,6 +1,5 @@
 /* Tema claro (padrão) e tema escuro ([data-tema='escuro'], mais abaixo). O
-   tema escolhido vai no <html>; a barra lateral e a barra superior da coleta
-   ficam sempre escuras. */
+   tema escolhido vai no <html> e vale para todas as telas. */
 :root {
   color-scheme: light;
   /* ===== Identidade de eleição — as duas únicas cores de candidato no
@@ -24,12 +23,11 @@
   --cor-texto-desabilitado: #94a3b8;
   --cor-placeholder: #cbd5e1;
 
-  /* ===== Sidebar e barra superior da coleta: sempre escuras, nos dois
-     temas (recebem data-tema="escuro" no próprio elemento). ===== */
-  --cor-sidebar: #0f172a;
-  --cor-sidebar-hover: #172554;
-  --cor-sidebar-texto: #ffffff;
-  --cor-sidebar-icone: #cbd5e1;
+  /* ===== Barra lateral e barra superior da coleta. ===== */
+  --cor-sidebar: #ffffff;
+  --cor-sidebar-hover: #f1f5f9;
+  --cor-sidebar-texto: #0f172a;
+  --cor-sidebar-icone: #5b6577;
 
   /* ===== Azul institucional — cor predominante do sistema (seleção, ação
      primária, item ativo). ===== */
@@ -186,8 +184,10 @@
   --cor-placeholder: #64748b;
   --cor-texto-inverso: #0b1326;
 
-  --cor-sidebar: rgba(4, 7, 14, 0.92);
+  --cor-sidebar: rgba(4, 7, 14, 0.72);
   --cor-sidebar-hover: rgba(148, 163, 184, 0.1);
+  --cor-sidebar-texto: #ffffff;
+  --cor-sidebar-icone: #cbd5e1;
 
   --cor-selecao-fundo-suave: rgba(34, 211, 238, 0.12);
   --cor-selecao-texto: #67e8f9;

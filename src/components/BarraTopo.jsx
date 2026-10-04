@@ -7,7 +7,7 @@ function BarraTopo() {
   const { nome } = useAuth();
 
   return (
-    <header className={styles.barra} data-tema="escuro">
+    <header className={styles.barra}>
       <div className={styles.marca}>
         <span className={styles.logoMarca} aria-hidden="true">
           <img src="/icons/icon-192.png" alt="" />

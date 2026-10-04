@@ -75,9 +75,15 @@
   background: var(--cor-sidebar-hover);
 }
 
+/* Fundo azul com texto e ícone brancos nos dois temas (5,17:1). */
 .itemAtivo,
 .itemAtivo:hover {
   background: var(--cor-selecao);
+  color: #fff;
+}
+
+.itemAtivo .itemIcone {
+  color: #fff;
 }
 
 .itemIcone {
@@ -105,8 +111,8 @@
 }
 
 .botaoSair:hover {
-  background: rgba(220, 38, 38, 0.16);
-  color: #fca5a5;
+  background: var(--cor-erro-fundo-suave);
+  color: var(--cor-erro-texto);
 }
 
 .atalhos {

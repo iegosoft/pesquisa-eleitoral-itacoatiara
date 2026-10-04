@@ -87,9 +87,8 @@ function Sidebar() {
   const { pathname } = useLocation();
   const noDashboard = pathname === '/admin/dashboard';
 
-  // A barra lateral é sempre escura, nos dois temas (como no visual original).
   return (
-    <aside className={styles.sidebar} data-tema="escuro">
+    <aside className={styles.sidebar}>
       <div className={styles.logo}>
         <span className={styles.logoMarca} aria-hidden="true">
           <img src="/icons/icon-192.png" alt="" />
