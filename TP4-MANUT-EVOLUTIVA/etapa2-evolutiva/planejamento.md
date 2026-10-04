@@ -78,15 +78,15 @@ Levantamento feito no código antes de escolher as funcionalidades:
 
 ### A1 — Uso completo por teclado e por leitor de tela
 
-Levantamento feito no código atual (depois do redesign). Cinco limitações reais:
+Levantamento feito no código atual (depois do redesign). Quatro limitações reais,
+todas ligadas a quem usa só o teclado ou um leitor de tela:
 
 | # | Problema | Quem é afetado e por quê | Critério WCAG 2.1 | Correção |
 |---|---|---|---|---|
-| 1 | Na coleta, os botões de sexo, faixa etária, quantidade de moradores e candidato não informam qual opção está marcada; a seleção só aparece pela cor e pelo ✓ | Pessoa cega usando leitor de tela não consegue conferir o que marcou, justamente na tarefa principal do sistema | 4.1.2 Nome, função, valor | `aria-pressed` nos botões de seleção |
-| 2 | Não há link "Pular para o conteúdo"; quem navega com Tab passa pela barra lateral inteira em toda tela | Pessoa com deficiência motora que usa só teclado ou acionador; leitor de tela | 2.4.1 Ignorar blocos | Link de pular, visível ao receber foco |
-| 3 | Ao trocar de seção do painel, o foco do teclado fica para trás e o leitor de tela não anuncia a página nova | Pessoa cega; quem usa só teclado | 2.4.3 Ordem do foco | Mover o foco para o título da página nova e atualizar o título da aba |
-| 4 | O botão "Escolher arquivo" (Dados) não mostra o contorno de foco, porque o campo real é invisível | Quem usa só teclado não sabe onde está | 2.4.7 Foco visível | Contorno de foco no botão quando o campo recebe foco |
-| 5 | O gráfico de Tendência é só desenho (SVG), sem alternativa em texto | Pessoa cega não acessa a evolução do candidato | 1.1.1 Conteúdo não textual | Tabela com os mesmos dados, acessível ao leitor de tela, e opção "ver como tabela" |
+| 1 | Não há link "Pular para o conteúdo"; quem navega com Tab passa pela barra lateral inteira em toda tela | Pessoa com deficiência motora que usa só teclado ou acionador; leitor de tela | 2.4.1 Ignorar blocos | Link de pular, visível ao receber foco |
+| 2 | Ao trocar de seção do painel, o foco do teclado fica para trás e o leitor de tela não anuncia a página nova | Pessoa cega; quem usa só teclado | 2.4.3 Ordem do foco | Mover o foco para o título da página nova e atualizar o título da aba |
+| 3 | O botão "Escolher arquivo" (Dados) não mostra o contorno de foco, porque o campo real é invisível | Quem usa só teclado não sabe onde está | 2.4.7 Foco visível | Contorno de foco no botão quando o campo recebe foco |
+| 4 | O gráfico de Tendência é só desenho (SVG), sem alternativa em texto | Pessoa cega não acessa a evolução do candidato | 1.1.1 Conteúdo não textual | Tabela com os mesmos dados, acessível ao leitor de tela, e opção "ver como tabela" |
 
 No redesign, o ranking de intenção e as roscas do perfil já passaram a ser texto
 real (lidos pelo leitor de tela); por isso não entram nesta lista.
