@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
+import { TemaProvider } from '../../contexts/TemaContext.jsx';
 import { sair } from '../../services/auth.js';
 import PaginaLogin from './PaginaLogin.jsx';
 
@@ -13,11 +14,13 @@ beforeEach(() => {
 
 function renderComAuth(valorAuth) {
   return render(
-    <MemoryRouter>
-      <AuthContext.Provider value={valorAuth}>
-        <PaginaLogin />
-      </AuthContext.Provider>
-    </MemoryRouter>,
+    <TemaProvider>
+      <MemoryRouter>
+        <AuthContext.Provider value={valorAuth}>
+          <PaginaLogin />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    </TemaProvider>,
   );
 }
 

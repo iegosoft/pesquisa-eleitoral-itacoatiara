@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { sair } from '../services/auth.js';
 import { SECOES_DASHBOARD } from '../pages/Admin/Dashboard/secoesDashboard.js';
+import BotaoTema from './BotaoTema.jsx';
 import styles from './Sidebar.module.css';
 
 const ICONES = {
@@ -86,8 +87,9 @@ function Sidebar() {
   const { pathname } = useLocation();
   const noDashboard = pathname === '/admin/dashboard';
 
+  // A barra lateral é sempre escura, nos dois temas (como no visual original).
   return (
-    <aside className={styles.sidebar}>
+    <aside className={styles.sidebar} data-tema="escuro">
       <div className={styles.logo}>
         <span className={styles.logoMarca} aria-hidden="true">
           <img src="/icons/icon-192.png" alt="" />
@@ -114,10 +116,13 @@ function Sidebar() {
         ))}
       </nav>
 
-      <button type="button" className={styles.botaoSair} onClick={sair}>
-        <span className={styles.itemIcone}>{ICONES.sair}</span>
-        Sair
-      </button>
+      <div className={styles.rodape}>
+        <BotaoTema />
+        <button type="button" className={styles.botaoSair} onClick={sair}>
+          <span className={styles.itemIcone}>{ICONES.sair}</span>
+          Sair
+        </button>
+      </div>
     </aside>
   );
 }
