@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { entrar, sair } from '../../services/auth.js';
 import { useAuth } from '../../contexts/useAuth.js';
 import BotaoTema from '../../components/BotaoTema.jsx';
+import LogoSistema from '../../components/LogoSistema.jsx';
 import styles from './PaginaLogin.module.css';
 
 const CAMINHO_POR_ROLE = {
@@ -51,9 +52,7 @@ function PaginaLogin() {
       <BotaoTema compacto className={styles.botaoTema} />
       <form className={styles.cartao} onSubmit={aoEnviar}>
         <div className={styles.marca}>
-          <span className={styles.logoMarca} aria-hidden="true">
-            <img src="/icons/icon-192.png" alt="" />
-          </span>
+          <LogoSistema tamanho={44} />
           <span className={styles.nomeSistema}>Pesquisa Eleitoral · Itacoatiara</span>
         </div>
         <h1>Entrar</h1>

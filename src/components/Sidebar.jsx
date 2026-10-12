@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { sair } from '../services/auth.js';
 import { SECOES_DASHBOARD } from '../pages/Admin/Dashboard/secoesDashboard.js';
 import BotaoTema from './BotaoTema.jsx';
+import LogoSistema from './LogoSistema.jsx';
 import styles from './Sidebar.module.css';
 
 const ICONES = {
@@ -97,9 +98,7 @@ function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span className={styles.logoMarca} aria-hidden="true">
-          <img src="/icons/icon-192.png" alt="" />
-        </span>
+        <LogoSistema tamanho={42} />
         <span className={styles.logoTexto}>
           Pesquisa
           <br />
