@@ -41,10 +41,10 @@ const ICONES = {
 };
 
 const ITENS = [
-  { valor: 'dashboard', rotulo: 'Dashboard', icone: 'dashboard' },
-  { valor: 'candidatos', rotulo: 'Candidatos', icone: 'candidatos' },
-  { valor: 'dados', rotulo: 'Dados', icone: 'dados' },
-  { valor: 'entrevistas', rotulo: 'Entrevistas', icone: 'entrevistas' },
+  { valor: 'dashboard', rotulo: 'Dashboard' },
+  { valor: 'candidatos', rotulo: 'Candidatos' },
+  { valor: 'dados', rotulo: 'Dados' },
+  { valor: 'entrevistas', rotulo: 'Entrevistas' },
 ];
 
 // Marca o atalho da seção que está na parte de cima da tela enquanto a
@@ -113,7 +113,7 @@ function Sidebar() {
               to={`/admin/${item.valor}`}
               className={({ isActive }) => `${styles.item} ${isActive ? styles.itemAtivo : ''}`}
             >
-              <span className={styles.itemIcone}>{ICONES[item.icone]}</span>
+              <span className={styles.itemIcone}>{ICONES[item.valor]}</span>
               {item.rotulo}
             </NavLink>
             {item.valor === 'dashboard' && noDashboard && <AtalhosDashboard />}
