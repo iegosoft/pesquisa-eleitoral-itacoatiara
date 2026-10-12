@@ -1,4 +1,5 @@
 import { formatarPercentual } from '../../../utils/formatacao.js';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PerfilAmostra.module.css';
 
 const RAIO = 46;
@@ -51,7 +52,7 @@ function Rosca({ titulo, fatias, total }) {
           </svg>
           <span className={styles.centro}>
             <strong>{total.toLocaleString('pt-BR')}</strong>
-            <span>{total === 1 ? 'pessoa' : 'pessoas'}</span>
+            <span>{pluralizar(total, 'pessoa', 'pessoas')}</span>
           </span>
         </div>
 

@@ -1,6 +1,7 @@
 import { AMOSTRA_MINIMA_BAIRRO } from './agregacoes.js';
 import { MARGEM_EMPATE } from './coresGraficos.js';
 import SeloStatus from './SeloStatus.jsx';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './DesempenhoPorBairro.module.css';
 
 const ORDEM_STATUS = ['lidera', 'empate', 'perde'];
@@ -94,7 +95,7 @@ function DesempenhoPorBairro({ dados, aoSelecionarBairro }) {
                   {linha.bairro}
                 </button>
                 <span className={styles.entrevistas}>
-                  {linha.entrevistas} {linha.entrevistas === 1 ? 'entrevista' : 'entrevistas'}
+                  {linha.entrevistas} {pluralizar(linha.entrevistas, 'entrevista', 'entrevistas')}
                 </span>
               </div>
               {linha.amostraPequena && <span className={styles.avisoAmostra}>Amostra pequena</span>}

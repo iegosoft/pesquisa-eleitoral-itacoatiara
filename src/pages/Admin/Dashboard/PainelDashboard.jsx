@@ -20,6 +20,7 @@ import PerfilAmostra from './PerfilAmostra.jsx';
 import DesempenhoPorBairro from './DesempenhoPorBairro.jsx';
 import GraficoEvolucao from './GraficoEvolucao.jsx';
 import { SECOES_DASHBOARD } from './secoesDashboard.js';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PainelDashboard.module.css';
 
 // Título grande + uma linha dizendo que pergunta a seção responde, para o
@@ -160,7 +161,7 @@ function PainelDashboard() {
       <Secao
         id="resultado"
         complemento={`Base: ${respostasFiltradas.length.toLocaleString('pt-BR')} ${
-          respostasFiltradas.length === 1 ? 'entrevistado' : 'entrevistados'
+          pluralizar(respostasFiltradas.length, 'entrevistado', 'entrevistados')
         }`}
       >
         <ResultadoFoco federal={resultadoFederal} estadual={resultadoEstadual} />

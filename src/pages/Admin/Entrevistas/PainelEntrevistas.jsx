@@ -5,6 +5,7 @@ import { listarPesquisadores } from '../../../services/usuarios.js';
 import { formatarDataBr } from '../Dados/utilData.js';
 import { agruparEntrevistas } from './agruparEntrevistas.js';
 import CartaoCasa from './CartaoCasa.jsx';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PainelEntrevistas.module.css';
 
 function filtrosIniciais() {
@@ -75,8 +76,8 @@ function PainelEntrevistas() {
           </select>
         </label>
         <p className={styles.resumo}>
-          {casas.length} {casas.length === 1 ? 'casa' : 'casas'} · {totalMoradores}{' '}
-          {totalMoradores === 1 ? 'entrevistado' : 'entrevistados'}
+          {casas.length} {pluralizar(casas.length, 'casa', 'casas')} · {totalMoradores}{' '}
+          {pluralizar(totalMoradores, 'entrevistado', 'entrevistados')}
         </p>
       </div>
 

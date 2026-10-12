@@ -2,6 +2,7 @@ import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, X
 import { corFoco } from './coresGraficos.js';
 import { estiloTooltip } from './estiloGraficos.js';
 import { formatarPercentual } from '../../../utils/formatacao.js';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './Graficos.module.css';
 
 const PERIODOS = [7, 14, 30];
@@ -13,7 +14,7 @@ const SERIES = [
 
 function rotuloDoDia(data, payload) {
   const entrevistas = payload?.[0]?.payload.entrevistas ?? 0;
-  return `${data} · ${entrevistas} ${entrevistas === 1 ? 'entrevista' : 'entrevistas'}`;
+  return `${data} · ${entrevistas} ${pluralizar(entrevistas, 'entrevista', 'entrevistas')}`;
 }
 
 function valorOuTraco(valor) {

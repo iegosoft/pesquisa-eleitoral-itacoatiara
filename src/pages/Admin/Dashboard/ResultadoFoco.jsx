@@ -1,5 +1,6 @@
 import AvatarCandidato from '../../../components/AvatarCandidato.jsx';
 import SeloStatus from './SeloStatus.jsx';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './ResultadoFoco.module.css';
 
 const RAIO_ANEL = 54;
@@ -7,7 +8,7 @@ const CIRCUNFERENCIA = 2 * Math.PI * RAIO_ANEL;
 
 function formatarPontos(valor) {
   const pontos = Math.abs(valor).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
-  return `${pontos} ${Math.abs(valor) === 1 ? 'ponto' : 'pontos'}`;
+  return `${pontos} ${pluralizar(Math.abs(valor), 'ponto', 'pontos')}`;
 }
 
 function manchete({ nome, status, posicao }, rotuloCargo) {

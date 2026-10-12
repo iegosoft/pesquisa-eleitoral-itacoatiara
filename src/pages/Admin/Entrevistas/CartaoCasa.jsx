@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { excluirCasa } from '../../../services/entrevistas.js';
 import LinhaMorador from './LinhaMorador.jsx';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PainelEntrevistas.module.css';
 
 function CartaoCasa({ casa, dataFormatada, candidatos, aoInformar }) {
@@ -29,7 +30,7 @@ function CartaoCasa({ casa, dataFormatada, candidatos, aoInformar }) {
           <h3>{casa.bairro}</h3>
           <p className={styles.detalheCasa}>
             {dataFormatada} · {casa.pesquisador} · {casa.moradores.length}{' '}
-            {casa.moradores.length === 1 ? 'entrevistado' : 'entrevistados'}
+            {pluralizar(casa.moradores.length, 'entrevistado', 'entrevistados')}
             {casa.qtdMoradores ? ` de ${casa.qtdMoradores} morador(es)` : ''}
           </p>
         </div>
