@@ -1,5 +1,6 @@
 import { format, isToday, isYesterday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { FAIXAS_ETARIAS, SEXOS, VOTO_INDECISO, VOTOS_NEUTROS } from '../../../dominio/opcoes.js';
 import { statusFoco } from './coresGraficos.js';
 
 function aplicarFiltros(respostas, filtros) {
@@ -66,7 +67,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
   const total = respostas.length;
   const contagem = {};
   respostas.forEach((resposta) => {
-    const chave = resposta[campoVoto] ?? 'indeciso';
+    const chave = resposta[campoVoto] ?? VOTO_INDECISO;
     contagem[chave] = (contagem[chave] ?? 0) + 1;
   });
 
@@ -82,24 +83,14 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
     percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
   }));
 
-  const itensExtras = [
-    {
-      chave: 'indeciso',
-      rotulo: 'Indeciso',
-      isFoco: false,
-      tipo: 'indeciso',
-      quantidade: contagem.indeciso ?? 0,
-      percentual: total ? ((contagem.indeciso ?? 0) / total) * 100 : 0,
-    },
-    {
-      chave: 'branco_nulo',
-      rotulo: 'Branco/Nulo',
-      isFoco: false,
-      tipo: 'branco_nulo',
-      quantidade: contagem.branco_nulo ?? 0,
-      percentual: total ? ((contagem.branco_nulo ?? 0) / total) * 100 : 0,
-    },
-  ];
+  const itensExtras = VOTOS_NEUTROS.map(({ valor, rotulo }) => ({
+    chave: valor,
+    rotulo,
+    isFoco: false,
+    tipo: valor,
+    quantidade: contagem[valor] ?? 0,
+    percentual: total ? ((contagem[valor] ?? 0) / total) * 100 : 0,
+  }));
 
   return [...itensCandidatos, ...itensExtras].sort((a, b) => b.percentual - a.percentual);
 }
@@ -153,17 +144,8 @@ function calcularCandidatoPorBairro(respostas, candidatoId, campoVoto) {
     .sort((a, b) => b.percentual - a.percentual || b.entrevistas - a.entrevistas);
 }
 
-const OPCOES_SEXO = [
-  { chave: 'feminino', rotulo: 'Feminino' },
-  { chave: 'masculino', rotulo: 'Masculino' },
-];
-const OPCOES_FAIXA_IDADE = [
-  { chave: '16-24', rotulo: '16 a 24 anos' },
-  { chave: '25-34', rotulo: '25 a 34 anos' },
-  { chave: '35-44', rotulo: '35 a 44 anos' },
-  { chave: '45-59', rotulo: '45 a 59 anos' },
-  { chave: '60+', rotulo: '60 anos ou mais' },
-];
+const OPCOES_SEXO = SEXOS.map(({ valor, rotulo }) => ({ chave: valor, rotulo }));
+const OPCOES_FAIXA_IDADE = FAIXAS_ETARIAS.map(({ valor, rotuloExtenso }) => ({ chave: valor, rotulo: rotuloExtenso }));
 
 function distribuicao(respostas, campo, opcoes) {
   const total = respostas.length;

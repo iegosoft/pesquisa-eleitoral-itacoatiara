@@ -1,19 +1,7 @@
+import { FAIXAS_ETARIAS, SEXOS } from '../../dominio/opcoes.js';
 import SeletorPills from '../SeletorPills.jsx';
 import GradeCandidatos from './GradeCandidatos.jsx';
 import styles from './CartaoMorador.module.css';
-
-const OPCOES_SEXO = [
-  { valor: 'feminino', rotulo: 'Feminino' },
-  { valor: 'masculino', rotulo: 'Masculino' },
-];
-
-const OPCOES_FAIXA_IDADE = [
-  { valor: '16-24', rotulo: '16-24' },
-  { valor: '25-34', rotulo: '25-34' },
-  { valor: '35-44', rotulo: '35-44' },
-  { valor: '45-59', rotulo: '45-59' },
-  { valor: '60+', rotulo: '60+' },
-];
 
 function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual, aoAtualizar, aoRemover }) {
   return (
@@ -35,7 +23,7 @@ function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual,
       <fieldset className={styles.campoFieldset}>
         <legend className={styles.rotulo}>Sexo</legend>
         <SeletorPills
-          opcoes={OPCOES_SEXO}
+          opcoes={SEXOS}
           valorSelecionado={morador.sexo}
           aoSelecionar={(valor) => aoAtualizar('sexo', valor)}
         />
@@ -44,7 +32,7 @@ function CartaoMorador({ numero, morador, candidatosFederal, candidatosEstadual,
       <fieldset className={styles.campoFieldset}>
         <legend className={styles.rotulo}>Faixa de idade</legend>
         <SeletorPills
-          opcoes={OPCOES_FAIXA_IDADE}
+          opcoes={FAIXAS_ETARIAS}
           valorSelecionado={morador.faixaIdade}
           aoSelecionar={(valor) => aoAtualizar('faixaIdade', valor)}
         />

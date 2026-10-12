@@ -1,3 +1,4 @@
+import { VOTO_BRANCO_NULO, VOTO_INDECISO } from '../../dominio/opcoes.js';
 import AvatarCandidato from '../AvatarCandidato.jsx';
 import styles from './GradeCandidatos.module.css';
 
@@ -18,8 +19,8 @@ function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {
 
       <button
         type="button"
-        className={`${styles.opcao} ${valorSelecionado === 'indeciso' ? styles.selecionada : ''}`}
-        onClick={() => aoSelecionar('indeciso')}
+        className={`${styles.opcao} ${valorSelecionado === VOTO_INDECISO ? styles.selecionada : ''}`}
+        onClick={() => aoSelecionar(VOTO_INDECISO)}
       >
         <span className={styles.avatarNeutro} aria-hidden="true" style={{ background: 'var(--cor-superficie-baixa)' }}>
           ?
@@ -29,8 +30,8 @@ function GradeCandidatos({ candidatos, valorSelecionado, aoSelecionar }) {
 
       <button
         type="button"
-        className={`${styles.opcao} ${valorSelecionado === 'branco_nulo' ? styles.selecionada : ''}`}
-        onClick={() => aoSelecionar('branco_nulo')}
+        className={`${styles.opcao} ${valorSelecionado === VOTO_BRANCO_NULO ? styles.selecionada : ''}`}
+        onClick={() => aoSelecionar(VOTO_BRANCO_NULO)}
       >
         <span className={styles.avatarNeutro} aria-hidden="true" style={{ background: 'var(--cor-superficie-baixa)' }}>
           —

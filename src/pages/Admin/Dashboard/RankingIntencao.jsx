@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import AvatarCandidato from '../../../components/AvatarCandidato.jsx';
 import { formatarPercentual } from '../../../utils/formatacao.js';
 import { pluralizar } from '../../../utils/texto.js';
+import { VOTO_INDECISO } from '../../../dominio/opcoes.js';
 import styles from './RankingIntencao.module.css';
 
 // O candidato foco leva a cor do próprio resultado (lidera/empata/perde);
@@ -24,7 +25,7 @@ function FotoItem({ item }) {
   }
   return (
     <span className={`${styles.foto} ${styles.fotoNeutra}`} aria-hidden="true">
-      {item.tipo === 'indeciso' ? '?' : '–'}
+      {item.tipo === VOTO_INDECISO ? '?' : '–'}
     </span>
   );
 }
