@@ -1,17 +1,11 @@
 import { useAuth } from '../contexts/useAuth.js';
+import { iniciais } from '../utils/texto.js';
 import styles from './Cabecalho.module.css';
 
 const ROTULO_POR_ROLE = {
   admin: 'Administrador',
   pesquisador: 'Pesquisador',
 };
-
-function iniciais(nome) {
-  const partes = nome.trim().split(/\s+/);
-  const primeira = partes[0]?.[0] ?? '';
-  const ultima = partes.length > 1 ? partes[partes.length - 1][0] : '';
-  return (primeira + ultima).toUpperCase();
-}
 
 function Cabecalho({ secaoAtual, titulo, subtitulo }) {
   const { nome, role } = useAuth();
