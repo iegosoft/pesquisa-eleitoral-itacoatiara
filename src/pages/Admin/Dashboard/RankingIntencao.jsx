@@ -1,10 +1,7 @@
 import { useEffect, useRef } from 'react';
 import AvatarCandidato from '../../../components/AvatarCandidato.jsx';
+import { formatarPercentual } from '../../../utils/formatacao.js';
 import styles from './RankingIntencao.module.css';
-
-function formatarPercentual(valor) {
-  return `${valor.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
-}
 
 // O candidato foco leva a cor do próprio resultado (lidera/empata/perde);
 // concorrentes ficam em cinza sólido e indeciso/branco num cinza apagado.
@@ -57,7 +54,7 @@ function DetalheCandidato({ id, candidato, linhas, aoFechar }) {
             <span className={styles.detalheTrilho} aria-hidden="true">
               <span className={styles.detalheBarra} style={{ width: `${linha.percentual}%` }} />
             </span>
-            <span className={styles.detalhePercentual}>{formatarPercentual(linha.percentual)}</span>
+            <span className={styles.detalhePercentual}>{formatarPercentual(linha.percentual, 1)}</span>
             <span className={styles.detalheVotos}>
               {linha.votos} de {linha.entrevistas} {linha.entrevistas === 1 ? 'entrevista' : 'entrevistas'}
             </span>
@@ -116,7 +113,7 @@ function RankingIntencao({ titulo, cargo, itens, statusFoco, base, candidatoAber
               />
             </div>
             <span className={styles.valores}>
-              <span className={styles.percentual}>{formatarPercentual(item.percentual)}</span>
+              <span className={styles.percentual}>{formatarPercentual(item.percentual, 1)}</span>
               <span className={styles.votos}>
                 {item.quantidade} {item.quantidade === 1 ? 'voto' : 'votos'}
               </span>

@@ -1,6 +1,7 @@
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { corFoco } from './coresGraficos.js';
 import { estiloTooltip } from './estiloGraficos.js';
+import { formatarPercentual } from '../../../utils/formatacao.js';
 import styles from './Graficos.module.css';
 
 const PERIODOS = [7, 14, 30];
@@ -10,17 +11,13 @@ const SERIES = [
   { chave: 'percentualEstadual', nome: 'Estadual', cargo: 'estadual' },
 ];
 
-function formatarPercentual(valor) {
-  return `${valor.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
-}
-
 function rotuloDoDia(data, payload) {
   const entrevistas = payload?.[0]?.payload.entrevistas ?? 0;
   return `${data} · ${entrevistas} ${entrevistas === 1 ? 'entrevista' : 'entrevistas'}`;
 }
 
 function valorOuTraco(valor) {
-  return valor == null ? '—' : formatarPercentual(valor);
+  return valor == null ? '—' : formatarPercentual(valor, 1);
 }
 
 // Alternativa em texto ao gráfico: os mesmos números, numa tabela de verdade,
@@ -116,7 +113,7 @@ function GraficoEvolucao({ dados, periodo, aoAlterarPeriodo, ultimaColeta }) {
                   stroke="var(--cor-grafico-grid)"
                 />
                 <Tooltip
-                  formatter={(valor) => formatarPercentual(valor)}
+                  formatter={(valor) => formatarPercentual(valor, 1)}
                   labelFormatter={rotuloDoDia}
                   cursor={{ stroke: 'var(--cor-texto-suave)', strokeDasharray: '4 4' }}
                   {...estiloTooltip}
