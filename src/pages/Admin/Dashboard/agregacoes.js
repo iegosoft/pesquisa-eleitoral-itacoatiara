@@ -26,18 +26,23 @@ function formatarUltimaColeta(data) {
   return format(data, 'dd/MM/yyyy', { locale: ptBR });
 }
 
-function calcularResumo(respostas) {
-  const totalEntrevistados = respostas.length;
-  const casasVisitadas = new Set(respostas.map((resposta) => resposta.residenciaId)).size;
-  const bairrosCobertos = new Set(respostas.map((resposta) => resposta.bairro)).size;
-  const datas = respostas.map((resposta) => resposta.dataColeta).filter(Boolean);
-  const ultimaColeta = datas.length ? new Date(Math.max(...datas)) : null;
+// Valem tanto para respostas quanto para residências: as duas listas têm
+// `bairro` e `dataColeta`.
+function contarBairros(registros) {
+  return new Set(registros.map((registro) => registro.bairro)).size;
+}
 
+function ultimaColetaFormatada(registros) {
+  const datas = registros.map((registro) => registro.dataColeta).filter(Boolean);
+  return formatarUltimaColeta(datas.length ? new Date(Math.max(...datas)) : null);
+}
+
+function calcularResumo(respostas) {
   return {
-    totalEntrevistados,
-    casasVisitadas,
-    bairrosCobertos,
-    ultimaColeta: formatarUltimaColeta(ultimaColeta),
+    totalEntrevistados: respostas.length,
+    casasVisitadas: new Set(respostas.map((resposta) => resposta.residenciaId)).size,
+    bairrosCobertos: contarBairros(respostas),
+    ultimaColeta: ultimaColetaFormatada(respostas),
   };
 }
 
@@ -47,16 +52,11 @@ function calcularResumo(respostas) {
 // Só é valido quando nenhum filtro detalhado esta ativo — com filtro, o
 // resumo precisa ser recalculado a partir das respostas filtradas.
 function calcularResumoAgregado(residencias, totalEntrevistados) {
-  const casasVisitadas = residencias.length;
-  const bairrosCobertos = new Set(residencias.map((residencia) => residencia.bairro)).size;
-  const datas = residencias.map((residencia) => residencia.dataColeta).filter(Boolean);
-  const ultimaColeta = datas.length ? new Date(Math.max(...datas)) : null;
-
   return {
     totalEntrevistados,
-    casasVisitadas,
-    bairrosCobertos,
-    ultimaColeta: formatarUltimaColeta(ultimaColeta),
+    casasVisitadas: residencias.length,
+    bairrosCobertos: contarBairros(residencias),
+    ultimaColeta: ultimaColetaFormatada(residencias),
   };
 }
 
