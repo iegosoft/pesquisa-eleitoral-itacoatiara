@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { observarResidencias, observarTodosEntrevistados } from '../../../services/estatisticas.js';
-import { observarCandidatos } from '../../../services/candidatos.js';
+import { useDadosPesquisa } from '../../../hooks/useDadosPesquisa.js';
 import { listarPesquisadores } from '../../../services/usuarios.js';
 import { formatarDataBr } from '../Dados/utilData.js';
 import { agruparEntrevistas } from './agruparEntrevistas.js';
@@ -13,23 +12,13 @@ function filtrosIniciais() {
 }
 
 function PainelEntrevistas() {
-  const [residencias, setResidencias] = useState([]);
-  const [entrevistados, setEntrevistados] = useState([]);
-  const [candidatos, setCandidatos] = useState([]);
+  const { residencias, entrevistados, candidatos } = useDadosPesquisa();
   const [pesquisadores, setPesquisadores] = useState([]);
   const [filtros, setFiltros] = useState(filtrosIniciais);
   const [mensagem, setMensagem] = useState({ texto: '', tipo: 'sucesso' });
 
   useEffect(() => {
-    const cancelarResidencias = observarResidencias(setResidencias);
-    const cancelarEntrevistados = observarTodosEntrevistados(setEntrevistados);
-    const cancelarCandidatos = observarCandidatos(setCandidatos);
     listarPesquisadores().then(setPesquisadores);
-    return () => {
-      cancelarResidencias();
-      cancelarEntrevistados();
-      cancelarCandidatos();
-    };
   }, []);
 
   const nomePorId = Object.fromEntries(pesquisadores.map((p) => [p.uid, p.nome]));
