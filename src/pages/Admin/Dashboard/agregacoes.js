@@ -61,10 +61,6 @@ function calcularResumoAgregado(residencias, totalEntrevistados) {
   };
 }
 
-function percentualDoTotal(quantidade, total) {
-  return total ? (quantidade / total) * 100 : 0;
-}
-
 // Retorna um item por candidato do cargo, mais Indeciso e Branco/Nulo, com o
 // percentual sobre o total de respostas filtradas.
 function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
@@ -84,7 +80,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
     isFoco: candidato.isFoco,
     tipo: 'candidato',
     quantidade: contagem[candidato.id] ?? 0,
-    percentual: percentualDoTotal(contagem[candidato.id] ?? 0, total),
+    percentual: total ? ((contagem[candidato.id] ?? 0) / total) * 100 : 0,
   }));
 
   const itensExtras = VOTOS_NEUTROS.map(({ valor, rotulo }) => ({
@@ -93,7 +89,7 @@ function calcularIntencaoVoto(respostas, candidatosCargo, campoVoto) {
     isFoco: false,
     tipo: valor,
     quantidade: contagem[valor] ?? 0,
-    percentual: percentualDoTotal(contagem[valor] ?? 0, total),
+    percentual: total ? ((contagem[valor] ?? 0) / total) * 100 : 0,
   }));
 
   return [...itensCandidatos, ...itensExtras].sort((a, b) => b.percentual - a.percentual);
