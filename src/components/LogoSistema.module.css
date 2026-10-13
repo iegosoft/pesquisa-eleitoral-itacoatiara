@@ -1,0 +1,15 @@
+.moldura {
+  display: block;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 19%;
+}
+
+/* A logo oficial tem uma margem clara em volta do quadrado azul-marinho: a
+   moldura com o mesmo raio recorta essa margem. */
+.moldura img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.15);
+}

@@ -1,6 +1,7 @@
 import { sair } from '../services/auth.js';
 import { useAuth } from '../contexts/useAuth.js';
 import BotaoTema from './BotaoTema.jsx';
+import LogoSistema from './LogoSistema.jsx';
 import styles from './BarraTopo.module.css';
 
 function BarraTopo() {
@@ -9,9 +10,7 @@ function BarraTopo() {
   return (
     <header className={styles.barra}>
       <div className={styles.marca}>
-        <span className={styles.logoMarca} aria-hidden="true">
-          <img src="/icons/icon-192.png" alt="" />
-        </span>
+        <LogoSistema tamanho={36} />
         <span className={styles.logoTexto}>Pesquisa Eleitoral</span>
       </div>
       <div className={styles.usuario}>

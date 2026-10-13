@@ -1,27 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  contarTotalEntrevistados,
-  observarResidencias,
-  observarTodosEntrevistados,
-} from '../../../services/estatisticas.js';
-import { observarCandidatos } from '../../../services/candidatos.js';
+import { contarTotalEntrevistados } from '../../../services/estatisticas.js';
+import { useDadosPesquisa } from '../../../hooks/useDadosPesquisa.js';
 
 function useDadosPainel() {
-  const [residencias, setResidencias] = useState([]);
-  const [entrevistados, setEntrevistados] = useState([]);
-  const [candidatos, setCandidatos] = useState([]);
+  const { residencias, entrevistados, candidatos } = useDadosPesquisa();
   const [totalEntrevistadosAgregado, setTotalEntrevistadosAgregado] = useState(null);
 
   useEffect(() => {
-    const cancelarResidencias = observarResidencias(setResidencias);
-    const cancelarEntrevistados = observarTodosEntrevistados(setEntrevistados);
-    const cancelarCandidatos = observarCandidatos(setCandidatos);
     contarTotalEntrevistados().then(setTotalEntrevistadosAgregado);
-    return () => {
-      cancelarResidencias();
-      cancelarEntrevistados();
-      cancelarCandidatos();
-    };
   }, []);
 
   const respostas = useMemo(() => {

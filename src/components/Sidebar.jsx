@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { sair } from '../services/auth.js';
 import { SECOES_DASHBOARD } from '../pages/Admin/Dashboard/secoesDashboard.js';
 import BotaoTema from './BotaoTema.jsx';
+import LogoSistema from './LogoSistema.jsx';
 import styles from './Sidebar.module.css';
 
 const ICONES = {
@@ -40,10 +41,10 @@ const ICONES = {
 };
 
 const ITENS = [
-  { valor: 'dashboard', rotulo: 'Dashboard', icone: 'dashboard' },
-  { valor: 'candidatos', rotulo: 'Candidatos', icone: 'candidatos' },
-  { valor: 'dados', rotulo: 'Dados', icone: 'dados' },
-  { valor: 'entrevistas', rotulo: 'Entrevistas', icone: 'entrevistas' },
+  { valor: 'dashboard', rotulo: 'Dashboard' },
+  { valor: 'candidatos', rotulo: 'Candidatos' },
+  { valor: 'dados', rotulo: 'Dados' },
+  { valor: 'entrevistas', rotulo: 'Entrevistas' },
 ];
 
 // Marca o atalho da seção que está na parte de cima da tela enquanto a
@@ -97,9 +98,7 @@ function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span className={styles.logoMarca} aria-hidden="true">
-          <img src="/icons/icon-192.png" alt="" />
-        </span>
+        <LogoSistema tamanho={42} />
         <span className={styles.logoTexto}>
           Pesquisa
           <br />
@@ -114,7 +113,7 @@ function Sidebar() {
               to={`/admin/${item.valor}`}
               className={({ isActive }) => `${styles.item} ${isActive ? styles.itemAtivo : ''}`}
             >
-              <span className={styles.itemIcone}>{ICONES[item.icone]}</span>
+              <span className={styles.itemIcone}>{ICONES[item.valor]}</span>
               {item.rotulo}
             </NavLink>
             {item.valor === 'dashboard' && noDashboard && <AtalhosDashboard />}

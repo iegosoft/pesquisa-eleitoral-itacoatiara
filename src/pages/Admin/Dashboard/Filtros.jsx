@@ -1,7 +1,6 @@
+import { FAIXAS_ETARIAS, SEXOS } from '../../../dominio/opcoes.js';
 import { intervaloDeDatasInvertido } from './agregacoes.js';
 import styles from './Filtros.module.css';
-
-const OPCOES_FAIXA_IDADE = ['16-24', '25-34', '35-44', '45-59', '60+'];
 
 function formatarDataIso(iso) {
   const [ano, mes, dia] = iso.split('-');
@@ -48,8 +47,11 @@ function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiv
             onChange={(evento) => atualizar('sexo', evento.target.value)}
           >
             <option value="todos">Todos</option>
-            <option value="feminino">Feminino</option>
-            <option value="masculino">Masculino</option>
+            {SEXOS.map((sexo) => (
+              <option key={sexo.valor} value={sexo.valor}>
+                {sexo.rotulo}
+              </option>
+            ))}
           </select>
         </label>
 
@@ -61,9 +63,9 @@ function Filtros({ filtros, aoAlterar, aoLimpar, temFiltroAtivo, bairrosDisponiv
             onChange={(evento) => atualizar('faixaIdade', evento.target.value)}
           >
             <option value="todas">Todas</option>
-            {OPCOES_FAIXA_IDADE.map((faixa) => (
-              <option key={faixa} value={faixa}>
-                {faixa}
+            {FAIXAS_ETARIAS.map((faixa) => (
+              <option key={faixa.valor} value={faixa.valor}>
+                {faixa.rotulo}
               </option>
             ))}
           </select>

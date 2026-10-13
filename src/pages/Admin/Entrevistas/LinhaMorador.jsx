@@ -1,17 +1,8 @@
 import { useState } from 'react';
+import { FAIXAS_ETARIAS, SEXOS, VOTOS_NEUTROS } from '../../../dominio/opcoes.js';
 import { atualizarEntrevistado, excluirEntrevistado } from '../../../services/entrevistas.js';
 import { nomeDoVoto } from '../Dados/resolverVoto.js';
 import styles from './PainelEntrevistas.module.css';
-
-const OPCOES_SEXO = [
-  { valor: 'feminino', rotulo: 'Feminino' },
-  { valor: 'masculino', rotulo: 'Masculino' },
-];
-const OPCOES_FAIXA = ['16-24', '25-34', '35-44', '45-59', '60+'];
-const VOTOS_NEUTROS = [
-  { valor: 'indeciso', rotulo: 'Indeciso' },
-  { valor: 'branco_nulo', rotulo: 'Branco/Nulo' },
-];
 
 function opcoesDeVoto(candidatos, cargo) {
   return [
@@ -21,7 +12,7 @@ function opcoesDeVoto(candidatos, cargo) {
 }
 
 function rotuloSexo(valor) {
-  return OPCOES_SEXO.find((opcao) => opcao.valor === valor)?.rotulo ?? valor;
+  return SEXOS.find((opcao) => opcao.valor === valor)?.rotulo ?? valor;
 }
 
 function CampoSelecao({ rotulo, valor, opcoes, aoMudar }) {
@@ -77,13 +68,13 @@ function LinhaMorador({ casa, morador, numero, ultimoDaCasa, candidatos, aoInfor
       <tr className={styles.linhaEditando}>
         <th scope="row">{numero}</th>
         <td>
-          <CampoSelecao rotulo={`Sexo do ${quem}`} valor={rascunho.sexo} opcoes={OPCOES_SEXO} aoMudar={atualizar('sexo')} />
+          <CampoSelecao rotulo={`Sexo do ${quem}`} valor={rascunho.sexo} opcoes={SEXOS} aoMudar={atualizar('sexo')} />
         </td>
         <td>
           <CampoSelecao
             rotulo={`Faixa etária do ${quem}`}
             valor={rascunho.faixaIdade}
-            opcoes={OPCOES_FAIXA.map((faixa) => ({ valor: faixa, rotulo: faixa }))}
+            opcoes={FAIXAS_ETARIAS}
             aoMudar={atualizar('faixaIdade')}
           />
         </td>

@@ -1,8 +1,9 @@
+import { FAIXAS_ETARIAS, SEXOS } from '../../../dominio/opcoes.js';
 import { parseDataBr } from './utilData.js';
 import { idDoVoto } from './resolverVoto.js';
 
-const FAIXAS_VALIDAS = ['16-24', '25-34', '35-44', '45-59', '60+'];
-const SEXOS_VALIDOS = ['feminino', 'masculino'];
+const FAIXAS_VALIDAS = FAIXAS_ETARIAS.map((faixa) => faixa.valor);
+const SEXOS_VALIDOS = SEXOS.map((sexo) => sexo.valor);
 
 // Valida linha a linha e agrupa por casa_id+bairro em residências prontas
 // pra gravar. Se houver qualquer erro, a importação inteira fica bloqueada

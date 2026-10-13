@@ -1,3 +1,5 @@
+import { formatarPercentual } from '../../../utils/formatacao.js';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PerfilAmostra.module.css';
 
 const RAIO = 46;
@@ -11,10 +13,6 @@ const CORES_SEXO = {
 };
 const CORES_IDADE = ['var(--cor-idade-1)', 'var(--cor-idade-2)', 'var(--cor-idade-3)', 'var(--cor-idade-4)', 'var(--cor-idade-5)'];
 
-function formatarPercentual(valor) {
-  return `${valor.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}%`;
-}
-
 function Rosca({ titulo, fatias, total }) {
   let acumulado = 0;
   const comVotos = fatias.filter((fatia) => fatia.quantidade > 0);
@@ -25,7 +23,7 @@ function Rosca({ titulo, fatias, total }) {
       <figcaption className={styles.titulo}>
         {titulo}{' '}
         <span className={styles.destaque}>
-          Maior grupo: <strong>{maiorGrupo.rotulo}</strong> ({formatarPercentual(maiorGrupo.percentual)})
+          Maior grupo: <strong>{maiorGrupo.rotulo}</strong> ({formatarPercentual(maiorGrupo.percentual, 0)})
         </span>
       </figcaption>
       <div className={styles.corpo}>
@@ -54,7 +52,7 @@ function Rosca({ titulo, fatias, total }) {
           </svg>
           <span className={styles.centro}>
             <strong>{total.toLocaleString('pt-BR')}</strong>
-            <span>{total === 1 ? 'pessoa' : 'pessoas'}</span>
+            <span>{pluralizar(total, 'pessoa', 'pessoas')}</span>
           </span>
         </div>
 
@@ -64,7 +62,7 @@ function Rosca({ titulo, fatias, total }) {
               <span className={styles.marcador} style={{ background: fatia.cor }} aria-hidden="true" />
               <span className={styles.rotulo}>{fatia.rotulo}</span>
               <span className={styles.valor}>
-                {formatarPercentual(fatia.percentual)}
+                {formatarPercentual(fatia.percentual, 0)}
                 <span className={styles.quantidade}> ({fatia.quantidade})</span>
               </span>
             </li>

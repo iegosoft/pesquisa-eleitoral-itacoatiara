@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
+import { iniciais } from '../utils/texto.js';
 import styles from './AvatarCandidato.module.css';
-
-function iniciais(nome) {
-  const partes = nome.trim().split(/\s+/);
-  const primeira = partes[0]?.[0] ?? '';
-  const ultima = partes.length > 1 ? partes[partes.length - 1][0] : '';
-  return (primeira + ultima).toUpperCase();
-}
 
 // `decorativo`: quando o nome já aparece em texto ao lado, a foto não repete
 // o nome para o leitor de tela.

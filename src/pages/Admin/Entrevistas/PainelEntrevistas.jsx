@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { observarResidencias, observarTodosEntrevistados } from '../../../services/estatisticas.js';
-import { observarCandidatos } from '../../../services/candidatos.js';
+import { useDadosPesquisa } from '../../../hooks/useDadosPesquisa.js';
 import { listarPesquisadores } from '../../../services/usuarios.js';
 import { formatarDataBr } from '../Dados/utilData.js';
 import { agruparEntrevistas } from './agruparEntrevistas.js';
 import CartaoCasa from './CartaoCasa.jsx';
+import { pluralizar } from '../../../utils/texto.js';
 import styles from './PainelEntrevistas.module.css';
 
 function filtrosIniciais() {
@@ -12,23 +12,13 @@ function filtrosIniciais() {
 }
 
 function PainelEntrevistas() {
-  const [residencias, setResidencias] = useState([]);
-  const [entrevistados, setEntrevistados] = useState([]);
-  const [candidatos, setCandidatos] = useState([]);
+  const { residencias, entrevistados, candidatos } = useDadosPesquisa();
   const [pesquisadores, setPesquisadores] = useState([]);
   const [filtros, setFiltros] = useState(filtrosIniciais);
   const [mensagem, setMensagem] = useState({ texto: '', tipo: 'sucesso' });
 
   useEffect(() => {
-    const cancelarResidencias = observarResidencias(setResidencias);
-    const cancelarEntrevistados = observarTodosEntrevistados(setEntrevistados);
-    const cancelarCandidatos = observarCandidatos(setCandidatos);
     listarPesquisadores().then(setPesquisadores);
-    return () => {
-      cancelarResidencias();
-      cancelarEntrevistados();
-      cancelarCandidatos();
-    };
   }, []);
 
   const nomePorId = Object.fromEntries(pesquisadores.map((p) => [p.uid, p.nome]));
@@ -75,8 +65,8 @@ function PainelEntrevistas() {
           </select>
         </label>
         <p className={styles.resumo}>
-          {casas.length} {casas.length === 1 ? 'casa' : 'casas'} · {totalMoradores}{' '}
-          {totalMoradores === 1 ? 'entrevistado' : 'entrevistados'}
+          {casas.length} {pluralizar(casas.length, 'casa', 'casas')} · {totalMoradores}{' '}
+          {pluralizar(totalMoradores, 'entrevistado', 'entrevistados')}
         </p>
       </div>
 
