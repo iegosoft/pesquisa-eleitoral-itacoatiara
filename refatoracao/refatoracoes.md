@@ -234,11 +234,12 @@ não só um trecho dentro de uma função.
 
 ## 9. Extração de Função em nível de design — `useIndicadoresDashboard` (S7)
 
-**Problema:** `PainelDashboard` tinha 219 linhas, com cerca de 12 cálculos
-misturados à montagem da tela.
+**Problema:** `PainelDashboard` tinha 219 linhas logo antes desta refatoração
+(218 no levantamento dos smells; a refatoração 3 acrescentou uma linha de
+import), com cerca de 12 cálculos misturados à montagem da tela.
 
 **Depois:** os cálculos foram para o hook `useIndicadoresDashboard`, e o
-componente caiu para **145 linhas**, ficando só com a tela e as interações:
+componente caiu para **144 linhas**, ficando só com a tela e as interações:
 ```js
 const { resumo, itensFederal, resultadoFederal, /* ... */ } =
   useIndicadoresDashboard({ filtros, periodoEvolucao, candidatosAbertos });

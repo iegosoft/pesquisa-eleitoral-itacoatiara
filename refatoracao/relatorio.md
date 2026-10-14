@@ -5,7 +5,7 @@
 Refatoramos o sistema Pesquisa Eleitoral Itacoatiara em dois níveis, sem mudar o
 comportamento observável:
 
-- **Código:** sete refatorações planejadas e uma oportunista, usando quatro
+- **Código:** seis refatorações planejadas e uma oportunista, usando quatro
   técnicas do catálogo de Fowler: **Extração de Função**, **Movimentação de
   Função**, **Extração de Classe** e **Substituir Literal Mágico por
   Constante**.
