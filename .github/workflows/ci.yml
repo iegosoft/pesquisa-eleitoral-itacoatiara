@@ -30,6 +30,10 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
+          # Guarda as bibliotecas baixadas entre uma execução e outra: o
+          # npm ci não precisa baixar tudo da internet de novo. O cache é
+          # refeito sozinho quando o package-lock.json muda.
+          cache: npm
 
       - name: Instalar as dependências
         run: npm ci
