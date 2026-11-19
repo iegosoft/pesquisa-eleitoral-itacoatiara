@@ -13,7 +13,7 @@
   "dependencies": {
     "date-fns": "^4.4.0",
     "exceljs": "^4.4.0",
-    "firebase": "^12.16.0",
+    "firebase": "^13.3.0",
     "papaparse": "^5.5.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
