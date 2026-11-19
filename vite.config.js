@@ -75,5 +75,13 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/testes/setup.js'],
+    // Cobertura (npm run test:coverage): tabela no terminal e página HTML em
+    // coverage/. Mede só o código do sistema, sem contar os próprios testes.
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      include: ['src/**/*.{js,jsx}'],
+      exclude: ['src/**/*.test.{js,jsx}', 'src/testes/**'],
+    },
   },
 })
