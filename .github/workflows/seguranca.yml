@@ -1,0 +1,46 @@
+# Segurança das dependências: roda o npm audit a cada Pull Request, a cada
+# push na main e toda segunda-feira. O relatório completo aparece no resumo
+# da execução; só reprova quando há vulnerabilidade CRÍTICA numa biblioteca
+# que vai para produção.
+name: Segurança
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 12 * * 1' # toda segunda-feira, 8h no horário de Manaus
+  workflow_dispatch: # permite rodar à mão pela aba Actions
+
+permissions:
+  contents: read
+
+jobs:
+  auditoria:
+    name: Auditoria das dependências
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v5
+
+      - name: Instalar o Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      # Só leitura: lista tudo, inclusive as ferramentas de desenvolvimento.
+      # O npm audit lê o package-lock.json, não precisa instalar nada.
+      - name: Relatório completo
+        run: |
+          {
+            echo '## Relatório do npm audit'
+            echo '```'
+            npm audit || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Só esta etapa reprova: vulnerabilidade crítica no que vai para produção.
+      - name: Bloquear vulnerabilidade crítica em produção
+        run: npm audit --omit=dev --audit-level=critical

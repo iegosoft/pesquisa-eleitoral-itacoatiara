@@ -1,0 +1,23 @@
+# Dependabot: confere toda semana se as bibliotecas do projeto têm versões
+# novas e abre Pull Requests de atualização. Cada PR passa pelo CI antes de
+# poder ser mesclada, então uma atualização que quebre algo é barrada.
+version: 2
+updates:
+  # Bibliotecas do projeto (package.json e package-lock.json).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # Atualizações pequenas (minor e patch) chegam juntas numa PR só, para
+      # não lotar a lista de Pull Requests.
+      atualizacoes-menores:
+        update-types: [minor, patch]
+
+  # Ações usadas nos workflows (actions/checkout, actions/setup-node...).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
