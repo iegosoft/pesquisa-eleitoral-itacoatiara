@@ -23,7 +23,13 @@ duração da etapa **Instalar as dependências** e do job inteiro.
 | | Execuções medidas | Instalar as dependências (média) | Job inteiro (média) |
 |---|---|---|---|
 | Antes (sem cache) | 2 | 22s | 1min12s |
-| Depois (com cache) | 14 | 17s | 1min15s |
+| Depois, cache aproveitado | 5 | 9s | 1min09s |
+| Depois, `package-lock.json` mudou (cache refeito) | 9 | 21s | 1min18s |
+
+Quando o cache é aproveitado, a instalação cai de 22s para 9s (cerca de 60%
+mais rápida). Nas execuções em que o `package-lock.json` mudou (PRs do
+Dependabot e a que instalou a cobertura de testes), o cache não serve e o
+tempo volta ao de antes, como esperado.
 
 O tempo do job inteiro varia com o que cada PR muda (a cobertura de testes,
 por exemplo, deixa os testes mais lentos). Por isso a comparação que mostra o
