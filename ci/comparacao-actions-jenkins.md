@@ -23,7 +23,7 @@ duração da etapa **Instalar as dependências** e do job inteiro.
 | | Execuções medidas | Instalar as dependências (média) | Job inteiro (média) |
 |---|---|---|---|
 | Antes (sem cache) | 2 | 22s | 1min12s |
-| Depois (com cache) | a medir | a medir | a medir |
+| Depois (com cache) | 14 | 17s | 1min15s |
 
 O tempo do job inteiro varia com o que cada PR muda (a cobertura de testes,
 por exemplo, deixa os testes mais lentos). Por isso a comparação que mostra o
