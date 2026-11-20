@@ -5,6 +5,25 @@ por entrega da disciplina Manutenção e Integração de Software. Formato basea
 [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Cada item aponta
 para o Pull Request que fez a mudança.
 
+## [Integração contínua] — 2026-11-20
+
+Documentação completa em [`ci/`](ci/).
+
+### Adicionado
+
+- **CI no GitHub Actions**: a cada Pull Request e a cada push na `main`,
+  instala o projeto numa máquina limpa e roda lint, testes e build; a `main`
+  só aceita PR com o CI aprovado ([#40](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/40)).
+- **Segurança das dependências**: Dependabot abre PRs de atualização toda
+  semana, e o `npm audit` roda em toda PR e toda segunda-feira, reprovando só
+  vulnerabilidade crítica em produção ([#44](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/44)).
+- **Cobertura de testes**: comando `npm run test:coverage`; no CI, a tabela
+  aparece no log e a página HTML fica para download ([#53](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/53)).
+- **Cache das dependências** no CI e comparação entre GitHub Actions e
+  Jenkins ([#42](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/42)).
+- Documentação do pipeline em `ci/README.md` e selos de status do CI e da
+  Segurança no README.
+
 ## [TP4 — Manutenção evolutiva] — 2026-10-04
 
 Documentação completa em [`TP4-MANUT-EVOLUTIVA/`](TP4-MANUT-EVOLUTIVA/).
