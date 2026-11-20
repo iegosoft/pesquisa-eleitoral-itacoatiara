@@ -1,5 +1,8 @@
 # Pesquisa Eleitoral Itacoatiara
 
+[![CI](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/actions/workflows/ci.yml/badge.svg)](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/actions/workflows/ci.yml)
+[![Segurança](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/actions/workflows/seguranca.yml/badge.svg)](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/actions/workflows/seguranca.yml)
+
 Sistema de coleta e análise de intenção de voto para pesquisa eleitoral de rua no município de Itacoatiara-AM, com dados separados para deputado federal e deputado estadual.
 
 O sistema tem dois perfis de uso completamente separados:
@@ -73,6 +76,14 @@ src/
    npm test
    npm run lint
    ```
+
+## Integração contínua (CI)
+
+A cada Pull Request e a cada push na `main`, o GitHub Actions instala o
+projeto numa máquina limpa e roda lint, testes com cobertura e build; a `main`
+só aceita PR com o CI aprovado. Uma auditoria de segurança das bibliotecas
+roda junto e toda semana. Como funciona, como ler o resultado e o que fazer
+quando falha: [`ci/README.md`](ci/README.md).
 
 ## Histórico de mudanças
 
