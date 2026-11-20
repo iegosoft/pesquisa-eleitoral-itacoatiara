@@ -76,6 +76,25 @@ No computador, os testes usam as chaves do seu `.env`. No CI, como o `.env`
 não vai para o repositório, a etapa de testes usa chaves fictícias do Firebase:
 os testes não acessam o banco.
 
+## Demonstração: o CI barrando um teste quebrado
+
+Para mostrar a proteção funcionando, abrimos a PR
+[#54](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/54) com
+um teste errado de propósito: ele esperava `58%` onde o certo é `57,9%`. O CI
+reprovou, a mesclagem ficou bloqueada e a PR foi fechada sem entrar na `main`.
+
+**1. A PR com o check obrigatório falhando e o botão de mesclar bloqueado**
+
+![PR barrada pelo CI](evidencias/1-pr-barrada.png)
+
+**2. As etapas da execução: os testes falharam e o build nem rodou**
+
+![Etapas da execução](evidencias/2-etapas-da-execucao.png)
+
+**3. O log mostrando qual teste falhou, o esperado e o recebido**
+
+![Teste que falhou](evidencias/3-teste-que-falhou.png)
+
 ## Rodando no computador
 
 | Comando | O que faz |
@@ -92,9 +111,9 @@ os testes não acessam o banco.
 |---|---|---|
 | Pipeline base e proteção da `main` | Iêgo Sérgio | [#40](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/40) |
 | Dependabot e auditoria de segurança | Luan Serrão | [#44](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/44) |
-| Cobertura de testes e demonstração da PR barrada | Karina Lopes | [#53](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/53) |
-| Cache e comparação Actions × Jenkins | José André | [#42](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/42) |
-| Esta documentação, selos e CHANGELOG | Luiz Augusto | esta PR |
+| Cobertura de testes e demonstração da PR barrada | Karina Lopes | [#53](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/53) e [#54](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/54) |
+| Cache e comparação Actions × Jenkins | José André | [#42](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/42) e [#58](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/58) |
+| Esta documentação, selos e CHANGELOG | Luiz Augusto | [#56](https://github.com/iegosoft/pesquisa-eleitoral-itacoatiara/pull/56) |
 
 ## Veja também
 
