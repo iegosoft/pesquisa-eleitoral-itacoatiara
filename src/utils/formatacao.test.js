@@ -15,7 +15,7 @@ const VALORES = [0, 5.3, 9.0909, 13.636, 22.7272, 50, 54.5454, 57.89, 66.666, 99
 describe('formatarPercentual', () => {
   it('com 1 casa, igual à cópia antiga do ranking e da evolução', () => {
     VALORES.forEach((valor) => expect(formatarPercentual(valor, 1)).toBe(copiaComUmaCasa(valor)));
-    expect(formatarPercentual(57.89, 1)).toBe('58');
+    expect(formatarPercentual(57.89, 1)).toBe('57,9');
   });
 
   it('sem casas, igual à cópia antiga do perfil da amostra', () => {
